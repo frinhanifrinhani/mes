@@ -11,16 +11,20 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Form\LoginForm;
 
 class LoginController extends AbstractActionController
 {
+   /**
+    * 
+    * @return ViewModel
+    */
     public function indexAction()
     {
         $this->layout('layout/login');
+        $form = new LoginForm();
         return new ViewModel(array(
-        
-            'nome'=>'thiago',
-            'sobrenome'=>'frinhani'
+            'form' => $form
         ));
 
     }
