@@ -33,36 +33,93 @@ return array(
                     ),
                 ),
             ),
+            //rota para tela productbacklog
+            'productbacklog' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/productbacklog',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklog',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            //rota para tela projeto
+            'projeto' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/projeto',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Projeto',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            //rota para tela sprintbacklog
+            'sprintbacklog' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/sprintbacklog',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\SprintBacklog',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            //rota para tela sprint
+            'sprint' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/sprint',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Sprint',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            //rota para tela usuario
+            'usuario' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/usuario',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Usuario',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+//*** 
+//            'application' => array(
+//                'type'    => 'Literal',
+//                'options' => array(
+//                    'route'    => '/application',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'Application\Controller',
+//                        'controller'    => 'Index',
+//                        'action'        => 'index',
+//                    ),
+//                ),
+//                'may_terminate' => true,
+//                'child_routes' => array(
+//                    'default' => array(
+//                        'type'    => 'Segment',
+//                        'options' => array(
+//                            'route'    => '/[:controller[/:action]]',
+//                            'constraints' => array(
+//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                            ),
+//                            'defaults' => array(
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            ),
+//***
         ),
     ),
     'service_manager' => array(
@@ -87,7 +144,12 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Login' => 'Application\Controller\LoginController'
+            'Application\Controller\Login' => 'Application\Controller\LoginController',
+            'Application\Controller\ProductBacklog' => 'Application\Controller\ProductBacklogController',
+            'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
+            'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',
+            'Application\Controller\Sprint' => 'Application\Controller\SprintController',
+            'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     'view_manager' => array(
