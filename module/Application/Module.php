@@ -9,10 +9,26 @@
 
 namespace Application;
 
+// importação das bibliotecas do ZendFramework
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+//add
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\TableIdentifier;
+use Application\Model\Usuario;
+use Application\Model\UsuarioTable;
+//add
+//use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+//use Zend\Authentication\Storage;
+//use Zend\Authentication\AuthenticationService;
+//use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 
-class Module
+/*
+ * Para implementar uma interface, o operador implements é utilizado. 
+ * Todos os métodos na interface devem ser implementados na classe; 
+ */
+class Module //implements AutoloaderProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -35,5 +51,25 @@ class Module
                 ),
             ),
         );
+    }
+    
+    public function getServiceConfig()
+    {
+       return array(
+           'factories' => array(
+               'Application\Model\UsuarioTable' =>  function($sm) {
+                            $tableGateway = $sm->get('UsuarioTableGateway');
+                            $table = new UsuarioTable($tableGateway);
+                            return $table;
+               },
+               'UsuarioTableGateway' => function ($sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Usuario());
+                    return new TableGateway(new TableIdentifier('usuario'),$dbAdapter, null, $resultSetPrototype);
+               },
+
+           )
+       ); 
     }
 }

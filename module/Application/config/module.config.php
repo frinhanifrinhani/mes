@@ -29,6 +29,40 @@ return array(
                     'route'    => '/login',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Login',
+                        'action'     => 'login',
+                    ),
+                ),
+            ),
+            //rota para tela de autenticacao
+            'autenticacao' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/autenticacao',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Login',
+                        'action'     => 'autenticacao',
+                    )
+                )
+            ),
+            //rota para funcionalidade sair
+            'sair' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/sair',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Login',
+                        'action'     => 'sair',
+                    )
+                )
+            ),
+            
+            //rota para tela de participante
+            'participante' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/participante',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Participante',
                         'action'     => 'index',
                     ),
                 ),
@@ -145,6 +179,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Login' => 'Application\Controller\LoginController',
+            'Application\Controller\Participante' => 'Application\Controller\ParticipanteController',
             'Application\Controller\ProductBacklog' => 'Application\Controller\ProductBacklogController',
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
             'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',

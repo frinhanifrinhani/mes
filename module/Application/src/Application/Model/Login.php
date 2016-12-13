@@ -1,0 +1,60 @@
+<?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+namespace Application\Model;
+
+use Zend\Authentication\Adapter\DbTable;
+use Zend\Authentication\AuthenticationService;
+use Application\Model\Usuario;
+use Application\Model\UsuarioTable;
+use Zend\Db\Sql\TableIdentifier;
+
+class Login{
+
+    private $identidade;
+    private $credencial;
+    private $mensagens = array();
+    
+    public function __construct($identidade,$credencial)
+    {
+        $this->identidade = $identidade;
+        $this->credencial = $credencial;
+    }
+    
+    public function autenticar($sm)
+    {
+        $zendDb = $sm->get('Zend\Db\Adapter\Adapter');
+        $adapter = new DbTable($zendDb);
+        
+        $adapter->setIdentityColumn('usuario')
+                ->setTableName(new TableIdentifier('usuario'))
+                ->setCredentialColumn('senha')
+                ->setIdentity($this->identidade)
+                ->setCredential($this->credencial)
+                ->setCredentialTreatment('MD5(?)');
+        
+        $autenticacao = new AuthenticationService();
+        $autenticacao->setAdapter($adapter);
+        //autentica
+        $resultado = $autenticacao->authenticate();
+        if($resultado->isValid()){
+            $usuario = $autenticacao->getAdapter()->getResultRowObject(null, 'senha');
+            $autenticacao->getStorage()->write($usuario);
+            $sessao = new \Zend\Session\Container();
+            $sessao->usuario = $usuario;
+            
+            return true;
+        }else{
+            $this->mensagens = $resultado->getMessages();
+            
+            return false;
+        }
+        
+    }
+}

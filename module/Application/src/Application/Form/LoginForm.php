@@ -15,10 +15,9 @@ use Zend\InputFilter;
 class LoginForm extends Form {
     
     public function __construct() {
-        parent::__construct();
+        parent::__construct('form_login');
         
         $this->setAttribute('method', 'post');
-//        $this->setAttribute('enctype','multipart/form-data');
         $this->add(array(
             'name' => 'usuario',
             'type' => 'Text',
@@ -28,7 +27,6 @@ class LoginForm extends Form {
               'placeholder'=>'Usuario',
             ),
         ));
-//        <input id="login-password" type="password" class="form-control" name="password" placeholder="Senha">
         $this->add(array(
             'name' => 'senha',
             'type' => 'Password',
