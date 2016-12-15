@@ -11,11 +11,27 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Authentication\AuthenticationService;
+use Application\Model\Login;
 
-class IndexController extends AbstractActionController
+class IndexController extends AcessoController
 {
     public function indexAction()
     {
+        $autenticacao = new AuthenticationService;
+        if ($autenticacao->hasIdentity()) {
+            return $this->redirect()->toRoute('inicio');
+        }else{
+            return $this->redirect()->toRoute('login');
+            
+        }
+
+    }
+    
+    public function inicioAction()
+    {
+        //metodo que verifica autenticação e perfil
+        $this->permitir();
         return new ViewModel();
     }
 }

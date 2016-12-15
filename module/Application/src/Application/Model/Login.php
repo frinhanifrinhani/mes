@@ -14,6 +14,7 @@ use Zend\Authentication\AuthenticationService;
 use Application\Model\Usuario;
 use Application\Model\UsuarioTable;
 use Zend\Db\Sql\TableIdentifier;
+use Zend\Session\Container;
 
 class Login{
 
@@ -46,7 +47,7 @@ class Login{
         if($resultado->isValid()){
             $usuario = $autenticacao->getAdapter()->getResultRowObject(null, 'senha');
             $autenticacao->getStorage()->write($usuario);
-            $sessao = new \Zend\Session\Container();
+            $sessao = new Container();
             $sessao->usuario = $usuario;
             
             return true;

@@ -11,20 +11,20 @@
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
                 <?php
-                $form = $this->form;
-                $form->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
-                $form->prepare();
-                echo $this->form()->openTag($form);
+                $formLogin = $this->form_login;
+                $formLogin->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
+                $formLogin->prepare();
+                echo $this->form()->openTag($formLogin);
                 ?>
 
                 <div style="margin-bottom: 25px" class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <?= $this->formRow($form->get('usuario')); ?>                                       
+                    <?= $this->formRow($formLogin->get('usuario')); ?>                                       
                 </div>
 
                 <div style="margin-bottom: 25px" class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <?= $this->formRow($form->get('senha')); ?>
+                    <?= $this->formRow($formLogin->get('senha')); ?>
                 </div>
 
 
@@ -42,7 +42,7 @@
                     <!-- Button -->
 
                     <div class="col-sm-12 controls">
-                        <?= $this->formRow($form->get('botao_entrar')); ?>
+                        <?= $this->formRow($formLogin->get('botao_entrar')); ?>
                         <!--<a id="btn-fblogin" href="#" class="btn btn-primary">Login com Facebook</a>-->
                         <p>
                     </div>
@@ -52,9 +52,9 @@
                 <div class="form-group">
                     <div class="col-md-12 control">
                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
-                            N�o tem uma conta! 
-                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                Crie uma agora.
+                            Não tem uma conta? 
+                            <a href="<?php echo $this->url('criarcontaproductowner') ?>" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                Crie uma conta agora!
                             </a>
                         </div>
                     </div>

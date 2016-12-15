@@ -16,7 +16,7 @@ use Application\Form\LoginForm;
 use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 use Application\Model\Usuario;
-use Zend\Crypt\Password\Apache;  //Zend\Crypt\Password\Bcrypt 
+
 
 
 class LoginController extends AbstractActionController
@@ -25,17 +25,17 @@ class LoginController extends AbstractActionController
     
     public function loginAction()
     {
-        $autentica = new AuthenticationService;
+        $autenticacao = new AuthenticationService;
         
-        if ($autentica->hasIdentity()) {
-            return $this->redirect()->toRoute('sprint');
+        if ($autenticacao->hasIdentity()) {
+            return $this->redirect()->toRoute('inicio');
         }
         
         $this->layout('layout/login');
-        $form = new LoginForm();
+        $formLogin = new LoginForm();
         
         return new ViewModel(array(
-            'form' => $form
+            'form_login' => $formLogin
         ));
 
     }
@@ -47,6 +47,7 @@ class LoginController extends AbstractActionController
             $this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
         }
         
+        return $this->usuarioTable;
         
     }
 
@@ -63,12 +64,23 @@ class LoginController extends AbstractActionController
         $usuario = new Login($identidade,$credencial);
         
         if($usuario->autenticar($this->getServiceLocator())){
-            return $this->redirect()->toRoute('sprint');
+            return $this->redirect()->toRoute('inicio');
         }else{
             return $this->redirect()->toRoute('login');
         }
     }
     
+//    public function verificarAutenticacaoAction()
+//    {
+//        $autenticacao = new AuthenticationService;
+//        
+//        if (!$autenticacao->hasIdentity()) {
+//            //return $this->redirect()->toRoute('login');
+//            return $this->redirect()->toRoute('login');
+//        } 
+//    }
+
+
     public function sairAction()
     {
         $autenticacao = new AuthenticationService();

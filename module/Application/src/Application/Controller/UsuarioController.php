@@ -11,11 +11,25 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Form\UsuarioForm;
 
-class UsuarioController extends AbstractActionController
+class UsuarioController extends AcessoController
 {
     public function indexAction()
     {
+        //metodo que verifica autenticação e perfil
+        $this->permitir();
         return new ViewModel();
     }
+    
+    public function criarContaProductOwnerAction()
+    {
+        $this->layout('layout/login');
+        $formUsuario = new UsuarioForm();
+        return new ViewModel(array(
+            'form_usuario'=> $formUsuario
+        ));
+    }
+    
+    
 }

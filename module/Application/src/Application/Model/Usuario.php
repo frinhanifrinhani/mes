@@ -49,12 +49,47 @@ class Usuario //implements InputFilterAwareInterface
         );
     }
     
-//     public function setInputFilter(InputFilterInterface $inputFilter) {
-//        throw new \Exception("Sem uso!");
-//    }
-//
-//    public function getInputFilter() {
-//    
-//    }
+     public function setInputFilter(InputFilterInterface $inputFilter) {
+        throw new \Exception("Sem uso!");
+    }
+
+    public function getInputFilter() {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            $factory = new InputFactory();
+            
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'usuario',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Usuário não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'StringLength',
+                                'options' => array(
+                                    'min' => 3,
+                                    'max' => 255,
+                                    'messages' => array(
+                                        \Zend\Validator\StringLength::TOO_SHORT => 'O campo Usuário deve ter no mínimo 3 caracteres!',
+                                        \Zend\Validator\StringLength::TOO_LONG => 'O campo Usuário deve ter no máximo 255 caracteres!',
+                                    )
+                                ),
+                            ),
+                        )
+            )));
+           $this->inputFilter = $inputFilter; 
+        }
+        return $this->inputFilter;
+    }
     
 }

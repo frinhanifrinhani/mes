@@ -12,10 +12,12 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class ProjetoController extends AbstractActionController
+class ProjetoController extends AcessoController
 {
     public function indexAction()
     {
+        //metodo que verifica autenticação e perfil
+        $this->permitir();
         return new ViewModel();
     }
 }

@@ -22,7 +22,7 @@ class LoginForm extends Form {
             'name' => 'usuario',
             'type' => 'Text',
             'attributes'=>array(
-              'id' => 'login-username',
+              'id' => 'usuario',
               'class'=>'form-control',
               'placeholder'=>'Usuario',
             ),
@@ -31,7 +31,7 @@ class LoginForm extends Form {
             'name' => 'senha',
             'type' => 'Password',
             'attributes'=>array(
-              'id' => 'inputPassword',
+              'id' => 'senha',
               'class'=>'form-control',
               'placeholder'=>'Senha',
             ),

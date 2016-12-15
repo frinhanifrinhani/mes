@@ -12,10 +12,12 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class SprintController extends AbstractActionController
+class SprintController extends AcessoController
 {
     public function indexAction()
     {
+        //metodo que verifica autenticação e perfil
+        $this->permitir();
         return new ViewModel();
     }
 }

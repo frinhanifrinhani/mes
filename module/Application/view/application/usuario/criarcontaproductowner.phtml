@@ -1,0 +1,45 @@
+<?php
+$formUsuario = $this->form_usuario;
+//formUsuario->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
+$formUsuario->prepare();
+echo $this->form()->openTag($formUsuario);
+?>
+<fieldset class="form-group">
+    <legend>Criar Conta Product Owner</legend>
+  <div class="form-group">
+    <?= $this->formRow($formUsuario->get('nome')); ?>    
+  </div>
+    
+  <div class="form-group">
+    <?= $this->formRow($formUsuario->get('cpf')); ?>
+  </div>
+
+  <div class="form-group">
+    <?= $this->formRow($formUsuario->get('email')); ?>
+  </div>
+
+  <div class="form-group">
+    <?= $this->formRow($formUsuario->get('senha')); ?>
+  </div>
+
+  <div class="form-group">
+    <?= $this->formRow($formUsuario->get('confirma_senha')); ?>
+  </div>
+    
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+
+  
+   
+  </fieldset>
+ 
+    <?= $this->formRow($formUsuario->get('botao_salvar')); ?> 
+  
+ <?= $this->form()->closeTag(); ?> 
+    
+
+
+
+    

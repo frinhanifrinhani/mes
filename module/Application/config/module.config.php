@@ -22,6 +22,17 @@ return array(
                     ),
                 ),
             ),
+            //rota para tela inicial
+            'inicio' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/inicio',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'inicio',
+                    ),
+                ),
+            ),
             //rota para tela de login
             'login' => array(
                 'type' => 'Literal',
@@ -122,6 +133,28 @@ return array(
                     ),
                 ),
             ),
+            //rota para tela criar conta
+            'criarcontaproductowner' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/criarcontaproductowner',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Usuario',
+                        'action'     => 'criarcontaproductowner',
+                    ),
+                ),
+            ),
+            //rota para tela verificar autenticacao
+            'permitir' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/permitir',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Acesso',
+                        'action'     => 'permitir',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -187,6 +220,19 @@ return array(
             'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
+//    'view_helpers' => array(
+//        'invokables' => array(
+//                    'mesverificaautenticacao' => 'Application\View\Helper\MESVerificaAutenticacao',
+//                            
+//            ),            
+//	),
+//     'controller_plugins' => array(
+//        'invokables' => array(
+//            'mesacesso' => 'Application\Controller\ActionHelper\MESAcesso',    
+//        )
+//    ),
+    
+    
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
