@@ -1,6 +1,6 @@
 <?php
 $formUsuario = $this->form_usuario;
-//formUsuario->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
+$formUsuario->setAttribute('action', $this->url('criarcontaproductowner', array('action' => 'criarcontaproductowner')));
 $formUsuario->prepare();
 echo $this->form()->openTag($formUsuario);
 ?>

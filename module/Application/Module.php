@@ -18,17 +18,10 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\TableIdentifier;
 use Application\Model\Usuario;
 use Application\Model\UsuarioTable;
-//add
-//use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-//use Zend\Authentication\Storage;
-//use Zend\Authentication\AuthenticationService;
-//use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Application\Model\Participante;
+use Application\Model\ParticipanteTable;
 
-/*
- * Para implementar uma interface, o operador implements é utilizado. 
- * Todos os métodos na interface devem ser implementados na classe; 
- */
-class Module //implements AutoloaderProviderInterface
+class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -52,22 +45,52 @@ class Module //implements AutoloaderProviderInterface
             ),
         );
     }
-    
+    // configu
     public function getServiceConfig()
     {
        return array(
+           
+//           'Application\Model\UsuarioTable' => function($sm) {
+//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+//                    $table = new UsuarioTable($dbAdapter);
+//                    return $table;
+//                },
+//                
+//                
+           //factories para acesso as tabelas
            'factories' => array(
+               //instacia um objeto da UsuarioTable e retorna seus elementos
                'Application\Model\UsuarioTable' =>  function($sm) {
                             $tableGateway = $sm->get('UsuarioTableGateway');
                             $table = new UsuarioTable($tableGateway);
                             return $table;
                },
+//             //instancia um array objeto da Usuario, e retorna uma TableGateway 
+//             //passando o nome da tabela 'usuario'
                'UsuarioTableGateway' => function ($sm){
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Usuario());
                     return new TableGateway(new TableIdentifier('usuario'),$dbAdapter, null, $resultSetPrototype);
                },
+               //instacia um objeto da ParticiapanteTable e retorna seus elementos
+               'Application\Model\ParticipanteTable' =>  function($sm) {
+                            $tableGateway = $sm->get('ParticipanteTableGateway');
+                            $table = new ParticipanteTable($tableGateway);
+                            return $table;
+               },
+//             //instancia um array objeto da Participante, e retorna uma TableGateway 
+//             //passando o nome da tabela 'participante'
+               'ParticipanteTableGateway' => function ($sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Participante());
+                    return new TableGateway(new TableIdentifier('participante'),$dbAdapter, null, $resultSetPrototype);
+               },
+               
+                
+               
+       
 
            )
        ); 

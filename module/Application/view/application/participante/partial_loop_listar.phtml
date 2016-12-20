@@ -1,0 +1,12 @@
+<tr>
+    <td><?=$this->escapeHtml($this->participante->cod_participante)?></td>
+    <td><?=$this->escapeHtml($this->participante->nome_participante)?></td>
+    <td><?=$this->participante->cpf_participante?></td>
+    <td><?=$this->participante->telefone_participante?></td>
+    <td><?=$this->escapeHtml($this->participante->email_participante)?></td>
+    <td><?=$this->participante->tipo_participante?></td>
+    <td>
+        <a href="<?=$this->placeholder('url')->editar .'/'. $this->participante->cod_participante ?>" class="btn btn-info" >Editar</a>
+        <a href="<?=$this->placeholder('url')->excluir .'/'. $this->participante->cod_participante ?>" class="btn btn-danger">Excluir</a>
+    </td>    
+</tr>

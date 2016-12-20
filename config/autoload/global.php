@@ -15,6 +15,7 @@
  *  conexão com o banco de dados
  */
 return array(
+    //configuração do service manager - adaptador do banco de dados
     'db' => array (
         'driver'         => 'Pdo',
         'dsn'            => 'mysql:dbname=mes;host=localhost',
@@ -24,7 +25,6 @@ return array(
         'username'       => 'root',
         'password'       => ''
         ),
-        //configuração do service manager - adaptador do banco de dados
         'service_manager' => array(
             'factories' => array(
                 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',

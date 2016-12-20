@@ -68,13 +68,25 @@ return array(
             ),
             
             //rota para tela de participante
+//            'participante' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route'    => '/participante',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Participante',
+//                        'action'     => 'index',
+//                    ),
+//                ),
+//            ),
             'participante' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante',
+                    'route'    => '/participante[/:action][/:cod_participante][page/:page]',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Participante',
-                        'action'     => 'index',
+                        'controller'        => 'Application\Controller\Participante',
+                        'action'            => 'listar',
+                        'cod_participante'   => null,
+                        'page'            => '1'
                     ),
                 ),
             ),

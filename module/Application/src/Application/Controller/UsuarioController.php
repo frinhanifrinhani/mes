@@ -24,8 +24,17 @@ class UsuarioController extends AcessoController
     
     public function criarContaProductOwnerAction()
     {
-        $this->layout('layout/login');
+        $this->layout('layout/layout_cadastro');
         $formUsuario = new UsuarioForm();
+        
+        $request = $this->getRequest();
+        
+        if($request->isPost()){
+            var_dump($request->getPost());
+        }
+    
+        
+        
         return new ViewModel(array(
             'form_usuario'=> $formUsuario
         ));

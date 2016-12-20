@@ -43,6 +43,18 @@ class UsuarioForm extends Form {
             ),
         ));
         $this->add(array(
+            'name' => 'telefone',
+            'type' => 'Text',
+            'attributes'=>array(
+              'id' => 'telefone_usuario',
+              'class'=>'form-control',
+              'placeholder'=>'Telefone para contato',
+            ),
+            'options'=>array(
+                'label'=>'Telefone',
+            ),
+        ));
+        $this->add(array(
             'name' => 'email',
             'type' => 'Text',
             'attributes'=>array(
