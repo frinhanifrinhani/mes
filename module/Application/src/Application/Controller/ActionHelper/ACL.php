@@ -7,25 +7,22 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application\Controller;
+namespace Application\Controller\ActionHelper;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Authentication\Validator\Authentication;
 //add
 use Zend\Authentication\AuthenticationService;
-use Zend\Mvc\Controller\PluginManager;
-use Zend\Mvc\Controller\Plugin\Url;
-//use Application\Model\Login;
-//use Application\Model\Usuario;
+use Zend\Mvc\Controller\Plugin\Redirect;
 
-
-
-class AcessoController extends AbstractActionController
+class ACL extends AbstractPlugin
 {
     public $autenticado;
-
+    public $redirect;
+    
     public function __construct()
     {
+        //$this->redirect = new Redirect();
         $this->autenticado = new AuthenticationService();
         $dados = $this->autenticado->getIdentity();
         
@@ -43,8 +40,9 @@ class AcessoController extends AbstractActionController
     {
         $autenticado = $this->verificarAutenticacao();
         if($autenticado==false){
-            return $this->redirect()->toRoute('login');
+            $controller = $this->getController();
+            $redirector = $controller->getPluginManager()->get('Redirect');
+            return $redirector->toRoute('login');
         }
     }
-
 }

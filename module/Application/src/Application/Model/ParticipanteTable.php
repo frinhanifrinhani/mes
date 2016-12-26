@@ -29,9 +29,10 @@ class ParticipanteTable
         $select->from(new TableIdentifier('participante') )
                ->columns(array('cod_participante','nome_participante','cpf_participante','telefone_participante','email_participante','cod_tipo_participante','data_cadastro_participante'))
                ->join('tipo_participante', 'tipo_participante.cod_tipo_participante = participante.cod_tipo_participante', 'tipo_participante');
-//        $linha = $this->tableGateway->selectWith($select);
+        $linha = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();  
-        return $select;
+//        return '$select';
+        return $linha;
 
 
     }

@@ -31,7 +31,7 @@ class IndexController extends AcessoController
     public function inicioAction()
     {
         //metodo que verifica autenticação e perfil
-        $this->permitir();
+        $this->ACLpermitir()->permitir();
         return new ViewModel();
     }
 }

@@ -81,15 +81,26 @@ return array(
             'participante' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante[/:action][/:cod_participante][page/:page]',
+                    'route'    => '/participante',
                     'defaults' => array(
                         'controller'        => 'Application\Controller\Participante',
                         'action'            => 'listar',
-                        'cod_participante'   => null,
-                        'page'            => '1'
                     ),
                 ),
             ),
+            
+            /*Rota de editar*/
+            'participante_editar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/participante_editar[/:cod_participante]',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Participante',
+                        'action'            => 'editar',
+                    ),
+                ),
+            ),
+            
             //rota para tela productbacklog
             'productbacklog' => array(
                 'type' => 'Literal',
@@ -238,11 +249,12 @@ return array(
 //                            
 //            ),            
 //	),
-//     'controller_plugins' => array(
-//        'invokables' => array(
-//            'mesacesso' => 'Application\Controller\ActionHelper\MESAcesso',    
-//        )
-//    ),
+    'controller_plugins' => array(
+       'invokables' => array(
+           'ACLpermitir' => 'Application\Controller\ActionHelper\ACL',    
+           
+           )
+       ),
     
     
     'view_manager' => array(

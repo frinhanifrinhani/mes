@@ -1,12 +1,12 @@
 <tr>
-    <td><?=$this->escapeHtml($this->participante->cod_participante)?></td>
-    <td><?=$this->escapeHtml($this->participante->nome_participante)?></td>
-    <td><?=$this->participante->cpf_participante?></td>
-    <td><?=$this->participante->telefone_participante?></td>
-    <td><?=$this->escapeHtml($this->participante->email_participante)?></td>
-    <td><?=$this->participante->tipo_participante?></td>
+    <td><?=$this->escapeHtml($this->codParticipante)?></td>
+    <td><?=$this->escapeHtml($this->nomeParticipante)?></td>
+    <td><?=$this->cpfParticipante?></td>
+    <td><?=$this->telefoneParticipante?></td>
+    <td><?=$this->escapeHtml($this->emailParticipante)?></td>
+    <td><?=$this->tipoParticipante?></td>
     <td>
-        <a href="<?=$this->placeholder('url')->editar .'/'. $this->participante->cod_participante ?>" class="btn btn-info" >Editar</a>
-        <a href="<?=$this->placeholder('url')->excluir .'/'. $this->participante->cod_participante ?>" class="btn btn-danger">Excluir</a>
+        <a href="<?php echo $this->url('participante_editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
+        <a href="<?php echo $this->url('participante_editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
     </td>    
 </tr>

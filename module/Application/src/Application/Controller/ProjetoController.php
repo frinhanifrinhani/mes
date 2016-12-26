@@ -17,7 +17,7 @@ class ProjetoController extends AcessoController
     public function indexAction()
     {
         //metodo que verifica autenticação e perfil
-        $this->permitir();
+        $this->ACLpermitir()->permitir();
         return new ViewModel();
     }
 }
