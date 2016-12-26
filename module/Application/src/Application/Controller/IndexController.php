@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 
-class IndexController extends AcessoController
+class IndexController extends AbstractActionController
 {
     public function indexAction()
     {

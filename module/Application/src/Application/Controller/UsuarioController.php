@@ -13,7 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Form\UsuarioForm;
 
-class UsuarioController extends AcessoController
+class UsuarioController extends AbstractActionController
 {
     public function indexAction()
     {
