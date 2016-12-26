@@ -18,7 +18,7 @@ class UsuarioController extends AbstractActionController
     public function indexAction()
     {
         //metodo que verifica autenticação e perfil
-        $this->ACLpermitir()->permitir();
+        $this->ACLPermitir()->permitir();
         return new ViewModel();
     }
     

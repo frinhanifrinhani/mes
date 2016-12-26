@@ -26,7 +26,7 @@ class ParticipanteController extends AbstractActionController
     public function listarAction() {
 
         //metodo que verifica autenticação e perfil
-        $this->ACLpermitir()->permitir();
+        $this->ACLPermitir()->permitir();
         $participantes = $this->getParticipanteTable()->fetchAllParticipantes();
         //retorna dados apra a view
         return new ViewModel(array(

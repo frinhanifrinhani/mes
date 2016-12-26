@@ -251,7 +251,7 @@ return array(
 //	),
     'controller_plugins' => array(
        'invokables' => array(
-           'ACLpermitir' => 'Application\Controller\ActionHelper\ACL',    
+           'ACLPermitir' => 'Application\Controller\ActionHelper\ACL',    
            
            )
        ),
