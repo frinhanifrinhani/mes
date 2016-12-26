@@ -6,7 +6,7 @@
     <td><?=$this->escapeHtml($this->emailParticipante)?></td>
     <td><?=$this->tipoParticipante?></td>
     <td>
-        <a href="<?php echo $this->url('participante_editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
-        <a href="<?php echo $this->url('participante_editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
+        <a href="<?php echo $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
+        <a href="<?php echo $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
     </td>    
 </tr>

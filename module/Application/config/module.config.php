@@ -66,18 +66,10 @@ return array(
                     )
                 )
             ),
+                       
+/*************** ROTAS PARA PARTICPANTE ***************/
             
             //rota para tela de participante
-//            'participante' => array(
-//                'type' => 'Literal',
-//                'options' => array(
-//                    'route'    => '/participante',
-//                    'defaults' => array(
-//                        'controller' => 'Application\Controller\Participante',
-//                        'action'     => 'index',
-//                    ),
-//                ),
-//            ),
             'participante' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -89,18 +81,29 @@ return array(
                 ),
             ),
             
-            /*Rota de editar*/
-            'participante_editar' => array(
+            //Rota editar participante
+            'participante-editar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante_editar[/:cod_participante]',
+                    'route'    => '/participante-editar[/:cod_participante]',
                     'defaults' => array(
                         'controller'        => 'Application\Controller\Participante',
                         'action'            => 'editar',
                     ),
                 ),
             ),
-            
+            //Rota excluir participante
+            'participante-excluir' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/participante-excluir[/:cod_participante]',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Participante',
+                        'action'            => 'excluir',
+                    ),
+                ),
+            ),
+/*************** ROTAS PARA PRODUCTBACKLOG ***************/
             //rota para tela productbacklog
             'productbacklog' => array(
                 'type' => 'Literal',
@@ -112,6 +115,7 @@ return array(
                     ),
                 ),
             ),
+/*************** ROTAS PARA PROJETO ***************/
             //rota para tela projeto
             'projeto' => array(
                 'type' => 'Literal',
@@ -123,6 +127,7 @@ return array(
                     ),
                 ),
             ),
+/*************** ROTAS PARA SPRINTBACKLOG ***************/
             //rota para tela sprintbacklog
             'sprintbacklog' => array(
                 'type' => 'Literal',
@@ -134,6 +139,7 @@ return array(
                     ),
                 ),
             ),
+/*************** ROTAS PARA SPRINT ***************/
             //rota para tela sprint
             'sprint' => array(
                 'type' => 'Literal',
@@ -145,6 +151,7 @@ return array(
                     ),
                 ),
             ),
+/*************** ROTAS PARA USUARIO ***************/
             //rota para tela usuario
             'usuario' => array(
                 'type' => 'Literal',
@@ -156,6 +163,7 @@ return array(
                     ),
                 ),
             ),
+/*************** ROTAS PARA CRIAÇÃO DA CONTA P.O. ***************/
             //rota para tela criar conta
             'criarcontaproductowner' => array(
                 'type' => 'Literal',
@@ -167,17 +175,7 @@ return array(
                     ),
                 ),
             ),
-            //rota para tela verificar autenticacao
-            'permitir' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/permitir',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Acesso',
-                        'action'     => 'permitir',
-                    ),
-                ),
-            ),
+
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -231,6 +229,7 @@ return array(
             ),
         ),
     ),
+    /** invocando os controllers */
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
@@ -249,6 +248,7 @@ return array(
 //                            
 //            ),            
 //	),
+    /** invocando o(s) plugin(s) */
     'controller_plugins' => array(
        'invokables' => array(
            'ACLPermitir' => 'Application\Controller\ActionHelper\ACL',    
