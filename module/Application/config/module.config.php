@@ -81,6 +81,17 @@ return array(
                 ),
             ),
             
+            //Rota cadastrar participante
+            'participante-cadastrar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/participante-cadastrar',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Participante',
+                        'action'            => 'cadastrar',
+                    ),
+                ),
+            ),
             //Rota editar participante
             'participante-editar' => array(
                 'type' => 'Segment',

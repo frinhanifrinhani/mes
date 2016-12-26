@@ -1,1 +1,17 @@
 <h1>Cadastrar participante</h1>
+
+                <?php
+                $formParticipante = $this->form_participante;
+                $formParticipante->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
+                $formParticipante->prepare();
+                echo $this->form()->openTag($formParticipante);
+                ?>
+                
+                <?= $this->formRow($formParticipante->get('cod_participante')); ?>
+                <?= $this->formRow($formParticipante->get('nome')); ?>
+                <?= $this->formRow($formParticipante->get('cpf')); ?>
+                <?= $this->formRow($formParticipante->get('email')); ?>
+                <?= $this->formRow($formParticipante->get('tipo_participante')); ?>
+                <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
+                
+                <?php echo $this->form()->closeTag(); ?>     

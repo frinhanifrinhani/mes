@@ -16,7 +16,7 @@ use Application\Model\Participante;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\ArrayAdapter;
-
+use \Application\Form\ParticipanteForm;
 class ParticipanteController extends AbstractActionController 
 {
 
@@ -37,7 +37,10 @@ class ParticipanteController extends AbstractActionController
 
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
-        return new ViewModel();
+        $formParticipante = new ParticipanteForm();
+        return new ViewModel(array(
+            'form_participante' => $formParticipante,
+        ));
     }
 
     //metodo que retorna pagina de edição dos dados da funcionalidade Participante

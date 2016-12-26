@@ -10,19 +10,34 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+
 use Zend\InputFilter;
 
-class UsuarioForm extends Form {
+class ParticipanteForm extends Form {
     
     public function __construct() {
-        parent::__construct('form_usuario');
+        parent::__construct('form_participante');
         
         $this->setAttribute('method', 'post');
+        
+        $this->add(array(
+            'name' => 'cod_participante',
+            'type' => 'Text',
+            'attributes'=>array(
+              'id' => 'cod_participante',
+              'class'=>'form-control',
+              'placeholder'=>'Código do Participante',
+            ),
+            'options'=>array(
+                'label'=>'Código do Participante',
+            ),
+        ));
+        
         $this->add(array(
             'name' => 'nome',
             'type' => 'Text',
             'attributes'=>array(
-              'id' => 'nome_usuario',
+              'id' => 'nome_participante',
               'class'=>'form-control',
               'placeholder'=>'Nome Completo',
             ),
@@ -30,11 +45,12 @@ class UsuarioForm extends Form {
                 'label'=>'Nome Completo *',
             ),
         ));
+        
         $this->add(array(
             'name' => 'cpf',
             'type' => 'Text',
             'attributes'=>array(
-              'id' => 'cpf_usuario',
+              'id' => 'cpf_participante',
               'class'=>'form-control',
               'placeholder'=>'CPF',
             ),
@@ -42,6 +58,7 @@ class UsuarioForm extends Form {
                 'label'=>'CPF *',
             ),
         ));
+        
         $this->add(array(
             'name' => 'telefone',
             'type' => 'Text',
@@ -54,6 +71,7 @@ class UsuarioForm extends Form {
                 'label'=>'Telefone',
             ),
         ));
+        
         $this->add(array(
             'name' => 'email',
             'type' => 'Text',
@@ -66,29 +84,24 @@ class UsuarioForm extends Form {
                 'label'=>'E-mail *',
             ),
         ));
+        
         $this->add(array(
-            'name' => 'senha',
-            'type' => 'password',
+            'name' => 'tipo_participante',
+            'type' => 'Select',
             'attributes'=>array(
-              'id' => 'senha_usuario',
+              'id' => 'tipo_participante',
               'class'=>'form-control',
-              'placeholder'=>'Senha *',
+              
             ),
             'options'=>array(
-                'label'=>'Senha',
+                'label'=>'Tipo de participante *',
             ),
-        ));
-        $this->add(array(
-            'name' => 'confirma_senha',
-            'type' => 'password',
-            'attributes'=>array(
-              'id' => 'senha_usuario',
-              'class'=>'form-control',
-              'placeholder'=>'Confirmacao da Senha',
-            ),
-            'options'=>array(
-                'label'=>'Confirmação da Senha *'
-            ),
+            'value_options' => array(
+                             '0' => 'French',
+                             '1' => 'English',
+                             '2' => 'Japanese',
+                             '3' => 'Chinese',
+                     ),
         ));
 
         $this->add(array(
@@ -97,6 +110,16 @@ class UsuarioForm extends Form {
             'attributes'=> array(
               'value' => 'Salvar', 
               'class'=>'btn btn-primary',
+              'id' => 'botao_salvar',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'botao_cancelar',
+            'type' => 'button',
+            'attributes'=> array(
+              'value' => 'Cancelar', 
+              'class'=>'btn btn-danger',
               'id' => 'botao_salvar',
             ),
         ));
