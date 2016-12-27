@@ -28,10 +28,9 @@ class ParticipanteController extends AbstractActionController
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $participantes = $this->getParticipanteTable()->fetchAllParticipantes();
-        //retorna dados apra a view
+        //retorna dados pra a view
         return new ViewModel(array(
             'partial_loop_listar' => $participantes,
-            'title' => $this->setAndGetTitle(),
         ));
     }
 
@@ -39,9 +38,9 @@ class ParticipanteController extends AbstractActionController
     public function cadastrarAction() {
         $formParticipante = new ParticipanteForm();
         $request = $this->getRequest();
-//        if($request->isPost()){
-//            echo 'sim';
-//        }
+        if($request->isPost()){
+           $data;
+        }
         return new ViewModel(array(
             'form_participante' => $formParticipante,
         ));
@@ -72,14 +71,6 @@ class ParticipanteController extends AbstractActionController
     //recupera e retorna o Service Manager
     private function getSm() {
         return $this->getEvent()->getApplication()->getServiceManager();
-    }
-
-    //retorna o titulo da funcionalidade através do Service Manager
-    private function setAndGetTitle() {
-        $title = 'Participantes';
-        $headTitle = $this->getSm()->get('viewhelpermanager')->get('HeadTitle');
-        $headTitle($title);
-        return $title;
     }
 
 }
