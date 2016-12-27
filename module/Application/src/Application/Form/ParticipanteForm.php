@@ -19,6 +19,7 @@ class ParticipanteForm extends Form {
         parent::__construct('form_participante');
         
         $this->setAttribute('method', 'post');
+        $this->setAttribute('id', 'form_participante');
         
         $this->add(array(
             'name' => 'cod_participante',
@@ -27,6 +28,7 @@ class ParticipanteForm extends Form {
               'id' => 'cod_participante',
               'class'=>'form-control',
               'placeholder'=>'Código do Participante',
+              'readonly'=>'readonly',
             ),
             'options'=>array(
                 'label'=>'Código do Participante',
@@ -110,16 +112,6 @@ class ParticipanteForm extends Form {
             'attributes'=> array(
               'value' => 'Salvar', 
               'class'=>'btn btn-primary',
-              'id' => 'botao_salvar',
-            ),
-        ));
-        
-        $this->add(array(
-            'name' => 'botao_cancelar',
-            'type' => 'button',
-            'attributes'=> array(
-              'value' => 'Cancelar', 
-              'class'=>'btn btn-danger',
               'id' => 'botao_salvar',
             ),
         ));

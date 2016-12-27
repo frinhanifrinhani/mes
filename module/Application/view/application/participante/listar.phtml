@@ -1,5 +1,7 @@
-<h2><?=$this->escapeHtml($this->title) ?></h2>
-<hr>
+<div class="box-header with-border">
+	<h3 class="box-title"><?=$this->escapeHtml($this->title) ?></h3>
+</div>
+<hr />
 <a href="<?php echo $this->url('participante-cadastrar',array('action' => 'cadastrar'))?>" class="btn btn-success">Novo Cadastro</a>
 <p></p>
 <table id="data_table" class="table data_tables table-striped table-hover table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">

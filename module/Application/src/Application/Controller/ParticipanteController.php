@@ -38,6 +38,10 @@ class ParticipanteController extends AbstractActionController
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
         $formParticipante = new ParticipanteForm();
+        $request = $this->getRequest();
+//        if($request->isPost()){
+//            echo 'sim';
+//        }
         return new ViewModel(array(
             'form_participante' => $formParticipante,
         ));

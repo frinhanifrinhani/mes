@@ -5,30 +5,44 @@
         <meta charset="utf-8">
         <?php echo $this->headTitle('My Easy Scrum - MES') ?>
 
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
 
         <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath('css/style.css'))
-                        ->prependStylesheet($this->basePath('plugin/datatables/css/bootstrap.min.css'))
-                        ->prependStylesheet($this->basePath('plugin/datatables/css/dataTables.bootstrap.min.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) 
-                
-                ?>
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath('css/style.css'))
+                ->prependStylesheet($this->basePath('plugin/datatables/css/bootstrap.min.css'))
+                ->prependStylesheet($this->basePath('plugin/datatables/css/dataTables.bootstrap.min.css'))
+                ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ?>
 
         <!-- Scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath('plugin/datatables/js/dataTables.bootstrap.min.js'))
-            ->prependFile($this->basePath('plugin/datatables/js/jquery.dataTables.min.js'))
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery.min.js'))
-            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
-        ; ?>
+        <?php
+        echo $this->headScript()
+                //JQuery Validade JS
+                ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/additional/extension.js'))
+                ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/dist/additional-methods.js'))
+                ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/dist/jquery.validate.min.js'))
+                ->prependFile($this->basePath('plugin/jquerymask/jquery.mask.js'))
+                
+                //Datatables
+                ->prependFile($this->basePath('plugin/datatables/js/dataTables.bootstrap.min.js'))
+                ->prependFile($this->basePath('plugin/datatables/js/jquery.dataTables.min.js'))
+                
+                ->prependFile($this->basePath('js/bootstrap.min.js'))
+                ->prependFile($this->basePath('js/jquery.min.js'))
+                ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+
+
+
+        ;
+        ?>
 
     </head>
     <body>
@@ -57,34 +71,35 @@
             </div>
         </nav>
         <div class="container">
-            <?php echo $this->content; ?>
+<?php echo $this->content; ?>
             <hr>
             <footer>
                 <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('Todos os direitos reservados.') ?></p>
             </footer>
         </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+<?php echo $this->inlineScript() ?>
         <script>
-        $(document).ready(function () {
-        $('.data_tables').dataTable({
-           "order": [[ 1, "desc" ]],
-           "oLanguage": {
-               "sProcessing": "Aguarde enquanto os dados são carregados ...",
-               "sLengthMenu": "Mostrar _MENU_ registros por página",
-               "sZeroRecords": "Nenhum registro correspondente ao criterio encontrado",
-               "sInfoEmtpy": "Exibindo 0 a 0 de 0 registros",
-               "sInfo": "Exibindo de _START_ a _END_ de _TOTAL_ registros",
-               "sInfoFiltered": "",
-               "sSearch": "Procurar",
-               "oPaginate": {
-                   "sFirst": "Primeiro",
-                   "sPrevious": "Anterior",
-                   "sNext": "Próximo",
-                   "sLast": "Último"
-               }
-           }
-       });
-   });
+            $(document).ready(function () {
+                $('.data_tables').dataTable({
+                    "order": [[1, "desc"]],
+                    "oLanguage": {
+                        "sProcessing": "Aguarde enquanto os dados são carregados ...",
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro correspondente ao criterio encontrado",
+                        "sInfoEmtpy": "Exibindo 0 a 0 de 0 registros",
+                        "sInfo": "Exibindo de _START_ a _END_ de _TOTAL_ registros",
+                        "sInfoFiltered": "",
+                        "sSearch": "Procurar",
+                        "oPaginate": {
+                            "sFirst": "<< Primeiro",
+                            "sPrevious": "< Anterior",
+                            "sNext": "Próximo >",
+                            "sLast": "Último >>"
+                        }
+                    }
+                });
+
+            });
         </script>
     </body>
 </html>

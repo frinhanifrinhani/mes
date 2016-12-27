@@ -1,17 +1,81 @@
-<h1>Cadastrar participante</h1>
+
+<div class="box-header with-border">
+	<h3 class="box-title">Cadastrar participante</h3>
+</div>
+<hr />
+      <div class="content">
 
                 <?php
                 $formParticipante = $this->form_participante;
-                $formParticipante->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
+                //$formParticipante->setAttribute('action', $this->url('participante-cadastrar'));
                 $formParticipante->prepare();
                 echo $this->form()->openTag($formParticipante);
                 ?>
-                
-                <?= $this->formRow($formParticipante->get('cod_participante')); ?>
-                <?= $this->formRow($formParticipante->get('nome')); ?>
-                <?= $this->formRow($formParticipante->get('cpf')); ?>
-                <?= $this->formRow($formParticipante->get('email')); ?>
-                <?= $this->formRow($formParticipante->get('tipo_participante')); ?>
-                <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('cod_participante')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('nome')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('cpf')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('email')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('tipo_participante')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
+            <a href="<?=$this->url('participante') ?>" class="btn btn-danger" >Cancelar</a>
+            
+        </div>
+
                 
                 <?php echo $this->form()->closeTag(); ?>     
+      </div>
+<script>
+    $(document).ready(function () {
+        $('#cpf_participante').mask('000.000.000-00');
+    });
+   $(document).ready(function () {
+       
+       
+        $('#form_participante').validate({
+            // Define as regras
+            rules: {
+                nome: {
+                    required: true,
+                },
+                cpf: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                },
+                tipo_participante: {
+                    required: true,
+                },
+            },
+            // Define as mensagens de erro para cada regra
+            messages: {
+                nome: {
+                    required: "Campo Nome não pode ser vazio!",
+                },
+                cpf: {
+                    required: "Campo CPF não pode ser vazio!",
+                    
+                },
+                email: {
+                    required: "Campo E-mail não pode ser vazio!",
+                    email: "Formato email dever ter (@ e .com)!",
+                },
+                tipo_participante: {
+                    required: "Campo Tipo de Participante não pode ser vazio!",
+                },
+            }
+        });
+    });
+</script>

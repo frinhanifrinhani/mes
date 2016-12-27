@@ -2,7 +2,14 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
-
+.error{
+	color:#FF0000;
+	font-size:12px;
+	font-weight: lighter;
+}
+input.error{
+	border: 1px solid #FF0000;
+}
 .zf-green {
     color: #68b604;
 }

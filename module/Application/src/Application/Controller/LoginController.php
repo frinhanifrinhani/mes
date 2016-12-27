@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -17,59 +18,52 @@ use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 use Application\Model\Usuario;
 
+class LoginController extends AbstractActionController {
 
-
-class LoginController extends AbstractActionController
-{
     protected $usuarioTable;
-    
-    public function loginAction()
-    {
+
+    public function loginAction() {
         $autenticacao = new AuthenticationService;
-        
+
         if ($autenticacao->hasIdentity()) {
             return $this->redirect()->toRoute('inicio');
         }
-        
+
         $this->layout('layout/login');
         $formLogin = new LoginForm();
-        
+
         return new ViewModel(array(
             'form_login' => $formLogin
         ));
-
     }
-    
-    public function getUsuarioTable()
-    {
-        if(!$this->usuarioTable){
+
+    public function getUsuarioTable() {
+        if (!$this->usuarioTable) {
             $sm = $this->getServiceLocator();
             $this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
         }
-        
+
         return $this->usuarioTable;
-        
     }
 
-    public function autenticacaoAction()
-    {
+    public function autenticacaoAction() {
         $request = $this->getRequest();
-        
-        if(!$request->isPost()){
+
+        if (!$request->isPost()) {
             return $this->redirect()->toRoute('login');
         }
-        $identidade = $request->getPost('usuario');       
-        $credencial = $request->getPost('senha'); 
-       
-        $usuario = new Login($identidade,$credencial);
-        
-        if($usuario->autenticar($this->getServiceLocator())){
+        $identidade = $request->getPost('usuario');
+        $credencial = $request->getPost('senha');
+
+        $usuario = new Login($identidade, $credencial);
+
+        if ($usuario->autenticar($this->getServiceLocator())) {
             return $this->redirect()->toRoute('inicio');
-        }else{
+        } else {
             return $this->redirect()->toRoute('login');
         }
     }
-    
+
 //    public function verificarAutenticacaoAction()
 //    {
 //        $autenticacao = new AuthenticationService;
@@ -81,10 +75,10 @@ class LoginController extends AbstractActionController
 //    }
 
 
-    public function sairAction()
-    {
+    public function sairAction() {
         $autenticacao = new AuthenticationService();
         $autenticacao->clearIdentity();
         return $this->redirect()->toRoute('login');
     }
+
 }
