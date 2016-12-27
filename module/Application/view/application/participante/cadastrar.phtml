@@ -36,11 +36,11 @@
                 <?php echo $this->form()->closeTag(); ?>     
       </div>
 <script>
-    $(document).ready(function () {
-        $('#cpf_participante').mask('000.000.000-00');
-    });
+
+
    $(document).ready(function () {
        
+        $('#cpf_participante').mask('000.000.000-00');
        
         $('#form_participante').validate({
             // Define as regras
@@ -50,6 +50,7 @@
                 },
                 cpf: {
                     required: true,
+                    minlength: 14,
                 },
                 email: {
                     required: true,
@@ -66,6 +67,7 @@
                 },
                 cpf: {
                     required: "Campo CPF não pode ser vazio!",
+                    minlength: "O Campo CPF deve ter 11 números!"
                     
                 },
                 email: {

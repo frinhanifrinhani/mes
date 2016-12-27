@@ -2,7 +2,7 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
-.error{
+label.error{
 	color:#FF0000;
 	font-size:12px;
 	font-weight: lighter;
