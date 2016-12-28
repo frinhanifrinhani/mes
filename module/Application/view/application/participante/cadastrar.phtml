@@ -15,16 +15,19 @@
             <?= $this->formRow($formParticipante->get('cod_participante')); ?>
         </div>
         <div class="form-group">
-            <?= $this->formRow($formParticipante->get('nome')); ?>
+            <?= $this->formRow($formParticipante->get('nome_participante')); ?>
         </div>
         <div class="form-group">
-            <?= $this->formRow($formParticipante->get('cpf')); ?>
+            <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
         </div>
         <div class="form-group">
-            <?= $this->formRow($formParticipante->get('email')); ?>
+            <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
         </div>
         <div class="form-group">
-            <?= $this->formRow($formParticipante->get('tipo_participante')); ?>
+            <?= $this->formRow($formParticipante->get('email_participante')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
         </div>
         <div class="form-group">
             <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
@@ -45,14 +48,14 @@
         $('#form_participante').validate({
             // Define as regras
             rules: {
-                nome: {
+                nome_participante: {
                     required: true,
                 },
-                cpf: {
+                cpf_participante: {
                     required: true,
                     minlength: 14,
                 },
-                email: {
+                email_participante: {
                     required: true,
                     email: true,
                 },
@@ -62,15 +65,15 @@
             },
             // Define as mensagens de erro para cada regra
             messages: {
-                nome: {
+                nome_participante: {
                     required: "Campo Nome não pode ser vazio!",
                 },
-                cpf: {
+                cpf_participante: {
                     required: "Campo CPF não pode ser vazio!",
                     minlength: "O Campo CPF deve ter 11 números!"
                     
                 },
-                email: {
+                email_participante: {
                     required: "Campo E-mail não pode ser vazio!",
                     email: "Formato email dever ter (@ e .com)!",
                 },

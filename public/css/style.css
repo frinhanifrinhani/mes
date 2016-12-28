@@ -10,6 +10,9 @@ label.error{
 input.error{
 	border: 1px solid #FF0000;
 }
+select.error{
+	border: 1px solid #FF0000;
+}
 .zf-green {
     color: #68b604;
 }

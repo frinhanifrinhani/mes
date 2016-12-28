@@ -14,7 +14,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Participante;
 use Zend\Paginator\Adapter\DbSelect;
-use Zend\Paginator\Paginator;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use \Application\Form\ParticipanteForm;
 class ParticipanteController extends AbstractActionController 
@@ -27,7 +26,7 @@ class ParticipanteController extends AbstractActionController
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        $participantes = $this->getParticipanteTable()->fetchAllParticipantes();
+        $participantes = $this->getParticipanteTable()->fetchAll();
         //retorna dados pra a view
         return new ViewModel(array(
             'partial_loop_listar' => $participantes,
@@ -37,10 +36,27 @@ class ParticipanteController extends AbstractActionController
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
         $formParticipante = new ParticipanteForm();
+
+//        $formParticipante->get('botao_salvar')->setValue('Salvar');
         $request = $this->getRequest();
         if($request->isPost()){
-           $data;
+            $participante = new Participante();
+            $formParticipante->setInputFilter($participante->getInputFilter());
+            $formParticipante->setData($request->getPost());
+            if($formParticipante->isValid()){
+                
+                $participante->exchangeArray($formParticipante->getData());
+//                var_dump($participante);
+                $this->getParticipanteTable()->salvar($participante);
+                //return $this->redirect()->toRoute('lanterna');
+            }
         }
+        
+        
+//        $request = $this->getRequest();
+//        if($request->isPost()){
+//           $data;
+//        }
         return new ViewModel(array(
             'form_participante' => $formParticipante,
         ));

@@ -14,6 +14,7 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 
 class ParticipanteForm extends Form {
+    public $tipoParticipanteTable;
     
     public function __construct() {
         parent::__construct('form_participante');
@@ -28,7 +29,7 @@ class ParticipanteForm extends Form {
               'id' => 'cod_participante',
               'class'=>'form-control',
               'placeholder'=>'Código do Participante',
-              'readonly'=>'readonly',
+//              'readonly'=>'readonly',
             ),
             'options'=>array(
                 'label'=>'Código do Participante',
@@ -36,7 +37,7 @@ class ParticipanteForm extends Form {
         ));
         
         $this->add(array(
-            'name' => 'nome',
+            'name' => 'nome_participante',
             'type' => 'Text',
             'attributes'=>array(
               'id' => 'nome_participante',
@@ -44,12 +45,12 @@ class ParticipanteForm extends Form {
               'placeholder'=>'Nome Completo',
             ),
             'options'=>array(
-                'label'=>'Nome Completo *',
+                'label'=>'Nome do participante *',
             ),
         ));
         
         $this->add(array(
-            'name' => 'cpf',
+            'name' => 'cpf_participante',
             'type' => 'Text',
             'attributes'=>array(
               'id' => 'cpf_participante',
@@ -62,7 +63,7 @@ class ParticipanteForm extends Form {
         ));
         
         $this->add(array(
-            'name' => 'telefone',
+            'name' => 'telefone_participante',
             'type' => 'Text',
             'attributes'=>array(
               'id' => 'telefone_usuario',
@@ -75,7 +76,7 @@ class ParticipanteForm extends Form {
         ));
         
         $this->add(array(
-            'name' => 'email',
+            'name' => 'email_participante',
             'type' => 'Text',
             'attributes'=>array(
               'id' => 'email_usuario',
@@ -88,22 +89,18 @@ class ParticipanteForm extends Form {
         ));
         
         $this->add(array(
-            'name' => 'tipo_participante',
+            'name' => 'cod_tipo_participante',
             'type' => 'Select',
             'attributes'=>array(
-              'id' => 'tipo_participante',
+              'id' => 'cod_tipo_participante',
               'class'=>'form-control',
               
             ),
             'options'=>array(
                 'label'=>'Tipo de participante *',
+                'value_options' => $this->getValueOptions(),
+                
             ),
-            'value_options' => array(
-                             '0' => 'French',
-                             '1' => 'English',
-                             '2' => 'Japanese',
-                             '3' => 'Chinese',
-                     ),
         ));
 
         $this->add(array(
@@ -115,5 +112,24 @@ class ParticipanteForm extends Form {
               'id' => 'botao_salvar',
             ),
         ));
+    }
+    
+    //Busca tipo de participante
+    private function getTipoParticipanteTable(){
+        if(!$this->tipoParticipanteTable){
+            $sm = $GLOBALS['sm'];
+            $this->tipoParticipanteTable = $sm->get('Application\Model\TipoParticipanteTable');
+        }
+        return $this->tipoParticipanteTable;
+    }
+    
+    private function getValueOptions(){
+        $valueOptions = array();
+        $tiposParticipantes = $this->getTipoParticipanteTable()->fetchAll();
+        $valueOptions['']='Selecione...';
+        foreach ($tiposParticipantes as $tipoParticipante){
+            $valueOptions[$tipoParticipante->codTipoParticipante]= $tipoParticipante->tipoParticipante;
+        }
+        return $valueOptions;
     }
 }

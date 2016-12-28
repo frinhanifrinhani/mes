@@ -16,7 +16,7 @@ use Zend\InputFilter\InputFilterInterface;
 
 
 
-class Participante //implements InputFilterAwareInterface 
+class Participante implements InputFilterAwareInterface 
 {
 
     public $codParticipante;
@@ -58,6 +58,16 @@ class Participante //implements InputFilterAwareInterface
     }
 
 
+    
+    public function toArray(){
+        return get_object_vars($this);
+    }
+        
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Sem uso");
+    }
+ 
     public function getInputFilter() {
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
@@ -97,8 +107,111 @@ class Participante //implements InputFilterAwareInterface
         return $this->inputFilter;
     }
     
-    public function toArray(){
-        return get_object_vars($this);
-    }
     
+//    public function getInputFilter()
+//    {
+//        if (!$this->inputFilter) {
+//            $inputFilter = new InputFilter();
+//            $factory     = new InputFactory();
+// 
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'id',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'Int'),
+//                ),
+//            )));
+// 
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'name',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 5,
+//                            'max'      => 255,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//             
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'gender',
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'InArray',
+//                        'options' => array(
+//                            'haystack' => array(2,3),
+//                            'messages' => array(
+//                                'notInArray' => 'Please select your gender !' 
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            )));
+//             
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'hobby',
+//                'required' => true 
+//            )));
+//             
+//             
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'email',
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'EmailAddress'
+//                    ),
+//                ),
+//            )));
+//             
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'birth',
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'Between',
+//                        'options' => array(
+//                            'min' => '1970-01-01',
+//                            'max' => date('Y-m-d')
+//                        ),
+//                    ),
+//                ),
+//            ))); 
+//             
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'address',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 5,
+//                            'max'      => 255,
+//                        ),
+//                    ),
+//                ),
+//            )));
+//             
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'direction',
+//                'required' => true  
+//            )));
+//              
+// 
+//            $this->inputFilter = $inputFilter;
+//        }
+// 
+//        return $this->inputFilter;
+//    }
 }
