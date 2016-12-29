@@ -16,8 +16,9 @@ use Application\Model\Participante;
 use Zend\Paginator\Adapter\DbSelect;
 //use Zend\Paginator\Adapter\ArrayAdapter;
 use Application\Form\ParticipanteForm;
-class ParticipanteController extends AbstractActionController 
-{
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+
+class ParticipanteController extends AbstractActionController {
 
     protected $participanteTable;
 
@@ -35,32 +36,38 @@ class ParticipanteController extends AbstractActionController
 
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
+        $retorno = false;
+        $ultimoParticipante = null;
         $formParticipante = new ParticipanteForm();
 
 //        $formParticipante->get('botao_salvar')->setValue('Salvar');
         $request = $this->getRequest();
-        if($request->isPost()){
+        if ($request->isPost()) {
             $participante = new Participante();
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
-            if($formParticipante->isValid()){
+            if ($formParticipante->isValid()) {
                 $participante->exchangeArray($formParticipante->getData());
-                $this->getParticipanteTable()->salvar($participante);
-                //return $this->redirect()->toRoute('lanterna');
+                $retorno = $this->getParticipanteTable()->salvar($participante);
+                $ultimoParticipante = $this->getParticipanteTable()->getLastId();
+
             }
         }
 
         return new ViewModel(array(
+            'ultimoParticipante' => $ultimoParticipante,
+            'retorno' => $retorno,
             'form_participante' => $formParticipante,
         ));
     }
 
     //metodo que retorna pagina de edição dos dados da funcionalidade Participante
     public function editarAction() {
+        $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
-        if(is_null($codParticipante)){
-            return $this->redirect()->toRoute('participante-cadastrar',array(
-                'action' => 'cadastrar'
+        if (is_null($codParticipante)) {
+            return $this->redirect()->toRoute('participante-cadastrar', array(
+                        'action' => 'cadastrar'
             ));
         }
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
@@ -69,20 +76,18 @@ class ParticipanteController extends AbstractActionController
         //$formParticipante->get('submit')->setAttribute('value','Editar');
 //        
         $request = $this->getRequest();
-        if($request->isPost()){
+        if ($request->isPost()) {
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
-            if($formParticipante->isValid()){
-                $this->getParticipanteTable()->salvar($formParticipante->getData());
-                
-                //return $this->redirect()->toRoute('participante');
+            if ($formParticipante->isValid()) {
+                $retorno = $this->getParticipanteTable()->salvar($formParticipante->getData());
             }
         }
-        
+
         return new ViewModel(array(
-//            'codigo'    => $codigo,
-            'form_participante'      => $formParticipante,
-//            'title'     => $this->setAndGetTitle()
+            'retorno' => $retorno,
+            'cod_participante' => $codParticipante,
+            'form_participante' => $formParticipante,
         ));
     }
 

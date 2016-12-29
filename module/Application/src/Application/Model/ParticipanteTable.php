@@ -35,7 +35,12 @@ class ParticipanteTable {
 //       echo $select->getSqlString();  
         return $linha;
     }
-    
+    public function getLastId(){
+      $ultimoParticipante = $this->tableGateway->lastInsertValue;
+      return $ultimoParticipante;
+ 
+    }
+
     public function getParticipante($codParticipante)
     {
         $codParticipante = (int) $codParticipante;
@@ -59,9 +64,9 @@ class ParticipanteTable {
         $codParticipante = $participante->codParticipante;
         if(!$this->getParticipante($codParticipante)){
             $data['cod_participante'] = $codParticipante;
-            $this->tableGateway->insert($data);
+            return $this->tableGateway->insert($data);
         }else{
-            $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+            return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
         }
     }
 

@@ -1,45 +1,72 @@
 <div class="box-header with-border">
-	<h3 class="box-title">Editar participante</h3>
+    <h3 class="box-title">Editar participante</h3>
 </div>
-<hr />
-      <div class="content">
 <?php
-$formParticipante = $this->form_participante;
-$formParticipante->setAttribute('action',$this->url('participante-editar',array('action'=>'editar','cod_participante'=>$formParticipante->get('cod_participante')->getValue())));
-$formParticipante->prepare();
-?>
-<?=$this->form()->openTag($formParticipante)?>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('cod_participante')); ?>
+if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
+    ?>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><b>Parabens!</b></h4>
+                </div>
+                <div class="modal-body">
+
+                    <b>Dados alterados com sucesso!</b><br /><br />
+                    Você deseja fazer mais alguma alteração?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sim</button>
+                    <a href="/participante" class="btn btn-danger">Não</a>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('nome_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('email_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
-            <a href="<?=$this->url('participante') ?>" class="btn btn-danger" >Cancelar</a>
-        </div>
-<?=$this->form()->closeTag()?>
- </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+<?php } ?>
+
+<hr />
+<div class="content">
+    <?php
+    $formParticipante = $this->form_participante;
+    $formParticipante->setAttribute('action', $this->url('participante-editar', array('action' => 'editar', 'cod_participante' => $formParticipante->get('cod_participante')->getValue())));
+    $formParticipante->prepare();
+    ?>
+    <?= $this->form()->openTag($formParticipante) ?>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cod_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('nome_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('email_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
+        <a href="<?= $this->url('participante') ?>" class="btn btn-danger" >Cancelar</a>
+    </div>
+    <?= $this->form()->closeTag() ?>
+</div>
 
 <script>
 
-   $(document).ready(function () {
+    $(document).ready(function () {
         $('#cpf_participante').mask('999.999.999-99');
         $('#telefone_participante').mask('(99) 99999-9999');
-        
+
         $('#form_participante').validate({
             // Define as regras
             rules: {
@@ -48,6 +75,7 @@ $formParticipante->prepare();
                 },
                 cpf_participante: {
                     required: true,
+                    minlength: 14,
                 },
                 email_participante: {
                     required: true,
@@ -64,8 +92,8 @@ $formParticipante->prepare();
                 },
                 cpf_participante: {
                     required: "Campo CPF não pode ser vazio!",
-                    //minlength: "O Campo CPF deve ter 11 números!"
-                    
+                    minlength: "O Campo CPF deve ter 11 números!"
+
                 },
                 email_participante: {
                     required: "Campo E-mail não pode ser vazio!",
