@@ -29,7 +29,7 @@ class ParticipanteForm extends Form {
               'id' => 'cod_participante',
               'class'=>'form-control',
               'placeholder'=>'Código do Participante',
-//              'readonly'=>'readonly',
+              'readonly'=>'readonly',
             ),
             'options'=>array(
                 'label'=>'Código do Participante',
@@ -66,7 +66,7 @@ class ParticipanteForm extends Form {
             'name' => 'telefone_participante',
             'type' => 'Text',
             'attributes'=>array(
-              'id' => 'telefone_usuario',
+              'id' => 'telefone_participante',
               'class'=>'form-control',
               'placeholder'=>'Telefone para contato',
             ),

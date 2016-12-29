@@ -14,8 +14,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Participante;
 use Zend\Paginator\Adapter\DbSelect;
-use Zend\Paginator\Adapter\ArrayAdapter;
-use \Application\Form\ParticipanteForm;
+//use Zend\Paginator\Adapter\ArrayAdapter;
+use Application\Form\ParticipanteForm;
 class ParticipanteController extends AbstractActionController 
 {
 
@@ -44,19 +44,12 @@ class ParticipanteController extends AbstractActionController
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
             if($formParticipante->isValid()){
-                
                 $participante->exchangeArray($formParticipante->getData());
-//                var_dump($participante);
                 $this->getParticipanteTable()->salvar($participante);
                 //return $this->redirect()->toRoute('lanterna');
             }
         }
-        
-        
-//        $request = $this->getRequest();
-//        if($request->isPost()){
-//           $data;
-//        }
+
         return new ViewModel(array(
             'form_participante' => $formParticipante,
         ));
@@ -64,10 +57,33 @@ class ParticipanteController extends AbstractActionController
 
     //metodo que retorna pagina de edição dos dados da funcionalidade Participante
     public function editarAction() {
-        $cod_participante = (int) $this->params()->fromRoute('cod_participante', null);
-        var_dump($cod_participante);
-        exit();
-        return new ViewModel();
+        $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
+        if(is_null($codParticipante)){
+            return $this->redirect()->toRoute('participante-cadastrar',array(
+                'action' => 'cadastrar'
+            ));
+        }
+        $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
+        $formParticipante = new ParticipanteForm();
+        $formParticipante->bind($participante);
+        //$formParticipante->get('submit')->setAttribute('value','Editar');
+//        
+        $request = $this->getRequest();
+        if($request->isPost()){
+            $formParticipante->setInputFilter($participante->getInputFilter());
+            $formParticipante->setData($request->getPost());
+            if($formParticipante->isValid()){
+                $this->getParticipanteTable()->salvar($formParticipante->getData());
+                
+                //return $this->redirect()->toRoute('participante');
+            }
+        }
+        
+        return new ViewModel(array(
+//            'codigo'    => $codigo,
+            'form_participante'      => $formParticipante,
+//            'title'     => $this->setAndGetTitle()
+        ));
     }
 
     //metodo que retorna pagina de exclusão dos dados da funcionalidade Participante

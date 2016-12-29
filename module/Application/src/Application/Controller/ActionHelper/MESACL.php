@@ -15,7 +15,7 @@ use Zend\Authentication\Validator\Authentication;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\Plugin\Redirect;
 
-class ACL extends AbstractPlugin
+class MESACL extends AbstractPlugin
 {
     public $autenticado;
     public $redirect;

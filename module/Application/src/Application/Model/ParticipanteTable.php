@@ -36,26 +36,33 @@ class ParticipanteTable {
         return $linha;
     }
     
+    public function getParticipante($codParticipante)
+    {
+        $codParticipante = (int) $codParticipante;
+        $rowset = $this->tableGateway->select(array ('cod_participante' => $codParticipante));
+        $row = $rowset->current();
+        
+        return $row;
+    }
+    
     public function salvar(Participante $participante){
         
         $data = array(
             'cod_participante' => $participante->codParticipante,
             'nome_participante' => $participante->nomeParticipante,
-            'cpf_participante' => $participante->cpfParticipante,
+            'cpf_participante' => str_replace(array('.','-'), '', $participante->cpfParticipante),
 	    'telefone_participante' => $participante->telefoneParticipante,
 	    'email_participante' => $participante->emailParticipante,
             'cod_tipo_participante' => $participante->codTipoParticipante,
         );
-//        var_dump($data);
-        var_dump($this->tableGateway->insert($data));
-//        $this->tableGateway->insert($data);
-//        $codigo = $setor->codigo;
-//        if(!$this->getSetor($codigo)){
-//            $data['codigo'] = $codigo;
-//            $this->tableGateway->insert($data);
-//        }else{
-//            $this->tableGateway->update($data, array('codigo' => $codigo));
-//        }
+
+        $codParticipante = $participante->codParticipante;
+        if(!$this->getParticipante($codParticipante)){
+            $data['cod_participante'] = $codParticipante;
+            $this->tableGateway->insert($data);
+        }else{
+            $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+        }
     }
 
     //metodo que retorna sql da tableGateway

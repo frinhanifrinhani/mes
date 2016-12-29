@@ -253,16 +253,20 @@ return array(
             'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
-//    'view_helpers' => array(
-//        'invokables' => array(
-//                    'mesverificaautenticacao' => 'Application\View\Helper\MESVerificaAutenticacao',
-//                            
-//            ),            
-//	),
+    /** invocando a(s) view helper(s) */
+    'view_helpers' => array(
+        'invokables' => array(
+                    'MascaraCpf' => 'Application\View\Helper\MESCpf',    
+                    'LimpaMascaraCpf' => 'Application\View\Helper\MESCpf',    
+                            
+            ),            
+	),
     /** invocando o(s) plugin(s) */
     'controller_plugins' => array(
        'invokables' => array(
-           'ACLPermitir' => 'Application\Controller\ActionHelper\ACL',    
+           'ACLPermitir' => 'Application\Controller\ActionHelper\MESACL',    
+           'LimpaMascaraCpf' => 'Application\Controller\ActionHelper\MESCpf',    
+           
            
            )
        ),
