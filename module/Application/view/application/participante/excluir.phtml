@@ -1,1 +1,113 @@
-<h1>Excluir participante</h1>
+<div class="box-header with-border">
+    <h3 class="box-title">Excluir participante</h3>
+</div>
+<?php
+if (!isset($_POST['cod_participante'])) {
+    ?>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><b>Atenção!</b></h4>
+                </div>
+                <div class="modal-body">
+
+                    <b>Você está prestes a excluir um participante!</b><br /><br />
+                    Você tem certeza que deseja continuar?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="excluir" id="excluir" class="btn btn-danger" onclick="excluir();">Sim</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Ver</button>
+                    <a href="/participante" class="btn btn-warning">Não</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+
+<?php
+}
+
+if (isset($_POST['cod_participante'])) {
+    
+    ?>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
+                </div>
+                <div class="modal-body">
+                   Participante excluido com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <a href="/participante" class="btn btn-warning">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+<?php } ?>
+
+<hr />
+<div class="content">
+    <?php
+    $formParticipante = $this->form_participante;
+    $formParticipante->setAttribute('action', $this->url('participante-excluir', array('action' => 'excluir', 'cod_participante' => $formParticipante->get('cod_participante')->getValue())));
+    $formParticipante->prepare();
+    ?>
+    <?= $this->form()->openTag($formParticipante) ?>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cod_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('nome_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('email_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
+    </div>
+    <div class="form-group">
+         <?= $this->formRow($formParticipante->get('botao_excluir')); ?>
+        <a href="<?= $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Editar</a>
+        <a href="<?= $this->url('participante') ?>" class="btn btn-warning" >Cancelar</a>
+    </div>
+    <?= $this->form()->closeTag() ?>
+</div>
+
+<script>
+    bloquerCampos();
+    function excluir(){
+        var formulario = document.getElementById('form_participante');
+        formulario.submit();
+        
+        return true;
+    }
+    
+    function bloquerCampos(){
+        var nome_participante = document.getElementById('nome_participante');
+        var cpf_participante = document.getElementById('cpf_participante');
+        var telefone_participante = document.getElementById('telefone_participante');
+        var email_participante = document.getElementById('email_participante');
+        var cod_tipo_participante = document.getElementById('cod_tipo_participante');
+        
+        nome_participante.setAttribute('disabled','disabled');
+        cpf_participante.setAttribute('disabled','disabled');
+        telefone_participante.setAttribute('disabled','disabled');
+        email_participante.setAttribute('disabled','disabled');
+        cod_tipo_participante.setAttribute('disabled','disabled');
+    }
+    
+</script>

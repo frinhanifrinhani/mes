@@ -79,7 +79,7 @@ class ParticipanteForm extends Form {
             'name' => 'email_participante',
             'type' => 'Text',
             'attributes'=>array(
-              'id' => 'email_usuario',
+              'id' => 'email_participante',
               'class'=>'form-control',
               'placeholder'=>'E-mail',
             ),
@@ -110,6 +110,15 @@ class ParticipanteForm extends Form {
               'value' => 'Salvar', 
               'class'=>'btn btn-primary',
               'id' => 'botao_salvar',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'botao_excluir',
+            'type' => 'Submit',
+            'attributes'=> array(
+              'value' => 'Excluir', 
+              'class'=>'btn btn-danger',
+              'id' => 'botao_excluir',
             ),
         ));
     }
