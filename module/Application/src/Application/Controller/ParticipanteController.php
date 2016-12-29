@@ -108,10 +108,12 @@ class ParticipanteController extends AbstractActionController {
         $request = $this->getRequest();
         if ($request->isPost()) {
             $retorno = $this->getParticipanteTable()->excluir($codParticipante);
+            //return $this->redirect()->toRoute('participante');
         }
 
         return new ViewModel(array(
             'retorno' => $retorno,
+            'cod_participante' => $codParticipante,
             'form_participante' => $formParticipante,
         ));
        

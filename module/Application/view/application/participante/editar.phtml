@@ -57,7 +57,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <div class="form-group">
         <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
         <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-danger" >Excluir</a>
-        <a href="<?= $this->url('participante') ?>" class="btn btn-danger" >Cancelar</a>
+        <a href="<?= $this->url('participante') ?>" class="btn btn-warning" >Cancelar</a>
     </div>
     <?= $this->form()->closeTag() ?>
 </div>

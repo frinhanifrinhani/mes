@@ -17,11 +17,11 @@ if (!isset($_POST['cod_participante'])) {
                 <div class="modal-body">
 
                     <b>Você está prestes a excluir um participante!</b><br /><br />
-                    Você tem certeza que deseja continuar?
+                    Você tem certeza que deseja excluir?
                 </div>
                 <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Ver</button>
                     <button type="button" name="excluir" id="excluir" class="btn btn-danger" onclick="excluir();">Sim</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Ver</button>
                     <a href="/participante" class="btn btn-warning">Não</a>
                 </div>
             </div>
@@ -80,8 +80,8 @@ if (isset($_POST['cod_participante'])) {
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
     <div class="form-group">
-         <?= $this->formRow($formParticipante->get('botao_excluir')); ?>
         <a href="<?= $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Editar</a>
+        <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-danger" >Excluir</a>
         <a href="<?= $this->url('participante') ?>" class="btn btn-warning" >Cancelar</a>
     </div>
     <?= $this->form()->closeTag() ?>
