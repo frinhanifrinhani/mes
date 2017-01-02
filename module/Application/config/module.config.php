@@ -165,7 +165,7 @@ return array(
 /*************** ROTAS PARA USUARIO ***************/
             //rota para tela usuario
             'usuario' => array(
-                'type' => 'Literal',
+                'type' => 'Literal', //criarContaProductOwner
                 'options' => array(
                     'route'    => '/usuario',
                     'defaults' => array(

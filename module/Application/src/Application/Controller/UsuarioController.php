@@ -11,10 +11,14 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Model\Participante;
 use Application\Form\UsuarioForm;
+use Application\Form\ParticipanteForm;
 
-class UsuarioController extends AbstractActionController
+class UsuarioController extends AbstractActionController 
 {
+     protected $participanteTable;
+     
     public function indexAction()
     {
         //metodo que verifica autenticação e perfil
@@ -25,19 +29,46 @@ class UsuarioController extends AbstractActionController
     public function criarContaProductOwnerAction()
     {
         $this->layout('layout/layout_cadastro');
-        $formUsuario = new UsuarioForm();
+        $formParticipante = new ParticipanteForm();
         
+        $retorno = false;
+
         $request = $this->getRequest();
-        
-        if($request->isPost()){
-            var_dump($request->getPost());
+
+        if ($request->isPost()) {
+            $participante = new Participante();
+            $formParticipante->setInputFilter($participante->getInputFilter());
+            $formParticipante->setData($request->getPost());
+            if ($formParticipante->isValid()) {
+                $participante->exchangeArray($formParticipante->getData());
+                //$retorno = $this->getParticipanteTable()->salvar($participante);
+                //$ultimoParticipante = $this->getParticipanteTable()->getLastId();
+                $retorno = true;
+
+            }
         }
+        
     
         
         
         return new ViewModel(array(
-            'form_usuario'=> $formUsuario
+            'form_participante'=> $formParticipante,
+             'retorno' => $retorno,
         ));
+    }
+    
+    //recupera e retorna a model PartticipanteTable
+    public function getParticipanteTable() {
+        if (!$this->participanteTable) {
+            $sm = $this->getServiceLocator();
+            $this->participanteTable = $sm->get('Application\Model\ParticipanteTable');
+        }
+        return $this->participanteTable;
+    }
+
+    //recupera e retorna o Service Manager
+    private function getSm() {
+        return $this->getEvent()->getApplication()->getServiceManager();
     }
     
     
