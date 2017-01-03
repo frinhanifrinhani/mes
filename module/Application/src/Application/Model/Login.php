@@ -11,8 +11,8 @@ namespace Application\Model;
 
 use Zend\Authentication\Adapter\DbTable;
 use Zend\Authentication\AuthenticationService;
-use Application\Model\Usuario;
-use Application\Model\UsuarioTable;
+use Application\Model\Participante;
+use Application\Model\ParticipanteTable;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Session\Container;
 
@@ -33,9 +33,9 @@ class Login{
         $zendDb = $sm->get('Zend\Db\Adapter\Adapter');
         $adapter = new DbTable($zendDb);
         
-        $adapter->setIdentityColumn('usuario')
-                ->setTableName(new TableIdentifier('usuario'))
-                ->setCredentialColumn('senha')
+        $adapter->setIdentityColumn('email_participante')
+                ->setTableName(new TableIdentifier('participante'))
+                ->setCredentialColumn('senha_participante')
                 ->setIdentity($this->identidade)
                 ->setCredential($this->credencial)
                 ->setCredentialTreatment('MD5(?)');
@@ -45,7 +45,7 @@ class Login{
         //autentica
         $resultado = $autenticacao->authenticate();
         if($resultado->isValid()){
-            $usuario = $autenticacao->getAdapter()->getResultRowObject(null, 'senha');
+            $usuario = $autenticacao->getAdapter()->getResultRowObject(null, 'email_participante');
             $autenticacao->getStorage()->write($usuario);
             $sessao = new Container();
             $sessao->usuario = $usuario;

@@ -30,8 +30,9 @@ class IndexController extends AbstractActionController
     
     public function inicioAction()
     {
+
         //metodo que verifica autenticação e perfil
-        $this->ACLPermitir()->permitir();
+        //$this->ACLPermitir()->permitir();
         return new ViewModel();
     }
 }

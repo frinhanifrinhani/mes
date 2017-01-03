@@ -26,6 +26,7 @@ class Participante implements InputFilterAwareInterface
     public $emailParticipante;
     public $codTipoParticipante;
     public $tipoParticipante;
+    public $senhaParticipante;
     public $dataCadastroParticipante; 
     protected $inputFilter;
     
@@ -38,6 +39,7 @@ class Participante implements InputFilterAwareInterface
         $this->emailParticipante = (isset($data['email_participante'])) ? $data['email_participante'] : null;
         $this->codTipoParticipante = (isset($data['cod_tipo_participante'])) ? $data['cod_tipo_participante'] : null;
         $this->tipoParticipante = (isset($data['tipo_participante'])) ? $data['tipo_participante'] : null;
+        $this->senhaParticipante = (isset($data['senha_participante'])) ? $data['senha_participante'] : null;
         $this->dataCadastroParticipante = (isset($data['data_cadastro_participante'])) ? $data['data_cadastro_participante'] : null;
         
     }
@@ -53,6 +55,7 @@ class Participante implements InputFilterAwareInterface
             'email_participante' => $this-> emailParticipante,
             'cod_tipo_participante'  => $this->codTipoParticipante,
             'tipo_participante'  => $this->tipoParticipante,
+            'senha_participante'  => $this->senhaParticipante,
             'data_cadastro_participante' => $this->dataCadastroParticipante,
         );
     }

@@ -24,7 +24,7 @@ return array(
             ),
             //rota para tela inicial
             'inicio' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
                     'route'    => '/inicio',
                     'defaults' => array(
@@ -69,6 +69,17 @@ return array(
                        
 /*************** ROTAS PARA PARTICPANTE ***************/
             
+            //rota para tela criar conta
+            'criarcontaproductowner' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/criarcontaproductowner',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Participante',
+                        'action'     => 'criarcontaproductowner',
+                    ),
+                ),
+            ),
             //rota para tela de participante
             'participante' => array(
                 'type' => 'Segment',
@@ -164,28 +175,17 @@ return array(
             ),
 /*************** ROTAS PARA USUARIO ***************/
             //rota para tela usuario
-            'usuario' => array(
-                'type' => 'Literal', //criarContaProductOwner
-                'options' => array(
-                    'route'    => '/usuario',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Usuario',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-/*************** ROTAS PARA CRIAÇÃO DA CONTA P.O. ***************/
-            //rota para tela criar conta
-            'criarcontaproductowner' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/criarcontaproductowner',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Usuario',
-                        'action'     => 'criarcontaproductowner',
-                    ),
-                ),
-            ),
+//            'usuario' => array(
+//                'type' => 'Literal', //criarContaProductOwner
+//                'options' => array(
+//                    'route'    => '/usuario',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Usuario',
+//                        'action'     => 'index',
+//                    ),
+//                ),
+//            ),
+
 
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
@@ -250,7 +250,7 @@ return array(
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
             'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',
             'Application\Controller\Sprint' => 'Application\Controller\SprintController',
-            'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
+            //'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     /** invocando a(s) view helper(s) */

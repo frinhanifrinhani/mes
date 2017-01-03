@@ -33,7 +33,14 @@ class ParticipanteController extends AbstractActionController {
             'partial_loop_listar' => $participantes,
         ));
     }
-
+    public function criarContaProductOwnerAction(){
+         $this->layout('layout/layout_cadastro');
+         $formParticipante = new ParticipanteForm();
+        $this->cadastrarAction();
+        return new ViewModel(array(
+            'form_participante' => $formParticipante,
+        ));
+    }
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
         $retorno = false;
