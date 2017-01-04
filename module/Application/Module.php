@@ -24,13 +24,15 @@ use Application\Model\TipoParticipanteTable;
 use Application\Model\Participante;
 use Application\Model\ParticipanteTable;
 
+//use Zend\Validator\Db\RecordExists;
+
 class Module {
 
     public function onBootstrap(MvcEvent $e) {
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        
+
         $GLOBALS['sm'] = $e->getApplication()->getServiceManager();
     }
 
@@ -53,24 +55,24 @@ class Module {
         return array(
             //factories para acesso as tabelas
             'factories' => array(
-                /** ************* USUARIO ************** */
+                /**                 * ************ USUARIO ************** */
                 //instacia um objeto da UsuarioTable e retorna seus elementos
-                'Application\Model\UsuarioTable' => function($sm) {
-                    $tableGateway = $sm->get('UsuarioTableGateway');
-                    $table = new UsuarioTable($tableGateway);
-                    return $table;
-                },
+//                'Application\Model\UsuarioTable' => function($sm) {
+//                    $tableGateway = $sm->get('UsuarioTableGateway');
+//                    $table = new UsuarioTable($tableGateway);
+//                    return $table;
+//                },
                 //instancia um array objeto da Usuario, e retorna uma TableGateway 
                 //passando o nome da tabela 'usuario'
-                'UsuarioTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Usuario());
-                    return new TableGateway(new TableIdentifier('usuario'), $dbAdapter, null, $resultSetPrototype);
-                },
-                        
-                        
-                /** ************* TIPO PARTICIPANTE ************** */
+//                'UsuarioTableGateway' => function ($sm) {
+//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+//                    $resultSetPrototype = new ResultSet();
+//                    $resultSetPrototype->setArrayObjectPrototype(new Usuario());
+//                    return new TableGateway(new TableIdentifier('usuario'), $dbAdapter, null, $resultSetPrototype);
+//                },
+
+
+                /**                 * ************ TIPO PARTICIPANTE ************** */
                 //instacia um objeto da TipoParticipanteTable e retorna seus elementos
                 'Application\Model\TipoParticipanteTable' => function($sm) {
                     $tableGateway = $sm->get('TipoParticipanteTableGateway');
@@ -85,9 +87,7 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new TipoParticipante());
                     return new TableGateway(new TableIdentifier('tipo_participante'), $dbAdapter, null, $resultSetPrototype);
                 },
-                        
-                        
-                /** ************* PARTICIPANTE ************** */
+                /**                 * ************ PARTICIPANTE ************** */
                 //instacia um objeto da ParticiapanteTable e retorna seus elementos
                 'Application\Model\ParticipanteTable' => function($sm) {
                     $tableGateway = $sm->get('ParticipanteTableGateway');

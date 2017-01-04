@@ -1,7 +1,8 @@
 <tr>
     <td><?=$this->escapeHtml($this->codParticipante)?></td>
     <td><?=$this->escapeHtml($this->nomeParticipante)?></td>
-    <td><?=$this->MascaraCpf()->formatarCpf($this->cpfParticipante)?></td>
+    <!--<td><?//$this->MascaraCpf()->formatarCpf($this->cpfParticipante)?></td>-->
+    <td><?=$this->cpfParticipante?></td>
     <td><?=$this->telefoneParticipante?></td>
     <td><?=$this->escapeHtml($this->emailParticipante)?></td>
     <td><?=$this->tipoParticipante?></td>

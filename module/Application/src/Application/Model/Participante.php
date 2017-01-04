@@ -13,6 +13,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\I18n\Filter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Db\TableGateway\TableGateway;
 
 
 
@@ -30,11 +31,15 @@ class Participante implements InputFilterAwareInterface
     public $dataCadastroParticipante; 
     protected $inputFilter;
     
+//    protected $inputFilter;
+    protected $dbAdapter;
+    public $data;
+    
     function exchangeArray($data)
     {
         $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
         $this->nomeParticipante = (isset($data['nome_participante'])) ? $data['nome_participante'] : null;
-        $this->cpfParticipante = (isset($data['cpf_participante'])) ? $data['cpf_participante'] : null;
+        $this->cpfParticipante =  (isset($data['cpf_participante'])) ? $data['cpf_participante'] : null;
         $this->telefoneParticipante = (isset($data['telefone_participante'])) ? $data['telefone_participante'] : null;
         $this->emailParticipante = (isset($data['email_participante'])) ? $data['email_participante'] : null;
         $this->codTipoParticipante = (isset($data['cod_tipo_participante'])) ? $data['cod_tipo_participante'] : null;
@@ -65,18 +70,27 @@ class Participante implements InputFilterAwareInterface
     public function toArray(){
         return get_object_vars($this);
     }
-        
-    public function setInputFilter(InputFilterInterface $inputFilter)
+      
+    
+    /*add*/
+    public function setDbAdapter($dbAdapter)
     {
-        throw new \Exception("Sem uso");
+        
+        $this->dbAdapter = $dbAdapter;
     }
  
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+ 
+
     public function getInputFilter() {
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $factory = new InputFactory();
-            
-            $inputFilter->add($factory->createInput(array(
+
+ $inputFilter->add($factory->createInput(array(
                         'name' => 'nome_participante',
                         'required' => true,
                         'filters' => array(
@@ -105,10 +119,94 @@ class Participante implements InputFilterAwareInterface
                             ),
                         )
             )));
-           $this->inputFilter = $inputFilter; 
+
+            //verifica duplicidade do cpf
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'cpf_participante',
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => '\Zend\Validator\Db\NoRecordExists',
+                        'options' => array(
+                            'table' => 'participante',
+                            'field' => 'cpf_participante',
+                            'adapter' => $this->dbAdapter,
+                            'messages' => array(
+                            \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'CPF já cadastrado',
+                            ),
+                        ),
+                    ),
+                ),
+            )));
+//            verifica duplicidade do email
+            $inputFilter->add($factory->createInput(array(
+                'name' => 'email_participante',
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => '\Zend\Validator\Db\NoRecordExists',
+                        'options' => array(
+                            'table' => 'participante',
+                            'field' => 'email_participante',
+                            'adapter' => $this->dbAdapter,
+                            'messages' => array(
+                                \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'Email já cadastrado',
+                            ),
+                        ),
+                    ),
+                ),
+            )));
+ 
+            $this->inputFilter = $inputFilter;
         }
+ 
         return $this->inputFilter;
     }
+}
+    
+//    public function setInputFilter(InputFilterInterface $inputFilter)
+//    {
+//        throw new \Exception("Sem uso");
+//    }
+// 
+//    public function getInputFilter() {
+//        if (!$this->inputFilter) {
+//            $inputFilter = new InputFilter();
+//            $factory = new InputFactory();
+            
+//            $inputFilter->add($factory->createInput(array(
+//                        'name' => 'nome_participante',
+//                        'required' => true,
+//                        'filters' => array(
+//                            array('name' => 'StripTags'),
+//                            array('name' => 'StringTrim')
+//                        ),
+//                        'validators' => array(
+//                            array(
+//                                'name' => 'NotEmpty',
+//                                'options' => array(
+//                                    'messages' => array(
+//                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo nome não pode ser vazio!'
+//                                    ),
+//                                ),
+//                            ),
+//                            array(
+//                                'name' => 'StringLength',
+//                                'options' => array(
+//                                    'min' => 3,
+//                                    'max' => 255,
+//                                    'messages' => array(
+//                                        \Zend\Validator\StringLength::TOO_SHORT => 'O campo nome deve ter no mínimo 3 caracteres!',
+//                                        \Zend\Validator\StringLength::TOO_LONG => 'O campo nome deve ter no máximo 255 caracteres!',
+//                                    )
+//                                ),
+//                            ),
+//                        )
+//            )));
+//           $this->inputFilter = $inputFilter; 
+//        }
+//        return $this->inputFilter;
+//    }
     
     
 //    public function getInputFilter()
@@ -217,4 +315,4 @@ class Participante implements InputFilterAwareInterface
 // 
 //        return $this->inputFilter;
 //    }
-}
+//}

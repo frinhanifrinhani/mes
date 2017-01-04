@@ -14,7 +14,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Participante;
 use Zend\Paginator\Adapter\DbSelect;
-//use Zend\Paginator\Adapter\ArrayAdapter;
+use Application\Controller\LoginController AS Login;
 use Application\Form\ParticipanteForm;
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
@@ -34,10 +34,46 @@ class ParticipanteController extends AbstractActionController {
         ));
     }
     public function criarContaProductOwnerAction(){
-         $this->layout('layout/layout_cadastro');
-         $formParticipante = new ParticipanteForm();
-         $this->cadastrarAction();
+        $this->layout('layout/layout_cadastro');
+        $retorno = false;
+        $ultimoParticipante = null;
+        $formParticipante = new ParticipanteForm();
+       
+        $request = $this->getRequest();
+     
+        if ($request->isPost()) {
+            
+            $participante = new Participante();
+            
+            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $participante->setDbAdapter($dbAdapter);
+
+            $formParticipante->setInputFilter($participante->getInputFilter());
+            $formParticipante->setData($request->getPost());
+
+            if ($formParticipante->isValid()) {
+
+                $participante->exchangeArray($formParticipante->getData());
+                $retorno = $this->getParticipanteTable()->salvar($participante);
+                
+//                if($retorno == true){
+//
+////                    $autenticar =  new LoginController('frinhani.frinhani@gmail.com','123456');
+//                    $usuario = new Login('frinhani.frinhani@gmail.com','123456');
+//
+//                    if ($usuario->autenticacaoAction($this->getServiceLocator())) {
+//                        return $this->redirect()->toRoute('inicio');
+//                    } else {
+//                        return $this->redirect()->toRoute('login');
+//                    }
+//                    
+//                }
+               
+            }
+        }
+
         return new ViewModel(array(
+            'retorno' => $retorno,
             'form_participante' => $formParticipante,
         ));
     }
@@ -46,28 +82,31 @@ class ParticipanteController extends AbstractActionController {
         $retorno = false;
         $ultimoParticipante = null;
         $formParticipante = new ParticipanteForm();
-
-//        $formParticipante->get('botao_salvar')->setValue('Salvar');
+       
         $request = $this->getRequest();
-//        var_dump($request->getPost());
+     
         if ($request->isPost()) {
+            
             $participante = new Participante();
+            
+            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $participante->setDbAdapter($dbAdapter);
+
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
+
             if ($formParticipante->isValid()) {
+
                 $participante->exchangeArray($formParticipante->getData());
                 $retorno = $this->getParticipanteTable()->salvar($participante);
-                echo $retorno;
+                
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
-                
-                //$this->flashMessenger()->addMessage(array('danger' => '<i class="glyphicon glyphicon-remove"></i> '));
-                
             }
         }
 
         return new ViewModel(array(
             'ultimoParticipante' => $ultimoParticipante,
-//            'retorno' => $retorno,
+            'retorno' => $retorno,
             'form_participante' => $formParticipante,
         ));
     }
