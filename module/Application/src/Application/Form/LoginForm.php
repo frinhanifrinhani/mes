@@ -18,20 +18,23 @@ class LoginForm extends Form {
         parent::__construct('form_login');
         
         $this->setAttribute('method', 'post');
+
+        $this->setAttribute('id', 'form_login');
+        
         $this->add(array(
-            'name' => 'usuario',
+            'name' => 'email_participante',
             'type' => 'Text',
             'attributes'=>array(
-              'id' => 'usuario',
+              'id' => 'email_participante',
               'class'=>'form-control',
-              'placeholder'=>'Usuario',
+              'placeholder'=>'E-mail',
             ),
         ));
         $this->add(array(
-            'name' => 'senha',
+            'name' => 'senha_participante',
             'type' => 'Password',
             'attributes'=>array(
-              'id' => 'senha',
+              'id' => 'senha_participante',
               'class'=>'form-control',
               'placeholder'=>'Senha',
             ),

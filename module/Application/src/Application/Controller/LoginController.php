@@ -20,7 +20,7 @@ use Application\Model\Usuario;
 
 class LoginController extends AbstractActionController {
 
-    protected $usuarioTable;
+//    protected $usuarioTable;
 
     public function loginAction() {
         $autenticacao = new AuthenticationService;
@@ -31,20 +31,19 @@ class LoginController extends AbstractActionController {
 
         $this->layout('layout/login');
         $formLogin = new LoginForm();
-
         return new ViewModel(array(
             'form_login' => $formLogin
         ));
     }
 
-    public function getUsuarioTable() {
-        if (!$this->usuarioTable) {
-            $sm = $this->getServiceLocator();
-            $this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
-        }
-
-        return $this->usuarioTable;
-    }
+//    public function getUsuarioTable() {
+//        if (!$this->usuarioTable) {
+//            $sm = $this->getServiceLocator();
+//            $this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+//        }
+//
+//        return $this->usuarioTable;
+//    }
 
     public function autenticacaoAction() {
         $request = $this->getRequest();
@@ -52,8 +51,12 @@ class LoginController extends AbstractActionController {
         if (!$request->isPost()) {
             return $this->redirect()->toRoute('login');
         }
-        $identidade = $request->getPost('usuario');
-        $credencial = $request->getPost('senha');
+        if($request->getPost()->email_participante == null){
+            //return 
+        }
+        //die;
+        $identidade = $request->getPost('email_participante');
+        $credencial = $request->getPost('senha_participante');
 
         $usuario = new Login($identidade, $credencial);
 
