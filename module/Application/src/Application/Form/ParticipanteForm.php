@@ -89,6 +89,32 @@ class ParticipanteForm extends Form {
         ));
         
         $this->add(array(
+            'name' => 'senha_participante',
+            'type' => 'Password',
+            'attributes'=>array(
+              'id' => 'senha_participante',
+              'class'=>'form-control',
+              'placeholder'=>'Senha',
+            ),
+            'options'=>array(
+                'label'=>'Senha *',
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'confirma_senha_participante',
+            'type' => 'Password',
+            'attributes'=>array(
+              'id' => 'confirma_senha_participante',
+              'class'=>'form-control',
+              'placeholder'=>'Senha',
+            ),
+            'options'=>array(
+                'label'=>'Confirma Senha *',
+            ),
+        ));
+        
+        $this->add(array(
             'name' => 'cod_tipo_participante',
             'type' => 'Select',
             'attributes'=>array(

@@ -36,7 +36,7 @@ class ParticipanteController extends AbstractActionController {
     public function criarContaProductOwnerAction(){
          $this->layout('layout/layout_cadastro');
          $formParticipante = new ParticipanteForm();
-        $this->cadastrarAction();
+         $this->cadastrarAction();
         return new ViewModel(array(
             'form_participante' => $formParticipante,
         ));
@@ -49,6 +49,7 @@ class ParticipanteController extends AbstractActionController {
 
 //        $formParticipante->get('botao_salvar')->setValue('Salvar');
         $request = $this->getRequest();
+//        var_dump($request->getPost());
         if ($request->isPost()) {
             $participante = new Participante();
             $formParticipante->setInputFilter($participante->getInputFilter());
@@ -56,14 +57,17 @@ class ParticipanteController extends AbstractActionController {
             if ($formParticipante->isValid()) {
                 $participante->exchangeArray($formParticipante->getData());
                 $retorno = $this->getParticipanteTable()->salvar($participante);
+                echo $retorno;
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
-
+                
+                //$this->flashMessenger()->addMessage(array('danger' => '<i class="glyphicon glyphicon-remove"></i> '));
+                
             }
         }
 
         return new ViewModel(array(
             'ultimoParticipante' => $ultimoParticipante,
-            'retorno' => $retorno,
+//            'retorno' => $retorno,
             'form_participante' => $formParticipante,
         ));
     }

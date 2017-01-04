@@ -58,16 +58,45 @@ class ParticipanteTable {
             'cpf_participante' => str_replace(array('.','-'), '', $participante->cpfParticipante),
 	    'telefone_participante' => $participante->telefoneParticipante,
 	    'email_participante' => $participante->emailParticipante,
+            'senha_participante' => md5($participante->senhaParticipante),
             'cod_tipo_participante' => $participante->codTipoParticipante,
         );
 
+        try {
         $codParticipante = $participante->codParticipante;
-        if(!$this->getParticipante($codParticipante)){
-            $data['cod_participante'] = $codParticipante;
-            return $this->tableGateway->insert($data);
-        }else{
-            return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+            if(!$this->getParticipante($codParticipante)){
+                $data['cod_participante'] = $codParticipante;
+                $this->tableGateway->insert($data);
+            } else {
+                return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+            }
+        } catch (\Exception $e) {
+            //return $e->getPrevious()->getMessage();
+            switch ($e->getPrevious()->getCode()) {
+                
+            case 23000:
+                return 'email duplicado';
+                break;
+            }
+////
+//            case 1452:
+//            // Cannot add or update a child row
+//            break;
+//    }
+//            $msg = $e->getMessage();
+//            $this->flashMessenger()->addMessage(array('danger' => '<i class="glyphicon glyphicon-remove"></i> ' . $msg));
+            //$this->redirect()->toRoute('login');
+            exit;
         }
+        
+        //**ORIGINAL*/
+//        $codParticipante = $participante->codParticipante;
+//        if(!$this->getParticipante($codParticipante)){
+//            $data['cod_participante'] = $codParticipante;
+//            return $this->tableGateway->insert($data);
+//        }else{
+//            return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+//        }
     }
     
     public function excluir($codParticipante){

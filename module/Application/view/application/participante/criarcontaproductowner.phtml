@@ -3,20 +3,10 @@
 </div>
 <hr />
 <!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item active" id="dados_pessoais_link">
-    <a class="nav-link " data-toggle="tab" href="#dados_pessoais" role="tab">Dados Pessoais</a>
-  </li>
-  <li class="nav-item" id="dados_usuario_link">
-    <a class="nav-link " data-toggle="tab" href="#dados_usuario" role="tab">Dados do Usuário</a>
-  </li>
-</ul>
-<br />
-
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <div class="tab-pane active" id="dados_pessoais" role="tabpanel">
+
          
 
                 <?php
@@ -39,6 +29,12 @@
         <div class="form-group">
             <?= $this->formRow($formParticipante->get('email_participante')); ?>
         </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('senha_participante')); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->formRow($formParticipante->get('confirma_senha_participante')); ?>
+        </div>
              <input type="hidden" name="cod_tipo_participante" id="cod_tipo_participante" value="1">
         <div class="form-group">
             <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
@@ -46,13 +42,8 @@
         </div>
                
                 <?php echo $this->form()->closeTag(); ?>     
-    </div>
-    
-  <div class="tab-pane" id="dados_usuario" role="tabpanel">
-      quatro
-  </div>
 </div>
-
+<?php echo $this->message; ?>
     <script>
 //    habilitarAba();
 //    
@@ -90,6 +81,16 @@
                     required: true,
                     email: true,
                 },
+                senha_participante: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 12,
+                },
+                confirma_senha_participante: {
+                    required: true,
+                    equalTo: '#senha_participante'
+                    
+                },
 
             },
             // Define as mensagens de erro para cada regra
@@ -105,6 +106,15 @@
                 email_participante: {
                     required: "Campo E-mail não pode ser vazio!",
                     email: "Formato email dever ter (@ e .com)!",
+                },
+                senha_participante: {
+                    required: "Campo Senha não pode ser vazio!",
+                    minlength: "A senha dever ter no mínimo 6 caracteres",
+                    maxlength: "A senha dever ter no máximo 12 caracteres",
+                },
+                confirma_senha_participante: {
+                    required: "Campo Confirma Senha não pode ser vazio!",
+                    equalTo: "Senhas não conferem!",
                 },
             }
         });

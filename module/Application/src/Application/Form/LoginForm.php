@@ -40,7 +40,8 @@ class LoginForm extends Form {
             'name' => 'botao_entrar',
             'type' => 'Submit',
             'attributes'=> array(
-              'value' => 'Entrar',  
+              'value' => 'Entrar', 
+              'class'=>'btn btn-primary',
               'id' => 'botao_entrar' 
             ),
         ));
