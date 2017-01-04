@@ -13,8 +13,8 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Participante;
+use Application\Model\Login;
 use Zend\Paginator\Adapter\DbSelect;
-use Application\Controller\LoginController AS Login;
 use Application\Form\ParticipanteForm;
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
@@ -33,18 +33,19 @@ class ParticipanteController extends AbstractActionController {
             'partial_loop_listar' => $participantes,
         ));
     }
-    public function criarContaProductOwnerAction(){
+
+    public function criarContaProductOwnerAction() {
         $this->layout('layout/layout_cadastro');
         $retorno = false;
         $ultimoParticipante = null;
         $formParticipante = new ParticipanteForm();
-       
+
         $request = $this->getRequest();
-     
+
         if ($request->isPost()) {
-            
+
             $participante = new Participante();
-            
+
             $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $participante->setDbAdapter($dbAdapter);
 
@@ -55,20 +56,14 @@ class ParticipanteController extends AbstractActionController {
 
                 $participante->exchangeArray($formParticipante->getData());
                 $retorno = $this->getParticipanteTable()->salvar($participante);
-                
-//                if($retorno == true){
-//
-////                    $autenticar =  new LoginController('frinhani.frinhani@gmail.com','123456');
-//                    $usuario = new Login('frinhani.frinhani@gmail.com','123456');
-//
-//                    if ($usuario->autenticacaoAction($this->getServiceLocator())) {
-//                        return $this->redirect()->toRoute('inicio');
-//                    } else {
-//                        return $this->redirect()->toRoute('login');
-//                    }
-//                    
-//                }
-               
+
+                if ($retorno == true) {
+                    $identidade = $request->getPost('email_participante');
+                    $credencial = $request->getPost('senha_participante');
+
+                    $usuario = new Login($identidade, $credencial);
+                    
+                }
             }
         }
 
@@ -77,18 +72,19 @@ class ParticipanteController extends AbstractActionController {
             'form_participante' => $formParticipante,
         ));
     }
+
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
         $retorno = false;
         $ultimoParticipante = null;
         $formParticipante = new ParticipanteForm();
-       
+
         $request = $this->getRequest();
-     
+
         if ($request->isPost()) {
-            
+
             $participante = new Participante();
-            
+
             $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $participante->setDbAdapter($dbAdapter);
 
@@ -99,7 +95,7 @@ class ParticipanteController extends AbstractActionController {
 
                 $participante->exchangeArray($formParticipante->getData());
                 $retorno = $this->getParticipanteTable()->salvar($participante);
-                
+
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
             }
         }
@@ -143,7 +139,7 @@ class ParticipanteController extends AbstractActionController {
 
     //metodo que retorna pagina de exclusão dos dados da funcionalidade Participante
     public function excluirAction() {
-        
+
         $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
         if (is_null($codParticipante)) {
@@ -154,7 +150,7 @@ class ParticipanteController extends AbstractActionController {
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
         $formParticipante = new ParticipanteForm();
         $formParticipante->bind($participante);
-  
+
         $request = $this->getRequest();
         if ($request->isPost()) {
             $retorno = $this->getParticipanteTable()->excluir($codParticipante);
@@ -166,7 +162,6 @@ class ParticipanteController extends AbstractActionController {
             'cod_participante' => $codParticipante,
             'form_participante' => $formParticipante,
         ));
-       
     }
 
     //recupera e retorna a model PartticipanteTable
