@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -14,25 +15,22 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 
-class IndexController extends AbstractActionController
-{
-    public function indexAction()
-    {
+class IndexController extends AbstractActionController {
+
+    public function indexAction() {
         $autenticacao = new AuthenticationService;
         if ($autenticacao->hasIdentity()) {
             return $this->redirect()->toRoute('inicio');
-        }else{
+        } else {
             return $this->redirect()->toRoute('login');
-            
         }
-
     }
-    
-    public function inicioAction()
-    {
+
+    public function inicioAction() {
 
         //metodo que verifica autenticação e perfil
         //$this->ACLPermitir()->permitir();
         return new ViewModel();
     }
+
 }

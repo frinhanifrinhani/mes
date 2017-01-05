@@ -18,6 +18,9 @@
 
         <!-- Scripts -->
         <?php echo $this->headScript()
+                ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/additional/extension.js'))
+                ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/dist/additional-methods.js'))
+                ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/dist/jquery.validate.min.js'))
             ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/jquery.min.js'))
             ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
@@ -29,10 +32,7 @@
         
         <div class="container">
             <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2016 - <?php echo date('Y') ?> My Easy Scrum - MES. <?php echo $this->translate('Todos os direitos reservados.') ?></p>
-            </footer>
+
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>
     </body>

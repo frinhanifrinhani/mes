@@ -62,7 +62,6 @@ class ParticipanteController extends AbstractActionController {
                     $credencial = $request->getPost('senha_participante');
 
                     $usuario = new Login($identidade, $credencial);
-                    
                 }
             }
         }

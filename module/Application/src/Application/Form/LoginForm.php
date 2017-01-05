@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -13,40 +14,41 @@ use Zend\Form\Form;
 use Zend\InputFilter;
 
 class LoginForm extends Form {
-    
+
     public function __construct() {
         parent::__construct('form_login');
-        
+
         $this->setAttribute('method', 'post');
 
         $this->setAttribute('id', 'form_login');
-        
+
         $this->add(array(
             'name' => 'email_participante',
             'type' => 'Text',
-            'attributes'=>array(
-              'id' => 'email_participante',
-              'class'=>'form-control',
-              'placeholder'=>'E-mail',
+            'attributes' => array(
+                'id' => 'email_participante',
+                'class' => 'form-control',
+                'placeholder' => 'E-mail',
             ),
         ));
         $this->add(array(
             'name' => 'senha_participante',
             'type' => 'Password',
-            'attributes'=>array(
-              'id' => 'senha_participante',
-              'class'=>'form-control',
-              'placeholder'=>'Senha',
+            'attributes' => array(
+                'id' => 'senha_participante',
+                'class' => 'form-control',
+                'placeholder' => 'Senha',
             ),
         ));
         $this->add(array(
             'name' => 'botao_entrar',
             'type' => 'Submit',
-            'attributes'=> array(
-              'value' => 'Entrar', 
-              'class'=>'btn btn-primary',
-              'id' => 'botao_entrar' 
+            'attributes' => array(
+                'value' => 'Entrar',
+                'class' => 'btn btn-primary btn-lg btn-block',
+                'id' => 'botao_entrar'
             ),
         ));
     }
+
 }
