@@ -1,0 +1,13 @@
+<tr>
+    <td><?=$this->codProjeto?></td>
+    <td><?=$this->escapeHtml($this->nomeProjeto)?></td>
+    <!--<td><?//$this->MascaraCpf()->formatarCpf($this->cpfParticipante)?></td>-->
+    <td><?=$this->descricaoProjeto?></td>
+    <td><?=$this->dataInicioProjeto?></td>
+    <td><?=$this->dataFimProjeto?></td>
+    <td><?=$this->codStatusProjeto?></td>
+    <td>
+        <a href="<?php //echo $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
+        <a href="<?php //echo $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
+    </td>    
+</tr>

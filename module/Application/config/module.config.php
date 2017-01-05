@@ -145,7 +145,40 @@ return array(
                     'route'    => '/projeto',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Projeto',
-                        'action'     => 'index',
+                        'action'     => 'listar',
+                    ),
+                ),
+            ),
+            //Rota cadastrar projeto
+            'projeto-cadastrar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/projeto-cadastrar',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Projeto',
+                        'action'            => 'cadastrar',
+                    ),
+                ),
+            ),
+            //Rota editar projeto
+            'projeto-editar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/projeto-editar[/:cod_projeto]',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Projeto',
+                        'action'            => 'editar',
+                    ),
+                ),
+            ),
+            //Rota excluir projeto
+            'projeto-excluir' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/projeto-excluir[/:cod_projeto]',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Projeto',
+                        'action'            => 'excluir',
                     ),
                 ),
             ),

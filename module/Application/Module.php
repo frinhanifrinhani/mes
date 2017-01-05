@@ -23,6 +23,10 @@ use Application\Model\TipoParticipante;
 use Application\Model\TipoParticipanteTable;
 use Application\Model\Participante;
 use Application\Model\ParticipanteTable;
+use Application\Model\Status;
+use Application\Model\StatusTable;
+use Application\Model\Projeto;
+use Application\Model\ProjetoTable;
 
 //use Zend\Validator\Db\RecordExists;
 
@@ -55,23 +59,7 @@ class Module {
         return array(
             //factories para acesso as tabelas
             'factories' => array(
-                /**                 * ************ USUARIO ************** */
-                //instacia um objeto da UsuarioTable e retorna seus elementos
-//                'Application\Model\UsuarioTable' => function($sm) {
-//                    $tableGateway = $sm->get('UsuarioTableGateway');
-//                    $table = new UsuarioTable($tableGateway);
-//                    return $table;
-//                },
-                //instancia um array objeto da Usuario, e retorna uma TableGateway 
-                //passando o nome da tabela 'usuario'
-//                'UsuarioTableGateway' => function ($sm) {
-//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-//                    $resultSetPrototype = new ResultSet();
-//                    $resultSetPrototype->setArrayObjectPrototype(new Usuario());
-//                    return new TableGateway(new TableIdentifier('usuario'), $dbAdapter, null, $resultSetPrototype);
-//                },
-
-
+                
                 /**                 * ************ TIPO PARTICIPANTE ************** */
                 //instacia um objeto da TipoParticipanteTable e retorna seus elementos
                 'Application\Model\TipoParticipanteTable' => function($sm) {
@@ -101,6 +89,36 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Participante());
                     return new TableGateway(new TableIdentifier('participante'), $dbAdapter, null, $resultSetPrototype);
+                },
+                        /**                 * ************ STATUS ************** */
+                //instacia um objeto da StatusTable e retorna seus elementos
+                'Application\Model\StatusTable' => function($sm) {
+                    $tableGateway = $sm->get('StatusTableGateway');
+                    $table = new StatusTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da Status, e retorna uma TableGateway 
+                //passando o nome da tabela 'status'
+                'StatusTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Status());
+                    return new TableGateway(new TableIdentifier('status'), $dbAdapter, null, $resultSetPrototype);
+                },
+                /**                 * ************ PROJETO ************** */
+                //instacia um objeto da ProjetoTable e retorna seus elementos
+                'Application\Model\ProjetoTable' => function($sm) {
+                    $tableGateway = $sm->get('ProjetoTableGateway');
+                    $table = new ProjetoTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da Projeto, e retorna uma TableGateway 
+                //passando o nome da tabela 'projeto'
+                'ProjetoTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Projeto());
+                    return new TableGateway(new TableIdentifier('projeto'), $dbAdapter, null, $resultSetPrototype);
                 },
             )
         );

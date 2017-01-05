@@ -1,0 +1,81 @@
+<div class="box-header with-border">
+    <h3 class="box-title">Editar projeto</h3>
+</div>
+<?php
+//var_dump($this->retorno);
+if (isset($_POST['botao_salvar']) && ($this->retorno == 1)) {
+    ?>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><b>Parabens!</b></h4>
+                </div>
+                <div class="modal-body">
+
+                    <b>Dados alterados com sucesso!</b><br /><br />
+                    Você deseja fazer mais alguma alteração?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sim</button>
+                    <a href="/participante" class="btn btn-danger">Não</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+<?php } ?>
+
+<hr />
+<div class="content">
+    
+</div>
+
+<script>
+
+//    $(document).ready(function () {
+//        $('#cpf_participante').mask('999.999.999-99');
+//        $('#telefone_participante').mask('(99) 99999-9999');
+//
+//        $('#form_participante').validate({
+//            // Define as regras
+//            rules: {
+//                nome_participante: {
+//                    required: true,
+//                },
+//                cpf_participante: {
+//                    required: true,
+//                    minlength: 14,
+//                },
+//                email_participante: {
+//                    required: true,
+//                    email: true,
+//                },
+//                tipo_participante: {
+//                    required: true,
+//                },
+//            },
+//            // Define as mensagens de erro para cada regra
+//            messages: {
+//                nome_participante: {
+//                    required: "Campo Nome não pode ser vazio!",
+//                },
+//                cpf_participante: {
+//                    required: "Campo CPF não pode ser vazio!",
+//                    minlength: "O Campo CPF deve ter 11 números!"
+//
+//                },
+//                email_participante: {
+//                    required: "Campo E-mail não pode ser vazio!",
+//                    email: "Formato email dever ter (@ e .com)!",
+//                },
+//                tipo_participante: {
+//                    required: "Campo Tipo de Participante não pode ser vazio!",
+//                },
+//            }
+//        });
+//    });
+</script>

@@ -19,28 +19,24 @@ use Zend\InputFilter\InputFilterInterface;
 class TipoParticipante 
 {
 
-    public $codTipoParticipante;
-    public $tipoParticipante;
+    public $codStatus;
+    public $descricaoStatus;
     protected $inputFilter;
     
     function exchangeArray($data)
     {
-        $this->codTipoParticipante = (isset($data['cod_tipo_participante'])) ? $data['cod_tipo_participante'] : null;
-        $this->tipoParticipante = (isset($data['tipo_participante'])) ? $data['tipo_participante'] : null;
-        
-        
+        $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
+        $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
+
     }
     
     public function getArrayCopy()
     {
         return array(
-            
-            'cod_tipo_participante' => $this->codTipoParticipante,
-            'tipo_participante' => $this->tipoParticipante,
-            
+            'cod_status' => $this->codStatus,
+            'descricao_status' => $this->descricaoStatus,
         );
     }
-
 
 //    public function getInputFilter() {
 //        if (!$this->inputFilter) {
@@ -80,7 +76,7 @@ class TipoParticipante
 //        }
 //        return $this->inputFilter;
 //    }
-//    
+    
     public function toArray(){
         return get_object_vars($this);
     }

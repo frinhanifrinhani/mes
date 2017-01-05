@@ -1,0 +1,24 @@
+<div class="box-header with-border">
+	<h3 class="box-title">Projetos</h3>
+</div>
+
+<hr />
+<a href="<?php echo $this->url('projeto-cadastrar',array('action' => 'cadastrar'))?>" class="btn btn-success">Novo Projeto</a>
+<p></p>
+<table id="data_table" class="table data_tables table-striped table-hover table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Data Inicio</th>
+                        <th>Data Fim</th>
+                        <th>Status</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+<?= $this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar) ?>  
+                </tbody>
+</table>
+
