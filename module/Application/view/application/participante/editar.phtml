@@ -32,7 +32,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <div class="content">
     <?php
     $formParticipante = $this->form_participante;
-    $formParticipante->setAttribute('action', $this->url('participante-editar', array('action' => 'editar', 'cod_participante' => $formParticipante->get('cod_participante')->getValue())));
+    //$formParticipante->setAttribute('action', $this->url('participante-editar', array('action' => 'editar', 'cod_participante' => $formParticipante->get('cod_participante')->getValue())));
     $formParticipante->prepare();
     ?>
     <?= $this->form()->openTag($formParticipante) ?>

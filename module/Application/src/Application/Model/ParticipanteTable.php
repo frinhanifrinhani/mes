@@ -30,47 +30,48 @@ class ParticipanteTable {
         $select->from(new TableIdentifier('participante'))
                 ->columns(array('cod_participante', 'nome_participante', 'cpf_participante', 'telefone_participante', 'email_participante', 'cod_tipo_participante', 'data_cadastro_participante'))
                 ->join('tipo_participante', 'tipo_participante.cod_tipo_participante = participante.cod_tipo_participante', 'tipo_participante')
-                ->order(array('cod_participante' => 'desc'));
+                ->order(array('cod_participante'=>'desc'));
         $linha = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();  
         return $linha;
     }
-
-    public function getLastId() {
-        $ultimoParticipante = $this->tableGateway->lastInsertValue;
-        return $ultimoParticipante;
+    public function getLastId(){
+      $ultimoParticipante = $this->tableGateway->lastInsertValue;
+      return $ultimoParticipante;
+ 
     }
 
-    public function getParticipante($codParticipante) {
-        $codParticipante = (int) $codParticipante;
-        $rowset = $this->tableGateway->select(array('cod_participante' => $codParticipante));
-        $row = $rowset->current();
-
-        return $row;
-    }
-
-    public function salvar(Participante $participante) {
-
+    public function getParticipante($codParticipante)
+     {
+         $codParticipante = (int) $codParticipante;
+         $rowset = $this->tableGateway->select(array ('cod_participante' => $codParticipante));
+         $row = $rowset->current();
+         
+         return  $row;
+     }
+    
+    public function salvar(Participante $participante){
+        
         $data = array(
             'cod_participante' => $participante->codParticipante,
             'nome_participante' => $participante->nomeParticipante,
             'cpf_participante' => $participante->cpfParticipante,
-            'telefone_participante' => $participante->telefoneParticipante,
-            'email_participante' => $participante->emailParticipante,
+	    'telefone_participante' => $participante->telefoneParticipante,
+	    'email_participante' => $participante->emailParticipante,
             'senha_participante' => md5($participante->senhaParticipante),
             'cod_tipo_participante' => $participante->codTipoParticipante,
         );
 
         $codParticipante = $participante->codParticipante;
-        if (!$this->getParticipante($codParticipante)) {
-            $data['cod_participante'] = $codParticipante;
-            return $this->tableGateway->insert($data);
-        } else {
-            return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+            if(!$this->getParticipante($codParticipante)){
+                $data['cod_participante'] = $codParticipante;
+                return $this->tableGateway->insert($data);
+            } else {
+                return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+            }
         }
-    }
-
-    public function excluir($codParticipante) {
+    
+    public function excluir($codParticipante){
         return $this->tableGateway->delete(array('cod_participante' => $codParticipante));
     }
 

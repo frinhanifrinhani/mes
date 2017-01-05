@@ -17,6 +17,7 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\TableGateway\TableGateway;
 
+
 class Participante implements InputFilterAwareInterface {
 
     public $codParticipante;
@@ -30,7 +31,7 @@ class Participante implements InputFilterAwareInterface {
     public $dataCadastroParticipante;
     protected $inputFilter;
     protected $dbAdapter;
-    public $data;
+   // public $data;
 
     function exchangeArray($data) {
         $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
@@ -58,9 +59,6 @@ class Participante implements InputFilterAwareInterface {
         );
     }
 
-    public function toArray() {
-        return get_object_vars($this);
-    }
 
     /* add */
     public function setDbAdapter($dbAdapter) {
@@ -150,4 +148,7 @@ class Participante implements InputFilterAwareInterface {
         return $this->inputFilter;
     }
 
+    public function toArray() {
+        return get_object_vars($this);
+    }
 }

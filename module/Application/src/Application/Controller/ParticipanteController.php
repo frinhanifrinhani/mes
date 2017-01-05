@@ -18,6 +18,7 @@ use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ParticipanteForm;
 use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
+
 class ParticipanteController extends AbstractActionController {
 
     protected $participanteTable;
@@ -106,6 +107,33 @@ class ParticipanteController extends AbstractActionController {
         ));
     }
 
+//    public function editarAction() {
+//          $retorno = false;
+//          $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
+//    if (is_null($codParticipante)) {
+//             return $this->redirect()->toRoute('participante-cadastrar', array(
+//                         'action' => 'cadastrar'
+//              ));
+//          }
+//          $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
+//          $formParticipante = new ParticipanteForm();
+//
+//           $request = $this->getRequest();
+//         if ($request->isPost()) {
+//              $formParticipante->setInputFilter($participante->getInputFilter());
+//              $formParticipante->setData($request->getPost());
+//              if ($formParticipante->isValid()) {
+//                 $retorno = $this->getParticipanteTable()->salvar($formParticipante->getData());
+//              }
+//          }
+//          return new ViewModel(array(
+//          'retorno' => $retorno,
+//             'cod_participante' => $codParticipante,
+//             'form_participante' => $formParticipante,
+//              ));
+//      }
+          
+          
     //metodo que retorna pagina de edição dos dados da funcionalidade Participante
     public function editarAction() {
         $retorno = false;
@@ -117,11 +145,12 @@ class ParticipanteController extends AbstractActionController {
         }
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
         $formParticipante = new ParticipanteForm();
-        $formParticipante->bind($participante);
-        //$formParticipante->get('submit')->setAttribute('value','Editar');
-//        
+        $formParticipante->setData($participante->getArrayCopy());
+
         $request = $this->getRequest();
+        var_dump($request->getPost());
         if ($request->isPost()) {
+            
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
             if ($formParticipante->isValid()) {
@@ -148,9 +177,10 @@ class ParticipanteController extends AbstractActionController {
         }
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
         $formParticipante = new ParticipanteForm();
-        $formParticipante->bind($participante);
+        $formParticipante->setData($participante->getArrayCopy());
 
         $request = $this->getRequest();
+        
         if ($request->isPost()) {
             $retorno = $this->getParticipanteTable()->excluir($codParticipante);
             //return $this->redirect()->toRoute('participante');
