@@ -148,13 +148,22 @@ class ParticipanteController extends AbstractActionController {
         $formParticipante->setData($participante->getArrayCopy());
 
         $request = $this->getRequest();
-        var_dump($request->getPost());
+
         if ($request->isPost()) {
-            
-            $formParticipante->setInputFilter($participante->getInputFilter());
+
+            $participante = new Participante();
+
+//            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+//            $participante->setDbAdapter($dbAdapter);
+//            $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
+
             if ($formParticipante->isValid()) {
-                $retorno = $this->getParticipanteTable()->salvar($formParticipante->getData());
+
+                $participante->exchangeArray($formParticipante->getData());
+                $retorno = $this->getParticipanteTable()->salvar($participante);
+
+                $ultimoParticipante = $this->getParticipanteTable()->getLastId();
             }
         }
 

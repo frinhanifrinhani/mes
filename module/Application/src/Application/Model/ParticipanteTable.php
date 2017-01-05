@@ -51,7 +51,6 @@ class ParticipanteTable {
      }
     
     public function salvar(Participante $participante){
-        
         $data = array(
             'cod_participante' => $participante->codParticipante,
             'nome_participante' => $participante->nomeParticipante,
@@ -62,6 +61,7 @@ class ParticipanteTable {
             'cod_tipo_participante' => $participante->codTipoParticipante,
         );
 
+        try{
         $codParticipante = $participante->codParticipante;
             if(!$this->getParticipante($codParticipante)){
                 $data['cod_participante'] = $codParticipante;
@@ -69,7 +69,11 @@ class ParticipanteTable {
             } else {
                 return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
             }
+        }  catch (\Exception $e){
+             $e->getPrevious()->getMessage();
         }
+    }
+        
     
     public function excluir($codParticipante){
         return $this->tableGateway->delete(array('cod_participante' => $codParticipante));
