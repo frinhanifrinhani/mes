@@ -90,7 +90,7 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new Participante());
                     return new TableGateway(new TableIdentifier('participante'), $dbAdapter, null, $resultSetPrototype);
                 },
-                        /**                 * ************ STATUS ************** */
+                 /**                 * ************ STATUS ************** */
                 //instacia um objeto da StatusTable e retorna seus elementos
                 'Application\Model\StatusTable' => function($sm) {
                     $tableGateway = $sm->get('StatusTableGateway');

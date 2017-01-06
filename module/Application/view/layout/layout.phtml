@@ -15,8 +15,12 @@
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                 ->prependStylesheet($this->basePath('css/style.css'))
+                //CSS DataTables
                 ->prependStylesheet($this->basePath('plugin/datatables/css/bootstrap.min.css'))
                 ->prependStylesheet($this->basePath('plugin/datatables/css/dataTables.bootstrap.min.css'))
+                //CSS Datepicker
+                ->prependStylesheet($this->basePath('plugin/datepicker/datepicker.css'))
+                //CSS Bootstrap
                 ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                 ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ?>
@@ -29,15 +33,20 @@
                 ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/dist/additional-methods.js'))
                 ->prependFile($this->basePath('plugin/jquery-validation-1.15.0/dist/jquery.validate.min.js'))
                 ->prependFile($this->basePath('plugin/jquerymask/jquery.mask.js'))
+                //Jquery datepiker
+                ->prependFile($this->basePath('plugin/datepicker/bootstrap-datepicker.js'))
                 
                 //Datatables
                 ->prependFile($this->basePath('plugin/datatables/js/dataTables.bootstrap.min.js'))
                 ->prependFile($this->basePath('plugin/datatables/js/jquery.dataTables.min.js'))
                 
+                //Jquery 
                 ->prependFile($this->basePath('js/bootstrap.min.js'))
                 ->prependFile($this->basePath('js/jquery.min.js'))
                 ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
                 ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+                
+//                 ->prependFile('http://code.jquery.com/jquery-1.10.2.js')
 
 
 

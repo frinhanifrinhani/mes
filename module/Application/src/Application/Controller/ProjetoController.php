@@ -12,7 +12,10 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-
+use Application\Model\Projeto;
+//use Application\Model\Login;
+//use Zend\Paginator\Adapter\DbSelect;
+use Application\Form\ProjetoForm;
 
 
 class ProjetoController extends AbstractActionController
@@ -32,9 +35,9 @@ class ProjetoController extends AbstractActionController
     
     //metodo que retorna pagina de cadastro da funcionalidade Projeto
     public function cadastrarAction() {
-        
+        $formProjeto = new ProjetoForm();
         return new ViewModel(array(
-           
+           'form_projeto' => $formProjeto,
         ));
     }
     //metodo que retorna pagina de edicao da funcionalidade Projeto

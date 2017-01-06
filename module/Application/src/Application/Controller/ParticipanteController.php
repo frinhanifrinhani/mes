@@ -13,8 +13,8 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Participante;
-use Application\Model\Login;
-use Zend\Paginator\Adapter\DbSelect;
+//use Application\Model\Login;
+//use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ParticipanteForm;
 
 class ParticipanteController extends AbstractActionController {

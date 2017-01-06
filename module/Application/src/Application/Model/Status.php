@@ -16,7 +16,7 @@ use Zend\InputFilter\InputFilterInterface;
 
 
 
-class TipoParticipante 
+class Status 
 {
 
     public $codStatus;
