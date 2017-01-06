@@ -17,6 +17,7 @@ use Zend\Db\ResultSet\ResultSet;
 use Application\Model\ProjetoTable;
 use Zend\Db\Sql\TableIdentifier;
 
+use Zend\I18n\View\Helper\DateFormat;
 class ProjetoTable {
 
     protected $tableGateway;
@@ -37,42 +38,45 @@ class ProjetoTable {
                 
     }
     public function getLastId(){
-      $ultimoParticipante = $this->tableGateway->lastInsertValue;
-      return $ultimoParticipante;
+      $ultimoProjeto = $this->tableGateway->lastInsertValue;
+      return $ultimoProjeto;
  
     }
 
-    public function getParticipante($codParticipante)
+    public function getProjeto($codProjeto)
      {
-         $codParticipante = (int) $codParticipante;
-         $rowset = $this->tableGateway->select(array ('cod_participante' => $codParticipante));
+         $codProjeto = (int) $codProjeto;
+         $rowset = $this->tableGateway->select(array ('cod_projeto' => $codProjeto));
          $row = $rowset->current();
          
          return  $row;
      }
     
-    public function salvar(Participante $participante){
+    public function salvar(Projeto $projeto){
         $data = array(
-            'cod_participante' => $participante->codParticipante,
-            'nome_participante' => $participante->nomeParticipante,
-            'cpf_participante' => $participante->cpfParticipante,
-	    'telefone_participante' => $participante->telefoneParticipante,
-	    'email_participante' => $participante->emailParticipante,
-            'senha_participante' => md5($participante->senhaParticipante),
-            'cod_tipo_participante' => $participante->codTipoParticipante,
+            'cod_projeto' => $projeto->codProjeto,
+            'nome_projeto' => $projeto->nomeProjeto,
+            'descricao_projeto' => $projeto->descricaoProjeto,
+//            'data_inicio_projeto' => implode('-',  array_reverse( explode('/', $projeto->dataInicioProjeto) )),
+//            'data_fim_projeto' => implode('-',  array_reverse( explode('/', $projeto->dataFimProjeto) )),
+//            'data_inicio_projeto' => $projeto->dataInicioProjeto,
+//            'data_fim_projeto' => $projeto->dataFimProjeto,
+            'data_inicio_projeto' => date_format($projeto->dataInicioProjeto, "YYYY-mm-dd"),
+            'data_fim_projeto' => date_format($projeto->dataFimProjeto, "YYYY-mm-dd"),
+            'cod_status' => $projeto->codStatusProjeto,
         );
-
-        try{
-        $codParticipante = $participante->codParticipante;
-            if(!$this->getParticipante($codParticipante)){
-                $data['cod_participante'] = $codParticipante;
+        var_dump($data);
+        //try{
+        $codProjeto = $projeto->codProjeto;
+            if(!$this->getProjeto($codProjeto)){
+                $data['cod_projeto'] = $codProjeto;
                 return $this->tableGateway->insert($data);
             } else {
-                return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
+                return $this->tableGateway->update($data, array('cod_projeto' => $codProjeto));
             }
-        }  catch (\Exception $e){
-             $e->getPrevious()->getMessage();
-        }
+//        }  catch (\Exception $e){
+//             $e->getPrevious()->getMessage();
+//        }
     }
         
     

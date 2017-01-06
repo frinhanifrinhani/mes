@@ -35,7 +35,31 @@ class ProjetoController extends AbstractActionController
     
     //metodo que retorna pagina de cadastro da funcionalidade Projeto
     public function cadastrarAction() {
+        //metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
         $formProjeto = new ProjetoForm();
+        
+        $request = $this->getRequest();
+//        var_dump($request->getPost());
+        if ($request->isPost()) {
+
+            $projeto = new Projeto();
+
+//            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+//            $participante->setDbAdapter($dbAdapter);
+//
+            $formProjeto->setInputFilter($projeto->getInputFilter());
+            $formProjeto->setData($request->getPost());
+
+            if ($formProjeto->isValid()) {
+
+                $projeto->exchangeArray($formProjeto->getData());
+                $retorno = $this->getProjetoTable()->salvar($projeto);
+
+                //$ultimoParticipante = $this->getParticipanteTable()->getLastId();
+            }
+        }
+        
         return new ViewModel(array(
            'form_projeto' => $formProjeto,
         ));

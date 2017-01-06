@@ -72,7 +72,7 @@ class Projeto implements InputFilterAwareInterface {
             $factory = new InputFactory();
 
             $inputFilter->add($factory->createInput(array(
-                        'name' => 'nome_participante',
+                        'name' => 'nome_projeto',
                         'required' => true,
                         'filters' => array(
                             array('name' => 'StripTags'),
@@ -101,42 +101,42 @@ class Projeto implements InputFilterAwareInterface {
                         )
             )));
 
-            //verifica duplicidade do cpf
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'cpf_participante',
-                        'required' => true,
-                        'validators' => array(
-                            array(
-                                'name' => '\Zend\Validator\Db\NoRecordExists',
-                                'options' => array(
-                                    'table' => 'participante',
-                                    'field' => 'cpf_participante',
-                                    'adapter' => $this->dbAdapter,
-                                    'messages' => array(
-                                        \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'CPF já cadastrado',
-                                    ),
-                                ),
-                            ),
-                        ),
-            )));
-//            verifica duplicidade do email
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'email_participante',
-                        'required' => true,
-                        'validators' => array(
-                            array(
-                                'name' => '\Zend\Validator\Db\NoRecordExists',
-                                'options' => array(
-                                    'table' => 'participante',
-                                    'field' => 'email_participante',
-                                    'adapter' => $this->dbAdapter,
-                                    'messages' => array(
-                                        \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'Email já cadastrado',
-                                    ),
-                                ),
-                            ),
-                        ),
-            )));
+//            //verifica duplicidade do cpf
+//            $inputFilter->add($factory->createInput(array(
+//                        'name' => 'cpf_participante',
+//                        'required' => true,
+//                        'validators' => array(
+//                            array(
+//                                'name' => '\Zend\Validator\Db\NoRecordExists',
+//                                'options' => array(
+//                                    'table' => 'participante',
+//                                    'field' => 'cpf_participante',
+//                                    'adapter' => $this->dbAdapter,
+//                                    'messages' => array(
+//                                        \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'CPF já cadastrado',
+//                                    ),
+//                                ),
+//                            ),
+//                        ),
+//            )));
+////            verifica duplicidade do email
+//            $inputFilter->add($factory->createInput(array(
+//                        'name' => 'email_participante',
+//                        'required' => true,
+//                        'validators' => array(
+//                            array(
+//                                'name' => '\Zend\Validator\Db\NoRecordExists',
+//                                'options' => array(
+//                                    'table' => 'participante',
+//                                    'field' => 'email_participante',
+//                                    'adapter' => $this->dbAdapter,
+//                                    'messages' => array(
+//                                        \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'Email já cadastrado',
+//                                    ),
+//                                ),
+//                            ),
+//                        ),
+//            )));
 
             $this->inputFilter = $inputFilter;
         }
