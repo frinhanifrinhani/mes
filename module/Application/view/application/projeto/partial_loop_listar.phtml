@@ -1,13 +1,16 @@
+<?php 
+    $dataInicioProjeto = date_create($this->dataInicioProjeto);
+    $dataFimProjeto = date_create($this->dataFimProjeto);
+?>
 <tr>
     <td><?=$this->codProjeto?></td>
     <td><?=$this->escapeHtml($this->nomeProjeto)?></td>
-    <!--<td><?//$this->MascaraCpf()->formatarCpf($this->cpfParticipante)?></td>-->
     <td><?=$this->descricaoProjeto?></td>
-    <td><?=$this->dataInicioProjeto?></td>
-    <td><?=$this->dataFimProjeto?></td>
-    <td><?=$this->codStatusProjeto?></td>
+    <td><?=date_format($dataInicioProjeto,'d/m/Y') ?></td>
+    <td><?=date_format($dataFimProjeto,'d/m/Y')?></td>
+    <td><?=$this->descricaoStatus?></td>
     <td>
-        <a href="<?php //echo $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
-        <a href="<?php //echo $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
+        <a href="<?php echo $this->url('projeto-editar',array('action' => 'editar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-info" >Editar</a>
+        <a href="<?php echo $this->url('projeto-excluir',array('action' => 'excluir', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-danger">Excluir</a>
     </td>    
 </tr>

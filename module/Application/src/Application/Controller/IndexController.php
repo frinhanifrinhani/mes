@@ -14,6 +14,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
+use Zend\Session\Container;
 
 class IndexController extends AbstractActionController {
 
@@ -29,7 +30,7 @@ class IndexController extends AbstractActionController {
     public function inicioAction() {
 
         //metodo que verifica autenticação e perfil
-        //$this->ACLPermitir()->permitir();
+        $this->ACLPermitir()->permitir();
         return new ViewModel();
     }
 

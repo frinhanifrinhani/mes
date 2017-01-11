@@ -26,6 +26,7 @@ class Projeto implements InputFilterAwareInterface {
     public $dataInicioProjeto;
     public $dataFimProjeto;
     public $codStatusProjeto; //alterar para codStatusProjeto no DB
+    public $descricaoStatus; 
     public $dataCadastroProjeto;
     
     protected $inputFilter;
@@ -39,6 +40,7 @@ class Projeto implements InputFilterAwareInterface {
         $this->dataInicioProjeto = (isset($data['data_inicio_projeto'])) ? $data['data_inicio_projeto'] : null;
         $this->dataFimProjeto = (isset($data['data_fim_projeto'])) ? $data['data_fim_projeto'] : null;
         $this->codStatusProjeto = (isset($data['cod_status'])) ? $data['cod_status'] : null;
+        $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
         $this->dataCadastroProjeto = (isset($data['data_cadastro_projeto'])) ? $data['data_cadastro_projeto'] : null;
         
     }
@@ -48,9 +50,10 @@ class Projeto implements InputFilterAwareInterface {
             'cod_projeto' => $this->codProjeto,
             'nome_projeto' => $this->nomeProjeto,
             'descricao_projeto' => $this->descricaoProjeto,
-            'data_inicio_projeto' => $this->dataInicioProjeto,
-            'data_fim_projeto' => $this->dataFimProjeto,
+            'data_inicio_projeto' => implode('/', array_reverse(explode('-', $this->dataInicioProjeto))),
+            'data_fim_projeto' => implode('/', array_reverse(explode('-', $this->dataFimProjeto))),
             'cod_status' => $this->codStatusProjeto,
+            'descricao_status' => $this->descricaoStatus,
             'data_cadastro_projeto' => $this->dataCadastroProjeto,
         );
     }

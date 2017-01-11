@@ -37,6 +37,8 @@ class ProjetoController extends AbstractActionController
     public function cadastrarAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
+        $retorno = false;
+        $ultimoProjeto = null;
         $formProjeto = new ProjetoForm();
         
         $request = $this->getRequest();
@@ -56,27 +58,83 @@ class ProjetoController extends AbstractActionController
                 $projeto->exchangeArray($formProjeto->getData());
                 $retorno = $this->getProjetoTable()->salvar($projeto);
 
-                //$ultimoParticipante = $this->getParticipanteTable()->getLastId();
+                $ultimoProjeto = $this->getProjetoTable()->getLastId();
             }
         }
         
         return new ViewModel(array(
+            'ultimoProjeto' => $ultimoProjeto,
+            'retorno' => $retorno,
            'form_projeto' => $formProjeto,
         ));
     }
     //metodo que retorna pagina de edicao da funcionalidade Projeto
     public function editarAction() {
+        //metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
         
+        $retorno = false;
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+        if (is_null($codProjeto)) {
+            return $this->redirect()->toRoute('projeto-cadastrar', array(
+                        'action' => 'cadastrar'
+            ));
+        }
+        $projeto = $this->getprojetoTable()->getprojeto($codProjeto);
+        $formProjeto = new projetoForm();
+        $formProjeto->setData($projeto->getArrayCopy());
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+
+            $projeto = new projeto();
+
+//            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+//            $projeto->setDbAdapter($dbAdapter);
+//            $formprojeto->setInputFilter($projeto->getInputFilter());
+            $formProjeto->setData($request->getPost());
+
+            if ($formProjeto->isValid()) {
+
+                $projeto->exchangeArray($formProjeto->getData());
+                $retorno = $this->getprojetoTable()->salvar($projeto);
+
+                $ultimoProjeto = $this->getprojetoTable()->getLastId();
+            }
+        }
+
         return new ViewModel(array(
-           
+            'retorno' => $retorno,
+            'cod_projeto' => $codProjeto,
+            'form_projeto' => $formProjeto,
         ));
     }
     //metodo que retorna pagina de exclusao da funcionalidade Projeto
     public function excluirAction() {
+        $retorno = false;
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+        if (is_null($codProjeto)) {
+            return $this->redirect()->toRoute('projeto-cadastrar', array(
+                        'action' => 'cadastrar'
+            ));
+        }
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+        $formProjeto = new ProjetoForm();
+        $formProjeto->setData($projeto->getArrayCopy());
+
+        $request = $this->getRequest();
         
+        if ($request->isPost()) {
+            $retorno = $this->getProjetoTable()->excluir($codProjeto);
+        }
+
         return new ViewModel(array(
-           
+            'retorno' => $retorno,
+            'cod_projeto' => $codProjeto,
+            'form_projeto' => $formProjeto,
         ));
+    
     }
     
     //recupera e retorna a model ProjetoTable

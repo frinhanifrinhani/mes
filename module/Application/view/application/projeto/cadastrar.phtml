@@ -15,12 +15,11 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 </div>
                 <div class="modal-body">
 
-                    <b>Dados salvos com sucesso!</b><br /><br />
+                    <b>Projeto cadastrado com sucesso!</b><br /><br />
                     Você deseja fazer alguma alteração?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sim</button>
-                    <a href="<?= $this->url('projeto-editar', array('action' => 'editar', 'cod_projeto' => $this->ultimoParticipante)) ?>" class="btn btn-default">Sim</a>
+                    <a href="<?= $this->url('projeto-editar', array('action' => 'editar', 'cod_projeto' => $this->ultimoProjeto)) ?>" class="btn btn-default">Sim</a>
                     <a href="/projeto" class="btn btn-danger">Não</a>
                 </div>
             </div>
@@ -32,6 +31,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <div class="content">
 
     <?php
+    
     $formProjeto = $this->form_projeto;
     //$formProjeto->setAttribute('action', $this->url('projeto-cadastrar'));
     $formProjeto->prepare();
@@ -62,7 +62,9 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 
     <?php echo $this->form()->closeTag(); ?>     
 </div>
+<input type="button" value="Calcular" onclick="calcularDiasProjeto()">
 <script>
+    
     $(function() {
         $( "#data_inicio_projeto" ).datepicker({
             showAnim: "fadeIn"
@@ -73,6 +75,26 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
             showAnim: "fadeIn"
         });
     });
+    
+//    function calcularDiasProjeto(){
+        //var dataInicio =  document.getElementById('data_inicio_projeto').value;
+        //var dataFim = document.getElementById('data_fim_projeto').value;
+        
+//       var dataInicioBR =  document.getElementById('data_inicio_projeto').value.split('/');
+//       var dataInicioUSA = new Date(dataInicioBR[2],dataInicioBR[1] -1,dataInicioBR[0]);
+//       
+//       var dataFimBR = document.getElementById('data_fim_projeto').value.split('/');
+//       var dataFimUSA = new Date(dataFimBR[2], dataFimBR[1] -1, dataFimBR[0]);
+//        
+//       var tempo = Math.abs(dataFimUSA.getTime() - dataInicioUSA.getTime());
+//       var dias = Math.ceil(tempo / (1000 * 60 * 60 * 24)); 
+//       
+//       if(dias <= 15){
+//           alert('O projeto não pode ter menos de 15 dias');
+//           return false;
+//       }
+//   
+//    }
 
 //        $('#form_projeto').validate({
 //            // Define as regras

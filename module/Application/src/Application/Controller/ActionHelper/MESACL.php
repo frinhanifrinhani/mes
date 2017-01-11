@@ -13,8 +13,9 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Authentication\Validator\Authentication;
 //add
 use Zend\Authentication\AuthenticationService;
-use Zend\Mvc\Controller\Plugin\Redirect;
+//use Zend\Mvc\Controller\Plugin\Redirect;
 
+use Zend\Session\Container;
 class MESACL extends AbstractPlugin
 {
     public $autenticado;
@@ -22,9 +23,12 @@ class MESACL extends AbstractPlugin
     
     public function __construct()
     {
-        //$this->redirect = new Redirect();
+        
         $this->autenticado = new AuthenticationService();
         $dados = $this->autenticado->getIdentity();
+        
+        $container = new Container();
+        $container->email_participante = $dados->email_participante;
         
     }
     
@@ -39,10 +43,13 @@ class MESACL extends AbstractPlugin
     public function permitir()
     {
         $autenticado = $this->verificarAutenticacao();
+                        
         if($autenticado==false){
             $controller = $this->getController();
             $redirector = $controller->getPluginManager()->get('Redirect');
             return $redirector->toRoute('login');
         }
+        
+        
     }
 }

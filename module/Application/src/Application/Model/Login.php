@@ -45,11 +45,10 @@ class Login {
             //autentica
             $resultado = $autenticacao->authenticate();
             if ($resultado->isValid()) {
-                $usuario = $autenticacao->getAdapter()->getResultRowObject(null, 'email_participante');
+                $usuario = $autenticacao->getAdapter()->getResultRowObject();
                 $autenticacao->getStorage()->write($usuario);
-                $sessao = new Container();
-                $sessao->usuario = $usuario;
-
+//                $sessao = new Container();
+//                $sessao->usuario = $usuario;
                 //return true;
             }
 
