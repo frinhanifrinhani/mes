@@ -16,6 +16,9 @@ use Application\Model\Participante;
 //use Application\Model\Login;
 //use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ParticipanteForm;
+use Zend\Mail;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Sendmail;
 
 class ParticipanteController extends AbstractActionController {
 
@@ -78,7 +81,6 @@ class ParticipanteController extends AbstractActionController {
         $formParticipante = new ParticipanteForm();
 
         $request = $this->getRequest();
-
         if ($request->isPost()) {
 
             $participante = new Participante();
@@ -95,6 +97,10 @@ class ParticipanteController extends AbstractActionController {
                 $retorno = $this->getParticipanteTable()->salvar($participante);
 
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
+
+                if ($retorno == true) {
+                    $this->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
+                }
             }
         }
 
@@ -104,7 +110,7 @@ class ParticipanteController extends AbstractActionController {
             'form_participante' => $formParticipante,
         ));
     }
-  
+
     //metodo que retorna pagina de edição dos dados da funcionalidade Participante
     public function editarAction() {
         $retorno = false;
@@ -160,7 +166,7 @@ class ParticipanteController extends AbstractActionController {
         $formParticipante->setData($participante->getArrayCopy());
 
         $request = $this->getRequest();
-        
+
         if ($request->isPost()) {
             $retorno = $this->getParticipanteTable()->excluir($codParticipante);
             //return $this->redirect()->toRoute('participante');
@@ -171,6 +177,34 @@ class ParticipanteController extends AbstractActionController {
             'cod_participante' => $codParticipante,
             'form_participante' => $formParticipante,
         ));
+    }
+
+    public function gerarSenha() {
+        
+    }
+
+    public function enviarEmailConfirmacao($nomeParticipante, $emailParticipante, $senhaParticipante) {
+        $mailbody = "Olá $nomeParticipante!\n";
+        $mailbody .= "\n";
+        $mailbody .= "Bem vindo ao My Easy Scrum!\n";
+        $mailbody .= "\n";
+        $mailbody .= "Sua conta foi criada com sucesso, e pode ser acessada através do link mes.tf \n";
+        $mailbody .= "\n";
+        $mailbody .= "Usuário: $emailParticipante \n";
+        $mailbody .= "Senha: $senhaParticipante\n";
+        $mailbody .= "\n";
+        $mailbody .= "Obs: A senha fornecida é provisória, você deve altera-la assim que acessar o sistema.";
+
+
+        $mail = new Message();
+        $mail->setBody($mailbody);
+
+        //$mail->setFrom('email@gmail.com', 'Fulano');
+        $mail->addTo($emailParticipante, $nomeParticipante);
+        $mail->setSubject('Acesso');
+
+        $transport = new Sendmail();
+        $transport->send($mail);
     }
 
     //recupera e retorna a model PartticipanteTable
