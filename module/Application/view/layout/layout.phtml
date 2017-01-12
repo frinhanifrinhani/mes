@@ -35,17 +35,17 @@
                 ->prependFile($this->basePath('plugin/jquerymask/jquery.mask.js'))
                 //Jquery datepiker
                 ->prependFile($this->basePath('plugin/datepicker/bootstrap-datepicker.js'))
-                
+
                 //Datatables
                 ->prependFile($this->basePath('plugin/datatables/js/dataTables.bootstrap.min.js'))
                 ->prependFile($this->basePath('plugin/datatables/js/jquery.dataTables.min.js'))
-                
+
                 //Jquery 
                 ->prependFile($this->basePath('js/bootstrap.min.js'))
                 ->prependFile($this->basePath('js/jquery.min.js'))
                 ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
                 ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-                
+
 //                 ->prependFile('http://code.jquery.com/jquery-1.10.2.js')
 
 
@@ -55,7 +55,7 @@
 
     </head>
     <body>
-        
+
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -68,27 +68,27 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                        <li><a href="<?php echo $this->url('projeto') ?>"><?php echo $this->translate('Gerenciar projeto') ?></a></li>
-                        <li><a href="<?php echo $this->url('participante') ?>"><?php echo $this->translate('Participante') ?></a></li>
-                      
-                        <li><a href="<?php echo $this->url('sprint') ?>"><?php echo $this->translate('Sprint') ?></a></li>
-                        <li><a href="<?php echo $this->url('sprintbacklog') ?>"><?php echo $this->translate('SprintBacklog') ?></a></li>
-                        <li><a href="<?php echo $this->url('productbacklog') ?>"><?php echo $this->translate('ProductBacklog') ?></a></li>
-                        <li><a href="<?php echo $this->url('sair') ?>"><?php echo $this->translate('Sair') ?></a></li>
-                        
+                        <li><a href="<?php echo $this->url('home') ?>">Home</a></li>
+                        <li><a href="<?php echo $this->url('projeto') ?>">Gerenciar projeto</a></li>
+                        <li><a href="<?php echo $this->url('participante') ?>">Participante</a></li>
+                        <li><a href="<?php echo $this->url('sprint') ?>">Sprint</a></li>
+                        <li><a href="<?php echo $this->url('sprintbacklog') ?>">SprintBacklog</a></li>
+                        <li><a href="<?php echo $this->url('productbacklog') ?>">ProductBacklog</a></li>
+                        <li><a href="<?php echo $this->url('alterarsenha') ?>">Alterar senha</a></li>
+                        <li><a href="<?php echo $this->url('sair') ?>">Sair</a></li>
+
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
         </nav>
         <div class="container">
-<?php echo $this->content; ?>
+            <?php echo $this->content; ?>
             <hr>
             <footer>
                 <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('Todos os direitos reservados.') ?></p>
             </footer>
         </div> <!-- /container -->
-<?php echo $this->inlineScript() ?>
+        <?php echo $this->inlineScript() ?>
         <script>
             $(document).ready(function () {
                 $('.data_tables').dataTable({

@@ -78,7 +78,12 @@ class ParticipanteTable {
     public function excluir($codParticipante){
         return $this->tableGateway->delete(array('cod_participante' => $codParticipante));
     }
-
+    
+    public function alterarSenha($codParticipante,$senhaParticipante){
+        $senhaParticipante = array('senha_participante' => md5($senhaParticipante));
+        return $this->tableGateway->update($senhaParticipante, array('cod_participante' => $codParticipante));
+    }
+    
     //metodo que retorna sql da tableGateway
     public function getSql() {
         return $this->tableGateway->getSql();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -14,42 +15,56 @@ use Zend\Authentication\Validator\Authentication;
 //add
 use Zend\Authentication\AuthenticationService;
 //use Zend\Mvc\Controller\Plugin\Redirect;
-
 use Zend\Session\Container;
-class MESACL extends AbstractPlugin
-{
+
+class MESACL extends AbstractPlugin {
+
     public $autenticado;
+    public $dados;
     public $redirect;
-    
-    public function __construct()
-    {
-        
+
+    public function __construct() {
+
         $this->autenticado = new AuthenticationService();
-        $dados = $this->autenticado->getIdentity();
-        
-        $container = new Container();
-        $container->email_participante = $dados->email_participante;
-        
+        $this->dados = $this->autenticado->getIdentity();
+ 
     }
     
+    public function container(){
+        
+        $container = new Container();
+        
+        $container->cod_participante = $this->dados->cod_participante;
+        $container->cod_tipo_participante = $this->dados->cod_tipo_participante;
+        $container->email_participante = $this->dados->email_participante;
+        $container->senha_participante = $this->dados->senha_participante;
+        
+       return array(
+            'cod_participante' => $container->cod_participante,
+            'cod_tipo_participante' => $container->cod_tipo_participante,
+            'email_participante' => $container->email_participante,
+            'senha_participante' => $container->senha_participante,
+        );
+    }
+
     public function verificarAutenticacao() {
         if (!$this->autenticado->hasIdentity()) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-    
-    public function permitir()
-    {
+
+    public function permitir() {
         $autenticado = $this->verificarAutenticacao();
-                        
-        if($autenticado==false){
+        $container = new Container();
+        
+        if ($autenticado == false) {
             $controller = $this->getController();
             $redirector = $controller->getPluginManager()->get('Redirect');
             return $redirector->toRoute('login');
         }
-        
-        
+
     }
+
 }

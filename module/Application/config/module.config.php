@@ -66,6 +66,17 @@ return array(
                     )
                 )
             ),
+            //rota para funcionalidade alterar senha
+            'alterarsenha' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/alterarsenha',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Participante',
+                        'action'     => 'alterarsenha',
+                    )
+                )
+            ),
                        
 /*************** ROTAS PARA PARTICPANTE ***************/
             
@@ -278,6 +289,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Login' => 'Application\Controller\LoginController',
+//            'Application\Controller\Senha' => 'Application\Controller\SenhaController',
             'Application\Controller\Participante' => 'Application\Controller\ParticipanteController',
             'Application\Controller\ProductBacklog' => 'Application\Controller\ProductBacklogController',
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
@@ -298,7 +310,8 @@ return array(
     'controller_plugins' => array(
        'invokables' => array(
            'ACLPermitir' => 'Application\Controller\ActionHelper\MESACL',    
-           'LimpaMascaraCpf' => 'Application\Controller\ActionHelper\MESCpf',    
+           'Email' => 'Application\Controller\ActionHelper\MESEmail',    
+//           'LimpaMascaraCpf' => 'Application\Controller\ActionHelper\MESCpf',    
            
            
            )

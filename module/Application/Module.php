@@ -103,6 +103,7 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new Status());
                     return new TableGateway(new TableIdentifier('status'), $dbAdapter, null, $resultSetPrototype);
                 },
+                 
                 /**                 * ************ PROJETO ************** */
                 //instacia um objeto da ProjetoTable e retorna seus elementos
                 'Application\Model\ProjetoTable' => function($sm) {
