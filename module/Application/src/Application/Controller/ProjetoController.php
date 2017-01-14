@@ -114,14 +114,20 @@ class ProjetoController extends AbstractActionController
     public function excluirAction() {
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        if (is_null($codProjeto)) {
-            return $this->redirect()->toRoute('projeto-cadastrar', array(
-                        'action' => 'cadastrar'
-            ));
-        }
+//        if (is_null($codProjeto)) {
+//            return $this->redirect()->toRoute('projeto-cadastrar', array(
+//                        'action' => 'cadastrar'
+//            ));
+//        }
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+        if($projeto == true){
         $formProjeto = new ProjetoForm();
-        $formProjeto->setData($projeto->getArrayCopy());
+            $formProjeto->setData($projeto->getArrayCopy());
+        }else{
+            return $this->redirect()->toRoute('projeto');
+        }
+        
+        
 
         $request = $this->getRequest();
         
