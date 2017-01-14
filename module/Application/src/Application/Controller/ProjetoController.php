@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -11,17 +12,15 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
 use Application\Model\Projeto;
 //use Application\Model\Login;
 //use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ProjetoForm;
 
+class ProjetoController extends AbstractActionController {
 
-class ProjetoController extends AbstractActionController
-{
     protected $projetoTable;
-    
+
     public function listarAction() {
 
         //metodo que verifica autenticação e perfil
@@ -32,7 +31,7 @@ class ProjetoController extends AbstractActionController
             'partial_loop_listar' => $projetos,
         ));
     }
-    
+
     //metodo que retorna pagina de cadastro da funcionalidade Projeto
     public function cadastrarAction() {
         //metodo que verifica autenticação e perfil
@@ -40,7 +39,7 @@ class ProjetoController extends AbstractActionController
         $retorno = false;
         $ultimoProjeto = null;
         $formProjeto = new ProjetoForm();
-        
+
         $request = $this->getRequest();
 //        var_dump($request->getPost());
         if ($request->isPost()) {
@@ -61,18 +60,19 @@ class ProjetoController extends AbstractActionController
                 $ultimoProjeto = $this->getProjetoTable()->getLastId();
             }
         }
-        
+
         return new ViewModel(array(
             'ultimoProjeto' => $ultimoProjeto,
             'retorno' => $retorno,
-           'form_projeto' => $formProjeto,
+            'form_projeto' => $formProjeto,
         ));
     }
+
     //metodo que retorna pagina de edicao da funcionalidade Projeto
     public function editarAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        
+
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         if (is_null($codProjeto)) {
@@ -110,6 +110,7 @@ class ProjetoController extends AbstractActionController
             'form_projeto' => $formProjeto,
         ));
     }
+
     //metodo que retorna pagina de exclusao da funcionalidade Projeto
     public function excluirAction() {
         $retorno = false;
@@ -120,17 +121,15 @@ class ProjetoController extends AbstractActionController
 //            ));
 //        }
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
-        if($projeto == true){
-        $formProjeto = new ProjetoForm();
+        if ($projeto == true) {
+            $formProjeto = new ProjetoForm();
             $formProjeto->setData($projeto->getArrayCopy());
-        }else{
+        } else {
             return $this->redirect()->toRoute('projeto');
         }
-        
-        
 
         $request = $this->getRequest();
-        
+
         if ($request->isPost()) {
             $retorno = $this->getProjetoTable()->excluir($codProjeto);
         }
@@ -140,9 +139,8 @@ class ProjetoController extends AbstractActionController
             'cod_projeto' => $codProjeto,
             'form_projeto' => $formProjeto,
         ));
-    
     }
-    
+
     //recupera e retorna a model ProjetoTable
     public function getProjetoTable() {
         if (!$this->projetoTable) {
@@ -156,4 +154,5 @@ class ProjetoController extends AbstractActionController
     private function getSm() {
         return $this->getEvent()->getApplication()->getServiceManager();
     }
+
 }
