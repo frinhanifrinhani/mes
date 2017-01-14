@@ -205,9 +205,11 @@ class ParticipanteController extends AbstractActionController {
                     $this->flashMessenger()->addMessage('Não foi possível alterar a senha!');
                 }
             } else{
-                $this->flashMessenger()->addMessage('Senha atual não confere com a senha atual!');
+                $this->flashMessenger()->addMessage('Senha atual não confere com a senha cadastrada!');
             } 
         }
+        
+        
         return new ViewModel(array(
             'form_senha' => $formSenha,
         ));

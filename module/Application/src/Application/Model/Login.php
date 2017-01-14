@@ -42,16 +42,16 @@ class Login {
 
             $autenticacao = new AuthenticationService();
             $autenticacao->setAdapter($adapter);
-            //autentica
+
             $resultado = $autenticacao->authenticate();
             if ($resultado->isValid()) {
                 $usuario = $autenticacao->getAdapter()->getResultRowObject();
                 $autenticacao->getStorage()->write($usuario);
-//                $sessao = new Container();
-//                $sessao->usuario = $usuario;
-                //return true;
+                return true;
+            }else{
+                return false;
             }
-
+            
         } catch (\Exception $e) {
             return $e->getPrevious();
         }

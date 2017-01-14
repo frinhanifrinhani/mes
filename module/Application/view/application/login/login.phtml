@@ -6,6 +6,7 @@
                 <h4 class="text-center">Autenticação do usuário</h4>
             </div>
             <div class="modal-body">
+               
                 <?php
                 $formLogin = $this->form_login;
                 $formLogin->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
@@ -49,8 +50,7 @@
                 },
                 senha_participante: {
                     required: true,
-                    minlength: 6,
-                    maxlength: 12,
+
                 },
             },
             // Define as mensagens de erro para cada regra
@@ -61,8 +61,7 @@
                 },
                 senha_participante: {
                     required: "Campo Senha não pode ser vazio!",
-                    minlength: "A senha dever ter no mínimo 6 caracteres",
-                    maxlength: "A senha dever ter no máximo 12 caracteres",
+
                 }
             }
         });

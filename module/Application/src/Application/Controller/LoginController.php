@@ -34,7 +34,6 @@ class LoginController extends AbstractActionController {
 
     public function autenticacaoAction() {
         $request = $this->getRequest();
-
         if (!$request->isPost()) {
             return $this->redirect()->toRoute('login');
         }
@@ -44,11 +43,18 @@ class LoginController extends AbstractActionController {
 
         $usuario = new Login($identidade, $credencial);
 
-        if ($usuario->autenticar($this->getServiceLocator())) {
+        if ($usuario->autenticar($this->getServiceLocator()) == true) {
             return $this->redirect()->toRoute('inicio');
         } else {
-            return $this->redirect()->toRoute('login');
+            return $this->redirect()->toRoute('error-login');
         }
+    }
+
+    public function errorLoginAction(){
+        $this->layout('layout/login');
+       return new ViewModel(array(
+            
+        )); 
     }
 
     public function sairAction() {
