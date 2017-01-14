@@ -124,7 +124,7 @@ class ParticipanteController extends AbstractActionController {
 //            ));
 //        }
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
-         if ($participante == true) {
+        if ($participante == true) {
             $formParticipante = new ParticipanteForm();
             $formParticipante->setData($participante->getArrayCopy());
         } else {
@@ -200,24 +200,23 @@ class ParticipanteController extends AbstractActionController {
         $codParticipante = $this->ACLPermitir()->container()['cod_participante'];
 
         $formSenha = new SenhaForm();
+//        $this->flashMessenger()->addMessage('sua senha nova só funcionará após sair e entra');
 
         $request = $this->getRequest();
-
         if ($request->isPost()) {
-            if (md5($request->getPost()->senha_atual) == $senhaParticipante) {
-                $retorno = $this->getParticipanteTable()->alterarSenha($codParticipante, $request->getPost()->nova_senha);
+            $senhaAtual = md5($request->getPost()->senha_atual);
 
+            if ($senhaAtual == $senhaParticipante) {
+                $retorno = $this->getParticipanteTable()->alterarSenha($codParticipante, $request->getPost()->nova_senha);
                 if ($retorno == true) {
-                    $this->flashMessenger()->addMessage('Senha alterada com sucesso!');
+                    $this->flashMessenger()->addSuccessMessage('Senha alterada com sucesso!');
                 } else {
-                    $this->flashMessenger()->addMessage('Não foi possível alterar a senha!');
+                    $this->flashMessenger()->addErrorMessage('Não foi possível alterar a senha!');
                 }
             } else {
-                $this->flashMessenger()->addMessage('Senha atual não confere com a senha cadastrada!');
+                $this->flashMessenger()->addWarningMessage('Senha atual não confere com a senha cadastrada!');
             }
         }
-
-
         return new ViewModel(array(
             'form_senha' => $formSenha,
         ));

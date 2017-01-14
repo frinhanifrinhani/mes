@@ -312,8 +312,9 @@ return array(
     /** invocando a(s) view helper(s) */
     'view_helpers' => array(
         'invokables' => array(
-                    'MascaraCpf' => 'Application\View\Helper\MESCpf',    
-                    'LimpaMascaraCpf' => 'Application\View\Helper\MESCpf',    
+                    'Notificacoes' => 'Application\View\Helper\Notificacoes',    
+//                    'MascaraCpf' => 'Application\View\Helper\MESCpf',    
+//                    'LimpaMascaraCpf' => 'Application\View\Helper\MESCpf',    
                             
             ),            
 	),

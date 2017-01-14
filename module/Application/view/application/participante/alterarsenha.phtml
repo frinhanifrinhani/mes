@@ -2,25 +2,7 @@
     <h3 class="box-title">Alterar Senha</h3>
 </div>
 <hr />
-<?php
-if (isset($_POST['botao_salvar'])) {
-    if ($this->flashMessenger()->hasMessages()) {
-        ?>
-<div class="alert alert-warning" role="alert">
-    <strong>Atenção</strong>
-        <?php
-        $messages = $this->flashMessenger()->getMessages();
-        foreach ($messages as $message) {
-            echo $message;
-            header("Location: /alterarsenha ");
-//            header("Refresh: 0");
-        }
-        ?>
-</div>
-        <?php
-    }
-}
-?>
+<?php $this->Notificacoes(); ?>
 <div class="content">
     <?php
     $formSenha = $this->form_senha;
