@@ -118,14 +118,18 @@ class ParticipanteController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
-        if (is_null($codParticipante)) {
-            return $this->redirect()->toRoute('participante-cadastrar', array(
-                        'action' => 'cadastrar'
-            ));
-        }
+//        if (is_null($codParticipante)) {
+//            return $this->redirect()->toRoute('participante-cadastrar', array(
+//                        'action' => 'cadastrar'
+//            ));
+//        }
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
-        $formParticipante = new ParticipanteForm();
-        $formParticipante->setData($participante->getArrayCopy());
+         if ($participante == true) {
+            $formParticipante = new ParticipanteForm();
+            $formParticipante->setData($participante->getArrayCopy());
+        } else {
+            return $this->redirect()->toRoute('participante');
+        }
 
         $request = $this->getRequest();
 
