@@ -18,7 +18,6 @@ use Application\Model\Participante;
 use Application\Form\ParticipanteForm;
 use Application\Form\SenhaForm;
 
-
 class ParticipanteController extends AbstractActionController {
 
     protected $participanteTable;
@@ -161,14 +160,19 @@ class ParticipanteController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
-        if (is_null($codParticipante)) {
-            return $this->redirect()->toRoute('participante-cadastrar', array(
-                        'action' => 'cadastrar'
-            ));
-        }
+//        if (is_null($codParticipante)) {
+//            return $this->redirect()->toRoute('participante-cadastrar', array(
+//                        'action' => 'cadastrar'
+//            ));
+//        }
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
-        $formParticipante = new ParticipanteForm();
-        $formParticipante->setData($participante->getArrayCopy());
+
+        if ($participante == true) {
+            $formParticipante = new ParticipanteForm();
+            $formParticipante->setData($participante->getArrayCopy());
+        } else {
+            return $this->redirect()->toRoute('participante');
+        }
 
         $request = $this->getRequest();
 
@@ -190,32 +194,31 @@ class ParticipanteController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $senhaParticipante = $this->ACLPermitir()->container()['senha_participante'];
         $codParticipante = $this->ACLPermitir()->container()['cod_participante'];
-        
+
         $formSenha = new SenhaForm();
-        
+
         $request = $this->getRequest();
-        
-        if($request->isPost()){
-            if(md5($request->getPost()->senha_atual)==$senhaParticipante){
-                $retorno = $this->getParticipanteTable()->alterarSenha($codParticipante,$request->getPost()->nova_senha);
-                
-                if($retorno==true){
+
+        if ($request->isPost()) {
+            if (md5($request->getPost()->senha_atual) == $senhaParticipante) {
+                $retorno = $this->getParticipanteTable()->alterarSenha($codParticipante, $request->getPost()->nova_senha);
+
+                if ($retorno == true) {
                     $this->flashMessenger()->addMessage('Senha alterada com sucesso!');
-                }else{
+                } else {
                     $this->flashMessenger()->addMessage('Não foi possível alterar a senha!');
                 }
-            } else{
+            } else {
                 $this->flashMessenger()->addMessage('Senha atual não confere com a senha cadastrada!');
-            } 
+            }
         }
-        
-        
+
+
         return new ViewModel(array(
             'form_senha' => $formSenha,
         ));
     }
 
-    
     //recupera e retorna a model PartticipanteTable
     public function getParticipanteTable() {
         if (!$this->participanteTable) {
