@@ -13,7 +13,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Participante;
-//use Application\Model\Login;
+use Application\Model\Login;
 //use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ParticipanteForm;
 use Application\Form\SenhaForm;
@@ -62,6 +62,7 @@ class ParticipanteController extends AbstractActionController {
                     $credencial = $request->getPost('senha_participante');
 
                     $usuario = new Login($identidade, $credencial);
+                    $usuario->autenticar($this->getServiceLocator());
                 }
             }
         }
@@ -99,7 +100,6 @@ class ParticipanteController extends AbstractActionController {
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
 
                 if ($retorno == true) {
-                    //$this->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
                     $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
                 }
             }
