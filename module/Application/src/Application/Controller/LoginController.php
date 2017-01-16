@@ -19,7 +19,7 @@ use Application\Model\Login;
 class LoginController extends AbstractActionController {
 
     public function loginAction() {
-        $autenticacao = new AuthenticationService;
+        $autenticacao = new AuthenticationService();
 
         if ($autenticacao->hasIdentity()) {
             return $this->redirect()->toRoute('inicio');

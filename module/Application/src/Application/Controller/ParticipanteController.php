@@ -17,6 +17,7 @@ use Application\Model\Login;
 //use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ParticipanteForm;
 use Application\Form\SenhaForm;
+use Zend\Authentication\AuthenticationService;
 
 class ParticipanteController extends AbstractActionController {
 
@@ -35,6 +36,10 @@ class ParticipanteController extends AbstractActionController {
     }
 
     public function criarContaProductOwnerAction() {
+        $autenticacao = new AuthenticationService();
+        if ($autenticacao->hasIdentity()) {
+            return $this->redirect()->toRoute('inicio');
+        }
         $this->layout('layout/layout_cadastro');
         $retorno = false;
         $ultimoParticipante = null;
