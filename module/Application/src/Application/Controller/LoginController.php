@@ -24,37 +24,26 @@ class LoginController extends AbstractActionController {
         if ($autenticacao->hasIdentity()) {
             return $this->redirect()->toRoute('inicio');
         }
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $identidade = $request->getPost('email_participante');
+            $credencial = $request->getPost('senha_participante');
+
+            $usuario = new Login($identidade, $credencial);
+
+            if ($usuario->autenticar($this->getServiceLocator()) == true) {
+                return $this->redirect()->toRoute('inicio');
+            } else {
+                $this->flashMessenger()->addWarningMessage('Login e senha não correspondem!');
+            }
+        }
 
         $this->layout('layout/login');
         $formLogin = new LoginForm();
         return new ViewModel(array(
             'form_login' => $formLogin
         ));
-    }
-
-    public function autenticacaoAction() {
-        $request = $this->getRequest();
-        if (!$request->isPost()) {
-            return $this->redirect()->toRoute('login');
-        }
-
-        $identidade = $request->getPost('email_participante');
-        $credencial = $request->getPost('senha_participante');
-
-        $usuario = new Login($identidade, $credencial);
-
-        if ($usuario->autenticar($this->getServiceLocator()) == true) {
-            return $this->redirect()->toRoute('inicio');
-        } else {
-            return $this->redirect()->toRoute('error-login');
-        }
-    }
-
-    public function errorLoginAction(){
-        $this->layout('layout/login');
-       return new ViewModel(array(
-            
-        )); 
     }
 
     public function sairAction() {

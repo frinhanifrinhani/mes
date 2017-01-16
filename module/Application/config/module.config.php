@@ -44,28 +44,7 @@ return array(
                     ),
                 ),
             ),
-            //rota para tela de autenticacao
-            'autenticacao' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/autenticacao',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Login',
-                        'action'     => 'autenticacao',
-                    )
-                )
-            ),
-            //rota para tela error-login
-            'error-login' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/error-login',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Login',
-                        'action'     => 'errorLogin',
-                    )
-                )
-            ),
+
             //rota para funcionalidade sair
             'sair' => array(
                 'type' => 'Literal',
