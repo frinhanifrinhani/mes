@@ -17,6 +17,8 @@ select.error{
     color: #68b604;
 }
 
+li{list-style-type: none; }
+
 .btn-success {
   background-color: #57a900;
   background-image: -moz-linear-gradient(top, #70d900, #57a900);

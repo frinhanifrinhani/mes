@@ -13,87 +13,73 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\InputFilter;
 
-class ProjetoForm extends Form {
+class SprintForm extends Form {
 
     public $statusTable;
 
     public function __construct() {
-        parent::__construct('form_projeto');
+        parent::__construct('form_sprint');
 
         $this->setAttribute('method', 'post');
-        $this->setAttribute('id', 'form_projeto');
+        $this->setAttribute('id', 'form_sprint');
 
         $this->add(array(
-            'name' => 'cod_projeto',
+            'name' => 'cod_sprint',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'cod_projeto',
+                'id' => 'cod_sprint',
                 'class' => 'form-control',
-                'placeholder' => 'Código do Projeto',
+                'placeholder' => 'Código da Sprint',
                 'readonly' => 'readonly',
             ),
             'options' => array(
-                'label' => 'Código do Projeto',
+                'label' => 'Código da Sprint',
             ),
         ));
 
         $this->add(array(
-            'name' => 'nome_projeto',
+            'name' => 'nome_sprint',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'nome_projeto',
+                'id' => 'nome_sprint',
                 'class' => 'form-control',
-                'placeholder' => 'Nome do Projeto',
+                'placeholder' => 'Nome da Sprint',
             ),
             'options' => array(
-                'label' => 'Nome do Projeto *',
+                'label' => 'Nome da Sprint *',
             ),
         ));
 
         $this->add(array(
-            'name' => 'descricao_projeto',
+            'name' => 'descricao_sprint',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'descricao_projeto',
+                'id' => 'descricao_sprint',
                 'class' => 'form-control',
-                'placeholder' => 'Descrição do Projeto',
+                'placeholder' => 'Descrição da Sprint',
             ),
             'options' => array(
-                'label' => 'Descrição do Projeto',
+                'label' => 'Descrição da Sprint',
             ),
         ));
 
         $this->add(array(
-            'name' => 'data_inicio_projeto',
-            'type' => 'Text',
+            'name' => 'tempo_sprint',
+            'type' => 'Select',
             'attributes' => array(
-                'id' => 'data_inicio_projeto',
+                'id' => 'tempo_sprint',
                 'class' => 'form-control',
-                'placeholder' => 'Data de Início do Projeto',
-                'onchange' => 'calcularDiasProjeto();alterarStatusProjetoData();',
             ),
             'options' => array(
-                'label' => 'Data de Início do Projeto *',
-                
+                'label' => 'Tempo de duração *',
+                'value_options' => array(
+                    null => 'Selecione...',
+                    15 => '15 Dias',
+                    20 => '20 Dias',
+                    30 => '30 Dias',
+                ),
             ),
         ));
-
-        $this->add(array(
-            'name' => 'data_fim_projeto',
-            'type' => 'Text',
-            'attributes' => array(
-                'id' => 'data_fim_projeto',
-                'class' => 'form-control',
-                'placeholder' => 'Data prevista para Finalização do Projeto',
-                'onchange' => 'calcularDiasProjeto(); verificarData();',
-            ),
-            'options' => array(
-                'label' => 'Data Fim do Pojeto *',
-            ),
-        ));
-
-        
-
 
         $this->add(array(
             'name' => 'cod_status',
@@ -141,8 +127,8 @@ class ProjetoForm extends Form {
         $valueOptions = array();
         $status = $this->getStatusTable()->fetchAll();
 //        $valueOptions[''] = 'Selecione...';
-        foreach ($status as $statusProjeto) {
-            $valueOptions[$statusProjeto->codStatus] = $statusProjeto->descricaoStatus;
+        foreach ($status as $statusSprint) {
+            $valueOptions[$statusSprint->codStatus] = $statusSprint->descricaoStatus;
         }
         return $valueOptions;
     }

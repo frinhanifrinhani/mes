@@ -36,12 +36,14 @@ class MESACL extends AbstractPlugin {
         
         $container->cod_participante = $this->dados->cod_participante;
         $container->cod_tipo_participante = $this->dados->cod_tipo_participante;
+        $container->nome_participante = $this->dados->nome_participante;
         $container->email_participante = $this->dados->email_participante;
         $container->senha_participante = $this->dados->senha_participante;
         
        return array(
             'cod_participante' => $container->cod_participante,
             'cod_tipo_participante' => $container->cod_tipo_participante,
+            'nome_participante' => $container->nome_participante,
             'email_participante' => $container->email_participante,
             'senha_participante' => $container->senha_participante,
         );

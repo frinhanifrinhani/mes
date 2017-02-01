@@ -80,7 +80,7 @@ class ProjetoController extends AbstractActionController {
 //                        'action' => 'cadastrar'
 //            ));
 //        }
-        $projeto = $this->getprojetoTable()->getprojeto($codProjeto);
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
          if ($projeto == true) {
             $formProjeto = new ProjetoForm();
             $formProjeto->setData($projeto->getArrayCopy());

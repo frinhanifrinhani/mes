@@ -16,7 +16,10 @@ use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 use Zend\Session\Container;
 
+//use Application\Controller\ProjetoController;
+use Application\Model\Projeto;
 class IndexController extends AbstractActionController {
+ protected $projetoTable;
 
     public function indexAction() {
         $autenticacao = new AuthenticationService;
@@ -31,7 +34,25 @@ class IndexController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        return new ViewModel();
+        $projetos = $this->getProjetoTable()->fetchAll();
+//        var_dump($projetos);
+        return new ViewModel(array(
+            'partial_loop_projetos' => $projetos,
+            'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
+        ));
     }
 
+ //recupera e retorna a model ProjetoTable
+    public function getProjetoTable() {
+        if (!$this->projetoTable) {
+            $sm = $this->getServiceLocator();
+            $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
+        }
+        return $this->projetoTable;
+    }
+
+    //recupera e retorna o Service Manager
+    private function getSm() {
+        return $this->getEvent()->getApplication()->getServiceManager();
+    }
 }

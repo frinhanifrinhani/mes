@@ -1,1 +1,15 @@
 <h1>Página inicial logado</h1>
+<p>Bem vindo! <?= $this->nome_participante ?>!</p>
+
+<p>Em qual projeto você pretente trabalhar? 
+    <select name="projetos" id="projetos" onchange="mostrarProjeto()">
+        <option>Selecione...</option>
+        <?= $this->partialLoop('partial_loop_projetos.phtml', $this->partial_loop_projetos) ?>  
+    </select>
+</p>
+
+<script>
+function mostrarProjeto(){
+    alert('projeto');
+}
+</script>

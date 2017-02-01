@@ -21,6 +21,8 @@ use Application\Model\TipoParticipante;
 use Application\Model\TipoParticipanteTable;
 use Application\Model\Participante;
 use Application\Model\ParticipanteTable;
+use Application\Model\Sprint;
+use Application\Model\SprintTable;
 use Application\Model\Status;
 use Application\Model\StatusTable;
 use Application\Model\Projeto;
@@ -87,6 +89,21 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Participante());
                     return new TableGateway(new TableIdentifier('participante'), $dbAdapter, null, $resultSetPrototype);
+                },
+                /**                 * ************ SPRINT ************** */
+                //instacia um objeto da SprintTable e retorna seus elementos
+                'Application\Model\SprintTable' => function($sm) {
+                    $tableGateway = $sm->get('SprintTableGateway');
+                    $table = new SprintTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da Sprint, e retorna uma TableGateway 
+                //passando o nome da tabela 'sprint'
+                'SprintTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Sprint());
+                    return new TableGateway(new TableIdentifier('sprint'), $dbAdapter, null, $resultSetPrototype);
                 },
                  /**                 * ************ STATUS ************** */
                 //instacia um objeto da StatusTable e retorna seus elementos

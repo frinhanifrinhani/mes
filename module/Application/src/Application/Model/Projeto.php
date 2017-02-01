@@ -17,7 +17,6 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\TableGateway\TableGateway;
 
-
 class Projeto implements InputFilterAwareInterface {
 
     public $codProjeto;
@@ -26,12 +25,10 @@ class Projeto implements InputFilterAwareInterface {
     public $dataInicioProjeto;
     public $dataFimProjeto;
     public $codStatusProjeto; //alterar para codStatusProjeto no DB
-    public $descricaoStatus; 
+    public $descricaoStatus;
     public $dataCadastroProjeto;
-    
     protected $inputFilter;
     protected $dbAdapter;
-
 
     function exchangeArray($data) {
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
@@ -42,7 +39,6 @@ class Projeto implements InputFilterAwareInterface {
         $this->codStatusProjeto = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
         $this->dataCadastroProjeto = (isset($data['data_cadastro_projeto'])) ? $data['data_cadastro_projeto'] : null;
-        
     }
 
     public function getArrayCopy() {
@@ -58,15 +54,15 @@ class Projeto implements InputFilterAwareInterface {
         );
     }
 
-
     /* add */
+
     public function setDbAdapter($dbAdapter) {
 
         $this->dbAdapter = $dbAdapter;
     }
 
     public function setInputFilter(InputFilterInterface $inputFilter) {
-        throw new \Exception("Not used");
+        throw new \Exception("Sem uso");
     }
 
     public function getInputFilter() {
@@ -104,42 +100,36 @@ class Projeto implements InputFilterAwareInterface {
                         )
             )));
 
-//            //verifica duplicidade do cpf
-//            $inputFilter->add($factory->createInput(array(
-//                        'name' => 'cpf_participante',
-//                        'required' => true,
-//                        'validators' => array(
-//                            array(
-//                                'name' => '\Zend\Validator\Db\NoRecordExists',
-//                                'options' => array(
-//                                    'table' => 'participante',
-//                                    'field' => 'cpf_participante',
-//                                    'adapter' => $this->dbAdapter,
-//                                    'messages' => array(
-//                                        \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'CPF já cadastrado',
-//                                    ),
-//                                ),
-//                            ),
-//                        ),
-//            )));
-////            verifica duplicidade do email
-//            $inputFilter->add($factory->createInput(array(
-//                        'name' => 'email_participante',
-//                        'required' => true,
-//                        'validators' => array(
-//                            array(
-//                                'name' => '\Zend\Validator\Db\NoRecordExists',
-//                                'options' => array(
-//                                    'table' => 'participante',
-//                                    'field' => 'email_participante',
-//                                    'adapter' => $this->dbAdapter,
-//                                    'messages' => array(
-//                                        \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'Email já cadastrado',
-//                                    ),
-//                                ),
-//                            ),
-//                        ),
-//            )));
+            //varifica se o campo data de início do projeto está preenchido
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'data_inicio_projeto',
+                        'required' => true,
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo data de início do projeto não pode ser vazio'
+                                    ),
+                                ),
+                            ),
+                        ),
+            )));
+            //varifica se o campo Data Fim do Pojeto está preenchido
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'data_inicio_projeto',
+                        'required' => true,
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo data fim do projeto não pode ser vazio'
+                                    ),
+                                ),
+                            ),
+                        ),
+            )));
 
             $this->inputFilter = $inputFilter;
         }
@@ -150,4 +140,5 @@ class Projeto implements InputFilterAwareInterface {
     public function toArray() {
         return get_object_vars($this);
     }
+
 }

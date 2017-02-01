@@ -1,0 +1,11 @@
+<tr>
+    <td><?=$this->codSprint?></td>
+    <td><?=$this->nomeSprint?></td>
+    <td><?=$this->descricaoSprint?></td>
+    <td><?=$this->tempoSprint?> Dias</td>
+    <td><?=$this->descricaoStatus?></td>
+    <td>
+        <a href="<?php echo $this->url('sprint-editar',array('action' => 'editar', 'cod_sprint' => $this->codSprint))?>" class="btn btn-info" >Editar</a>
+        <a href="<?php echo $this->url('sprint-excluir',array('action' => 'excluir', 'cod_sprint' => $this->codSprint))?>" class="btn btn-danger">Excluir</a>
+    </td>    
+</tr>

@@ -1,0 +1,108 @@
+<div class="box-header with-border">
+    <h3 class="box-title">Excluir sprint</h3>
+</div>
+<?php
+if (!isset($_POST['cod_sprint'])) {
+    ?>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"><b>Atenção!</b></h4>
+                </div>
+                <div class="modal-body">
+
+                    <b>Você está prestes a excluir uma sprint!</b><br /><br />
+                    Você tem certeza que deseja excluir?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Ver</button>
+                    <button type="button" name="excluir" id="excluir" class="btn btn-danger" onclick="excluir();">Sim</button>
+                    <a href="/sprint" class="btn btn-warning">Não</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+
+<?php
+}
+
+if (isset($_POST['cod_sprint'])) {
+    
+    ?>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
+                </div>
+                <div class="modal-body">
+                   Sprint excluída com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <a href="/sprint" class="btn btn-warning">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+<?php } ?>
+
+<hr />
+<div class="content">
+    <?php
+    $formSprint = $this->form_sprint;
+    $formSprint->prepare();
+    echo $this->form()->openTag($formSprint);
+    ?>
+    <div class="form-group">
+        <?= $this->formRow($formSprint->get('cod_sprint')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprint->get('nome_sprint')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprint->get('descricao_sprint')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprint->get('tempo_sprint')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprint->get('cod_status')); ?>
+    </div>
+    
+    <div class="form-group">
+        <a href="<?= $this->url('sprint-editar',array('action' => 'editar', 'cod_sprint' => $this->cod_sprint))?>" class="btn btn-primary" >Editar</a>
+        <a href="<?= $this->url('sprint-excluir',array('action' => 'excluir', 'cod_sprint' => $this->cod_sprint))?>" class="btn btn-danger" >Excluir</a>
+        <a href="<?= $this->url('sprint') ?>" class="btn btn-warning" >Cancelar</a>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>  
+</div>
+
+<script>
+    bloquerCampos();
+    function excluir(){
+        var formulario = document.getElementById('form_sprint');
+        formulario.submit();
+        
+        return true;
+    }
+    
+    function bloquerCampos(){
+        var nomeSprint = document.getElementById('nome_sprint');
+        var descricaoSprint = document.getElementById('descricao_sprint');
+        var tempoSprint = document.getElementById('tempo_sprint');
+        var codStatus = document.getElementById('cod_status');
+        
+        nomeSprint.setAttribute('disabled','disabled');
+        descricaoSprint.setAttribute('disabled','disabled');
+        tempoSprint.setAttribute('disabled','disabled');
+        codStatus.setAttribute('disabled','disabled');
+    }
+    
+</script>

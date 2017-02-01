@@ -203,10 +203,48 @@ return array(
                     'route'    => '/sprint',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Sprint',
-                        'action'     => 'index',
+                        'action'     => 'listar',
                     ),
                 ),
             ),
+            
+            //Rota cadastrar sprint
+            'sprint-cadastrar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/sprint-cadastrar',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Sprint',
+                        'action'            => 'cadastrar',
+                    ),
+                ),
+            ),
+            
+            //Rota editar sprint
+            'sprint-editar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/sprint-editar[/:cod_sprint]',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Sprint',
+                        'action'            => 'editar',
+                    ),
+                ),
+            ),
+            
+            //Rota excluir sprint
+            'sprint-excluir' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/sprint-excluir[/:cod_sprint]',
+                    'defaults' => array(
+                        'controller'        => 'Application\Controller\Sprint',
+                        'action'            => 'excluir',
+                    ),
+                ),
+            ),
+            
+            
 /*************** ROTAS PARA USUARIO ***************/
             //rota para tela usuario
 //            'usuario' => array(
