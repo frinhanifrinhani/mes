@@ -24,8 +24,10 @@ class Projeto implements InputFilterAwareInterface {
     public $descricaoProjeto;
     public $dataInicioProjeto;
     public $dataFimProjeto;
-    public $codStatusProjeto; //alterar para codStatusProjeto no DB
+    public $codStatus;
     public $descricaoStatus;
+    public $codParticipante;
+    public $productOwner; // vem pelo join
     public $dataCadastroProjeto;
     protected $inputFilter;
     protected $dbAdapter;
@@ -36,8 +38,10 @@ class Projeto implements InputFilterAwareInterface {
         $this->descricaoProjeto = (isset($data['descricao_projeto'])) ? $data['descricao_projeto'] : null;
         $this->dataInicioProjeto = (isset($data['data_inicio_projeto'])) ? $data['data_inicio_projeto'] : null;
         $this->dataFimProjeto = (isset($data['data_fim_projeto'])) ? $data['data_fim_projeto'] : null;
-        $this->codStatusProjeto = (isset($data['cod_status'])) ? $data['cod_status'] : null;
+        $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
+        $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
+        $this->productOwner = (isset($data['product_owner'])) ? $data['product_owner'] : null;
         $this->dataCadastroProjeto = (isset($data['data_cadastro_projeto'])) ? $data['data_cadastro_projeto'] : null;
     }
 
@@ -48,8 +52,10 @@ class Projeto implements InputFilterAwareInterface {
             'descricao_projeto' => $this->descricaoProjeto,
             'data_inicio_projeto' => implode('/', array_reverse(explode('-', $this->dataInicioProjeto))),
             'data_fim_projeto' => implode('/', array_reverse(explode('-', $this->dataFimProjeto))),
-            'cod_status' => $this->codStatusProjeto,
+            'cod_status' => $this->codStatus,
             'descricao_status' => $this->descricaoStatus,
+            'cod_participante' => $this->codParticipante,
+            'product_owner' => $this->productOwner,
             'data_cadastro_projeto' => $this->dataCadastroProjeto,
         );
     }

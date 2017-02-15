@@ -70,11 +70,10 @@ class ProjetoForm extends Form {
                 'id' => 'data_inicio_projeto',
                 'class' => 'form-control',
                 'placeholder' => 'Data de Início do Projeto',
-                'onchange' => 'calcularDiasProjeto();alterarStatusProjetoData();',
+                'onchange' => 'calcularDiasProjeto();',
             ),
             'options' => array(
                 'label' => 'Data de Início do Projeto *',
-                
             ),
         ));
 
@@ -92,9 +91,6 @@ class ProjetoForm extends Form {
             ),
         ));
 
-        
-
-
         $this->add(array(
             'name' => 'cod_status',
             'type' => 'Select',
@@ -105,6 +101,15 @@ class ProjetoForm extends Form {
             'options' => array(
                 'label' => 'Status',
                 'value_options' => $this->getValueOptions(),
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cod_participante',
+            'type' => 'Hidden',
+            'attributes' => array(
+                'id' => 'cod_participante',
+                'class' => 'form-control',
             ),
         ));
 

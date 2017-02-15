@@ -16,6 +16,7 @@ use Zend\InputFilter;
 class SprintForm extends Form {
 
     public $statusTable;
+    public $projetoTable;
 
     public function __construct() {
         parent::__construct('form_sprint');
@@ -82,6 +83,14 @@ class SprintForm extends Form {
         ));
 
         $this->add(array(
+            'name' => 'cod_projeto',
+            'type' => 'text',
+            'attributes' => array(
+                'id' => 'cod_projeto',
+                'class' => 'form-control',
+            ),
+        ));
+        $this->add(array(
             'name' => 'cod_status',
             'type' => 'Select',
             'attributes' => array(
@@ -114,6 +123,23 @@ class SprintForm extends Form {
         ));
     }
 
+    //Busca projeto
+//    private function getProjetoTable() {
+//        if (!$this->projetoTable) {
+//            $sm = $GLOBALS['sm'];
+//            $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
+//        }
+//        return $this->projetoTable;
+//    }
+//    private function getValueOptionsProjeto() {
+//        $valueOptions = array();
+//        $projetos = $this->getProjetoTable()->fetchAll($this->cod_participante);
+//        $valueOptions[''] = 'Selecione...';
+//        foreach ($projetos as $projeto) {
+//            $valueOptions[$projeto->codProjeto] = $projeto->nomeProjeto;
+//        }
+//        return $valueOptions;
+//    }
     //Busca status
     private function getStatusTable() {
         if (!$this->statusTable) {

@@ -2,7 +2,6 @@
     <h3 class="box-title">Cadastrar Sprint</h3>
 </div>
 <?php
-
 if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -21,7 +20,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 </div>
                 <div class="modal-footer">
                     <a href="<?= $this->url('sprint-editar', array('action' => 'editar', 'cod_sprint' => $this->ultimoSprint)) ?>" class="btn btn-default">Sim</a>
-                    <a href="/sprint" class="btn btn-danger">Não</a>
+                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-danger">Não</a>
                 </div>
             </div>
         </div>
@@ -37,26 +36,29 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     echo $this->form()->openTag($formSprint);
     ?>
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('cod_sprint')); ?>
+    <?= $this->formRow($formSprint->get('cod_sprint')); ?>
     </div>
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('nome_sprint')); ?>
+<?= $this->formRow($formSprint->get('nome_sprint')); ?>
     </div>
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('descricao_sprint')); ?>
+<?= $this->formRow($formSprint->get('descricao_sprint')); ?>
     </div>
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('tempo_sprint')); ?>
+<?= $this->formRow($formSprint->get('tempo_sprint')); ?>
     </div>
-    <div class="form-group">
-        <?= $this->formRow($formSprint->get('cod_status')); ?>
-    </div>
-    
-    <div class="form-group">
-        <?= $this->formRow($formSprint->get('botao_salvar')); ?>
-        <a href="<?= $this->url('sprint') ?>" class="btn btn-danger" >Cancelar</a>
-    </div>
-    <?php echo $this->form()->closeTag(); ?>     
+
+</div>
+<div class="form-group">
+<?= $this->formRow($formSprint->get('cod_status')); ?>
+</div>
+
+<div class="form-group">
+    <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
+<?= $this->formRow($formSprint->get('botao_salvar')); ?>
+    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-danger" >Cancelar</a>
+</div>
+<?php echo $this->form()->closeTag(); ?>     
 </div>
 <script>
 
@@ -70,8 +72,10 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 nome_sprint: {
                     required: true,
                 },
-                
                 tempo_sprint: {
+                    required: true,
+                },
+                cod_projeto: {
                     required: true,
                 },
             },
@@ -80,9 +84,11 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 nome_sprint: {
                     required: "Campo Nome da Sprint não pode ser vazio!",
                 },
-
                 tempo_sprint: {
                     required: "Campo Tempo de duração  não pode ser vazio!",
+                },
+                cod_projeto: {
+                    required: "Campo Projeto não pode ser vazio!",
                 },
             }
         });

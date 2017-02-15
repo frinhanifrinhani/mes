@@ -15,11 +15,12 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 use Zend\Session\Container;
-
 //use Application\Controller\ProjetoController;
 use Application\Model\Projeto;
+
 class IndexController extends AbstractActionController {
- protected $projetoTable;
+
+    protected $projetoTable;
 
     public function indexAction() {
         $autenticacao = new AuthenticationService;
@@ -34,7 +35,7 @@ class IndexController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        $projetos = $this->getProjetoTable()->fetchAll();
+        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
 //        var_dump($projetos);
         return new ViewModel(array(
             'partial_loop_projetos' => $projetos,
@@ -42,7 +43,7 @@ class IndexController extends AbstractActionController {
         ));
     }
 
- //recupera e retorna a model ProjetoTable
+    //recupera e retorna a model ProjetoTable
     public function getProjetoTable() {
         if (!$this->projetoTable) {
             $sm = $this->getServiceLocator();
@@ -55,4 +56,5 @@ class IndexController extends AbstractActionController {
     private function getSm() {
         return $this->getEvent()->getApplication()->getServiceManager();
     }
+
 }

@@ -25,55 +25,55 @@ class SprintTable {
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll() {
+    public function fetchAll($codProjeto) {
         $select = new Select();
         $select->from(new TableIdentifier('sprint'))
-                ->columns(array('cod_sprint', 'nome_sprint', 'descricao_sprint', 'tempo_sprint', 'cod_status'))
+                ->columns(array('cod_sprint', 'nome_sprint', 'descricao_sprint', 'tempo_sprint', 'cod_status', 'cod_projeto'))
                 ->join('status', 'status.cod_status = sprint.cod_status', 'descricao_status')
-                ->order(array('cod_sprint'=>'desc'));
+                ->where('cod_projeto = ' . $codProjeto)
+                ->order(array('cod_sprint' => 'desc'));
         $linha = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();  
         return $linha;
     }
-    public function getLastId(){
-      $ultimoSprint = $this->tableGateway->lastInsertValue;
-      return $ultimoSprint;
- 
+
+    public function getLastId() {
+        $ultimoSprint = $this->tableGateway->lastInsertValue;
+        return $ultimoSprint;
     }
 
-    public function getSprint($codSprint)
-     {
-         $codSprint = (int) $codSprint;
-         $rowset = $this->tableGateway->select(array ('cod_sprint' => $codSprint));
-         $row = $rowset->current();
-         
-         return  $row;
-     }
-    
-    public function salvar(Sprint $sprint){
-        $data = array(           
+    public function getSprint($codSprint) {
+        $codSprint = (int) $codSprint;
+        $rowset = $this->tableGateway->select(array('cod_sprint' => $codSprint));
+        $row = $rowset->current();
+
+        return $row;
+    }
+
+    public function salvar(Sprint $sprint) {
+        $data = array(
             'cod_sprint' => $sprint->codSprint,
             'nome_sprint' => $sprint->nomeSprint,
             'descricao_sprint' => $sprint->descricaoSprint,
             'tempo_sprint' => $sprint->tempoSprint,
             'cod_status' => $sprint->codStatusSprint,
+            'cod_projeto' => $sprint->codProjeto,
         );
 
-        try{
-        $codSprint = $sprint->codSprint;
-            if(!$this->getSprint($codSprint)){
+        try {
+            $codSprint = $sprint->codSprint;
+            if (!$this->getSprint($codSprint)) {
                 $data['cod_sprint'] = $codSprint;
                 return $this->tableGateway->insert($data);
             } else {
                 return $this->tableGateway->update($data, array('cod_sprint' => $codSprint));
             }
-        }  catch (\Exception $e){
-             $e->getPrevious()->getMessage();
+        } catch (\Exception $e) {
+            $e->getPrevious()->getMessage();
         }
     }
-        
-    
-    public function excluir($codSprint){
+
+    public function excluir($codSprint) {
         return $this->tableGateway->delete(array('cod_sprint' => $codSprint));
     }
 

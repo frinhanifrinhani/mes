@@ -1,17 +1,44 @@
-<?php 
-    $dataInicioProjeto = date_create($this->dataInicioProjeto);
-    $dataFimProjeto = date_create($this->dataFimProjeto);
+<?php
+$dataInicioProjeto = date_create($this->dataInicioProjeto);
+$dataFimProjeto = date_create($this->dataFimProjeto);
 ?>
 <tr>
-    <!--<td><input type="radio" name="projeto" id="projeto" onclick="getProject()" value="<?$this->codProjeto?>"></td>-->
-    <td><?=$this->codProjeto?></td>
-    <td><?=$this->escapeHtml($this->nomeProjeto)?></td>
-    <td><?=$this->descricaoProjeto?></td>
-    <td><?=date_format($dataInicioProjeto,'d/m/Y') ?></td>
-    <td><?=date_format($dataFimProjeto,'d/m/Y')?></td>
-    <td><?=$this->descricaoStatus?></td>
-    <td>
-        <a href="<?php echo $this->url('projeto-editar',array('action' => 'editar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-info" >Editar</a>
-        <a href="<?php echo $this->url('projeto-excluir',array('action' => 'excluir', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-danger">Excluir</a>
-    </td>    
+    <td><input type="radio" name="marca_projeto" id="marca_projeto" value="<?= $this->codProjeto ?>" onchange="marcarProjeto(this);"></td>
+    <td><?= $this->codProjeto ?></td>
+    <td><?= $this->escapeHtml($this->nomeProjeto) ?></td>
+    <td><?= $this->descricaoProjeto ?></td>
+    <td><?= date_format($dataInicioProjeto, 'd/m/Y') ?></td>
+    <td><?= date_format($dataFimProjeto, 'd/m/Y') ?></td>
+    <td><?= $this->descricaoStatus ?></td>    
+    <!-- para botões na mesma linha -->
+    <!--<a href="<? //  echo $this->url('projeto-editar',array('action' => 'editar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-info" id="<?$this->codProjeto?>"  >Editar</a>-->
+    <!--<a href="<? // echo $this->url('projeto-excluir',array('action' => 'excluir', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-danger" id="<?$this->codProjeto?>" >Excluir</a>-->
 </tr>
+
+<script>
+
+    function marcarProjeto(cod_projeto) {
+        var codProjeto = cod_projeto.value;
+
+        var editar = document.getElementById('editar-btn');
+        var excluir = document.getElementById('excluir-btn');
+        var sprint = document.getElementById('sprint-btn');
+        var productbacklog = document.getElementById('productbacklog-btn');
+        var relatorio = document.getElementById('relatorio-btn');
+
+        editar.removeAttribute('disabled');
+        excluir.removeAttribute('disabled');
+        sprint.removeAttribute('disabled');
+        productbacklog.removeAttribute('disabled');
+        relatorio.removeAttribute('disabled');
+
+        editar.setAttribute('href', 'projeto-editar/' + codProjeto);
+        excluir.setAttribute('href', 'projeto-excluir/' + codProjeto);
+        sprint.setAttribute('href', 'projeto/' + codProjeto + '/sprint');
+        productbacklog.setAttribute('href', 'projeto/' + codProjeto + '/sprint');
+        relatorio.setAttribute('href', 'projeto/' + codProjeto + '/sprint');
+
+    }
+
+</script>
+

@@ -4,20 +4,22 @@
 
 <hr />
 <a href="<?php echo $this->url('projeto-cadastrar', array('action' => 'cadastrar')) ?>" class="btn btn-success">Novo Projeto</a>
-<a href="<?php echo $this->url('projeto-cadastrar', array('action' => 'cadastrar')) ?>" class="btn btn-default" disabled >Sprint</a>
-<a href="<?php echo $this->url('projeto-cadastrar', array('action' => 'cadastrar')) ?>" class="btn btn-default" disabled >Product Backlog</a>
-<a href="<?php echo $this->url('projeto-cadastrar', array('action' => 'cadastrar')) ?>" class="btn btn-default" disabled >Emitir Relatório do Projeto</a>
+<a  class="btn btn-primary" id="editar-btn" disabled >Editar</a>
+<a  class="btn btn-danger" id="excluir-btn" disabled >Excluir</a>
+<a  class="btn btn-default" id="sprint-btn" disabled >Sprint</a>
+<a  class="btn btn-default" id="productbacklog-btn" disabled >Product Backlog</a>
+<a  class="btn btn-default" id="relatorio-btn"  disabled >Emitir Relatório do Projeto</a>
 <p></p>
 <table id="data_table" class="table data_tables table-striped table-hover table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
         <tr>
+            <th>Projeto</th>
             <th>Código</th>
             <th>Nome</th>
             <th>Descrição</th>
             <th>Data Inicio</th>
             <th>Data Fim</th>
             <th>Status</th>
-            <th>Opções</th>
         </tr>
     </thead>
     <tbody>

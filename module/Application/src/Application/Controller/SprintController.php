@@ -18,19 +18,25 @@ use Application\Model\Sprint;
 class SprintController extends AbstractActionController {
 
     protected $sprintTable;
+    protected $projetoTable;
 
     public function listarAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        $sprints = $this->getSprintTable()->fetchAll();
+
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+
+        $sprints = $this->getSprintTable()->fetchAll($codProjeto);
 
         return new ViewModel(array(
             'partial_loop_listar' => $sprints,
+            'cod_projeto' => $codProjeto,
         ));
     }
 
     public function cadastrarAction() {
         $this->ACLPermitir()->permitir();
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $retorno = false;
         $ultimoSprint = null;
         $formSprint = new SprintForm();
@@ -55,8 +61,12 @@ class SprintController extends AbstractActionController {
             }
         }
 
+        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         return new ViewModel(array(
-            'ultimoSprin' => $ultimoSprint,
+            'partial_loop_projetos' => $projetos,
+            'cod_projeto' => $codProjeto,
+            'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
+            'ultimoSprint' => $ultimoSprint,
             'retorno' => $retorno,
             'form_sprint' => $formSprint,
         ));
@@ -66,6 +76,7 @@ class SprintController extends AbstractActionController {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $retorno = false;
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
 
         $sprint = $this->getSprintTable()->getSprint($codSprint);
@@ -82,7 +93,6 @@ class SprintController extends AbstractActionController {
 
             $sprint = new Sprint();
 
-
             $formSprint->setData($request->getPost());
 
             if ($formSprint->isValid()) {
@@ -97,6 +107,7 @@ class SprintController extends AbstractActionController {
         return new ViewModel(array(
             'retorno' => $retorno,
             'cod_sprint' => $codSprint,
+            'cod_projeto' => $codProjeto,
             'form_sprint' => $formSprint,
         ));
     }
@@ -106,6 +117,7 @@ class SprintController extends AbstractActionController {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $retorno = false;
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
 
         $sprint = $this->getSprintTable()->getSprint($codSprint);
@@ -126,6 +138,7 @@ class SprintController extends AbstractActionController {
 
         return new ViewModel(array(
             'retorno' => $retorno,
+            'cod_projeto' => $codProjeto,
             'cod_sprint' => $codSprint,
             'form_sprint' => $formSprint,
         ));
@@ -142,6 +155,20 @@ class SprintController extends AbstractActionController {
 
     //recupera e retorna o Service Manager
     private function getSm() {
+        return $this->getEvent()->getApplication()->getServiceManager();
+    }
+
+    //recupera e retorna a model ProjetoTable
+    public function getProjetoTable() {
+        if (!$this->projetoTable) {
+            $sm = $this->getServiceLocator();
+            $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
+        }
+        return $this->projetoTable;
+    }
+
+    //recupera e retorna o Service Manager
+    private function getSmProjeto() {
         return $this->getEvent()->getApplication()->getServiceManager();
     }
 

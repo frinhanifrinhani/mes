@@ -21,7 +21,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == 1)) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Sim</button>
-                    <a href="/sprint" class="btn btn-danger">Não</a>
+                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-danger">Não</a>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == 1)) {
 
 <hr />
 <div class="content">
-   <?php
+    <?php
     $formSprint = $this->form_sprint;
     $formSprint->prepare();
     echo $this->form()->openTag($formSprint);
@@ -51,16 +51,19 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == 1)) {
     <div class="form-group">
         <?= $this->formRow($formSprint->get('cod_status')); ?>
     </div>
-    
+
     <div class="form-group">
+        <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
+
         <?= $this->formRow($formSprint->get('botao_salvar')); ?>
-        <a href="<?= $this->url('sprint') ?>" class="btn btn-danger" >Cancelar</a>
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint-excluir/<?= $this->cod_sprint ?>" class="btn btn-danger" >Excluir</a>
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-warning" >Cancelar</a>
     </div>
     <?php echo $this->form()->closeTag(); ?>  
 </div>
 
 <script>
-    
+
 
     $(document).ready(function () {
         $('#cpf_sprint').mask('999.999.999-99');

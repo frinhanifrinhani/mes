@@ -28,6 +28,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <script>$("#myModal").modal();</script>
 <?php } ?>
 <hr />
+
 <div class="content">
 
     <?php
@@ -53,9 +54,13 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
         <label id="dataFimProjetoErro" class="error" style="display: none" ></label>
     </div>
     <div class="form-group">
+        <label id="dataFimProjetoErro" class="error" style="display: none" ></label>
+    </div>
+    <div class="form-group">
         <?= $this->formRow($formProjeto->get('cod_status')); ?>
     </div>
     <div class="form-group">
+        <input type="hidden" name="cod_participante" id="cod_participante" value="<?= $this->cod_participante ?>">
         <?= $this->formRow($formProjeto->get('botao_salvar')); ?>
         <a href="<?= $this->url('projeto') ?>" class="btn btn-danger" >Cancelar</a>
     </div>
@@ -65,12 +70,12 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <script>
     $(function () {
         $("#data_inicio_projeto").datepicker({
-//            showAnim: "fadeIn"
+            showAnim: "fadeIn"
         });
     });
     $(function () {
         $("#data_fim_projeto").datepicker({
-//            showAnim: "fadeIn"
+            showAnim: "fadeIn"
         });
     });
 

@@ -5,7 +5,7 @@
 if (!isset($_POST['cod_sprint'])) {
     ?>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,18 +22,17 @@ if (!isset($_POST['cod_sprint'])) {
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-primary">Ver</button>
                     <button type="button" name="excluir" id="excluir" class="btn btn-danger" onclick="excluir();">Sim</button>
-                    <a href="/sprint" class="btn btn-warning">Não</a>
+                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-warning">Não</a>
                 </div>
             </div>
         </div>
     </div>
     <script>$("#myModal").modal();</script>
 
-<?php
+    <?php
 }
 
 if (isset($_POST['cod_sprint'])) {
-    
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -42,10 +41,10 @@ if (isset($_POST['cod_sprint'])) {
                     <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
                 </div>
                 <div class="modal-body">
-                   Sprint excluída com sucesso!
+                    Sprint excluída com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="/sprint" class="btn btn-warning">Voltar</a>
+                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-warning">Voltar</a>
                 </div>
             </div>
         </div>
@@ -75,10 +74,12 @@ if (isset($_POST['cod_sprint'])) {
     <div class="form-group">
         <?= $this->formRow($formSprint->get('cod_status')); ?>
     </div>
-    
+
     <div class="form-group">
-        <a href="<?= $this->url('sprint-editar',array('action' => 'editar', 'cod_sprint' => $this->cod_sprint))?>" class="btn btn-primary" >Editar</a>
-        <a href="<?= $this->url('sprint-excluir',array('action' => 'excluir', 'cod_sprint' => $this->cod_sprint))?>" class="btn btn-danger" >Excluir</a>
+        <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
+
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint-editar/<?= $this->cod_sprint ?>" class="btn btn-primary" >Editar</a>
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint-excluir/<?= $this->cod_sprint ?>" class="btn btn-danger" >Excluir</a>
         <a href="<?= $this->url('sprint') ?>" class="btn btn-warning" >Cancelar</a>
     </div>
     <?php echo $this->form()->closeTag(); ?>  
@@ -86,23 +87,23 @@ if (isset($_POST['cod_sprint'])) {
 
 <script>
     bloquerCampos();
-    function excluir(){
+    function excluir() {
         var formulario = document.getElementById('form_sprint');
         formulario.submit();
-        
+
         return true;
     }
-    
-    function bloquerCampos(){
+
+    function bloquerCampos() {
         var nomeSprint = document.getElementById('nome_sprint');
         var descricaoSprint = document.getElementById('descricao_sprint');
         var tempoSprint = document.getElementById('tempo_sprint');
         var codStatus = document.getElementById('cod_status');
-        
-        nomeSprint.setAttribute('disabled','disabled');
-        descricaoSprint.setAttribute('disabled','disabled');
-        tempoSprint.setAttribute('disabled','disabled');
-        codStatus.setAttribute('disabled','disabled');
+
+        nomeSprint.setAttribute('disabled', 'disabled');
+        descricaoSprint.setAttribute('disabled', 'disabled');
+        tempoSprint.setAttribute('disabled', 'disabled');
+        codStatus.setAttribute('disabled', 'disabled');
     }
-    
+
 </script>

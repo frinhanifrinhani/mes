@@ -17,7 +17,6 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\TableGateway\TableGateway;
 
-
 class Sprint implements InputFilterAwareInterface {
 
     public $codSprint;
@@ -25,11 +24,13 @@ class Sprint implements InputFilterAwareInterface {
     public $descricaoSprint;
     public $tempoSprint;
     public $codStatusSprint;
+    public $codProjeto;
     public $descricaoStatus;
     public $dataCadastroSprint;
     protected $inputFilter;
     protected $dbAdapter;
-   // public $data;
+
+    // public $data;
 
     function exchangeArray($data) {
         $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
@@ -38,8 +39,8 @@ class Sprint implements InputFilterAwareInterface {
         $this->tempoSprint = (isset($data['tempo_sprint'])) ? $data['tempo_sprint'] : null;
         $this->codStatusSprint = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
+        $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->dataCadastroSprint = (isset($data['data_cadastro_sprint'])) ? $data['data_cadastro_sprint'] : null;
-        
     }
 
     public function getArrayCopy() {
@@ -50,13 +51,13 @@ class Sprint implements InputFilterAwareInterface {
             'tempo_sprint' => $this->tempoSprint,
             'descricao_status' => $this->descricaoStatus,
             'cod_status' => $this->codStatusSprint,
+            'cod_projeto' => $this->codProjeto,
             'data_cadastro_sprint' => $this->dataCadastroSprint,
-            
         );
     }
 
-
     /* add */
+
     public function setDbAdapter($dbAdapter) {
 
         $this->dbAdapter = $dbAdapter;
@@ -110,4 +111,5 @@ class Sprint implements InputFilterAwareInterface {
     public function toArray() {
         return get_object_vars($this);
     }
+
 }

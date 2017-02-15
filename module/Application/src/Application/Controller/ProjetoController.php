@@ -25,7 +25,7 @@ class ProjetoController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        $projetos = $this->getProjetoTable()->fetchAll();
+        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         //retorna dados pra a view
         return new ViewModel(array(
             'partial_loop_listar' => $projetos,
@@ -41,14 +41,11 @@ class ProjetoController extends AbstractActionController {
         $formProjeto = new ProjetoForm();
 
         $request = $this->getRequest();
-//        var_dump($request->getPost());
+
         if ($request->isPost()) {
 
             $projeto = new Projeto();
 
-//            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-//            $participante->setDbAdapter($dbAdapter);
-//
             $formProjeto->setInputFilter($projeto->getInputFilter());
             $formProjeto->setData($request->getPost());
 
@@ -62,6 +59,7 @@ class ProjetoController extends AbstractActionController {
         }
 
         return new ViewModel(array(
+            'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
             'ultimoProjeto' => $ultimoProjeto,
             'retorno' => $retorno,
             'form_projeto' => $formProjeto,
@@ -81,7 +79,7 @@ class ProjetoController extends AbstractActionController {
 //            ));
 //        }
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
-         if ($projeto == true) {
+        if ($projeto == true) {
             $formProjeto = new ProjetoForm();
             $formProjeto->setData($projeto->getArrayCopy());
         } else {

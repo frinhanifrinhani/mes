@@ -59,7 +59,6 @@ class Module {
         return array(
             //factories para acesso as tabelas
             'factories' => array(
-                
                 /**                 * ************ TIPO PARTICIPANTE ************** */
                 //instacia um objeto da TipoParticipanteTable e retorna seus elementos
                 'Application\Model\TipoParticipanteTable' => function($sm) {
@@ -105,7 +104,7 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new Sprint());
                     return new TableGateway(new TableIdentifier('sprint'), $dbAdapter, null, $resultSetPrototype);
                 },
-                 /**                 * ************ STATUS ************** */
+                /**                 * ************ STATUS ************** */
                 //instacia um objeto da StatusTable e retorna seus elementos
                 'Application\Model\StatusTable' => function($sm) {
                     $tableGateway = $sm->get('StatusTableGateway');
@@ -120,7 +119,6 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new Status());
                     return new TableGateway(new TableIdentifier('status'), $dbAdapter, null, $resultSetPrototype);
                 },
-                 
                 /**                 * ************ PROJETO ************** */
                 //instacia um objeto da ProjetoTable e retorna seus elementos
                 'Application\Model\ProjetoTable' => function($sm) {

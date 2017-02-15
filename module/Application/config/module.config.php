@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -15,10 +16,10 @@ return array(
             'home' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/',
+                    'route' => '/',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
+                        'action' => 'index',
                     ),
                 ),
             ),
@@ -26,10 +27,10 @@ return array(
             'inicio' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/inicio',
+                    'route' => '/inicio',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action'     => 'inicio',
+                        'action' => 'inicio',
                     ),
                 ),
             ),
@@ -37,14 +38,13 @@ return array(
             'login' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/login',
+                    'route' => '/login',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Login',
-                        'action'     => 'login',
+                        'action' => 'login',
                     ),
                 ),
             ),
-
             //rota para funcionalidade sair
             'sair' => array(
                 'type' => 'Literal',
@@ -52,7 +52,7 @@ return array(
                     'route' => '/sair',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Login',
-                        'action'     => 'sair',
+                        'action' => 'sair',
                     )
                 )
             ),
@@ -63,21 +63,20 @@ return array(
                     'route' => '/alterarsenha',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Participante',
-                        'action'     => 'alterarsenha',
+                        'action' => 'alterarsenha',
                     )
                 )
             ),
-                       
-/*************** ROTAS PARA PARTICPANTE ***************/
-            
+            /*             * ************* ROTAS PARA PARTICPANTE ************** */
+
             //rota para tela criar conta
             'criarcontaproductowner' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/criarcontaproductowner',
+                    'route' => '/criarcontaproductowner',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Participante',
-                        'action'     => 'criarcontaproductowner',
+                        'action' => 'criarcontaproductowner',
                     ),
                 ),
             ),
@@ -85,22 +84,21 @@ return array(
             'participante' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante',
+                    'route' => '/participante',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Participante',
-                        'action'            => 'listar',
+                        'controller' => 'Application\Controller\Participante',
+                        'action' => 'listar',
                     ),
                 ),
             ),
-            
             //Rota cadastrar participante
             'participante-cadastrar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante-cadastrar',
+                    'route' => '/participante-cadastrar',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Participante',
-                        'action'            => 'cadastrar',
+                        'controller' => 'Application\Controller\Participante',
+                        'action' => 'cadastrar',
                     ),
                 ),
             ),
@@ -108,10 +106,10 @@ return array(
             'participante-editar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante-editar[/:cod_participante]',
+                    'route' => '/participante-editar[/:cod_participante]',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Participante',
-                        'action'            => 'editar',
+                        'controller' => 'Application\Controller\Participante',
+                        'action' => 'editar',
                     ),
                 ),
             ),
@@ -119,34 +117,34 @@ return array(
             'participante-excluir' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/participante-excluir[/:cod_participante]',
+                    'route' => '/participante-excluir[/:cod_participante]',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Participante',
-                        'action'            => 'excluir',
+                        'controller' => 'Application\Controller\Participante',
+                        'action' => 'excluir',
                     ),
                 ),
             ),
-/*************** ROTAS PARA PRODUCTBACKLOG ***************/
+            /*             * ************* ROTAS PARA PRODUCTBACKLOG ************** */
             //rota para tela productbacklog
             'productbacklog' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/productbacklog',
+                    'route' => '/productbacklog',
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklog',
-                        'action'     => 'index',
+                        'action' => 'index',
                     ),
                 ),
             ),
-/*************** ROTAS PARA PROJETO ***************/
+            /*             * ************* ROTAS PARA PROJETO ************** */
             //rota para tela projeto
             'projeto' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/projeto',
+                    'route' => '/projeto',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Projeto',
-                        'action'     => 'listar',
+                        'action' => 'listar',
                     ),
                 ),
             ),
@@ -154,10 +152,10 @@ return array(
             'projeto-cadastrar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/projeto-cadastrar',
+                    'route' => '/projeto-cadastrar',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Projeto',
-                        'action'            => 'cadastrar',
+                        'controller' => 'Application\Controller\Projeto',
+                        'action' => 'cadastrar',
                     ),
                 ),
             ),
@@ -165,10 +163,10 @@ return array(
             'projeto-editar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/projeto-editar[/:cod_projeto]',
+                    'route' => '/projeto-editar[/:cod_projeto]',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Projeto',
-                        'action'            => 'editar',
+                        'controller' => 'Application\Controller\Projeto',
+                        'action' => 'editar',
                     ),
                 ),
             ),
@@ -176,77 +174,73 @@ return array(
             'projeto-excluir' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/projeto-excluir[/:cod_projeto]',
+                    'route' => '/projeto-excluir[/:cod_projeto]',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Projeto',
-                        'action'            => 'excluir',
+                        'controller' => 'Application\Controller\Projeto',
+                        'action' => 'excluir',
                     ),
                 ),
             ),
-/*************** ROTAS PARA SPRINTBACKLOG ***************/
+            /*             * ************* ROTAS PARA SPRINTBACKLOG ************** */
             //rota para tela sprintbacklog
             'sprintbacklog' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/sprintbacklog',
+                    'route' => '/sprintbacklog',
                     'defaults' => array(
                         'controller' => 'Application\Controller\SprintBacklog',
-                        'action'     => 'index',
+                        'action' => 'index',
                     ),
                 ),
             ),
-/*************** ROTAS PARA SPRINT ***************/
+            /*             * ************* ROTAS PARA SPRINT ************** */
+
             //rota para tela sprint
             'sprint' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/sprint',
+                    'route' => '/projeto[/:cod_projeto]/sprint',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Sprint',
-                        'action'     => 'listar',
+                        'action' => 'listar',
                     ),
                 ),
             ),
-            
             //Rota cadastrar sprint
             'sprint-cadastrar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/sprint-cadastrar',
+                    'route' => '/projeto[/:cod_projeto]/sprint-cadastrar',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Sprint',
-                        'action'            => 'cadastrar',
+                        'controller' => 'Application\Controller\Sprint',
+                        'action' => 'cadastrar',
                     ),
                 ),
             ),
-            
             //Rota editar sprint
             'sprint-editar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/sprint-editar[/:cod_sprint]',
+                    'route' => '/projeto[/:cod_projeto]/sprint-editar[/:cod_sprint]',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Sprint',
-                        'action'            => 'editar',
+                        'controller' => 'Application\Controller\Sprint',
+                        'action' => 'editar',
                     ),
                 ),
             ),
-            
             //Rota excluir sprint
             'sprint-excluir' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/sprint-excluir[/:cod_sprint]',
+                    'route' => '/projeto[/:cod_projeto]/sprint-excluir[/:cod_sprint]',
                     'defaults' => array(
-                        'controller'        => 'Application\Controller\Sprint',
-                        'action'            => 'excluir',
+                        'controller' => 'Application\Controller\Sprint',
+                        'action' => 'excluir',
                     ),
                 ),
             ),
-            
-            
-/*************** ROTAS PARA USUARIO ***************/
-            //rota para tela usuario
+        /*         * ************* ROTAS PARA USUARIO ************** */
+        //rota para tela usuario
 //            'usuario' => array(
 //                'type' => 'Literal', //criarContaProductOwner
 //                'options' => array(
@@ -257,12 +251,10 @@ return array(
 //                    ),
 //                ),
 //            ),
-
-
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
+        // The following is a route to simplify getting started creating
+        // new controllers and actions without needing to create a new
+        // module. Simply drop new controllers in, and you can access them
+        // using the path /application/:controller/:action
 //*** 
 //            'application' => array(
 //                'type'    => 'Literal',
@@ -306,9 +298,9 @@ return array(
         'locale' => 'en_US',
         'translation_file_patterns' => array(
             array(
-                'type'     => 'gettext',
+                'type' => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
+                'pattern' => '%s.mo',
             ),
         ),
     ),
@@ -323,41 +315,36 @@ return array(
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
             'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',
             'Application\Controller\Sprint' => 'Application\Controller\SprintController',
-            //'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
+        //'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     /** invocando a(s) view helper(s) */
     'view_helpers' => array(
         'invokables' => array(
-                    'Notificacoes' => 'Application\View\Helper\Notificacoes',    
+            'Notificacoes' => 'Application\View\Helper\Notificacoes',
 //                    'MascaraCpf' => 'Application\View\Helper\MESCpf',    
 //                    'LimpaMascaraCpf' => 'Application\View\Helper\MESCpf',    
-                            
-            ),            
-	),
+        ),
+    ),
     /** invocando o(s) plugin(s) */
     'controller_plugins' => array(
-       'invokables' => array(
-           'ACLPermitir' => 'Application\Controller\ActionHelper\MESACL',    
-           'Email' => 'Application\Controller\ActionHelper\MESEmail',    
+        'invokables' => array(
+            'ACLPermitir' => 'Application\Controller\ActionHelper\MESACL',
+            'Email' => 'Application\Controller\ActionHelper\MESEmail',
 //           'LimpaMascaraCpf' => 'Application\Controller\ActionHelper\MESCpf',    
-           
-           
-           )
-       ),
-    
-    
+        )
+    ),
     'view_manager' => array(
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'error/404' => __DIR__ . '/../view/error/404.phtml',
+            'error/index' => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
