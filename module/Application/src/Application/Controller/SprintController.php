@@ -168,8 +168,8 @@ class SprintController extends AbstractActionController {
     }
 
     //recupera e retorna o Service Manager
-    private function getSmProjeto() {
-        return $this->getEvent()->getApplication()->getServiceManager();
-    }
+//    private function getSmProjeto() {
+//        return $this->getEvent()->getApplication()->getServiceManager();
+//    }
 
 }

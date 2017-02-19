@@ -33,9 +33,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <div class="tab-content">
 
                 <?php
-                //echo $this->retorno;
                 $formParticipante = $this->form_participante;
-                //$formParticipante->setAttribute('action', $this->url('criarcontaproductowner'));
                 $formParticipante->prepare();
                 echo $this->form()->openTag($formParticipante);
                 ?>
@@ -66,7 +64,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                
                 <?php echo $this->form()->closeTag(); ?>     
 </div>
-<?php echo $this->message; ?>
+<?php //echo $this->message; ?>
     <script>
 
    $(document).ready(function () {

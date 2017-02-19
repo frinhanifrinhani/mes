@@ -67,6 +67,17 @@ return array(
                     )
                 )
             ),
+            //rota para funcionalidade esqueci a senha
+            'recuperasenha' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/recuperasenha',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Participante',
+                        'action' => 'recuperarsenha',
+                    )
+                )
+            ),
             /*             * ************* ROTAS PARA PARTICPANTE ************** */
 
             //rota para tela criar conta
@@ -127,12 +138,13 @@ return array(
             /*             * ************* ROTAS PARA PRODUCTBACKLOG ************** */
             //rota para tela productbacklog
             'productbacklog' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
                     'route' => '/productbacklog',
+                    'route' => '/projeto[/:cod_projeto]/productbacklog',
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklog',
-                        'action' => 'index',
+                        'action' => 'listar',
                     ),
                 ),
             ),
@@ -193,6 +205,19 @@ return array(
                     ),
                 ),
             ),
+            
+            //Rota cadastrar product backlog
+            'productbacklog-cadastrar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-cadastrar',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklog',
+                        'action' => 'cadastrar',
+                    ),
+                ),
+            ),
+            
             /*             * ************* ROTAS PARA SPRINT ************** */
 
             //rota para tela sprint

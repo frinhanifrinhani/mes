@@ -35,7 +35,7 @@ class LoginController extends AbstractActionController {
             if ($usuario->autenticar($this->getServiceLocator()) == true) {
                 return $this->redirect()->toRoute('inicio');
             } else {
-                $this->flashMessenger()->addWarningMessage('Login e senha não correspondem!');
+                $this->flashMessenger()->addWarningMessage('E-mail e senha não correspondem!');
             }
         }
 

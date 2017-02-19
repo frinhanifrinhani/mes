@@ -32,9 +32,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <div class="content">
 
     <?php
-    $senhaParticipante = substr( md5(uniqid(rand(), true)), 0,6);
     $formParticipante = $this->form_participante;
-    //$formParticipante->setAttribute('action', $this->url('participante-cadastrar'));
     $formParticipante->prepare();
     echo $this->form()->openTag($formParticipante);
     ?>
@@ -57,7 +55,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
     <div class="form-group">
-        <input type="hidden" id="senha_paticipante" name="senha_participante" value="<?=$senhaParticipante?>">
+        <!--<input type="hidden" id="senha_paticipante" name="senha_participante" value="<?=$senhaParticipante?>">-->
         <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
         <a href="<?= $this->url('participante') ?>" class="btn btn-danger" >Cancelar</a>
     </div>

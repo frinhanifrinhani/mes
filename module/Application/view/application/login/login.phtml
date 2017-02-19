@@ -9,7 +9,6 @@
                 <?php $this->Notificacoes(); ?>
                 <?php
                 $formLogin = $this->form_login;
-                // $formLogin->setAttribute('action', $this->url('autenticacao', array('action' => 'autenticacao')));
                 $formLogin->prepare();
                 echo $this->form()->openTag($formLogin);
                 ?>
@@ -26,10 +25,14 @@
                         <?= $this->formRow($formLogin->get('botao_entrar')); ?>
                     </div>
                 </div>
-                <span>
-                    <a href="<?php echo $this->url('criarcontaproductowner') ?>" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                <div style="display: inline">
+                    <a href="<?php echo $this->url('criarcontaproductowner') ?>" >
                         Criar conta
-                    </a></p></span>
+                    </a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="<?php echo $this->url('recuperasenha') ?>">
+                        Esqueci a senha
+                    </a></div>
 
             </div>
         </div>
@@ -50,6 +53,8 @@
                 },
                 senha_participante: {
                     required: true,
+                    minlength: 6,
+                    maxlength: 12,
                 },
             },
             // Define as mensagens de erro para cada regra
@@ -60,6 +65,8 @@
                 },
                 senha_participante: {
                     required: "Campo Senha não pode ser vazio!",
+                    minlength: "A senha dever ter no mínimo 6 caracteres",
+                    maxlength: "A senha dever ter no máximo 12 caracteres",
                 }
             }
         });

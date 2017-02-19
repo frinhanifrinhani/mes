@@ -33,9 +33,28 @@ class MESEmail extends AbstractPlugin
         $mail = new Message();
         $mail->setBody($mailbody);
 
-        //$mail->setFrom('email@gmail.com', 'Fulano');
         $mail->addTo($emailParticipante, $nomeParticipante);
         $mail->setSubject('Acesso');
+
+        $transport = new Sendmail();
+        $transport->send($mail);
+    }
+    
+    public function enviarEmailRecuperarSenha($nomeParticipante, $emailParticipante, $senhaParticipante) {
+        $mailbody = "Olá $nomeParticipante!\n";
+        $mailbody .= "\n";
+        $mailbody .= "Sua senha de acesso ao My Easy Scrum foi alterada com sucesso!\n";
+        $mailbody .= "\n";
+        $mailbody .= "Usuário: $emailParticipante \n";
+        $mailbody .= "Senha: $senhaParticipante\n";
+        $mailbody .= "\n";
+        $mailbody .= "Obs: A senha fornecida é provisória, você deve altera-la assim que acessar o sistema.";
+
+        $mail = new Message();
+        $mail->setBody($mailbody);
+
+        $mail->addTo($emailParticipante, $nomeParticipante);
+        $mail->setSubject('Recuperação de senha');
 
         $transport = new Sendmail();
         $transport->send($mail);

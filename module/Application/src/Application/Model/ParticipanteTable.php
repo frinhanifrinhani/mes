@@ -49,6 +49,14 @@ class ParticipanteTable {
          
          return  $row;
      }
+     
+     public function getParticipanteEmail($emailParticipante)
+     {
+         $rowset = $this->tableGateway->select(array ('email_participante' => $emailParticipante));
+         $row = $rowset->current();
+         
+         return  $row;
+     }
     
     public function salvar(Participante $participante){
         $data = array(
@@ -84,7 +92,12 @@ class ParticipanteTable {
         return $this->tableGateway->update($senhaParticipante, array('cod_participante' => $codParticipante));
     }
     
-    //metodo que retorna sql da tableGateway
+    public function recuperarSenha($emailParticipante,$senhaParticipante){
+        $senhaParticipante = array('senha_participante' => md5($senhaParticipante));
+        return $this->tableGateway->update($senhaParticipante, array('email_participante' => $emailParticipante));
+    }
+
+        //metodo que retorna sql da tableGateway
     public function getSql() {
         return $this->tableGateway->getSql();
     }

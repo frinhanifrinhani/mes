@@ -41,7 +41,7 @@ class Participante implements InputFilterAwareInterface {
         $this->emailParticipante = (isset($data['email_participante'])) ? $data['email_participante'] : null;
         $this->codTipoParticipante = (isset($data['cod_tipo_participante'])) ? $data['cod_tipo_participante'] : null;
         $this->tipoParticipante = (isset($data['tipo_participante'])) ? $data['tipo_participante'] : null;
-        $this->senhaParticipante = (isset($data['senha_participante'])) ? $data['senha_participante'] : null;
+        $this->senhaParticipante =  (isset($data['senha_participante'])) ? $data['senha_participante'] : substr( md5(uniqid(rand(), true)), 0,6);
         $this->dataCadastroParticipante = (isset($data['data_cadastro_participante'])) ? $data['data_cadastro_participante'] : null;
     }
 

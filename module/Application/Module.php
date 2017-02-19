@@ -23,6 +23,8 @@ use Application\Model\Participante;
 use Application\Model\ParticipanteTable;
 use Application\Model\Sprint;
 use Application\Model\SprintTable;
+use Application\Model\ProductBacklog;
+use Application\Model\ProductBacklogTable;
 use Application\Model\Status;
 use Application\Model\StatusTable;
 use Application\Model\Projeto;
@@ -54,7 +56,7 @@ class Module {
         );
     }
 
-    // configu
+    // configura a ligação das models com as respectivas tabelas do banco de dados
     public function getServiceConfig() {
         return array(
             //factories para acesso as tabelas
@@ -103,6 +105,21 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Sprint());
                     return new TableGateway(new TableIdentifier('sprint'), $dbAdapter, null, $resultSetPrototype);
+                },
+                /**                 * ************ PRODUCT BACKLOG ************** */
+                //instacia um objeto da ProductBacklogTable e retorna seus elementos
+                'Application\Model\ProductBacklogTable' => function($sm) {
+                    $tableGateway = $sm->get('ProductBacklogTableGateway');
+                    $table = new ProductBacklogTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da ProductBacklog, e retorna uma TableGateway 
+                //passando o nome da tabela 'product_backlog'
+                'ProductBacklogTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new ProductBacklog());
+                    return new TableGateway(new TableIdentifier('product_backlog'), $dbAdapter, null, $resultSetPrototype);
                 },
                 /**                 * ************ STATUS ************** */
                 //instacia um objeto da StatusTable e retorna seus elementos

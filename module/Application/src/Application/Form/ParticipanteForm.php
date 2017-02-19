@@ -146,6 +146,15 @@ class ParticipanteForm extends Form {
                 'id' => 'botao_excluir',
             ),
         ));
+        $this->add(array(
+            'name' => 'botao_enviar',
+            'type' => 'Submit',
+            'attributes' => array(
+                'value' => 'Enviar',
+                'class' => 'btn btn-primary',
+                'id' => 'botao_enviar',
+            ),
+        ));
     }
 
     //Busca tipo de participante

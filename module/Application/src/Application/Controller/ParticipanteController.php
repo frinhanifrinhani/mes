@@ -97,6 +97,8 @@ class ParticipanteController extends AbstractActionController {
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
 
+
+
             if ($formParticipante->isValid()) {
 
                 $participante->exchangeArray($formParticipante->getData());
@@ -123,11 +125,7 @@ class ParticipanteController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
-//        if (is_null($codParticipante)) {
-//            return $this->redirect()->toRoute('participante-cadastrar', array(
-//                        'action' => 'cadastrar'
-//            ));
-//        }
+
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
         if ($participante == true) {
             $formParticipante = new ParticipanteForm();
@@ -142,9 +140,6 @@ class ParticipanteController extends AbstractActionController {
 
             $participante = new Participante();
 
-//            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-//            $participante->setDbAdapter($dbAdapter);
-//            $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
 
             if ($formParticipante->isValid()) {
@@ -169,11 +164,7 @@ class ParticipanteController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
-//        if (is_null($codParticipante)) {
-//            return $this->redirect()->toRoute('participante-cadastrar', array(
-//                        'action' => 'cadastrar'
-//            ));
-//        }
+
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
 
         if ($participante == true) {
@@ -187,7 +178,6 @@ class ParticipanteController extends AbstractActionController {
 
         if ($request->isPost()) {
             $retorno = $this->getParticipanteTable()->excluir($codParticipante);
-            //return $this->redirect()->toRoute('participante');
         }
 
         return new ViewModel(array(
@@ -197,16 +187,57 @@ class ParticipanteController extends AbstractActionController {
         ));
     }
 
+    //metodo responsável por recuperar a senha dos usuários, 
+    //redefinindo uma nava senha e enviando a mesma por e-mail
+    public function recuperarSenhaAction() {
+        //seta um novo layout usado para fora da área restrita
+        $this->layout('layout/layout_cadastro');
+        //instacia um objeto da classe ParticipanteForm, para criação dos campos na view
+        $formParticipante = new ParticipanteForm();
+        //getRequest() recupera os dados que vem pelo post
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            //recupera o metodo getParticipanteEmail()da classe 
+            //ParticipanteTable, que informa se existe ou não o e-mail informado
+            $participante = $this->getParticipanteTable()->getParticipanteEmail($request->getPost()->email_participante);
+
+            if ($participante == true) {
+                //cria uma nova senha (única e aleatório) contendo 6 caracteres alfanuméricos, 
+                //contendo letras minúsculas e/ou maiúsculas 
+                $senhaParticipante = substr(md5(uniqid(rand(), true)), 0, 6);
+                //retorna o metodo recuperarSenha() da classe ParticipanteTable, 
+                //a o mesmo recebe por parametro o email do usuário e a nova senha gerada
+                $retorno = $this->getParticipanteTable()->recuperarSenha($participante->emailParticipante, $senhaParticipante);
+                if ($retorno == true) {
+                    //retorna o metodo enviarEmailRecuperarSenha da ActionHelper MESEmail,
+                    //responsável por enviar o e-mail com a nova senha
+                    $this->Email()->enviarEmailRecuperarSenha($participante->nomeParticipante, $participante->emailParticipante, $senhaParticipante);
+                    //retorna flashMessager
+                    $this->flashMessenger()->addSuccessMessage('Uma nova senha foi envida para o e-mail informado!');
+                }
+            } else {
+                //retorna flashMessager
+                $this->flashMessenger()->addErrorMessage('Não existe usuário cadastrado com o e-mail informado!');
+            }
+        }
+        //retorna os dados para a view através da um array
+        return new ViewModel(array(
+            //retorna o formulário
+            'form_participante' => $formParticipante,
+        ));
+    }
+    // metodo responsável por alterar a senha dos usuários
     public function alterarSenhaAction() {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
+        //recupera a sanha do usuário, a mesma se econtra no container de dados
         $senhaParticipante = $this->ACLPermitir()->container()['senha_participante'];
+        //recupera o código do usuário, o mesmo se econtra no container de dados
         $codParticipante = $this->ACLPermitir()->container()['cod_participante'];
-
+        //instacia um objeto da classe SenhaForm, para criação dos campos na view
         $formSenha = new SenhaForm();
-//        $this->flashMessenger()->addMessage('sua senha nova só funcionará após sair e entra');
-
+        //getRequest() recupera os dados que vem pelo post
         $request = $this->getRequest();
         if ($request->isPost()) {
             $senhaAtual = md5($request->getPost()->senha_atual);
