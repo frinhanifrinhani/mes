@@ -1,4 +1,5 @@
 <tr>
+    <td><input type="radio" name="marca_participante" id="marca_participante" value="<?= $this->codParticipante ?>" onchange="marcarParticipante(this);"></td>
     <td><?=$this->escapeHtml($this->codParticipante)?></td>
     <td><?=$this->escapeHtml($this->nomeParticipante)?></td>
     <!--<td><?//$this->MascaraCpf()->formatarCpf($this->cpfParticipante)?></td>-->
@@ -6,8 +7,22 @@
     <td><?=$this->telefoneParticipante?></td>
     <td><?=$this->escapeHtml($this->emailParticipante)?></td>
     <td><?=$this->tipoParticipante?></td>
-    <td>
-        <a href="<?php echo $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
-        <a href="<?php echo $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
-    </td>    
+       
 </tr>
+<script>
+
+    function marcarParticipante(cod_participante) {
+        var codParticipante = cod_participante.value;
+
+        var editar = document.getElementById('editar-btn');
+        var excluir = document.getElementById('excluir-btn');
+
+        editar.removeAttribute('disabled');
+        excluir.removeAttribute('disabled');
+
+        editar.setAttribute('href', 'participante-editar/' + codParticipante);
+        excluir.setAttribute('href', 'participante-excluir/' + codParticipante);
+
+    }
+
+</script>

@@ -105,10 +105,10 @@ class ParticipanteController extends AbstractActionController {
                 $retorno = $this->getParticipanteTable()->salvar($participante);
 
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
-
-                if ($retorno == true) {
-                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
-                }
+// DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
+//                if ($retorno == true) {
+//                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
+//                }
             }
         }
 
@@ -211,6 +211,8 @@ class ParticipanteController extends AbstractActionController {
                 if ($retorno == true) {
                     //retorna o metodo enviarEmailRecuperarSenha da ActionHelper MESEmail,
                     //responsável por enviar o e-mail com a nova senha
+                    
+                    // DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
                     $this->Email()->enviarEmailRecuperarSenha($participante->nomeParticipante, $participante->emailParticipante, $senhaParticipante);
                     //retorna flashMessager
                     $this->flashMessenger()->addSuccessMessage('Uma nova senha foi envida para o e-mail informado!');

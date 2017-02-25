@@ -65,8 +65,8 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 
     $(document).ready(function () {
         $('#cpf_participante').mask('999.999.999-99');
-        $('#telefone_participante').mask('(99) 99999-9999');
-
+        
+        $('#telefone_participante').mask('(99) 9999-9999');
         $('#form_participante').validate({
             // Define as regras
             rules: {
