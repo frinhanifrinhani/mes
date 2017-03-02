@@ -135,6 +135,19 @@ return array(
                     ),
                 ),
             ),
+            
+            /*             * ************* ROTAS PARA PARTICIPANTE POR PROJETO ************** */
+            //Rota participante
+            'participanteprojeto' => array(
+                'type' => 'Segment',//Segment
+                'options' => array(
+                    'route' => '/participanteprojeto[/:cod_participante]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ParticipanteProjeto',
+                        'action' => 'listarprojeto',
+                    ),
+                ),
+            ),
             /*             * ************* ROTAS PARA PRODUCTBACKLOG ************** */
             //rota para tela productbacklog
             'productbacklog' => array(
@@ -334,13 +347,12 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Login' => 'Application\Controller\LoginController',
-//            'Application\Controller\Senha' => 'Application\Controller\SenhaController',
             'Application\Controller\Participante' => 'Application\Controller\ParticipanteController',
+            'Application\Controller\ParticipanteProjeto' => 'Application\Controller\ParticipanteProjetoController',
             'Application\Controller\ProductBacklog' => 'Application\Controller\ProductBacklogController',
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
             'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',
             'Application\Controller\Sprint' => 'Application\Controller\SprintController',
-        //'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     /** invocando a(s) view helper(s) */

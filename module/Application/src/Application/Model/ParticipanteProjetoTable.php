@@ -17,9 +17,7 @@ use Zend\Db\ResultSet\ResultSet;
 use Application\Model\Participante;
 use Zend\Db\Sql\TableIdentifier;
 
-use Zend\Db\Adapter\Exception\InvalidQueryException;
-
-class ParticipanteTable {
+class ParticipanteProjetoTable {
 
     protected $tableGateway;
 
@@ -27,10 +25,10 @@ class ParticipanteTable {
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll() {
+    public function fetchAllProjeto() {
         $select = new Select();
-        $select->from(new TableIdentifier('participante'))
-                ->columns(array('cod_participante', 'nome_participante', 'cpf_participante', 'telefone_participante', 'email_participante', 'cod_tipo_participante', 'data_cadastro_participante'))
+        $select->from(new TableIdentifier('participante_para_projeto'))
+                ->columns(array('cod_participante', 'cod_projeto'))
                 ->join('tipo_participante', 'tipo_participante.cod_tipo_participante = participante.cod_tipo_participante', 'tipo_participante')
                 ->order(array('cod_participante'=>'desc'));
         $linha = $this->tableGateway->selectWith($select);
@@ -91,7 +89,7 @@ class ParticipanteTable {
                 return $this->tableGateway->update($data, array('cod_participante' => $codParticipante));
             }
         }  catch (\Exception $e){
-            return $e->getPrevious()->getCode();
+             $e->getPrevious()->getMessage();
         }
     }
         

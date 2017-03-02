@@ -27,6 +27,7 @@ class Projeto implements InputFilterAwareInterface {
     public $codStatus;
     public $descricaoStatus;
     public $codParticipante;
+    public $nomeParticipante;
     public $productOwner; // vem pelo join
     public $dataCadastroProjeto;
     protected $inputFilter;
@@ -41,6 +42,7 @@ class Projeto implements InputFilterAwareInterface {
         $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
         $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
+        $this->nomeParticipante = (isset($data['nome_participante'])) ? $data['nome_participante'] : null;
         $this->productOwner = (isset($data['product_owner'])) ? $data['product_owner'] : null;
         $this->dataCadastroProjeto = (isset($data['data_cadastro_projeto'])) ? $data['data_cadastro_projeto'] : null;
     }
@@ -55,6 +57,7 @@ class Projeto implements InputFilterAwareInterface {
             'cod_status' => $this->codStatus,
             'descricao_status' => $this->descricaoStatus,
             'cod_participante' => $this->codParticipante,
+            'nome_participante' => $this->nomeParticipante,
             'product_owner' => $this->productOwner,
             'data_cadastro_projeto' => $this->dataCadastroProjeto,
         );

@@ -24,7 +24,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 </div>
                 <div class="modal-footer">
                     <a href="/inicio" class="btn btn-default">Sim</a>
-                    <a href="/sair" class="btn btn-danger">Não</a>
+                    <a href="/sair" class="btn btn-warning">Não</a>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
              <input type="hidden" name="cod_tipo_participante" id="cod_tipo_participante" value="1">
         <div class="form-group">
             <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
-            <a href="<?=$this->url('login') ?>" class="btn btn-danger" >Cancelar</a>
+            <a href="<?=$this->url('login') ?>" class="btn btn-warning" >Cancelar</a>
         </div>
                
                 <?php echo $this->form()->closeTag(); ?>     

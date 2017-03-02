@@ -25,7 +25,9 @@ class ProjetoController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
+        //SER FOR NECESSÁRIO FILTAR OS PROJETOS APENAS PARA QUE O DONO VEJE
+//        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
+        $projetos = $this->getProjetoTable()->fetchAll();
         //retorna dados pra a view
         return new ViewModel(array(
             'partial_loop_listar' => $projetos,
@@ -59,7 +61,7 @@ class ProjetoController extends AbstractActionController {
         }
 
         return new ViewModel(array(
-            'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
+            //'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
             'ultimoProjeto' => $ultimoProjeto,
             'retorno' => $retorno,
             'form_projeto' => $formProjeto,

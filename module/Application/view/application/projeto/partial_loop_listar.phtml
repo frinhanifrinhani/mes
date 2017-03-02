@@ -9,6 +9,7 @@ $dataFimProjeto = date_create($this->dataFimProjeto);
     <td><?= $this->descricaoProjeto ?></td>
     <td><?= date_format($dataInicioProjeto, 'd/m/Y') ?></td>
     <td><?= date_format($dataFimProjeto, 'd/m/Y') ?></td>
+    <td><?= $this->nomeParticipante ?></td>    
     <td><?= $this->descricaoStatus ?></td>    
     <!-- para botões na mesma linha -->
     <!--<a href="<? //  echo $this->url('projeto-editar',array('action' => 'editar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-info" id="<?$this->codProjeto?>"  >Editar</a>-->

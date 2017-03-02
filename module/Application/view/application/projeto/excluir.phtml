@@ -76,6 +76,9 @@ if (isset($_POST['cod_projeto'])) {
 <?= $this->formRow($formProjeto->get('data_fim_projeto')); ?>
     </div>
     <div class="form-group">
+<?= $this->formRow($formProjeto->get('cod_participante')); ?>
+    </div>
+    <div class="form-group">
 <?= $this->formRow($formProjeto->get('cod_status')); ?>
     </div>
     <div class="form-group">
@@ -101,12 +104,14 @@ if (isset($_POST['cod_projeto'])) {
         var descricaoProjeto = document.getElementById('descricao_projeto');
         var dataInicioProjeto = document.getElementById('data_inicio_projeto');
         var dataFimProjeto = document.getElementById('data_fim_projeto');
+        var codParticipante = document.getElementById('cod_participante');
         var codStatus = document.getElementById('cod_status');
 
         nomeProjeto.setAttribute('disabled', 'disabled');
         descricaoProjeto.setAttribute('disabled', 'disabled');
         dataInicioProjeto.setAttribute('disabled', 'disabled');
         dataFimProjeto.setAttribute('disabled', 'disabled');
+        codParticipante.setAttribute('disabled', 'disabled');
         codStatus.setAttribute('disabled', 'disabled');
     }
 

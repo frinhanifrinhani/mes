@@ -20,9 +20,9 @@ if (!isset($_POST['cod_participante'])) {
                     Você tem certeza que deseja excluir?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-primary">Ver</button>
-                    <button type="button" name="excluir" id="excluir" class="btn btn-danger" onclick="excluir();">Sim</button>
+                    <button type="button" name="excluir" id="excluir" class="btn btn-primary" onclick="excluir();">Sim</button>
                     <a href="/participante" class="btn btn-warning">Não</a>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Ver</button>
                 </div>
             </div>
         </div>
@@ -32,7 +32,8 @@ if (!isset($_POST['cod_participante'])) {
 <?php
 }
 
-if (isset($_POST['cod_participante'])) {
+//if (isset($_POST['cod_participante'])) {
+if (isset($this->retorno) && $this->retorno == true) {
     
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -45,6 +46,31 @@ if (isset($_POST['cod_participante'])) {
                    Participante excluido com sucesso!
                 </div>
                 <div class="modal-footer">
+                    <a href="/participante" class="btn btn-warning">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+<?php } else if (isset($this->retorno) && $this->retorno == false){?>
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><b>Atenção!</b></h4>
+                </div>
+                
+                <?php 
+//                    echo $this->cod_participante; 
+//                    echo $this->solicitante; 
+                    ?>
+                <div class="modal-body">
+                    Este participante não pode ser excluido, <br />
+                    pois ele é 'dono' de um ou mais projeto(s), e/ou sprint(s)<br /><br />
+                    <!--Você pode solicitar que o dono do projeto seja alterado. <br />--> 
+                </div>
+                <div class="modal-footer">
+                    <!--<a href="/participante" class="btn btn-primary">Solicitar alteração</a>-->
                     <a href="/participante" class="btn btn-warning">Voltar</a>
                 </div>
             </div>
@@ -80,8 +106,8 @@ if (isset($_POST['cod_participante'])) {
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
     <div class="form-group">
-        <a href="<?= $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Editar</a>
-        <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-danger" >Excluir</a>
+        <!--<a href="<?$this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Editar</a>-->
+        <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Excluir</a>
         <a href="<?= $this->url('participante') ?>" class="btn btn-warning" >Cancelar</a>
     </div>
     <?= $this->form()->closeTag() ?>

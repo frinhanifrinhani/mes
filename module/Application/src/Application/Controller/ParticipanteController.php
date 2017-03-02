@@ -97,8 +97,6 @@ class ParticipanteController extends AbstractActionController {
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
 
-
-
             if ($formParticipante->isValid()) {
 
                 $participante->exchangeArray($formParticipante->getData());
@@ -145,7 +143,12 @@ class ParticipanteController extends AbstractActionController {
             if ($formParticipante->isValid()) {
 
                 $participante->exchangeArray($formParticipante->getData());
-                $retorno = $this->getParticipanteTable()->salvar($participante);
+                $retornoCod = $this->getParticipanteTable()->salvar($participante);
+                if ($retornoCod == 23000) {
+                    $retorno = false;
+                } else {
+                    $retorno = true;
+                }
 
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
             }
@@ -164,7 +167,7 @@ class ParticipanteController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $retorno = false;
         $codParticipante = (int) $this->params()->fromRoute('cod_participante', null);
-
+        $solicitante = $this->ACLPermitir()->container()['cod_participante'];
         $participante = $this->getParticipanteTable()->getParticipante($codParticipante);
 
         if ($participante == true) {
@@ -177,11 +180,17 @@ class ParticipanteController extends AbstractActionController {
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $retorno = $this->getParticipanteTable()->excluir($codParticipante);
+            $retornoCod = $this->getParticipanteTable()->excluir($codParticipante);
+            if ($retornoCod == 23000) {
+                $retorno = false;
+            } else {
+                $retorno = true;
+            }
         }
 
         return new ViewModel(array(
             'retorno' => $retorno,
+            'solicitante' => $solicitante,
             'cod_participante' => $codParticipante,
             'form_participante' => $formParticipante,
         ));
@@ -211,7 +220,6 @@ class ParticipanteController extends AbstractActionController {
                 if ($retorno == true) {
                     //retorna o metodo enviarEmailRecuperarSenha da ActionHelper MESEmail,
                     //responsável por enviar o e-mail com a nova senha
-                    
                     // DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
                     $this->Email()->enviarEmailRecuperarSenha($participante->nomeParticipante, $participante->emailParticipante, $senhaParticipante);
                     //retorna flashMessager
@@ -228,6 +236,7 @@ class ParticipanteController extends AbstractActionController {
             'form_participante' => $formParticipante,
         ));
     }
+
     // metodo responsável por alterar a senha dos usuários
     public function alterarSenhaAction() {
 

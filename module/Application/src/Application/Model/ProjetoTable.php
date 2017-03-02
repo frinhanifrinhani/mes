@@ -26,12 +26,13 @@ class ProjetoTable {
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll($productOwner) {
+    public function fetchAll() {
         $select = new Select();
         $select->from(new TableIdentifier('projeto'))
                 ->columns(array('cod_projeto', 'nome_projeto', 'descricao_projeto', 'data_inicio_projeto', 'data_fim_projeto', 'cod_status', 'data_cadastro_projeto'))
                 ->join('status', 'status.cod_status = projeto.cod_status', 'descricao_status')
-                ->where('cod_participante = ' . $productOwner)
+                ->join('participante', 'participante.cod_participante = projeto.cod_participante', 'nome_participante')
+//                ->where('projeto.cod_participante = ' . $productOwner)
                 ->order(array('cod_projeto' => 'desc'));
         $linha = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();  

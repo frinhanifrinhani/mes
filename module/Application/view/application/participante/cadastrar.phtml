@@ -2,7 +2,6 @@
     <h3 class="box-title">Cadastrar participante</h3>
 </div>
 <?php
-
 if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -21,7 +20,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 </div>
                 <div class="modal-footer">
                     <a href="<?= $this->url('participante-editar', array('action' => 'editar', 'cod_participante' => $this->ultimoParticipante)) ?>" class="btn btn-default">Sim</a>
-                    <a href="/participante" class="btn btn-danger">Não</a>
+                    <a href="/participante" class="btn btn-primary">Não</a>
                 </div>
             </div>
         </div>
@@ -54,10 +53,13 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <div class="form-group">
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
+
+
+
     <div class="form-group">
-        <!--<input type="hidden" id="senha_paticipante" name="senha_participante" value="<?=$senhaParticipante?>">-->
+        <!--<input type="hidden" id="senha_paticipante" name="senha_participante" value="<?= $senhaParticipante ?>">-->
         <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
-        <a href="<?= $this->url('participante') ?>" class="btn btn-danger" >Cancelar</a>
+        <a href="<?= $this->url('participante') ?>" class="btn btn-warning" >Cancelar</a>
     </div>
     <?php echo $this->form()->closeTag(); ?>     
 </div>
@@ -65,8 +67,15 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 
     $(document).ready(function () {
         $('#cpf_participante').mask('999.999.999-99');
-        
-        $('#telefone_participante').mask('(99) 9999-9999');
+
+    $('#telefone_participante').mask('(00) 0000-00009');
+    $('#telefone_participante').blur(function (event) {
+        if ($(this).val().length == 15) { // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+            $('#telefone_participante').mask('(00) 00000-0009');
+        } else {
+            $('#telefone_participante').mask('(00) 0000-00009');
+        }
+    });
         $('#form_participante').validate({
             // Define as regras
             rules: {
@@ -75,6 +84,9 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 },
                 cpf_participante: {
                     required: true,
+                    minlength: 14,
+                },
+                telefone_participante: {
                     minlength: 14,
                 },
                 email_participante: {
@@ -95,6 +107,10 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     minlength: "O Campo CPF deve ter 11 números!"
 
                 },
+                telefone_participante: {
+                    minlength: "O Campo Telefone deve ter 10 ou 11 dígitos!"
+
+                },
                 email_participante: {
                     required: "Campo E-mail não pode ser vazio!",
                     email: "Formato email dever ter (@ e .com)!",
@@ -105,4 +121,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
             }
         });
     });
+
+
+
 </script>

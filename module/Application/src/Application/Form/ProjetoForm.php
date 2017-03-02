@@ -16,6 +16,7 @@ use Zend\InputFilter;
 class ProjetoForm extends Form {
 
     public $statusTable;
+    public $participanteTable;
 
     public function __construct() {
         parent::__construct('form_projeto');
@@ -100,16 +101,19 @@ class ProjetoForm extends Form {
             ),
             'options' => array(
                 'label' => 'Status',
-                'value_options' => $this->getValueOptions(),
+                'value_options' => $this->getStatusValueOptions(),
             ),
         ));
-
         $this->add(array(
             'name' => 'cod_participante',
-            'type' => 'Hidden',
+            'type' => 'Select',
             'attributes' => array(
                 'id' => 'cod_participante',
                 'class' => 'form-control',
+            ),
+            'options' => array(
+                'label' => 'Dono do Projeto *',
+                'value_options' => $this->getParticipanteValueOptions(),
             ),
         ));
 
@@ -141,13 +145,31 @@ class ProjetoForm extends Form {
         }
         return $this->statusTable;
     }
+    private function getParticipanteTable() {
+        if (!$this->participanteTable) {
+            $sm = $GLOBALS['sm'];
+            $this->participanteTable = $sm->get('Application\Model\participanteTable');
+        }
+        return $this->participanteTable;
+    }
 
-    private function getValueOptions() {
+    //Monta array com os status, e será retornado para a combobox 
+    private function getStatusValueOptions() {
         $valueOptions = array();
         $status = $this->getStatusTable()->fetchAll();
 //        $valueOptions[''] = 'Selecione...';
         foreach ($status as $statusProjeto) {
             $valueOptions[$statusProjeto->codStatus] = $statusProjeto->descricaoStatus;
+        }
+        return $valueOptions;
+    }
+    //Monta array com os participantes, e será retornado para a combobox 
+    private function getParticipanteValueOptions() {
+        $valueOptions = array();
+        $participantes = $this->getParticipanteTable()->fetchAllProductOwner();
+        $valueOptions[''] = 'Selecione...';
+        foreach ($participantes as $participante) {
+            $valueOptions[$participante->codParticipante] = $participante->nomeParticipante;
         }
         return $valueOptions;
     }
