@@ -104,9 +104,9 @@ class ParticipanteController extends AbstractActionController {
 
                 $ultimoParticipante = $this->getParticipanteTable()->getLastId();
 // DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
-//                if ($retorno == true) {
-//                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
-//                }
+                if ($retorno == true) {
+                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
+                }
             }
         }
 
