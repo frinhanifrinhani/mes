@@ -1,20 +1,19 @@
 <style type="text/css">
-li{color: #FF0000;} 
+    li{color: #FF0000;} 
 </style>
 <div class="box-header with-border">
-	<h3 class="box-title">Criar Conta Product Owner</h3>
+    <h3 class="box-title">Criar Conta Product Owner</h3>
 </div>
 <?php
-
 if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>-->
+                    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>-->
                     <h4 class="modal-title" id="myModalLabel"><b>Parabens!</b></h4>
                 </div>
                 <div class="modal-body">
@@ -35,45 +34,45 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 
 <div class="tab-content">
 
-                <?php
-                $formParticipante = $this->form_participante;
-                $formParticipante->prepare();
-                echo $this->form()->openTag($formParticipante);
-                ?>
+    <?php
+    $formParticipante = $this->form_participante;
+    $formParticipante->prepare();
+    echo $this->form()->openTag($formParticipante);
+    ?>
 
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('nome_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('email_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('senha_participante')); ?>
-        </div>
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('confirma_senha_participante')); ?>
-        </div>
-             <input type="hidden" name="cod_tipo_participante" id="cod_tipo_participante" value="1">
-        <div class="form-group">
-            <?= $this->formRow($formParticipante->get('botao_salvar')); ?>
-            <a href="<?=$this->url('login') ?>" class="btn btn-warning" >Cancelar</a>
-        </div>
-               
-                <?php echo $this->form()->closeTag(); ?>     
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('nome_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('email_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('senha_participante')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formParticipante->get('confirma_senha_participante')); ?>
+    </div>
+    <input type="hidden" name="cod_tipo_participante" id="cod_tipo_participante" value="1">
+    <div class="form-group">
+        <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+        <a href="<?= $this->url('login') ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+    </div>
+
+    <?php echo $this->form()->closeTag(); ?>     
 </div>
-<?php //echo $this->message; ?>
-    <script>
+<?php //echo $this->message;  ?>
+<script>
 
-   $(document).ready(function () {
+    $(document).ready(function () {
         $('#cpf_participante').mask('999.999.999-99');
         $('#telefone_participante').mask('(99) 99999-9999');
-        
+
         $('#form_participante').validate({
             // Define as regras
             rules: {
@@ -96,9 +95,8 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 confirma_senha_participante: {
                     required: true,
                     equalTo: '#senha_participante'
-                    
-                },
 
+                },
             },
             // Define as mensagens de erro para cada regra
             messages: {
@@ -108,7 +106,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                 cpf_participante: {
                     required: "Campo CPF não pode ser vazio!",
                     minlength: "O Campo CPF deve ter 11 números!"
-                    
+
                 },
                 email_participante: {
                     required: "Campo E-mail não pode ser vazio!",
@@ -130,4 +128,3 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 
 
 
-    

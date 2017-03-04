@@ -57,6 +57,7 @@ class ParticipanteForm extends Form {
                 'id' => 'cpf_participante',
                 'class' => 'form-control',
                 'placeholder' => 'CPF',
+                'onchange' => 'validarCPF(cpfInp);'
             ),
             'options' => array(
                 'label' => 'CPF *',
@@ -133,9 +134,11 @@ class ParticipanteForm extends Form {
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Salvar',
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary', //<span class="glyphicon glyphicon-file"></span>
                 'id' => 'botao_salvar',
             ),
+            
+            
         ));
         $this->add(array(
             'name' => 'botao_excluir',

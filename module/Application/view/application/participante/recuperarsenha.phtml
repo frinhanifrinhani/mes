@@ -17,8 +17,8 @@
 
     <div class="form-group">
         <div>
-            <?= $this->formRow($formParticipante->get('botao_enviar')); ?>
-            <a href="<?= $this->url('login') ?>" class="btn btn-warning" >Voltar</a>
+            <button type="submit" name="botao_enviar" id="botao_enviar" class="btn btn-primary" ><span class="glyphicon glyphicon-send"></span> Enviar</button>
+            <a href="<?= $this->url('login') ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-backward"></span> Voltar</a>
         </div>
     </div>
     <?= $this->form()->closeTag() ?>

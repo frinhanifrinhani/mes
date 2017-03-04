@@ -139,12 +139,22 @@ return array(
             /*             * ************* ROTAS PARA PARTICIPANTE POR PROJETO ************** */
             //Rota participante
             'participanteprojeto' => array(
-                'type' => 'Segment',//Segment
+                'type' => 'Literal',//Segment
                 'options' => array(
-                    'route' => '/participanteprojeto[/:cod_participante]',
+                    'route' => '/participanteprojeto',//[/:cod_participante]
                     'defaults' => array(
                         'controller' => 'Application\Controller\ParticipanteProjeto',
-                        'action' => 'listarprojeto',
+                        'action' => 'listar',
+                    ),
+                ),
+            ),
+            'participanteprojeto-add' => array(
+                'type' => 'Segment',//Segment
+                'options' => array(
+                    'route' => '/participanteprojeto-add[/:cod_participante]',//[/:cod_participante]
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ParticipanteProjeto',
+                        'action' => 'addProjeto',
                     ),
                 ),
             ),

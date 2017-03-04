@@ -19,8 +19,9 @@
         <?= $this->formRow($formSenha->get('confirma_senha')); ?>
     </div>
     <div class="form-group">
-        <?= $this->formRow($formSenha->get('botao_salvar')); ?>
-        <a href="<?= $this->url('inicio') ?>" class="btn btn-danger" >Cancelar</a>
+        <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Savlar</button>
+        <!--<?//$this->formRow($formSenha->get('botao_salvar')); ?>-->
+        <a href="<?= $this->url('inicio') ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
     <?php echo $this->form()->closeTag(); ?>     
 </div>

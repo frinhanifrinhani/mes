@@ -22,14 +22,14 @@
 
                 <div class="form-group">
                     <div>
-                        <?= $this->formRow($formLogin->get('botao_entrar')); ?>
+                        <button type="submit" name="botao_entrar" id="botao_entrar" class="btn btn-primary btn-lg btn-block" >Entrar <span class="glyphicon glyphicon-arrow-right"></span></button>
                     </div>
                 </div>
                 <div style="display: inline">
                     <a href="<?php echo $this->url('criarcontaproductowner') ?>" >
                         Criar conta
                     </a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="<?php echo $this->url('recuperasenha') ?>">
                         Esqueci a senha
                     </a></div>

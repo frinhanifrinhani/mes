@@ -22,18 +22,21 @@ class ParticipanteProjeto implements InputFilterAwareInterface {
 
     public $codParticipante;
     public $codProjeto;
+    public $nomeProjeto;
 //    protected $inputFilter;
     protected $dbAdapter;
 
     function exchangeArray($data) {
         $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
+        $this->nomeProjeto = (isset($data['nome_projeto'])) ? $data['nome_projeto'] : null;
     }
 
     public function getArrayCopy() {
         return array(
             'cod_participante' => $this->codParticipante,
             'cod_projeto' => $this->codProjeto,
+            'nome_projeto' => $this->nomeProjeto,
         );
     }
 
@@ -44,11 +47,11 @@ class ParticipanteProjeto implements InputFilterAwareInterface {
         $this->dbAdapter = $dbAdapter;
     }
 
-//    public function setInputFilter(InputFilterInterface $inputFilter) {
-//        throw new \Exception("Not used");
-//    }
+    public function setInputFilter(InputFilterInterface $inputFilter) {
+        throw new \Exception("Not used");
+    }
 //
-//    public function getInputFilter() {
+    public function getInputFilter() {
 //        if (!$this->inputFilter) {
 //            $inputFilter = new InputFilter();
 //            $factory = new InputFactory();
@@ -123,8 +126,8 @@ class ParticipanteProjeto implements InputFilterAwareInterface {
 //            $this->inputFilter = $inputFilter;
 //        }
 //
-//        return $this->inputFilter;
-//    }
+        return $this->inputFilter;
+    }
 
     public function toArray() {
         return get_object_vars($this);

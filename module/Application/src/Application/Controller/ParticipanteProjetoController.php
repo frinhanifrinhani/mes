@@ -20,21 +20,37 @@ use Zend\Authentication\AuthenticationService;
 
 class ParticipanteProjetoController extends AbstractActionController {
 
-//    protected $participanteTable;
-//
+    protected $participanteTable;
+    protected $participanteProjetoTable;
+    protected $projetoTable;
+    
+//    public function escolherParticipanteAction(){
+//        $participante = $this->getParticipanteTable()->fetchAll();
+//        return new ViewModel(array(
+//            'partial_loop_participantes' => $participante,
+//        ));
+//    }
+    public function listarAction(){
+        
+        $participante = $this->getParticipanteTable()->fetchAll();
+        $projeto = $this->getParticipanteProjetoTable()->fetchAllProjeto(1);
+        return new ViewModel(array(
+            'partial_loop_participantes' => $participante,
+            'partial_loop_participante_projetos' => $projeto,
+        ));
+    }
+
 //    //metodo que retorna pagina incial da funcionalidade Participante
-    public function listarProjetoAction() {
+    public function addProjetoAction() {
 
 //        //metodo que verifica autenticação e perfil
-//        $this->ACLPermitir()->permitir();
-//        $participantes = $this->getParticipanteTable()->fetchAll();
+        $this->ACLPermitir()->permitir();
+        $projeto = $this->getProjetoTable()->fetchAll();
 //        //retorna dados pra a view
-//        return new ViewModel(array(
-//            'partial_loop_listar' => $participantes,
-//        ));
         return new ViewModel(array(
-            
+            'partial_loop_projetos' => $projeto,
         ));
+       
     }
 //
 //    public function criarContaProductOwnerAction() {
@@ -268,18 +284,34 @@ class ParticipanteProjetoController extends AbstractActionController {
 //        ));
 //    }
 //
-//    //recupera e retorna a model PartticipanteTable
-//    public function getParticipanteTable() {
-//        if (!$this->participanteTable) {
-//            $sm = $this->getServiceLocator();
-//            $this->participanteTable = $sm->get('Application\Model\ParticipanteTable');
-//        }
-//        return $this->participanteTable;
-//    }
+    //recupera e retorna a model ParticipanteProjetoTable
+    public function getParticipanteProjetoTable() {
+        if (!$this->participanteProjetoTable) {
+            $sm = $this->getServiceLocator();
+            $this->participanteProjetoTable = $sm->get('Application\Model\ParticipanteProjetoTable');
+        }
+        return $this->participanteProjetoTable;
+    }
+    //recupera e retorna a model ParticipanteTable
+    public function getParticipanteTable() {
+        if (!$this->participanteTable) {
+            $sm = $this->getServiceLocator();
+            $this->participanteTable = $sm->get('Application\Model\ParticipanteTable');
+        }
+        return $this->participanteTable;
+    }
+    //recupera e retorna a model projetoTable
+    public function getProjetoTable() {
+        if (!$this->projetoTable) {
+            $sm = $this->getServiceLocator();
+            $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
+        }
+        return $this->projetoTable;
+    }
 //
-//    //recupera e retorna o Service Manager
-//    private function getSm() {
-//        return $this->getEvent()->getApplication()->getServiceManager();
-//    }
+    //recupera e retorna o Service Manager
+    private function getSm() {
+        return $this->getEvent()->getApplication()->getServiceManager();
+    }
 
 }
