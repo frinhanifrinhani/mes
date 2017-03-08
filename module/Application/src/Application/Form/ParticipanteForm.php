@@ -22,6 +22,7 @@ class ParticipanteForm extends Form {
 
         $this->setAttribute('method', 'post');
         $this->setAttribute('id', 'form_participante');
+//        $this->setAttribute('onsubmit', 'cpf(this.value);');
 
         $this->add(array(
             'name' => 'cod_participante',
@@ -57,7 +58,7 @@ class ParticipanteForm extends Form {
                 'id' => 'cpf_participante',
                 'class' => 'form-control',
                 'placeholder' => 'CPF',
-                'onchange' => 'validarCPF(cpfInp);'
+                'onblur' => 'cpf(this.value);'
             ),
             'options' => array(
                 'label' => 'CPF *',

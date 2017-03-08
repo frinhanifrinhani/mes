@@ -41,9 +41,13 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 
     <div class="form-group">
         <?= $this->formRow($formParticipante->get('nome_participante')); ?>
+
     </div>
     <div class="form-group">
         <?= $this->formRow($formParticipante->get('cpf_participante')); ?>
+        <div id="cpf_invalido"></div>
+
+        <!--<label id="cpf_participante_error" class="error" for="cpf_participante"><label id="cpf_participante_error" class="error" for="cpf_participante" >CPF inválido!</label></label>-->
     </div>
     <div class="form-group">
         <?= $this->formRow($formParticipante->get('telefone_participante')); ?>
@@ -64,29 +68,53 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <?php echo $this->form()->closeTag(); ?>     
 </div>
 <script>
-//    function validarCPF(cpfInp) {
-//	var cpf = cpfInp.replace(/[\.-]/g, "");
-//	alert(cpf);
-//    var Soma;
-//    var Resto;
-//    Soma = 0;
-//	if (cpf == "00000000000") return false;
-//    
-//	for (i=1; i<=9; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
-//	Resto = (Soma * 10) % 11;
-//	
-//    if ((Resto == 10) || (Resto == 11))  Resto = 0;
-//    if (Resto != parseInt(cpf.substring(9, 10)) ) return false;
-//	
-//	Soma = 0;
-//    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
-//    Resto = (Soma * 10) % 11;
-//	
-//    if ((Resto == 10) || (Resto == 11))  Resto = 0;
-//    if (Resto != parseInt(cpf.substring(10, 11) ) ) return false;
-//    return true;
-//	
-//}
+
+
+    function validarCPF(cpf) {
+        //var cpf = cpfInp.replace(/[\.-]/g, "");
+        //alert(cpf);
+        var Soma;
+        var Resto;
+        Soma = 0;
+        if (cpf == "00000000000")
+            return false;
+
+        for (i = 1; i <= 9; i++)
+            Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11))
+            Resto = 0;
+        if (Resto != parseInt(cpf.substring(9, 10)))
+            return false;
+
+        Soma = 0;
+        for (i = 1; i <= 10; i++)
+            Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11))
+            Resto = 0;
+        if (Resto != parseInt(cpf.substring(10, 11)))
+            return false;
+        return true;
+
+    }
+
+    function cpf(cpfInp) {
+        var cpf = cpfInp.replace(/[\.-]/g, "");
+        var div = document.getElementById('cpf_invalido');
+        var input = document.getElementById('cpf_participante');
+        if (validarCPF(cpf) == false) {
+            div.innerHTML = "<label class='error'>CPF inválido!</label>";
+            input.setAttribute("class", "form-control error");
+            return false;
+        } else {
+            div.innerHTML = "";
+            input.setAttribute("class", "form-control valid");
+
+        }
+    }
 
     $(document).ready(function () {
         $('#cpf_participante').mask('999.999.999-99');
@@ -102,45 +130,45 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
         $('#form_participante').validate({
             // Define as regras
             rules: {
-                nome_participante: {
-                    required: true,
-                },
+//                nome_participante: {
+//                    required: true,
+//                },
                 cpf_participante: {
                     required: true,
                     minlength: 14,
                 },
-                telefone_participante: {
-                    minlength: 14,
-                },
-                email_participante: {
-                    required: true,
-                    email: true,
-                },
-                cod_tipo_participante: {
-                    required: true,
-                },
+//                telefone_participante: {
+//                    minlength: 14,
+//                },
+//                email_participante: {
+//                    required: true,
+//                    email: true,
+//                },
+//                cod_tipo_participante: {
+//                    required: true,
+//                },
             },
             // Define as mensagens de erro para cada regra
             messages: {
-                nome_participante: {
-                    required: "Campo Nome não pode ser vazio!",
-                },
+//                nome_participante: {
+//                    required: "Campo Nome não pode ser vazio!",
+//                },
                 cpf_participante: {
                     required: "Campo CPF não pode ser vazio!",
                     minlength: "O Campo CPF deve ter 11 números!"
 
                 },
-                telefone_participante: {
-                    minlength: "O Campo Telefone deve ter 10 ou 11 dígitos!"
-
-                },
-                email_participante: {
-                    required: "Campo E-mail não pode ser vazio!",
-                    email: "Formato email dever ter (@ e .com)!",
-                },
-                cod_tipo_participante: {
-                    required: "Campo Tipo de Participante não pode ser vazio!",
-                },
+//                telefone_participante: {
+//                    minlength: "O Campo Telefone deve ter 10 ou 11 dígitos!"
+//
+//                },
+//                email_participante: {
+//                    required: "Campo E-mail não pode ser vazio!",
+//                    email: "Formato email dever ter (@ e .com)!",
+//                },
+//                cod_tipo_participante: {
+//                    required: "Campo Tipo de Participante não pode ser vazio!",
+//                },
             }
         });
     });

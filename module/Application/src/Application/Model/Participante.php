@@ -135,11 +135,38 @@ class Participante implements InputFilterAwareInterface {
                                     'field' => 'email_participante',
                                     'adapter' => $this->dbAdapter,
                                     'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo E-mail não pode ser vazio!',
                                         \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'Email já cadastrado',
+                                    ),
+                                ),
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo e-mail não pode ser vazio!'
                                     ),
                                 ),
                             ),
                         ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'cod_tipo_participante',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Tipo participante não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
+                            
+                        )
             )));
 
             $this->inputFilter = $inputFilter;

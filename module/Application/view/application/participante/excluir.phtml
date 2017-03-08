@@ -106,9 +106,8 @@ if (isset($this->retorno) && $this->retorno == true) {
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
     <div class="form-group">
-        <!--<a href="<?$this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Editar</a>-->
-        <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-primary" >Excluir</a>
-        <a href="<?= $this->url('participante') ?>" class="btn btn-warning" >Cancelar</a>
+        <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+        <a href="<?= $this->url('participante') ?>" class="btn btn-warning" > <span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
     <?= $this->form()->closeTag() ?>
 </div>
