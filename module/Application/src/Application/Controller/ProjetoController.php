@@ -75,11 +75,7 @@ class ProjetoController extends AbstractActionController {
 
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-//        if (is_null($codProjeto)) {
-//            return $this->redirect()->toRoute('projeto-cadastrar', array(
-//                        'action' => 'cadastrar'
-//            ));
-//        }
+        
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         if ($projeto == true) {
             $formProjeto = new ProjetoForm();
@@ -119,11 +115,7 @@ class ProjetoController extends AbstractActionController {
     public function excluirAction() {
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-//        if (is_null($codProjeto)) {
-//            return $this->redirect()->toRoute('projeto-cadastrar', array(
-//                        'action' => 'cadastrar'
-//            ));
-//        }
+
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         if ($projeto == true) {
             $formProjeto = new ProjetoForm();
@@ -142,6 +134,29 @@ class ProjetoController extends AbstractActionController {
             'retorno' => $retorno,
             'cod_projeto' => $codProjeto,
             'form_projeto' => $formProjeto,
+        ));
+    }
+    //metodo que retorna pagina gerenciar projeto funcionalidade Projeto
+    public function gerenciarAction() {
+        $retorno = false;
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+        $projetoDados = $projeto->getArrayCopy();
+//        if ($projeto == true) {
+//            $formProjeto = new ProjetoForm();
+//            $formProjeto->setData($projeto->getArrayCopy());
+//        } else {
+//            return $this->redirect()->toRoute('projeto');
+//        }
+
+        $request = $this->getRequest();
+
+
+        return new ViewModel(array(
+            'retorno' => $retorno,
+            'cod_projeto' => $codProjeto,
+            'projetos' => $projetoDados,
         ));
     }
 

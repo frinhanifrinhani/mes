@@ -216,6 +216,17 @@ return array(
                     ),
                 ),
             ),
+            //Rota gerenciar projeto
+            'projeto-gerenciar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto-gerenciar[/:cod_projeto]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Projeto',
+                        'action' => 'gerenciar',
+                    ),
+                ),
+            ),
             /*             * ************* ROTAS PARA SPRINTBACKLOG ************** */
             //rota para tela sprintbacklog
             'sprintbacklog' => array(

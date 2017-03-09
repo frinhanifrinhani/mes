@@ -45,11 +45,23 @@ class ProjetoTable {
     }
 
     public function getProjeto($codProjeto) {
-        $codProjeto = (int) $codProjeto;
-        $rowset = $this->tableGateway->select(array('cod_projeto' => $codProjeto));
-        $row = $rowset->current();
-
-        return $row;
+//        $codProjeto = (int) $codProjeto;
+//        $rowset = $this->tableGateway->select(array('cod_projeto' => $codProjeto));
+//        $row = $rowset->current();
+//
+//        return $row;
+        
+         $select = new Select();
+        $select->from(new TableIdentifier('projeto'))
+                ->columns(array('cod_projeto', 'nome_projeto', 'descricao_projeto', 'data_inicio_projeto', 'data_fim_projeto', 'cod_status', 'data_cadastro_projeto'))
+                ->join('status', 'status.cod_status = projeto.cod_status', 'descricao_status')
+                ->join('participante', 'participante.cod_participante = projeto.cod_participante', 'nome_participante')
+//                ->where('projeto.cod_participante = ' . $productOwner)
+                ->order(array('cod_projeto' => 'desc'));
+        $rowset = $this->tableGateway->selectWith($select);
+//       echo $select->getSqlString();  
+        $linha = $rowset->current();
+        return $linha;
     }
 
     public function salvar(Projeto $projeto) {
@@ -57,6 +69,7 @@ class ProjetoTable {
             'cod_projeto' => $projeto->codProjeto,
             'nome_projeto' => $projeto->nomeProjeto,
             'descricao_projeto' => $projeto->descricaoProjeto,
+            'descricao_status' => $projeto->descricaoStatus,
             'data_inicio_projeto' => implode('-', array_reverse(explode('/', $projeto->dataInicioProjeto))),
             'data_fim_projeto' => implode('-', array_reverse(explode('/', $projeto->dataFimProjeto))),
             'cod_participante' => $projeto->codParticipante,

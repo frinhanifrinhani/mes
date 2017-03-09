@@ -1,8 +1,12 @@
 <style type="text/css">
     li{color: #FF0000;} 
 </style>
-<div class="box-header with-border">
-    <h3 class="box-title">Cadastrar participante</h3>
+<div class="box-header with-border">    
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/participante">Participantes</a></li>
+        <li class="breadcrumb-item active">Cadastrar participante</li>
+    </ol>
 </div>
 <?php
 if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
@@ -58,9 +62,6 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <div class="form-group">
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
-
-
-
     <div class="form-group">
         <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
         <a href="<?= $this->url('participante') ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>

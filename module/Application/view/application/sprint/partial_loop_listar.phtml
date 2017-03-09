@@ -1,30 +1,12 @@
 <tr>
-    <td><input type="radio" name="marca_sprint" id="marca_sprint" value="<?= $this->codSprint ?>" onchange="marcarSprint(this);"></td>
     <td><?= $this->codSprint ?></td>
     <td><?= $this->nomeSprint ?></td>
     <td><?= $this->descricaoSprint ?></td>
     <td><?= $this->tempoSprint ?> Dias</td>
     <td><?= $this->descricaoStatus ?></td>
-    <!-- para botões na mesma linha -->
-        <!--<a href="<? echo $this->url('sprint-editar',array('action' => 'editar', 'cod_sprint' => $this->codSprint))?>" class="btn btn-info" >Editar</a>-->
-        <!--<a href="<? echo $this->url('sprint-excluir',array('action' => 'excluir', 'cod_sprint' => $this->codSprint))?>" class="btn btn-danger">Excluir</a>-->
-
+    <td>
+        <!--<a href="<?$this->url('sprint-editar',array('action' => 'editar', 'cod_sprint' => $this->codSprint))?>" class="btn btn-primary" ><span class="glyphicon glyphicon-edit"></span> Editar</a>-->
+        <a href="/projeto/<?=$this->codProjeto?>/sprint-editar/<?=$this->codSprint?>" class="btn btn-primary" ><span class="glyphicon glyphicon-edit"></span> Editar</a>
+        <a href="/projeto/<?=$this->codProjeto?>/sprint-excluir/<?=$this->codSprint?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+    </td>
 </tr>
-
-<script>
-
-    function marcarSprint(cod_sprint) {
-        var codSprint = cod_sprint.value;
-
-        var editar = document.getElementById('editar-btn');
-        var excluir = document.getElementById('excluir-btn');
-
-        editar.removeAttribute('disabled');
-        excluir.removeAttribute('disabled');
-
-        editar.setAttribute('href', 'sprint-editar/' + codSprint);
-        excluir.setAttribute('href', 'sprint-excluir/' + codSprint);
-
-    }
-
-</script>

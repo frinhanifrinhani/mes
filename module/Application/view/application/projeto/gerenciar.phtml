@@ -1,0 +1,35 @@
+<div class="box-header with-border">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/projeto">Projetos</a></li>
+        <li class="breadcrumb-item active">Gerenciar projeto</li>
+    </ol>
+</div>
+<div class="content">
+    <div class="form-group">
+        <!--<a href="<? $this->url('projeto',array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Sprint</a>-->
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-primary" >Sprint</a>
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-primary" >Product Backlog</a>
+        <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-primary" >Relatório</a>
+    </div>
+
+</div>
+<div class="alert alert-success" >
+    <p>
+        <span><strong>Projeto:</strong> <?= $this->projetos['nome_projeto']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span><strong>Dono do projeto: </strong><?= $this->projetos['nome_participante']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+
+    <p>
+        <span><strong>Descrição do projeto: </strong><?= $this->projetos['descricao_projeto']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <p style="display: inline">
+        <span><strong>Data incio: </strong><?= $this->projetos['data_inicio_projeto']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span><strong>Data fim: </strong><?= $this->projetos['data_fim_projeto']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span><strong>Status: </strong><?= $this->projetos['descricao_status']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+
+</div>
+
+
+<hr />

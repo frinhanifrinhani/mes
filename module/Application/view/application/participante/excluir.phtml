@@ -1,5 +1,9 @@
 <div class="box-header with-border">
-    <h3 class="box-title">Excluir participante</h3>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/participante">Participantes</a></li>
+        <li class="breadcrumb-item active">Excluir participante</li>
+    </ol>
 </div>
 <?php
 if (!isset($_POST['cod_participante'])) {
@@ -22,7 +26,6 @@ if (!isset($_POST['cod_participante'])) {
                 <div class="modal-footer">
                     <button type="button" name="excluir" id="excluir" class="btn btn-primary" onclick="excluir();">Sim</button>
                     <a href="/participante" class="btn btn-warning">Não</a>
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Ver</button>
                 </div>
             </div>
         </div>

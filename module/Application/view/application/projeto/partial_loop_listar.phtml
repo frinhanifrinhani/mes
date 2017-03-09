@@ -3,7 +3,6 @@ $dataInicioProjeto = date_create($this->dataInicioProjeto);
 $dataFimProjeto = date_create($this->dataFimProjeto);
 ?>
 <tr>
-    <td><input type="radio" name="marca_projeto" id="marca_projeto" class="radio primary" value="<?= $this->codProjeto ?>" onchange="marcarProjeto(this);"> </td>
     <td><?= $this->codProjeto ?></td>
     <td><?= $this->escapeHtml($this->nomeProjeto) ?></td>
     <td><?= $this->descricaoProjeto ?></td>
@@ -12,8 +11,11 @@ $dataFimProjeto = date_create($this->dataFimProjeto);
     <td><?= $this->nomeParticipante ?></td>    
     <td><?= $this->descricaoStatus ?></td>    
     <!-- para botões na mesma linha -->
-    <!--<a href="<? //  echo $this->url('projeto-editar',array('action' => 'editar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-info" id="<?$this->codProjeto?>"  >Editar</a>-->
-    <!--<a href="<? // echo $this->url('projeto-excluir',array('action' => 'excluir', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-danger" id="<?$this->codProjeto?>" >Excluir</a>-->
+    <td>
+    <a href="<?=$this->url('projeto-gerenciar',array('action' => 'gerenciar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-warning" id="<?=$this->codProjeto?>" ><span class="glyphicon glyphicon-cog"></span>&nbsp;Gerenciar</a>
+    <a href="<?=$this->url('projeto-editar',array('action' => 'editar', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-primary" id="<?=$this->codProjeto?>"><span class="glyphicon glyphicon-edit"></span>&nbsp; Editar</a>
+    <a href="<?=$this->url('projeto-excluir',array('action' => 'excluir', 'cod_projeto' => $this->codProjeto))?>" class="btn btn-danger" id="<?=$this->codProjeto?>" ><span class="glyphicon glyphicon-trash"></span>&nbsp;Excluir</a>
+    </td>
 </tr>
 
 <script>
