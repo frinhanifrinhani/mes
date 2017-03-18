@@ -48,11 +48,11 @@ class ParticipanteTable {
 //       echo $select->getSqlString();  
         return $linha;
     }
-    public function getLastId(){
-      $ultimoParticipante = $this->tableGateway->lastInsertValue;
-      return $ultimoParticipante;
- 
-    }
+      //metodo que retorna ultimo participante cadastrado
+//    public function getLastId(){
+//      $ultimoParticipante = $this->tableGateway->lastInsertValue;
+//      return $ultimoParticipante;
+//    }
 
     public function getParticipante($codParticipante)
      {

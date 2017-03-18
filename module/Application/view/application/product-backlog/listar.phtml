@@ -1,7 +1,10 @@
 <div class="box-header with-border">
-    <h3 class="box-title">Product Backlog</h3>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/projeto">Projetos</a></li>
+        <li class="breadcrumb-item active">Product Backlog</li>
+    </ol>
 </div>
-
 <hr />
 <a href="<?php echo $this->url('productbacklog-cadastrar', array('action' => 'cadastrar', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-success">Novo Item Product Backlog</a>
 

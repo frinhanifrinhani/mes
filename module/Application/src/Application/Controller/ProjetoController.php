@@ -44,15 +44,15 @@ class ProjetoController extends AbstractActionController {
 
         $request = $this->getRequest();
 
+//        var_dump($request->getPost());
         if ($request->isPost()) {
 
             $projeto = new Projeto();
 
             $formProjeto->setInputFilter($projeto->getInputFilter());
             $formProjeto->setData($request->getPost());
-
             if ($formProjeto->isValid()) {
-
+                
                 $projeto->exchangeArray($formProjeto->getData());
                 $retorno = $this->getProjetoTable()->salvar($projeto);
 
@@ -141,7 +141,7 @@ class ProjetoController extends AbstractActionController {
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
-        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+        $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
         $projetoDados = $projeto->getArrayCopy();
 //        if ($projeto == true) {
 //            $formProjeto = new ProjetoForm();

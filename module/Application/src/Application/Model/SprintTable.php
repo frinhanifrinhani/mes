@@ -36,11 +36,11 @@ class SprintTable {
 //       echo $select->getSqlString();  
         return $linha;
     }
-
-    public function getLastId() {
-        $ultimoSprint = $this->tableGateway->lastInsertValue;
-        return $ultimoSprint;
-    }
+    //metodo que retorna ultma sprint cadastrada
+//    public function getLastId() {
+//        $ultimoSprint = $this->tableGateway->lastInsertValue;
+//        return $ultimoSprint;
+//    }
 
     public function getSprint($codSprint) {
         $codSprint = (int) $codSprint;
@@ -69,7 +69,7 @@ class SprintTable {
                 return $this->tableGateway->update($data, array('cod_sprint' => $codSprint));
             }
         } catch (\Exception $e) {
-            $e->getPrevious()->getMessage();
+            return $e->getPrevious()->getCode();
         }
     }
 

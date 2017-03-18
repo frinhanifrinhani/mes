@@ -135,13 +135,12 @@ return array(
                     ),
                 ),
             ),
-            
             /*             * ************* ROTAS PARA PARTICIPANTE POR PROJETO ************** */
             //Rota participante
             'participanteprojeto' => array(
-                'type' => 'Literal',//Segment
+                'type' => 'Literal', //Segment
                 'options' => array(
-                    'route' => '/participanteprojeto',//[/:cod_participante]
+                    'route' => '/participanteprojeto', //[/:cod_participante]
                     'defaults' => array(
                         'controller' => 'Application\Controller\ParticipanteProjeto',
                         'action' => 'listar',
@@ -149,9 +148,9 @@ return array(
                 ),
             ),
             'participanteprojeto-add' => array(
-                'type' => 'Segment',//Segment
+                'type' => 'Segment', //Segment
                 'options' => array(
-                    'route' => '/participanteprojeto-add[/:cod_participante]',//[/:cod_participante]
+                    'route' => '/participanteprojeto-add[/:cod_participante]', //[/:cod_participante]
                     'defaults' => array(
                         'controller' => 'Application\Controller\ParticipanteProjeto',
                         'action' => 'addProjeto',
@@ -239,7 +238,6 @@ return array(
                     ),
                 ),
             ),
-            
             //Rota cadastrar product backlog
             'productbacklog-cadastrar' => array(
                 'type' => 'Segment',
@@ -251,7 +249,6 @@ return array(
                     ),
                 ),
             ),
-            
             /*             * ************* ROTAS PARA SPRINT ************** */
 
             //rota para tela sprint
@@ -389,7 +386,8 @@ return array(
         'invokables' => array(
             'ACLPermitir' => 'Application\Controller\ActionHelper\MESACL',
             'Email' => 'Application\Controller\ActionHelper\MESEmail',
-//           'LimpaMascaraCpf' => 'Application\Controller\ActionHelper\MESCpf',    
+            'ValidarCpf' => 'Application\Controller\ActionHelper\MESCpf',
+            'Redirecionamento' => 'Application\Controller\ActionHelper\MESRedirecionamento',
         )
     ),
     'view_manager' => array(

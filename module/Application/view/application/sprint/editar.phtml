@@ -8,9 +8,28 @@
     </ol>
 </div>
 <?php
-//var_dump($this->retorno);
-if (isset($_POST['botao_salvar']) && ($this->retorno == 1)) {
+if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     ?>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="close" aria-label="Close" ><!-- data-dismiss="modal" -->
+                        <!--<a href="/participante"> <span class="glyphicon glyphicon-remove "></span></a>-->
+                    </div>
+                    <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
+                </div>
+                <div class="modal-body">
+                    <spant> Sprint alterada com sucesso!</spant>
+                </div>
+                <div class="modal-footer">
+                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-primary">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -22,7 +41,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == 1)) {
                 </div>
                 <div class="modal-body">
 
-                    <b>Sprint alterada com sucesso!</b><br /><br />
+                    <b></b><br /><br />
                     Você deseja fazer mais alguma alteração?
                 </div>
                 <div class="modal-footer">

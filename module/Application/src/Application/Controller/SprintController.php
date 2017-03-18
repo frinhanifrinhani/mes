@@ -26,6 +26,8 @@ class SprintController extends AbstractActionController {
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
+        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
+
         $sprints = $this->getSprintTable()->fetchAll($codProjeto);
 
         return new ViewModel(array(
@@ -36,11 +38,13 @@ class SprintController extends AbstractActionController {
 
     public function cadastrarAction() {
         $this->ACLPermitir()->permitir();
-        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $retorno = false;
-        $ultimoSprint = null;
         $formSprint = new SprintForm();
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
+//        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+//        if ($projeto == true) {
+        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
         $request = $this->getRequest();
         if ($request->isPost()) {
 
@@ -56,17 +60,17 @@ class SprintController extends AbstractActionController {
 
                 $sprint->exchangeArray($formSprint->getData());
                 $retorno = $this->getSprintTable()->salvar($sprint);
-
-                $ultimoSprint = $this->getSprintTable()->getLastId();
             }
         }
+//        } else {
+//            return $this->redirect()->toRoute('projeto');
+//        }
 
         $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         return new ViewModel(array(
             'partial_loop_projetos' => $projetos,
             'cod_projeto' => $codProjeto,
             'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
-            'ultimoSprint' => $ultimoSprint,
             'retorno' => $retorno,
             'form_sprint' => $formSprint,
         ));
@@ -79,12 +83,18 @@ class SprintController extends AbstractActionController {
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
 
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $sprint = $this->getSprintTable()->getSprint($codSprint);
+        $sprint = $this->getSprintTable()->getSprint($codSprint);
+
+
+        $this->Redirecionamento()->redirecionarParaProjeto($projeto);
+
         if ($sprint == true) {
             $formSprint = new SprintForm();
             $formSprint->setData($sprint->getArrayCopy());
         } else {
-            return $this->redirect()->toRoute('sprint');
+            return $this->redirect()->toRoute('sprint', array('cod_projeto' => $codProjeto));
         }
 
         $request = $this->getRequest();
@@ -99,8 +109,6 @@ class SprintController extends AbstractActionController {
 
                 $sprint->exchangeArray($formSprint->getData());
                 $retorno = $this->getSprintTable()->salvar($sprint);
-
-                $ultimoSprint = $this->getSprintTable()->getLastId();
             }
         }
 
@@ -114,26 +122,28 @@ class SprintController extends AbstractActionController {
 
     //metodo que retorna pagina de exclusão dos dados da funcionalidade Sprint
     public function excluirAction() {
-        //metodo que verifica autenticação e perfil
+        //ActionHelper que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $retorno = false;
+        
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
 
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $sprint = $this->getSprintTable()->getSprint($codSprint);
+
+        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
 
         if ($sprint == true) {
             $formSprint = new SprintForm();
             $formSprint->setData($sprint->getArrayCopy());
         } else {
-            return $this->redirect()->toRoute('sprint');
+            return $this->redirect()->toRoute('sprint', array('cod_projeto' => $codProjeto));
         }
 
         $request = $this->getRequest();
-
         if ($request->isPost()) {
             $retorno = $this->getSprintTable()->excluir($codSprint);
-            //return $this->redirect()->toRoute('sprint');
         }
 
         return new ViewModel(array(
@@ -166,10 +176,5 @@ class SprintController extends AbstractActionController {
         }
         return $this->projetoTable;
     }
-
-    //recupera e retorna o Service Manager
-//    private function getSmProjeto() {
-//        return $this->getEvent()->getApplication()->getServiceManager();
-//    }
 
 }

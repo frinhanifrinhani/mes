@@ -43,6 +43,7 @@ class ParticipanteController extends AbstractActionController {
         $this->layout('layout/layout_cadastro');
         $retorno = false;
         $ultimoParticipante = null;
+        $validadeCpf = null;
         $formParticipante = new ParticipanteForm();
 
         $request = $this->getRequest();
@@ -50,6 +51,8 @@ class ParticipanteController extends AbstractActionController {
         if ($request->isPost()) {
 
             $participante = new Participante();
+            $cpfParticipante = $this->params()->fromPost('cpf_participante');
+            $cpfParticipanteValiado = $this->ValidarCpf()->isValid($cpfParticipante);
 
             $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $participante->setDbAdapter($dbAdapter);
@@ -57,7 +60,7 @@ class ParticipanteController extends AbstractActionController {
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
 
-            if ($formParticipante->isValid()) {
+            if ($formParticipante->isValid() && $cpfParticipanteValiado == true) {
 
                 $participante->exchangeArray($formParticipante->getData());
                 $retorno = $this->getParticipanteTable()->salvar($participante);
@@ -70,9 +73,13 @@ class ParticipanteController extends AbstractActionController {
                     $usuario->autenticar($this->getServiceLocator());
                 }
             }
+            if ($cpfParticipanteValiado == false) {
+                $validadeCpf = 'CPF inválido';
+            }
         }
 
         return new ViewModel(array(
+            'validadeCpf' => $validadeCpf,
             'retorno' => $retorno,
             'form_participante' => $formParticipante,
         ));
@@ -80,16 +87,19 @@ class ParticipanteController extends AbstractActionController {
 
     //metodo que retorna pagina de cadastro da funcionalidade Participante
     public function cadastrarAction() {
-        //metodo que verifica autenticação e perfil
+
         $this->ACLPermitir()->permitir();
         $retorno = false;
-        $ultimoParticipante = null;
+        $validadeCpf = null;
+
         $formParticipante = new ParticipanteForm();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
 
             $participante = new Participante();
+            $cpfParticipante = $this->params()->fromPost('cpf_participante');
+            $cpfParticipanteValiado = $this->ValidarCpf()->isValid($cpfParticipante);
 
             $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $participante->setDbAdapter($dbAdapter);
@@ -97,21 +107,25 @@ class ParticipanteController extends AbstractActionController {
             $formParticipante->setInputFilter($participante->getInputFilter());
             $formParticipante->setData($request->getPost());
 
-            if ($formParticipante->isValid()) {
+            if ($formParticipante->isValid() && $cpfParticipanteValiado == true) {
 
                 $participante->exchangeArray($formParticipante->getData());
                 $retorno = $this->getParticipanteTable()->salvar($participante);
 
-                $ultimoParticipante = $this->getParticipanteTable()->getLastId();
-// DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
-                if ($retorno == true) {
-                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
-                }
+                $validadeCpf == true;
+                // DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
+                //                if ($retorno == true) {
+                //                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
+                //                }
+            }
+
+            if ($cpfParticipanteValiado == false) {
+                $validadeCpf = 'CPF inválido';
             }
         }
 
         return new ViewModel(array(
-            'ultimoParticipante' => $ultimoParticipante,
+            'validadeCpf' => $validadeCpf,
             'retorno' => $retorno,
             'form_participante' => $formParticipante,
         ));
@@ -149,8 +163,6 @@ class ParticipanteController extends AbstractActionController {
                 } else {
                     $retorno = true;
                 }
-
-                $ultimoParticipante = $this->getParticipanteTable()->getLastId();
             }
         }
 

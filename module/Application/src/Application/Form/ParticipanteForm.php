@@ -58,7 +58,7 @@ class ParticipanteForm extends Form {
                 'id' => 'cpf_participante',
                 'class' => 'form-control',
                 'placeholder' => 'CPF',
-                'onblur' => 'cpf(this.value);'
+                'onclick' => 'cpf();'
             ),
             'options' => array(
                 'label' => 'CPF *',

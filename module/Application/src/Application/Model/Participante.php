@@ -121,9 +121,17 @@ class Participante implements InputFilterAwareInterface {
                                     ),
                                 ),
                             ),
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo CPF não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
                         ),
             )));
-//            verifica duplicidade do email
+            //verifica duplicidade do email
             $inputFilter->add($factory->createInput(array(
                         'name' => 'email_participante',
                         'required' => true,
@@ -135,10 +143,12 @@ class Participante implements InputFilterAwareInterface {
                                     'field' => 'email_participante',
                                     'adapter' => $this->dbAdapter,
                                     'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo E-mail não pode ser vazio!',
                                         \Zend\Validator\Db\NoRecordExists::ERROR_RECORD_FOUND => 'Email já cadastrado',
                                     ),
+                                    
                                 ),
+                            ),
+                            array(
                                 'name' => 'NotEmpty',
                                 'options' => array(
                                     'messages' => array(
@@ -148,6 +158,7 @@ class Participante implements InputFilterAwareInterface {
                             ),
                         ),
             )));
+//            
             
             $inputFilter->add($factory->createInput(array(
                         'name' => 'cod_tipo_participante',
