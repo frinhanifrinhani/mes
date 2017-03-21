@@ -264,7 +264,7 @@ return array(
             'productbacklog-excluir' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/projeto[/:cod_projeto]/productbacklog-editar[/:cod_productbacklog]',
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-excluir[/:cod_productbacklog]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklog',
                         'action' => 'excluir',

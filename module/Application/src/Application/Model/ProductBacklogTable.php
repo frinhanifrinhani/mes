@@ -74,8 +74,7 @@ class ProductBacklogTable {
     }
 
     public function excluir($codProductBacklog) {
-//        return $this->tableGateway->delete(array('cod_product_backlog' => $codProductBacklog));
-        return true;
+        return $this->tableGateway->delete(array('cod_product_backlog' => $codProductBacklog));
     }
 //
 //    //metodo que retorna sql da tableGateway
