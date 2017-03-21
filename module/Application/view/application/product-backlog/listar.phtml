@@ -1,13 +1,14 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="/projeto">Projetos</a></li>
+       <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('projeto')?>">Projetos</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar',array('cod_projeto'=>$this->cod_projeto))?>">Gerenciar projeto</a></li>
         <li class="breadcrumb-item active">Product Backlog</li>
     </ol>
 </div>
-<hr />
-<a href="<?php echo $this->url('productbacklog-cadastrar', array('action' => 'cadastrar', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-success">Novo Item Product Backlog</a>
 
+<hr />
+<a href="<?php echo $this->url('productbacklog-cadastrar', array('action' => 'cadastrar', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-success"><span class="glyphicon glyphicon-file"></span> Novo Item Product Backlog</a>
 <p></p>
 <table id="data_table" class="table data_tables table-striped table-hover table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>

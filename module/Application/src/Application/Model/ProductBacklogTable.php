@@ -14,7 +14,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
-use Application\Model\Sprint;
+use Application\Model\ProductBacklog;
 use Zend\Db\Sql\TableIdentifier;
 
 class ProductBacklogTable {
@@ -42,40 +42,41 @@ class ProductBacklogTable {
 //        return $ultimoSprint;
 //    }
 //
-//    public function getSprint($codSprint) {
-//        $codSprint = (int) $codSprint;
-//        $rowset = $this->tableGateway->select(array('cod_sprint' => $codSprint));
-//        $row = $rowset->current();
-//
-//        return $row;
-//    }
-//
-//    public function salvar(Sprint $sprint) {
-//        $data = array(
-//            'cod_sprint' => $sprint->codSprint,
-//            'nome_sprint' => $sprint->nomeSprint,
-//            'descricao_sprint' => $sprint->descricaoSprint,
-//            'tempo_sprint' => $sprint->tempoSprint,
-//            'cod_status' => $sprint->codStatusSprint,
-//            'cod_projeto' => $sprint->codProjeto,
-//        );
-//
-//        try {
-//            $codSprint = $sprint->codSprint;
-//            if (!$this->getSprint($codSprint)) {
-//                $data['cod_sprint'] = $codSprint;
-//                return $this->tableGateway->insert($data);
-//            } else {
-//                return $this->tableGateway->update($data, array('cod_sprint' => $codSprint));
-//            }
-//        } catch (\Exception $e) {
-//            $e->getPrevious()->getMessage();
-//        }
-//    }
-//
-//    public function excluir($codSprint) {
-//        return $this->tableGateway->delete(array('cod_sprint' => $codSprint));
-//    }
+    public function getProductBacklog($codProductBacklog) {
+        $codProductBacklog = (int) $codProductBacklog;
+        $rowset = $this->tableGateway->select(array('cod_product_backlog' => $codProductBacklog));
+        $row = $rowset->current();
+
+        return $row;
+    }
+
+    public function salvar(ProductBacklog $productBacklog) {
+        $data = array(
+            'cod_product_backlog' => $productBacklog->codProductBacklog,
+            'nome_product_backlog' => $productBacklog->nomeProductBacklog,
+            'descricao_product_backlog' => $productBacklog->descricaoProductBacklog,
+            'prioridade_product_backlog' => $productBacklog->prioridadeProductBacklog,
+            'cod_projeto' => $productBacklog->codProjeto,
+            'cod_status' => $productBacklog->codStatus,
+        );
+
+        try {
+            $codProductBacklog = $productBacklog->codProductBacklog;
+            if (!$this->getProductBacklog($codProductBacklog)) {
+                $data['cod_product_backlog'] = $codProductBacklog;
+                return $this->tableGateway->insert($data);
+            } else {
+                return $this->tableGateway->update($data, array('cod_product_backlog' => $codProductBacklog));
+            }
+        } catch (\Exception $e) {
+            $e->getPrevious()->getMessage();
+        }
+    }
+
+    public function excluir($codProductBacklog) {
+//        return $this->tableGateway->delete(array('cod_product_backlog' => $codProductBacklog));
+        return true;
+    }
 //
 //    //metodo que retorna sql da tableGateway
 //    public function getSql() {

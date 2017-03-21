@@ -66,14 +66,28 @@ class ProductBacklogForm extends Form {
 
         $this->add(array(
             'name' => 'prioridade_product_backlog',
-            'type' => 'Text',
+            'type' => 'Select',
             'attributes' => array(
                 'id' => 'prioridade_product_backlog',
                 'class' => 'form-control',
                 'placeholder' => 'Prioridade',
             ),
             'options' => array(
-                'label' => 'Prioridade',
+                'label' => 'Prioridade *',
+                'value_options' => array(
+                    '0' => 'Selecione...',
+                    '1' => 'Alta',
+                    '2' => 'Média',
+                    '3' => 'Baixa',
+                ),
+            ),
+        ));
+        $this->add(array(
+            'name' => 'cod_projeto',
+            'type' => 'text',
+            'attributes' => array(
+                'id' => 'cod_projeto',
+                'class' => 'form-control',
             ),
         ));
 
@@ -110,7 +124,7 @@ class ProductBacklogForm extends Form {
             ),
         ));
     }
-    
+
     //Busca status
     private function getStatusTable() {
         if (!$this->statusTable) {

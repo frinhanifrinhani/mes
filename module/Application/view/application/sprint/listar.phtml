@@ -2,11 +2,10 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
         <li class="breadcrumb-item"><a href="/projeto">Projetos</a></li>
-        <li class="breadcrumb-item"><a href="/projeto-gerenciar/<?=$this->cod_projeto?>">Gerenciar projeto</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar',array('cod_projeto'=>$this->cod_projeto))?>">Gerenciar projeto</a></li>
         <li class="breadcrumb-item active">Sprint</li>
     </ol>
 </div>
-
 <hr />
 <a href="<?php echo $this->url('sprint-cadastrar', array('action' => 'cadastrar', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-success"><span class="glyphicon glyphicon-file"></span> Nova Sprint</a>
 <p></p>

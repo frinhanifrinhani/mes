@@ -249,6 +249,29 @@ return array(
                     ),
                 ),
             ),
+            //Rota editar productbacklog
+            'productbacklog-editar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-editar[/:cod_productbacklog]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklog',
+                        'action' => 'editar',
+                    ),
+                ),
+            ),
+            //Rota excluir productbacklog
+            'productbacklog-excluir' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-editar[/:cod_productbacklog]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklog',
+                        'action' => 'excluir',
+                    ),
+                ),
+            ),
+            
             /*             * ************* ROTAS PARA SPRINT ************** */
 
             //rota para tela sprint

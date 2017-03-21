@@ -4,7 +4,7 @@
         <li class="breadcrumb-item"><a href="<?=$this->url('projeto')?>">Projetos</a></li>
         <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar',array('cod_projeto'=>$this->cod_projeto))?>">Gerenciar projeto</a></li>
         <li class="breadcrumb-item"><a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>">Product Backlog</a></li>
-        <li class="breadcrumb-item active">Cadastrar Product Backlog</li>
+        <li class="breadcrumb-item active">Editar Product Backlog</li>
     </ol>
 </div>
 <?php
@@ -20,7 +20,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
                 </div>
                 <div class="modal-body">
-                    <span>Product Backlog cadastrado com sucesso!</span>
+                    <span>Product Backlog alterado com sucesso!</span>
                 </div>
                 <div class="modal-footer">
                     <a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary">Ok</a>
@@ -38,6 +38,9 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     $formProductBacklog->prepare();
     echo $this->form()->openTag($formProductBacklog);
     ?>
+    <div class="form-group">
+        <?= $this->formRow($formProductBacklog->get('cod_product_backlog')); ?>
+    </div>
     <div class="form-group">
         <?= $this->formRow($formProductBacklog->get('nome_product_backlog')); ?>
     </div>

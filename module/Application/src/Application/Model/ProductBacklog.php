@@ -71,7 +71,7 @@ class ProductBacklog implements InputFilterAwareInterface {
             $factory = new InputFactory();
 
             $inputFilter->add($factory->createInput(array(
-                        'name' => 'nome_sprint',
+                        'name' => 'nome_product_backlog',
                         'required' => true,
                         'filters' => array(
                             array('name' => 'StripTags'),
@@ -82,19 +82,8 @@ class ProductBacklog implements InputFilterAwareInterface {
                                 'name' => 'NotEmpty',
                                 'options' => array(
                                     'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo nome da sprintnão pode ser vazio!'
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo nome do item product backlog pode ser vazio!'
                                     ),
-                                ),
-                            ),
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'min' => 3,
-                                    'max' => 255,
-                                    'messages' => array(
-                                        \Zend\Validator\StringLength::TOO_SHORT => 'O campo nome deve ter no mínimo 3 caracteres!',
-                                        \Zend\Validator\StringLength::TOO_LONG => 'O campo nome deve ter no máximo 255 caracteres!',
-                                    )
                                 ),
                             ),
                         )

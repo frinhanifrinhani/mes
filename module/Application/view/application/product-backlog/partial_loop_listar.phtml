@@ -5,7 +5,7 @@
     <td><?=$this->prioridadeProductBacklog?></td>
     <td><?=$this->codStatus?></td>
     <td>
-        <a href="<?php echo $this->url('participante-editar',array('action' => 'editar', 'cod_participante' => $this->codParticipante))?>" class="btn btn-info" >Editar</a>
-        <a href="<?php echo $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->codParticipante))?>" class="btn btn-danger">Excluir</a>
+        <a href="<?=$this->url('productbacklog-editar',array('cod_projeto'=>$this->codProjeto,'action'=>'editar','cod_productbacklog'=>$this->codProductBacklog)) ?>" class="btn btn-primary" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="<?=$this->url('productbacklog-excluir',array('cod_projeto'=>$this->codProjeto,'action'=>'excluir','cod_productbacklog'=>$this->codProductBacklog)) ?>" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
     </td>    
 </tr>
