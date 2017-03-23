@@ -39,9 +39,9 @@ class SprintController extends AbstractActionController {
     public function cadastrarAction() {
         $this->ACLPermitir()->permitir();
         $retorno = false;
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
         $formSprint = new SprintForm();
-        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -80,7 +80,6 @@ class SprintController extends AbstractActionController {
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $sprint = $this->getSprintTable()->getSprint($codSprint);
         $sprint = $this->getSprintTable()->getSprint($codSprint);
-
 
         $this->Redirecionamento()->redirecionarParaProjeto($projeto);
 
