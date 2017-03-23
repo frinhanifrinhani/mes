@@ -25,6 +25,7 @@ class ProductBacklogController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
 
         $productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
 
@@ -36,12 +37,13 @@ class ProductBacklogController extends AbstractActionController {
 
     public function cadastrarAction() {
         $this->ACLPermitir()->permitir();
-        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-
         $retorno = false;
-//        $ultimoSprint = null;
+
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
+        
         $formProductBacklog = new ProductBacklogForm();
-//
+        
         $request = $this->getRequest();
         if ($request->isPost()) {
             $productBacklog = new ProductBacklog();
@@ -67,7 +69,7 @@ class ProductBacklogController extends AbstractActionController {
             'form_productbacklog' => $formProductBacklog,
         ));
     }
-    
+
     public function editarAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
@@ -77,8 +79,6 @@ class ProductBacklogController extends AbstractActionController {
 
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $productBacklog = $this->getProductBacklogTable()->getProductBacklog($codProductBacklog);
-        $productBacklog = $this->getProductBacklogTable()->getProductBacklog($codProductBacklog);
-
 
         $this->Redirecionamento()->redirecionarParaProjeto($projeto);
 
@@ -111,13 +111,13 @@ class ProductBacklogController extends AbstractActionController {
             'form_productbacklog' => $formProductBacklog,
         ));
     }
-    
+
     //metodo que retorna pagina de exclusão dos dados da funcionalidade ProductBacklog
     public function excluirAction() {
         //ActionHelper que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $retorno = false;
-        
+
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codProductBacklog = (int) $this->params()->fromRoute('cod_productbacklog', null);
 

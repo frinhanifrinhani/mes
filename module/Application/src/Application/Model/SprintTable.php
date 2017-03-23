@@ -77,15 +77,15 @@ class SprintTable {
         return $this->tableGateway->delete(array('cod_sprint' => $codSprint));
     }
 
-    //metodo que retorna sql da tableGateway
-    public function getSql() {
-        return $this->tableGateway->getSql();
-    }
-
-    //metodo que retorna select da tableGateway
-    public function getSelect() {
-        $select = new Select($this->tableGateway->getTable());
-        return $select;
-    }
+//    //metodo que retorna sql da tableGateway
+//    public function getSql() {
+//        return $this->tableGateway->getSql();
+//    }
+//
+//    //metodo que retorna select da tableGateway
+//    public function getSelect() {
+//        $select = new Select($this->tableGateway->getTable());
+//        return $select;
+//    }
 
 }

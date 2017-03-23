@@ -1,16 +1,16 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('projeto')?>">Projetos</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar',array('cod_projeto'=>$this->cod_projeto))?>">Gerenciar projeto</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>">Product Backlog</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('projeto') ?>">Projetos</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('projeto-gerenciar', array('cod_projeto' => $this->cod_projeto)) ?>">Gerenciar projeto</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>">Product Backlog</a></li>
         <li class="breadcrumb-item active">Cadastrar Product Backlog</li>
     </ol>
 </div>
 <?php
 if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     ?>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -23,7 +23,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     <span>Product Backlog cadastrado com sucesso!</span>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary">Ok</a>
+                    <a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     $formProductBacklog->prepare();
     echo $this->form()->openTag($formProductBacklog);
     ?>
-    <div class="form-group">
+    <div class="form-group" id="form-group">
         <?= $this->formRow($formProductBacklog->get('nome_product_backlog')); ?>
     </div>
     <div class="form-group">
@@ -53,53 +53,41 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <div class="form-group">
         <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
         <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
-        <a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+        <a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
-    
+
     <?php echo $this->form()->closeTag(); ?>     
 </div>
+<style>
+    
+    </style>
 <script>
-
-//    $(document).ready(function () {
-//        $('#cpf_participante').mask('999.999.999-99');
-//        $('#telefone_participante').mask('(99) 99999-9999');
-//
-//        $('#form_participante').validate({
-//            // Define as regras
-//            rules: {
-//                nome_participante: {
-//                    required: true,
-//                },
-//                cpf_participante: {
-//                    required: true,
-//                    minlength: 14,
-//                },
-//                email_participante: {
-//                    required: true,
-//                    email: true,
-//                },
-//                cod_tipo_participante: {
-//                    required: true,
-//                },
-//            },
-//            // Define as mensagens de erro para cada regra
-//            messages: {
-//                nome_participante: {
-//                    required: "Campo Nome não pode ser vazio!",
-//                },
-//                cpf_participante: {
-//                    required: "Campo CPF não pode ser vazio!",
-//                    minlength: "O Campo CPF deve ter 11 números!"
-//
-//                },
-//                email_participante: {
-//                    required: "Campo E-mail não pode ser vazio!",
-//                    email: "Formato email dever ter (@ e .com)!",
-//                },
-//                cod_tipo_participante: {
-//                    required: "Campo Tipo de Participante não pode ser vazio!",
-//                },
-//            }
-//        });
-//    });
+    $(document).ready(function () {
+        $('#form_productbacklog').validate({
+            // Define as regras
+            rules: {
+                nome_product_backlog: {
+                    required: true,
+                },
+                descricao_product_backlog: {
+                    required: true,
+                },
+                prioridade_product_backlog: {
+                    required: true,
+                },
+            },
+            // Define as mensagens de erro para cada regra
+            messages: {
+                nome_product_backlog: {
+                    required: "Campo Nome do Item não pode ser vazio!",
+                },
+                descricao_product_backlog: {
+                    required: "Campo Descrição do Item não pode ser vazio!",
+                },
+                prioridade_product_backlog: {
+                    required: "Campo Prioridade não pode ser vazio!",
+                },
+            }
+        });
+    });
 </script>

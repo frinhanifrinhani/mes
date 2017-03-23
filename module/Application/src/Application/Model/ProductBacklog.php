@@ -25,7 +25,7 @@ class ProductBacklog implements InputFilterAwareInterface {
     public $prioridadeProductBacklog;
     public $codProjeto;
     public $codStatus;
-    //public $descricaoStatus;
+    public $descricaoStatus;
     public $dataCadastroProductBacklog;
     protected $inputFilter;
     protected $dbAdapter;
@@ -38,8 +38,8 @@ class ProductBacklog implements InputFilterAwareInterface {
         $this->prioridadeProductBacklog = (isset($data['prioridade_product_backlog'])) ? $data['prioridade_product_backlog'] : null;
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
+        $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
         $this->dataCadastroProductBacklog = (isset($data['data_cadastro_product_backlog'])) ? $data['data_cadastro_product_backlog'] : null;
-        
     }
 
     //Rassa os valores que vem do banco para os Atributos, (no ZF2 faz o papel do set)
@@ -51,19 +51,22 @@ class ProductBacklog implements InputFilterAwareInterface {
             'prioridade_product_backlog' => $this->prioridadeProductBacklog,
             'cod_projeto' => $this->codProjeto,
             'cod_status' => $this->codStatus,
-            'data_cadastro_product_backlog' => $this->dataCadastroProductBacklog, 
+            'descricao_status' => $this->descricaoStatus,
+            'data_cadastro_product_backlog' => $this->dataCadastroProductBacklog,
         );
     }
+
     //seta o adaptador do banco de dados
     public function setDbAdapter($dbAdapter) {
 
         $this->dbAdapter = $dbAdapter;
     }
-    
+
     //seta o inputfilter e retorna uma exessão
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new \Exception("Não");
     }
+
     //recupera o input filter, tratado os dados que vem do Form
     public function getInputFilter() {
         if (!$this->inputFilter) {
@@ -82,7 +85,43 @@ class ProductBacklog implements InputFilterAwareInterface {
                                 'name' => 'NotEmpty',
                                 'options' => array(
                                     'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo nome do item product backlog pode ser vazio!'
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Nome do Item não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
+                        )
+            )));
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'descricao_product_backlog',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Descrição do Item não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
+                        )
+            )));
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'prioridade_product_backlog',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Prioridade não pode ser vazio!'
                                     ),
                                 ),
                             ),

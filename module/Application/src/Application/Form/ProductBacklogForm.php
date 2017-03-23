@@ -44,10 +44,10 @@ class ProductBacklogForm extends Form {
             'attributes' => array(
                 'id' => 'nome_product_backlog',
                 'class' => 'form-control',
-                'placeholder' => 'Nome do Item Product Backlog',
+                'placeholder' => 'Nome do Item do Product Backlog',
             ),
             'options' => array(
-                'label' => 'Nome do Item Product Backlog *',
+                'label' => 'Nome do Item *',
             ),
         ));
 
@@ -57,10 +57,10 @@ class ProductBacklogForm extends Form {
             'attributes' => array(
                 'id' => 'descricao_product_backlog',
                 'class' => 'form-control',
-                'placeholder' => 'Descrição Item Product Backlog',
+                'placeholder' => 'Descrição do Item Product Backlog',
             ),
             'options' => array(
-                'label' => 'Descrição Item Product Backlog *',
+                'label' => 'Descrição do Item *',
             ),
         ));
 
@@ -75,7 +75,7 @@ class ProductBacklogForm extends Form {
             'options' => array(
                 'label' => 'Prioridade *',
                 'value_options' => array(
-                    '0' => 'Selecione...',
+                    null => 'Selecione...',
                     '1' => 'Alta',
                     '2' => 'Média',
                     '3' => 'Baixa',
@@ -100,7 +100,7 @@ class ProductBacklogForm extends Form {
                 'placeholder' => 'Status',
             ),
             'options' => array(
-                'label' => 'Status *',
+                'label' => 'Status',
                 'value_options' => $this->getValueOptions(),
             ),
         ));

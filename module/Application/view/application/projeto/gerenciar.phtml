@@ -8,9 +8,9 @@
 <hr />
 <div class="content">
     <div class="form-group">
-        <a href="<?=$this->url('sprint',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary" >Sprint</a>
-        <a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary" >Product Backlog</a>
-        <a href="<?=$this->url('sprint',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary" >Relatório</a>
+        <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Sprint</a>
+        <a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Product Backlog</a>
+        <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Relatório</a>
     </div>
 </div>
 <div class="alert alert-success" >        
@@ -20,23 +20,29 @@
     <p><strong>Data incio: </strong><?= $this->projetos['data_inicio_projeto']; ?></p>
     <p><strong>Data fim: </strong><?= $this->projetos['data_fim_projeto']; ?></p>
     <p><strong>Status: </strong><?= $this->projetos['descricao_status']; ?></p>
-    </div>
-    <table class="table table-hover table-bordered dataTable no-footer">
+</div>
+
+<!--<div class="alert alert-success">-->
+    <!--<table class="table table-hover table-bordered dataTable no-footer">-->
+<table class="table table-bordered-green">
     <thead>
-        <tr>
-            <td><strong>Projeto:</strong> </td>
-            <td><?= $this->projetos['nome_projeto']; ?></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>L2 C1</td>
-            <td>L2 C2</td>
-        </tr>
-    </tbody>
-    
+    <tr>
+    <td>Sprint</td>
+</tr>
+<tr>
+    <td><strong>Projeto:</strong> </td>
+    <td><?= $this->projetos['nome_projeto']; ?></td>
+</tr>
+</thead>
+<tbody>
+    <tr>
+        <td>L2 C1</td>
+        <td>L2 C2</td>
+    </tr>
+</tbody>
+
 </table>
-    
+<!--</di>-->
 
 
 <table class="table">

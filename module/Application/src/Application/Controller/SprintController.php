@@ -39,10 +39,10 @@ class SprintController extends AbstractActionController {
     public function cadastrarAction() {
         $this->ACLPermitir()->permitir();
         $retorno = false;
+        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
         $formSprint = new SprintForm();
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
-        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
         $request = $this->getRequest();
         if ($request->isPost()) {
 
@@ -62,7 +62,7 @@ class SprintController extends AbstractActionController {
         }
 //        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         return new ViewModel(array(
-            'partial_loop_projetos' => $projetos,
+//            'partial_loop_projetos' => $projetos,
             'cod_projeto' => $codProjeto,
             'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
             'retorno' => $retorno,

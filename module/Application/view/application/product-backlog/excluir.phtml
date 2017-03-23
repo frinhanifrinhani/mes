@@ -22,7 +22,7 @@ if (!isset($_POST['cod_product_backlog'])) {
                 </div>
                 <div class="modal-body">
 
-                    <b>Você está prestes a excluir um item da lista de Product Backlog!</b><br /><br />
+                    <b>Você está prestes a excluir um Product Backlog!</b><br /><br />
                     Você tem certeza que deseja excluir?
                 </div>
 
@@ -49,7 +49,7 @@ if (isset($_POST['cod_product_backlog'])) {
                     <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
                 </div>
                 <div class="modal-body">
-                    <span>Item de Product Backlog excluido com sucesso!</span>
+                    <span>Product Backlog excluido com sucesso!</span>
                 </div>
                 <div class="modal-footer">
                     <a href="<?=$this->url('productbacklog',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary">Ok</a>

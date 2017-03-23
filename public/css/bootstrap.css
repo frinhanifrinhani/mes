@@ -1694,6 +1694,10 @@ th {
 .table-bordered {
   border: 1px solid #dddddd;
 }
+/**Add*/
+.table-bordered-green {
+  border: 1px solid #b2dba1;
+}
 
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -1703,9 +1707,27 @@ th {
 .table-bordered > tfoot > tr > td {
   border: 1px solid #dddddd;
 }
+/**Add*/
+.table-bordered-green > thead > tr > th,
+.table-bordered-green > tbody > tr > th,
+.table-bordered-green > tfoot > tr > th,
+.table-bordered-green > thead > tr > td,
+.table-bordered-green > tfoot > tr > td {
+  border: 1px solid #b2dba1;
+  background-color: #c8e5bc ;
+}
+/**add*/
+.table-bordered-green > tbody > tr > td{
+    background-color: #dff0d8;
+}
 
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
+  border-bottom-width: 2px;
+}
+/**Add*/
+.table-bordered-green > thead > tr > th,
+.table-bordered-green > thead > tr > td {
   border-bottom-width: 2px;
 }
 
@@ -1983,6 +2005,13 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 15px;
+}
+.form-group ul li{
+    color: #FF0000;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: lighter;
 }
 
 .radio,
