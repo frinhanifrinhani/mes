@@ -1,0 +1,24 @@
+
+<tr>
+    <td><?=$this->escapeHtml($this->codProductBacklog)?></td>
+    <td><?=$this->escapeHtml($this->nomeProductBacklog)?></td>
+    <td><?=$this->descricaoProductBacklog?></td>
+    <td><?php
+       switch($this->prioridadeProductBacklog){
+           case 1;
+               echo 'Alta';
+               break;
+           case 2;
+               echo 'Média';
+               break;
+           case 3;
+               echo 'Baixa';
+               break;
+       }
+       ?></td>
+    <td><?=$this->descricaoStatus?></td>
+    <td>
+        <a href="<?=$this->url('productbacklog-editar',array('cod_projeto'=>$this->codProjeto,'cod_productbacklog'=>$this->codProductBacklog)) ?>" class="btn btn-primary" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="<?=$this->url('productbacklog-excluir',array('cod_projeto'=>$this->codProjeto,'cod_productbacklog'=>$this->codProductBacklog)) ?>" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
+    </td>    
+</tr>
