@@ -71,7 +71,17 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <?php echo $this->form()->closeTag(); ?>     
 </div>
 <script>
-
+    function verificarMinTempo(tempo){
+        var tempo = tempo.replace(':','');
+        var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
+      
+        if(tempo == 0 ){
+            campoTempo.removeAttribute('style');
+        }else{
+             campoTempo.setAttribute('style','display:none')
+        };
+    }
+    
     $(document).ready(function () {
     $('#tempo_sprint_backlog').mask('99:99');
 

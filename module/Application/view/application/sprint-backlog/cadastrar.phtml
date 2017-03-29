@@ -50,6 +50,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     </div>
     <div class="form-group">
         <?= $this->formRow($formSprintBacklog->get('tempo_sprint_backlog')); ?>
+        <label id="tempo_sprint_backlog-error-zero" class="error" for="nome_sprint_backlog" style="display: none;" >Campo Tempo de duração deve ter valor maior que zero!</label>
     </div>
     <div class="form-group">
         <?= $this->formRow($formSprintBacklog->get('cod_participante')); ?>
@@ -69,8 +70,14 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 </div>
 <script>
     function verificarMinTempo(tempo){
-        var tempo = tempo;
-        alert(tempo);
+        var tempo = tempo.replace(':','');
+        var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
+      
+        if(tempo == 0 ){
+            campoTempo.removeAttribute('style');
+        }else{
+             campoTempo.setAttribute('style','display:none')
+        };
     }
 
     $('#tempo_sprint_backlog').mask('99:99');

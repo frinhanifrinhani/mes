@@ -73,6 +73,7 @@ class SprintBacklogForm extends Form {
                 'id' => 'tempo_sprint_backlog',
                 'class' => 'form-control',
                 'placeholder' => '00:00',
+                'onblur' => 'verificarMinTempo(this.value);'
             ),
             'options' => array(
                 'label' => 'Tempo de duração *',
