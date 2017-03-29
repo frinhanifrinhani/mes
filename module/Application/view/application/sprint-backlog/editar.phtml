@@ -75,7 +75,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
         var tempo = tempo.replace(':','');
         var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
       
-        if(tempo == 0 ){
+         if(tempo == 0000 || tempo == 000 ||tempo == 00 || tempo == 0 ){
             campoTempo.removeAttribute('style');
         }else{
              campoTempo.setAttribute('style','display:none')
