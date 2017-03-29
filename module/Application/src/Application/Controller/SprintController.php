@@ -79,7 +79,6 @@ class SprintController extends AbstractActionController {
 
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $sprint = $this->getSprintTable()->getSprint($codSprint);
-        $sprint = $this->getSprintTable()->getSprint($codSprint);
 
         $this->Redirecionamento()->redirecionarParaProjeto($projeto);
 

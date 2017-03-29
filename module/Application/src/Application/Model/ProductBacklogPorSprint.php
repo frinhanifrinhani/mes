@@ -17,42 +17,24 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\TableGateway\TableGateway;
 
-class ProductBacklog implements InputFilterAwareInterface {
+class ProductBacklogPorSprint implements InputFilterAwareInterface {
 
     public $codProductBacklog;
-    public $nomeProductBacklog;
-    public $descricaoProductBacklog;
-    public $prioridadeProductBacklog;
-    public $codProjeto;
-    public $codStatus;
-    public $descricaoStatus;
-    public $dataCadastroProductBacklog;
+    public $codSprint;
     protected $inputFilter;
     protected $dbAdapter;
-
+    
     //Recupera os valores que vem por post e passa para os Atributos, caso não exista valores, pass null (no ZF2 faz o papel do get)
     function exchangeArray($data) {
         $this->codProductBacklog = (isset($data['cod_product_backlog'])) ? $data['cod_product_backlog'] : null;
-        $this->nomeProductBacklog = (isset($data['nome_product_backlog'])) ? $data['nome_product_backlog'] : null;
-        $this->descricaoProductBacklog = (isset($data['descricao_product_backlog'])) ? $data['descricao_product_backlog'] : null;
-        $this->prioridadeProductBacklog = (isset($data['prioridade_product_backlog'])) ? $data['prioridade_product_backlog'] : null;
-        $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
-        $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
-        $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
-        $this->dataCadastroProductBacklog = (isset($data['data_cadastro_product_backlog'])) ? $data['data_cadastro_product_backlog'] : null;
+        $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
     }
-
     //Rassa os valores que vem do banco para os Atributos, (no ZF2 faz o papel do set)
     public function getArrayCopy() {
         return array(
             'cod_product_backlog' => $this->codProductBacklog,
-            'nome_product_backlog' => $this->nomeProductBacklog,
-            'descricao_product_backlog' => $this->descricaoProductBacklog,
-            'prioridade_product_backlog' => $this->prioridadeProductBacklog,
-            'cod_projeto' => $this->codProjeto,
-            'cod_status' => $this->codStatus,
-            'descricao_status' => $this->descricaoStatus,
-            'data_cadastro_product_backlog' => $this->dataCadastroProductBacklog,
+            'cod_sprint' => $this->codSprint,
+            
         );
     }
 

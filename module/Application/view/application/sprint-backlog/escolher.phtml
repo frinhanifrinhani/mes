@@ -1,1 +1,18 @@
-<h1>Sprint Backlog</h1>
+<div class="box-header with-border">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item active">Escolher projeto</li>
+    </ol>
+</div>
+<div class="content">
+
+
+    <p>Em qual projeto você pretente trabalhar? 
+    <div class="form-group">
+        <select name="projetos" id="projetos" class="form-control" onchange="location = this.value;">
+            <option>Selecione...</option>
+            <?= $this->partialLoop('partial_loop_projetos.phtml', $this->partial_loop_projetos) ?>  
+        </select>
+    </div>
+</p>
+</div>

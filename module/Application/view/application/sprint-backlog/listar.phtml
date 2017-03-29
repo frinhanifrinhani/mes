@@ -1,1 +1,27 @@
-<h1>Sprint Backlog</h1>
+<div class="box-header with-border">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('sprintbacklog-escolher-projeto')?>">Escolher projeto</a></li>
+        <li class="breadcrumb-item active">Sprint Backlog</li>
+    </ol>
+</div>
+
+<hr />
+<a href="<?php echo $this->url('sprintbacklog-cadastrar', array('action' => 'cadastrar', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-success"><span class="glyphicon glyphicon-file"></span> Nova Sprint Backlog</a>
+<p></p>
+<table id="data_table" class="table data_tables table-striped table-hover table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nome da Sprint Backlog</th>
+            <th>Descrição da Sprint Backlog</th>
+            <th>Tempo de duração</th>
+            <th>Status</th>
+            <th>Atrinbuido para</th>
+            <th>Editar | Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?=$this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar) ?>  
+    </tbody>
+</table>

@@ -56,7 +56,7 @@ class SprintTable {
             'nome_sprint' => $sprint->nomeSprint,
             'descricao_sprint' => $sprint->descricaoSprint,
             'tempo_sprint' => $sprint->tempoSprint,
-            'cod_status' => $sprint->codStatusSprint,
+            'cod_status' => $sprint->codStatus,
             'cod_projeto' => $sprint->codProjeto,
         );
 

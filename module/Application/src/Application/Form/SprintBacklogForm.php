@@ -12,73 +12,70 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter;
+use Application\Controller\SprintBacklogController;
 
-class SprintForm extends Form {
+class SprintBacklogForm extends Form {
 
     public $statusTable;
-    public $projetoTable;
+    public $participanteTable;
+    public $productBacklogTable;
 
     public function __construct() {
-        parent::__construct('form_sprint');
+        parent::__construct('form_sprint_backlog');
 
         $this->setAttribute('method', 'post');
-        $this->setAttribute('id', 'form_sprint');
+        $this->setAttribute('id', 'form_sprint_backlog');
 
         $this->add(array(
-            'name' => 'cod_sprint',
+            'name' => 'cod_sprint_backlog',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'cod_sprint',
+                'id' => 'cod_sprint_backlog',
                 'class' => 'form-control',
-                'placeholder' => 'Código da Sprint',
+                'placeholder' => 'Código da Sprint Backlog',
                 'readonly' => 'readonly',
             ),
             'options' => array(
-                'label' => 'Código da Sprint',
+                'label' => 'Código Sprint Backlog',
             ),
         ));
 
         $this->add(array(
-            'name' => 'nome_sprint',
+            'name' => 'nome_sprint_backlog',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'nome_sprint',
+                'id' => 'nome_sprint_backlog',
                 'class' => 'form-control',
-                'placeholder' => 'Nome da Sprint',
+                'placeholder' => 'Nome da Sprint Backlog',
             ),
             'options' => array(
-                'label' => 'Nome da Sprint *',
+                'label' => 'Nome Sprint Backlog *',
             ),
         ));
 
         $this->add(array(
-            'name' => 'descricao_sprint',
+            'name' => 'descricao_sprint_backlog',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'descricao_sprint',
+                'id' => 'descricao_sprint_backlog',
                 'class' => 'form-control',
-                'placeholder' => 'Descrição da Sprint',
+                'placeholder' => 'Descrição da Sprint Backlog',
             ),
             'options' => array(
-                'label' => 'Descrição da Sprint',
+                'label' => 'Descrição Sprint Backlog',
             ),
         ));
 
         $this->add(array(
-            'name' => 'tempo_sprint',
-            'type' => 'Select',
+            'name' => 'tempo_sprint_backlog',
+            'type' => 'text',
             'attributes' => array(
-                'id' => 'tempo_sprint',
+                'id' => 'tempo_sprint_backlog',
                 'class' => 'form-control',
+                'placeholder' => '00:00',
             ),
             'options' => array(
                 'label' => 'Tempo de duração *',
-                'value_options' => array(
-                    null => 'Selecione...',
-                    15 => '15 Dias',
-                    20 => '20 Dias',
-                    30 => '30 Dias',
-                ),
             ),
         ));
 
@@ -99,7 +96,32 @@ class SprintForm extends Form {
             ),
             'options' => array(
                 'label' => 'Status',
-                'value_options' => $this->getValueOptions(),
+                'value_options' => $this->getValueStatusOptions(),
+            ),
+        ));
+        $this->add(array(
+            'name' => 'cod_participante',
+            'type' => 'Select',
+            'attributes' => array(
+                'id' => 'cod_participante',
+                'class' => 'form-control',
+            ),
+            'options' => array(
+                'label' => 'Atribuido para *',
+                'value_options' => $this->getValueParticipanteOptions(),
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cod_product_backlog',
+            'type' => 'Select',
+            'attributes' => array(
+                'id' => 'cod_product_backlog',
+                'class' => 'form-control',
+            ),
+            'options' => array(
+                'label' => 'Product Backlog *',
+                'value_options' => $this->getValueProductBacklogOptions(),
             ),
         ));
 
@@ -121,25 +143,9 @@ class SprintForm extends Form {
                 'id' => 'botao_excluir',
             ),
         ));
+       
     }
 
-    //Busca projeto
-//    private function getProjetoTable() {
-//        if (!$this->projetoTable) {
-//            $sm = $GLOBALS['sm'];
-//            $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
-//        }
-//        return $this->projetoTable;
-//    }
-//    private function getValueOptionsProjeto() {
-//        $valueOptions = array();
-//        $projetos = $this->getProjetoTable()->fetchAll($this->cod_participante);
-//        $valueOptions[''] = 'Selecione...';
-//        foreach ($projetos as $projeto) {
-//            $valueOptions[$projeto->codProjeto] = $projeto->nomeProjeto;
-//        }
-//        return $valueOptions;
-//    }
     //Busca status
     private function getStatusTable() {
         if (!$this->statusTable) {
@@ -149,7 +155,7 @@ class SprintForm extends Form {
         return $this->statusTable;
     }
 
-    private function getValueOptions() {
+    private function getValueStatusOptions() {
         $valueOptions = array();
         $status = $this->getStatusTable()->fetchAll();
 //        $valueOptions[''] = 'Selecione...';
@@ -157,6 +163,46 @@ class SprintForm extends Form {
             $valueOptions[$statusSprint->codStatus] = $statusSprint->descricaoStatus;
         }
         return $valueOptions;
+    }
+
+    // participante table
+    private function getParticipanteTable() {
+        if (!$this->participanteTable) {
+            $sm = $GLOBALS['sm'];
+            $this->participanteTable = $sm->get('Application\Model\ParticipanteTable');
+        }
+        return $this->participanteTable;
+    }
+
+    private function getValueParticipanteOptions() {
+        $valueOptions = array();
+        $participantes = $this->getParticipanteTable()->fetchAllScrumTeam(3);
+        $valueOptions[''] = 'Selecione...';
+        foreach ($participantes as $participante) {
+            $valueOptions[$participante->codParticipante] = $participante->nomeParticipante;
+        }
+        return $valueOptions;
+    }
+
+    // product backlog table
+    private function getProductBacklogTable() {
+        if (!$this->productBacklogTable) {
+            $sm = $GLOBALS['sm'];
+            $this->productBacklogTable = $sm->get('Application\Model\ProductBacklogTable');
+        }
+        return $this->productBacklogTable;
+    }
+
+    public function getValueProductBacklogOptions(){
+
+        $valueProductBacklogOptions = array();
+        $productBacklogs = $this->getProductBacklogTable()->fetchAllForm();
+        $valueProductBacklogOptions[''] = 'Selecione...';
+        foreach ($productBacklogs as $productBacklog) {
+            $valueProductBacklogOptions[$productBacklog->codProductBacklog] = $productBacklog->nomeProductBacklog;
+        }
+        return $valueProductBacklogOptions;
+
     }
 
 }

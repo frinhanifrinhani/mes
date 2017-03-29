@@ -17,42 +17,51 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\TableGateway\TableGateway;
 
-class Sprint implements InputFilterAwareInterface {
+class SprintBacklog implements InputFilterAwareInterface {
 
-    public $codSprint;
-    public $nomeSprint;
-    public $descricaoSprint;
-    public $tempoSprint;
-    public $codStatusSprint;
-    public $codProjeto;
+    public $codSprintBacklog;
+    public $nomeSprintBacklog;
+    public $descricaoSprintBacklog;
+    public $tempoSprintBacklog;
+    public $codStatus;
     public $descricaoStatus;
-    public $dataCadastroSprint;
+    public $codParticipante;
+    public $nomeParticipante;
+    public $codProjeto;
+    public $codProductBacklog;
+    public $dataCadastroSprintBacklog;
     protected $inputFilter;
     protected $dbAdapter;
 
     // public $data;
 
     function exchangeArray($data) {
-        $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
-        $this->nomeSprint = (isset($data['nome_sprint'])) ? $data['nome_sprint'] : null;
-        $this->descricaoSprint = (isset($data['descricao_sprint'])) ? $data['descricao_sprint'] : null;
-        $this->tempoSprint = (isset($data['tempo_sprint'])) ? $data['tempo_sprint'] : null;
-        $this->codStatusSprint = (isset($data['cod_status'])) ? $data['cod_status'] : null;
+        $this->codSprintBacklog = (isset($data['cod_sprint_backlog'])) ? $data['cod_sprint_backlog'] : null;
+        $this->nomeSprintBacklog = (isset($data['nome_sprint_backlog'])) ? $data['nome_sprint_backlog'] : null;
+        $this->descricaoSprintBacklog = (isset($data['descricao_sprint_backlog'])) ? $data['descricao_sprint_backlog'] : null;
+        $this->tempoSprintBacklog = substr( (isset($data['tempo_sprint_backlog'])) ? $data['tempo_sprint_backlog'] : null,0,5);
+        $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
+        $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
+        $this->nomeParticipante = (isset($data['nome_participante'])) ? $data['nome_participante'] : null;
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
-        $this->dataCadastroSprint = (isset($data['data_cadastro_sprint'])) ? $data['data_cadastro_sprint'] : null;
+        $this->codProductBacklog = (isset($data['cod_product_backlog'])) ? $data['cod_product_backlog'] : null;
+        $this->dataCadastroSprintBacklog = (isset($data['data_cadastro_sprint_backlog'])) ? $data['data_cadastro_sprint_backlog'] : null;
     }
 
     public function getArrayCopy() {
         return array(
-            'cod_sprint' => $this->codSprint,
-            'nome_sprint' => $this->nomeSprint,
-            'descricao_sprint' => $this->descricaoSprint,
-            'tempo_sprint' => $this->tempoSprint,
+            'cod_sprint_backlog' => $this->codSprintBacklog,
+            'nome_sprint_backlog' => $this->nomeSprintBacklog,
+            'descricao_sprint_backlog' => $this->descricaoSprintBacklog,
+            'tempo_sprint_backlog' => $this->tempoSprintBacklog,
+            'cod_status' => $this->codStatus,
             'descricao_status' => $this->descricaoStatus,
-            'cod_status' => $this->codStatusSprint,
+            'cod_participante' => $this->codParticipante,
+            'nome_participante' => $this->nomeParticipante,
             'cod_projeto' => $this->codProjeto,
-            'data_cadastro_sprint' => $this->dataCadastroSprint,
+            'cod_product_backlog' => $this->codProductBacklog,
+            'data_cadastro_sprint_backlog' => $this->dataCadastroSprintBacklog,
         );
     }
 
@@ -73,7 +82,7 @@ class Sprint implements InputFilterAwareInterface {
             $factory = new InputFactory();
 
             $inputFilter->add($factory->createInput(array(
-                        'name' => 'nome_sprint',
+                        'name' => 'cod_product_backlog',
                         'required' => true,
                         'filters' => array(
                             array('name' => 'StripTags'),
@@ -84,21 +93,70 @@ class Sprint implements InputFilterAwareInterface {
                                 'name' => 'NotEmpty',
                                 'options' => array(
                                     'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo nome da sprintnão pode ser vazio!'
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Product Backlog não pode ser vazio!'
                                     ),
                                 ),
                             ),
+                           
+                        )
+            )));
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'nome_sprint_backlog',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
                             array(
-                                'name' => 'StringLength',
+                                'name' => 'NotEmpty',
                                 'options' => array(
-                                    'min' => 3,
-                                    'max' => 255,
                                     'messages' => array(
-                                        \Zend\Validator\StringLength::TOO_SHORT => 'O campo nome deve ter no mínimo 3 caracteres!',
-                                        \Zend\Validator\StringLength::TOO_LONG => 'O campo nome deve ter no máximo 255 caracteres!',
-                                    )
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo nome da Sprint Backlog não pode ser vazio!'
+                                    ),
                                 ),
                             ),
+                           
+                        )
+            )));
+            
+
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'tempo_sprint_backlog',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Tempo de duração não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
+                           
+                        )
+            )));
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'cod_participante',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim')
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Atribuido para, não pode ser vazio!'
+                                    ),
+                                ),
+                            ),
+                           
                         )
             )));
 

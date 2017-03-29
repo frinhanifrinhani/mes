@@ -36,6 +36,18 @@ class IndexController extends AbstractActionController {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
+//        $codProjeto = $this->getProjetoTable()->getProjeto();
+        return new ViewModel(array(
+            'partial_loop_projetos' => $projetos,
+            'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
+            
+        ));
+    }
+    public function projetoEscolhidoAction() {
+
+        //metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
+        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         return new ViewModel(array(
             'partial_loop_projetos' => $projetos,
             'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],

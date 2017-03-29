@@ -35,6 +35,8 @@
                 ->prependFile($this->basePath('plugin/jquerymask/jquery.mask.js'))
                 //Jquery datepiker
                 ->prependFile($this->basePath('plugin/datepicker/bootstrap-datepicker.js'))
+                //Jquery timepiker
+                ->prependFile($this->basePath('plugin/timepicker/bootstrap-timepicker.js'))
 
                 //Datatables
                 ->prependFile($this->basePath('plugin/datatables/js/dataTables.bootstrap.min.js'))
@@ -70,6 +72,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="<?php echo $this->url('home') ?>">Home</a></li>
                         <li><a href="<?php echo $this->url('projeto') ?>">Projeto</a></li>
+                        <li><a href="<?php echo $this->url('sprintbacklog-escolher-projeto') ?>">Sprint Backlog</a></li>
                         <li><a href="<?php echo $this->url('participante') ?>">Participante</a></li>
                         <li><a href="<?php echo $this->url('alterarsenha') ?>">Alterar senha</a></li>
                         <li><a href="<?php echo $this->url('sair') ?>">Sair</a></li>

@@ -23,6 +23,8 @@ use Application\Model\Participante;
 use Application\Model\ParticipanteTable;
 use Application\Model\Sprint;
 use Application\Model\SprintTable;
+use Application\Model\SprintBacklog;
+use Application\Model\SprintBacklogTable;
 use Application\Model\ProductBacklog;
 use Application\Model\ProductBacklogTable;
 use Application\Model\Status;
@@ -122,6 +124,21 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new ProductBacklog());
                     return new TableGateway(new TableIdentifier('product_backlog'), $dbAdapter, null, $resultSetPrototype);
+                },
+                /**                 * ************ SPRINT BACKLOG ************** */
+                //instacia um objeto da SprintBacklogTable e retorna seus elementos
+                'Application\Model\SprintBacklogTable' => function($sm) {
+                    $tableGateway = $sm->get('SprintBacklogTableGateway');
+                    $table = new SprintBacklogTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da SprintBacklog, e retorna uma TableGateway 
+                //passando o nome da tabela 'sprint_backlog'
+                'SprintBacklogTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new SprintBacklog());
+                    return new TableGateway(new TableIdentifier('sprint_backlog'), $dbAdapter, null, $resultSetPrototype);
                 },
                 /**                 * ************ STATUS ************** */
                 //instacia um objeto da StatusTable e retorna seus elementos

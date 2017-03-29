@@ -10,53 +10,119 @@
     <div class="form-group">
         <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Sprint</a>
         <a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Product Backlog</a>
+        <a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Product Backlog Por Sprint</a>
         <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Relatório</a>
     </div>
 </div>
-<div class="alert alert-success" >        
-    <p><strong>Projeto:</strong> <?= $this->projetos['nome_projeto']; ?></p>
-    <p><strong>Dono do projeto: </strong><?= $this->projetos['nome_participante']; ?></p>
-    <p><strong>Descrição do projeto: </strong><?= $this->projetos['descricao_projeto']; ?></p>
-    <p><strong>Data incio: </strong><?= $this->projetos['data_inicio_projeto']; ?></p>
-    <p><strong>Data fim: </strong><?= $this->projetos['data_fim_projeto']; ?></p>
-    <p><strong>Status: </strong><?= $this->projetos['descricao_status']; ?></p>
-</div>
 
-<!--<div class="alert alert-success">-->
-    <!--<table class="table table-hover table-bordered dataTable no-footer">-->
+<table class="table table-bordered-green alert-success">
+    <thead>
+        <tr>
+            <td colspan="3"><h4>Dados do Projeto</h4> </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2"><strong>Nome do projeto: </strong><?= $this->projetos['nome_projeto']; ?></td>
+            <td><strong>Dono do projeto: </strong><?= $this->projetos['nome_participante']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="5"><strong>Descrição do Projeto:</strong> <?= $this->projetos['descricao_projeto']; ?></td>
+        </tr>
+        <tr>
+            <td><strong>Data incio: </strong><?= $this->projetos['data_inicio_projeto']; ?></td>
+            <td><strong>Data fim (prevista): </strong><?= $this->projetos['data_fim_projeto']; ?></td>
+            <td><strong>Status: </strong><?= $this->projetos['descricao_status']; ?></td>
+        </tr>
+    </tbody>
+</table>
+
 <table class="table table-bordered-green">
     <thead>
         <tr>
-            <td colspan="2"><h4>Sprint</h4></td>
-        </tr>
-        <tr>
-            <td><strong>Projeto:</strong> </td>
-            <td><?= $this->projetos['nome_projeto']; ?></td>
+            <td colspan="5"><h4>Sprint</h4></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>L2 C1</td>
-            <td>L2 C2</td>
+            <td><strong>Em Aberto: </strong>4</td>
+            <td><strong>Em Andamento: </strong>4</td>
+            <td><strong>Finalizado: </strong>4</td>
+            <td><strong>Parado: </strong>4 </td>
+            <td><strong>Total: </strong>16</td>
+        </tr>
+        <tr>
+            <td colspan="5"><strong>Observações:</strong></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                - Atenção 1 sprint está atrasada 2 dias.<br /> 
+                - 1 Sprint pra ser finalizada 25/03/2017.<br />
+            </td>
         </tr>
     </tbody>
-
 </table>
-<!--</di>-->
 
-
-<table class="table">
+<table class="table table-bordered-green">
     <thead>
         <tr>
-            <td>Sprints</td>
-            <td>Backlogs</td>
+            <td colspan="5"><h4>Product Backlog</h4></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>L2 C1</td>
-            <td>L2 C2</td>
+            <td><strong>Em Aberto: </strong>4</td>
+            <td><strong>Em Andamento: </strong>4</td>
+            <td><strong>Finalizado: </strong>4</td>
+            <td><strong>Parado: </strong>4 </td>
+            <td><strong>Total: </strong>16</td>
+        </tr>
+        <tr>
+            <td><strong>Prioridades</strong></td>
+            <td><strong>Alta: </strong>4</td>
+            <td><strong>Média: </strong>4</td>
+            <td colspan="2"><strong>Baixa: </strong>4</td>
+            
+        </tr>
+        <tr>
+            <td colspan="5"><strong>Observações:</strong></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                - Antenção! Você tem muitos itens com prioridade alta.<br /> 
+                - Antenção! Você tem muitos itens parados.<br /> 
+            </td>
         </tr>
     </tbody>
 </table>
+
+<table class="table table-bordered-green">
+    <thead>
+        <tr>
+            <td colspan="5"><h4>Sprint Backlog</h4></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Em Aberto: </strong>4</td>
+            <td><strong>Em Andamento: </strong>4</td>
+            <td><strong>Finalizado: </strong>4</td>
+            <td><strong>Parado: </strong>4 </td>
+            <td><strong>Total: </strong>16</td>
+        </tr>
+        <tr>
+            <td colspan="5"><strong>Observações:</strong></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                - Atenção! 2 sprint backlogs estão atrasada 1 dias.<br /> 
+                - Atenção! 1 sprint backlog está atrasada 1 dias.<br /> 
+                - Atenção! 3 sprint backlog pra serem finalizadas 26/03/2017.<br />
+                - Atenção! 1 sprint backlog pra ser finalizada 25/03/2017.<br />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
 

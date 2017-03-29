@@ -75,7 +75,7 @@ class ProductBacklogController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        $codProductBacklog = (int) $this->params()->fromRoute('cod_productbacklog', null);
+        $codProductBacklog = (int) $this->params()->fromRoute('cod_product_backlog', null);
 
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $productBacklog = $this->getProductBacklogTable()->getProductBacklog($codProductBacklog);
@@ -119,7 +119,7 @@ class ProductBacklogController extends AbstractActionController {
         $retorno = false;
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        $codProductBacklog = (int) $this->params()->fromRoute('cod_productbacklog', null);
+        $codProductBacklog = (int) $this->params()->fromRoute('cod_product_backlog', null);
 
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         $productBacklog = $this->getProductBacklogTable()->getProductBacklog($codProductBacklog);

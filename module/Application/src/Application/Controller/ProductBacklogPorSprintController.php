@@ -12,14 +12,21 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Form\ProductBacklogForm;
+//use Application\Form\ProductBacklogForm;
 use Application\Model\ProductBacklog;
 
-class ProductBacklogController extends AbstractActionController {
+class ProductBacklogPorSprintController extends AbstractActionController {
 
     protected $productBacklogTable;
     protected $projetoTable;
 
+    public function indexAction() {
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+        return new ViewModel(array(
+            
+        ));
+    }
+    
     public function listarAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();

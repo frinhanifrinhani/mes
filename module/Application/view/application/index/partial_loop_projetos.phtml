@@ -1,7 +1,6 @@
 
-<option value="<?=$this->codProjeto?>"> 
-    <a href="#">
+<!--<option value="<?$this->url('inicio-projeto',array('cod_projeto'=>$this->codProjeto))?>" >--> 
+<option value="<?=$this->url('projetoescolhido',array('cod_projeto'=>$this->codProjeto))?>" > 
        <?=$this->escapeHtml($this->nomeProjeto)?>
-        <a/>
 </option>
     

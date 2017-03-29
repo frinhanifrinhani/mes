@@ -14,10 +14,10 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
-use Application\Model\ProductBacklog;
+use Application\Model\ProductBacklogPorSprint;
 use Zend\Db\Sql\TableIdentifier;
 
-class ProductBacklogTable {
+class ProductBacklogPorSprintlogTable {
 
     protected $tableGateway;
 

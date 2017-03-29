@@ -1,10 +1,9 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=$this->url('inicio') ?>">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('projeto') ?>">Projetos</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar', array('cod_projeto' => $this->cod_projeto)) ?>">Gerenciar projeto</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>">Sprint</a></li>
-        <li class="breadcrumb-item active">Cadastrar Product Backlog</li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('sprintbacklog-escolher-projeto')?>">Escolher projeto</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('sprintbacklog',array('cod_projeto'=>$this->cod_projeto))?>">Sprint Backlog</a></li>
+        <li class="breadcrumb-item active">Editar Sprint Backlog</li>
     </ol>
 </div>
 <?php
@@ -20,10 +19,10 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
                 </div>
                 <div class="modal-body">
-                    <spant> Sprint cadastrada com sucesso!</spant>
+                    <spant> Sprint Backlog alterada com sucesso!</spant>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?= $this->url('projeto', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary">Ok</a>
+                    <a href="<?= $this->url('sprintbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>
@@ -31,31 +30,42 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <script>$("#myModal").modal();</script>
 <?php } ?>
 <hr />
+
 <div class="content">
 
     <?php
-    $formSprint = $this->form_sprint;
-    $formSprint->prepare();
-    echo $this->form()->openTag($formSprint);
+    $formSprintBacklog = $this->form_sprint_backlog;
+    $formSprintBacklog->prepare();
+    echo $this->form()->openTag($formSprintBacklog);
     ?>
+
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('nome_sprint')); ?>
+        <?= $this->formRow($formSprintBacklog->get('cod_sprint_backlog')); ?>
     </div>
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('descricao_sprint')); ?>
+        <?= $this->formRow($formSprintBacklog->get('cod_product_backlog')); ?>
     </div>
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('tempo_sprint')); ?>
+        <?= $this->formRow($formSprintBacklog->get('nome_sprint_backlog')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprintBacklog->get('descricao_sprint_backlog')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprintBacklog->get('tempo_sprint_backlog')); ?>
+    </div>
+    <div class="form-group">
+        <?= $this->formRow($formSprintBacklog->get('cod_participante')); ?>
     </div>
 
     <div class="form-group">
-        <?= $this->formRow($formSprint->get('cod_status')); ?>
+        <?= $this->formRow($formSprintBacklog->get('cod_status')); ?>
     </div>
 
     <div class="form-group">
         <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
         <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
-        <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+        <a href="<?= $this->url('sprintbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
 
     <?php echo $this->form()->closeTag(); ?>     
@@ -63,32 +73,37 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <script>
 
     $(document).ready(function () {
-        $('#cpf_sprint').mask('999.999.999-99');
-        $('#telefone_sprint').mask('(99) 99999-9999');
+    $('#tempo_sprint_backlog').mask('99:99');
 
-        $('#form_sprint').validate({
+        $('#form_sprint_backlog').validate({
             // Define as regras
             rules: {
-                nome_sprint: {
+                cod_product_backlog: {
                     required: true,
                 },
-                tempo_sprint: {
+                nome_sprint_backlog: {
                     required: true,
                 },
-                cod_projeto: {
+                tempo_sprint_backlog: {
+                    required: true,
+                },
+                cod_participante: {
                     required: true,
                 },
             },
             // Define as mensagens de erro para cada regra
             messages: {
-                nome_sprint: {
-                    required: "Campo Nome da Sprint não pode ser vazio!",
+                cod_product_backlog: {
+                    required: "Campo Product Backlog não pode ser vazio!",
                 },
-                tempo_sprint: {
+                nome_sprint_backlog: {
+                    required: "Campo Nome da Sprint Backlog não pode ser vazio!",
+                },
+                tempo_sprint_backlog: {
                     required: "Campo Tempo de duração  não pode ser vazio!",
                 },
-                cod_projeto: {
-                    required: "Campo Projeto não pode ser vazio!",
+                cod_participante: {
+                    required: "Campo Atribuido para, não pode ser vazio!",
                 },
             }
         });

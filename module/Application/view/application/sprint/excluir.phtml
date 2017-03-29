@@ -28,7 +28,7 @@ if (!isset($_POST['cod_sprint'])) {
 
                 <div class="modal-footer">
                     <button type="button" name="excluir" id="excluir" class="btn btn-primary" onclick="excluir();">Sim</button>
-                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-warning">Não</a>
+                    <a href="<?=$this->url('sprint',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-warning">Não</a>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@ if (isset($_POST['cod_sprint'])) {
                     Sprint excluída com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-primary">Ok</a>
+                    <a href="<?=$this->url('sprint',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>

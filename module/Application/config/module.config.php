@@ -23,17 +23,6 @@ return array(
                     ),
                 ),
             ),
-            //rota para tela inicial
-            'inicio' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/inicio',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'inicio',
-                    ),
-                ),
-            ),
             //rota para tela de login
             'login' => array(
                 'type' => 'Literal',
@@ -55,6 +44,28 @@ return array(
                         'action' => 'sair',
                     )
                 )
+            ),
+            //rota para tela inicial
+            'inicio' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/inicio',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'inicio',
+                    ),
+                ),
+            ),
+            //rota para tela inicial com projeto
+            'projetoescolhido' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projetoescolhido[/:cod_projeto]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'projetoescolhido',
+                    ),
+                ),
             ),
             //rota para funcionalidade alterar senha
             'alterarsenha' => array(
@@ -157,19 +168,6 @@ return array(
                     ),
                 ),
             ),
-            /*             * ************* ROTAS PARA PRODUCTBACKLOG ************** */
-            //rota para tela productbacklog
-            'productbacklog' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/productbacklog',
-                    'route' => '/projeto[/:cod_projeto]/productbacklog',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\ProductBacklog',
-                        'action' => 'listar',
-                    ),
-                ),
-            ),
             /*             * ************* ROTAS PARA PROJETO ************** */
             //rota para tela projeto
             'projeto' => array(
@@ -226,15 +224,75 @@ return array(
                     ),
                 ),
             ),
-            /*             * ************* ROTAS PARA SPRINTBACKLOG ************** */
+            /*             * ************* ROTAS PARA SPRINT BACKLOG ************** */
             //rota para tela sprintbacklog
-            'sprintbacklog' => array(
+            'sprintbacklog-escolher-projeto' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/sprintbacklog',
+                    'route' => '/sprintbacklog-escolher-projeto',
                     'defaults' => array(
                         'controller' => 'Application\Controller\SprintBacklog',
-                        'action' => 'index',
+                        'action' => 'escolher',
+                    ),
+                ),
+            ),
+            
+            //rota para tela sprint backlog
+            'sprintbacklog' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/productbacklog',
+                    'route' => '/projeto[/:cod_projeto]/sprintbacklog',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\SprintBacklog',
+                        'action' => 'listar',
+                    ),
+                ),
+            ),
+            //Rota cadastrar sprint backlog
+            'sprintbacklog-cadastrar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/sprintbacklog-cadastrar',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\SprintBacklog',
+                        'action' => 'cadastrar',
+                    ),
+                ),
+            ),
+            //Rota editar sprint backlog
+            'sprintbacklog-editar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/sprintbacklog-editar[/:cod_sprint_backlog]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\SprintBacklog',
+                        'action' => 'editar',
+                    ),
+                ),
+            ),
+            //Rota excluir sprint backlog
+            'sprintbacklog-excluir' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/sprintbacklog-excluir[/:cod_sprint_backlog]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\SprintBacklog',
+                        'action' => 'excluir',
+                    ),
+                ),
+            ),
+            
+            /*             * ************* ROTAS PARA PRODUCTBACKLOG ************** */
+            //rota para tela productbacklog
+            'productbacklog' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/productbacklog',
+                    'route' => '/projeto[/:cod_projeto]/productbacklog',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklog',
+                        'action' => 'listar',
                     ),
                 ),
             ),
@@ -253,7 +311,7 @@ return array(
             'productbacklog-editar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/projeto[/:cod_projeto]/productbacklog-editar[/:cod_productbacklog]',
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-editar[/:cod_product_backlog]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklog',
                         'action' => 'editar',
@@ -264,7 +322,7 @@ return array(
             'productbacklog-excluir' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/projeto[/:cod_projeto]/productbacklog-excluir[/:cod_productbacklog]',
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-excluir[/:cod_product_backlog]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklog',
                         'action' => 'excluir',
@@ -315,6 +373,18 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Sprint',
                         'action' => 'excluir',
+                    ),
+                ),
+            ),
+            
+            /*  * ************* ROTAS PARA PRODUCTBACKLOG POR SPRINT ************** */
+            'productbacklog-por-sprint' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-por-sprint',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklogPorSprint',
+                        'action' => 'index',
                     ),
                 ),
             ),
@@ -394,6 +464,7 @@ return array(
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
             'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',
             'Application\Controller\Sprint' => 'Application\Controller\SprintController',
+            'Application\Controller\ProductBacklogPorSprint' => 'Application\Controller\ProductBacklogPorSprintController',
         ),
     ),
     /** invocando a(s) view helper(s) */

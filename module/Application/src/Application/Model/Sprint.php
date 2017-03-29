@@ -23,7 +23,7 @@ class Sprint implements InputFilterAwareInterface {
     public $nomeSprint;
     public $descricaoSprint;
     public $tempoSprint;
-    public $codStatusSprint;
+    public $codStatus;
     public $codProjeto;
     public $descricaoStatus;
     public $dataCadastroSprint;
@@ -37,7 +37,7 @@ class Sprint implements InputFilterAwareInterface {
         $this->nomeSprint = (isset($data['nome_sprint'])) ? $data['nome_sprint'] : null;
         $this->descricaoSprint = (isset($data['descricao_sprint'])) ? $data['descricao_sprint'] : null;
         $this->tempoSprint = (isset($data['tempo_sprint'])) ? $data['tempo_sprint'] : null;
-        $this->codStatusSprint = (isset($data['cod_status'])) ? $data['cod_status'] : null;
+        $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->dataCadastroSprint = (isset($data['data_cadastro_sprint'])) ? $data['data_cadastro_sprint'] : null;
@@ -50,7 +50,7 @@ class Sprint implements InputFilterAwareInterface {
             'descricao_sprint' => $this->descricaoSprint,
             'tempo_sprint' => $this->tempoSprint,
             'descricao_status' => $this->descricaoStatus,
-            'cod_status' => $this->codStatusSprint,
+            'cod_status' => $this->codStatus,
             'cod_projeto' => $this->codProjeto,
             'data_cadastro_sprint' => $this->dataCadastroSprint,
         );

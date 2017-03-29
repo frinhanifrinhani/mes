@@ -1,16 +1,16 @@
-<h1>Página inicial logado</h1>
 <p>Bem vindo! <?= $this->nome_participante ?>!</p>
 
 <p>Em qual projeto você pretente trabalhar? 
-    <select name="projetos" id="projetos" onchange="escolherProjeto(this);">
+    <select name="projetos" id="projetos" onchange="location = this.value;">
+    <!--<select name="projetos" id="projetos" >-->
         <option>Selecione...</option>
         <?= $this->partialLoop('partial_loop_projetos.phtml', $this->partial_loop_projetos) ?>  
     </select>
 </p>
 
 <script>
-    function escolherProjeto(proj){
-       alert(proj.value);
+    function escolherProjeto(codProjeto){
+        
     }
     
 //function escolherProjeto(){

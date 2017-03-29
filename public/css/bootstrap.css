@@ -1718,6 +1718,7 @@ th {
 }
 /**add*/
 .table-bordered-green > tbody > tr > td{
+    border: 1px solid #b2dba1;
     background-color: #dff0d8;
 }
 
