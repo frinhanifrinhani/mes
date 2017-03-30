@@ -12,10 +12,8 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter;
-
 use Zend\Mvc\Controller\Plugin\Url;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-
 use Application\Controller\SprintBacklogController;
 
 class SprintBacklogForm extends Form {
@@ -24,13 +22,11 @@ class SprintBacklogForm extends Form {
     public $participanteTable;
     public $productBacklogTable;
     public $codProjeto;
-    
     public $productBacklogs;
 
     public function __construct($codProjeto) {
-        $this->codProjeto = $codProjeto;
         parent::__construct('form_sprint_backlog');
-
+        $this->setCodProjeto($codProjeto);
         $this->setAttribute('method', 'post');
         $this->setAttribute('id', 'form_sprint_backlog');
 
@@ -153,7 +149,14 @@ class SprintBacklogForm extends Form {
                 'id' => 'botao_excluir',
             ),
         ));
-        
+    }
+
+    public function setCodProjeto($codProjeto) {
+        $this->codProjeto = $codProjeto;
+    }
+
+    private function getCodProjeto() {
+        return $this->codProjeto;
     }
 
     //Busca status
@@ -185,7 +188,7 @@ class SprintBacklogForm extends Form {
     }
 
     private function getValueParticipanteOptions() {
-        
+
         $valueOptions = array();
         $participantes = $this->getParticipanteTable()->fetchAllScrumTeam(3);
         $valueOptions[''] = 'Selecione...';
@@ -203,12 +206,9 @@ class SprintBacklogForm extends Form {
         }
         return $this->productBacklogTable;
     }
-    private function getCodProjeto() {
-        return $this->codProjeto;
-    }
 
-    public function getValueProductBacklogOptions() {
-        
+    private function getValueProductBacklogOptions() {
+
         $valueProductBacklogOptions = array();
         $this->productBacklogs = $this->getProductBacklogTable()->fetchAll($this->getCodProjeto());
         $valueProductBacklogOptions[''] = 'Selecione...';

@@ -3,7 +3,7 @@
 </style>
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/login">Login</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('login')?>">Login</a></li>
         <li class="breadcrumb-item active">Criar conta Product Owner</li>
     </ol>
 </div>
@@ -21,8 +21,8 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     Deseja acessar o sistema?
                 </div>
                 <div class="modal-footer">
-                    <a href="/inicio" class="btn btn-primary">Sim</a>
-                    <a href="/sair" class="btn btn-default">Não</a>
+                    <a href="<?=$this->url('inicio')?>" class="btn btn-primary">Sim</a>
+                    <a href="<?=$this->url('sair')?>" class="btn btn-default">Não</a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="box-header with-border">    
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="/participante">Participantes</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('participante')?>">Participantes</a></li>
         <li class="breadcrumb-item active">Editar participante</li>
     </ol>
 </div>
@@ -21,7 +21,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     <spant> Participante alterado com sucesso!</spant>
                 </div>
                 <div class="modal-footer">
-                    <a href="/participante" class="btn btn-primary">Ok</a>
+                    <a href="<?=$this->url('participante')?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>

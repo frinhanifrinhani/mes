@@ -33,7 +33,7 @@ class ProjetoTable {
                 ->join('status', 'status.cod_status = projeto.cod_status', 'descricao_status')
                 ->join('participante', 'participante.cod_participante = projeto.cod_participante', 'nome_participante')
 //                ->where('projeto.cod_participante = ' . $productOwner)
-                ->order(array('cod_projeto' => 'desc'));
+                ->order(array('nome_projeto'));
         $linha = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();  
         return $linha;

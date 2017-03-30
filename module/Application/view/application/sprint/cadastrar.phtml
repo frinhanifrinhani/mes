@@ -4,7 +4,7 @@
         <li class="breadcrumb-item"><a href="<?=$this->url('projeto') ?>">Projetos</a></li>
         <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar', array('cod_projeto' => $this->cod_projeto)) ?>">Gerenciar projeto</a></li>
         <li class="breadcrumb-item"><a href="<?=$this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>">Sprint</a></li>
-        <li class="breadcrumb-item active">Cadastrar Product Backlog</li>
+        <li class="breadcrumb-item active">Cadastrar Sprint</li>
     </ol>
 </div>
 <?php
@@ -23,7 +23,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
                     <spant> Sprint cadastrada com sucesso!</spant>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?= $this->url('projeto', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary">Ok</a>
+                    <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <div class="form-group">
         <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
         <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
-        <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+        <a href="<?=$this->url('sprint',array('cod_projeto'=>$this->cod_projeto))?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
 
     <?php echo $this->form()->closeTag(); ?>     

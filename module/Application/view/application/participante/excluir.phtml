@@ -25,7 +25,7 @@ if (!isset($_POST['cod_participante'])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" name="excluir" id="excluir" class="btn btn-primary" onclick="excluir();">Sim</button>
-                    <a href="/participante" class="btn btn-warning">Não</a>
+                    <a href="<?=$this->url('participante')?>" class="btn btn-warning">Não</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@ if (isset($this->retorno) && $this->retorno == true) {
                    Participante excluido com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="/participante" class="btn btn-primary">Ok</a>
+                    <a href="<?=$this->url('participante')?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@ if (isset($this->retorno) && $this->retorno == true) {
                 </div>
                 <div class="modal-footer">
                     <!--<a href="/participante" class="btn btn-primary">Solicitar alteração</a>-->
-                    <a href="/participante" class="btn btn-warning">Voltar</a>
+                    <a href="<?=$this->url('participante')?>" class="btn btn-warning">Voltar</a>
                 </div>
             </div>
         </div>

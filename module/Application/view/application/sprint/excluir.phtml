@@ -1,9 +1,9 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="/projeto">Projetos</a></li>
-        <li class="breadcrumb-item"><a href="/projeto-gerenciar/<?=$this->cod_projeto?>">Gerenciar projeto</a></li>
-        <li class="breadcrumb-item"><a href="/projeto/<?=$this->cod_projeto?>/sprint">Sprint</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('projeto')?>">Projetos</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('projeto-gerenciar',array('cod_projeto'=>$this->cod_projeto))?>">Gerenciar projeto</a></li>
+        <li class="breadcrumb-item"><a href="<?=$this->url('sprint',array('cod_projeto'=>$this->cod_projeto))?>">Sprint</a></li>
         <li class="breadcrumb-item active">Excluir sprint</li>
     </ol>
 </div>
@@ -83,7 +83,7 @@ if (isset($_POST['cod_sprint'])) {
     
     <div class="form-group">
         <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?$this->cod_projeto ?>">
-        <a href="/projeto/<?= $this->cod_projeto ?>/sprint-excluir/<?= $this->cod_sprint ?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+        <a href="<?=$this->url('sprint-excluir',array('cod_projeto'=>$this->cod_projeto,'cod_sprint'=>$this->cod_projeto))?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
         <a href="/projeto/<?= $this->cod_projeto ?>/sprint" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
 
     </div>
