@@ -54,8 +54,8 @@ class SprintBacklogController extends AbstractActionController {
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 //        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
-        $formSprintBacklog = new SprintBacklogForm();
-        
+        $formSprintBacklog = new SprintBacklogForm($codProjeto);
+                
         $productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
 
         $request = $this->getRequest();

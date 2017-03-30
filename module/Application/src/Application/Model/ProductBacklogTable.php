@@ -36,17 +36,6 @@ class ProductBacklogTable {
 //       echo $select->getSqlString();  
         return $linha;
     }
-    public function fetchAllForm() {
-        $select = new Select();
-        $select->from(new TableIdentifier('product_backlog'))
-                ->columns(array('cod_product_backlog', 'nome_product_backlog','descricao_product_backlog','prioridade_product_backlog','cod_projeto','cod_status'))
-                ->join('status', 'status.cod_status = product_backlog.cod_status', 'descricao_status')
-//                ->where('cod_projeto = ' . $codProjeto)
-                ->order(array('cod_product_backlog' => 'desc'));
-        $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
-        return $linha;
-    }
 //
 //    public function getLastId() {
 //        $ultimoSprint = $this->tableGateway->lastInsertValue;

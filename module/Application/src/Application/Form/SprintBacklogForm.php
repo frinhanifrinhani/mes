@@ -12,6 +12,10 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter;
+
+use Zend\Mvc\Controller\Plugin\Url;
+use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+
 use Application\Controller\SprintBacklogController;
 
 class SprintBacklogForm extends Form {
@@ -19,8 +23,12 @@ class SprintBacklogForm extends Form {
     public $statusTable;
     public $participanteTable;
     public $productBacklogTable;
+    public $codProjeto;
+    
+    public $productBacklogs;
 
-    public function __construct() {
+    public function __construct($codProjeto) {
+        $this->codProjeto = $codProjeto;
         parent::__construct('form_sprint_backlog');
 
         $this->setAttribute('method', 'post');
@@ -123,6 +131,7 @@ class SprintBacklogForm extends Form {
             'options' => array(
                 'label' => 'Product Backlog *',
                 'value_options' => $this->getValueProductBacklogOptions(),
+//                'value_options' => array('null' => 'Selecione'),
             ),
         ));
 
@@ -144,7 +153,7 @@ class SprintBacklogForm extends Form {
                 'id' => 'botao_excluir',
             ),
         ));
-       
+        
     }
 
     //Busca status
@@ -176,6 +185,7 @@ class SprintBacklogForm extends Form {
     }
 
     private function getValueParticipanteOptions() {
+        
         $valueOptions = array();
         $participantes = $this->getParticipanteTable()->fetchAllScrumTeam(3);
         $valueOptions[''] = 'Selecione...';
@@ -193,17 +203,19 @@ class SprintBacklogForm extends Form {
         }
         return $this->productBacklogTable;
     }
+    private function getCodProjeto() {
+        return $this->codProjeto;
+    }
 
-    public function getValueProductBacklogOptions(){
-
+    public function getValueProductBacklogOptions() {
+        
         $valueProductBacklogOptions = array();
-        $productBacklogs = $this->getProductBacklogTable()->fetchAllForm();
+        $this->productBacklogs = $this->getProductBacklogTable()->fetchAll($this->getCodProjeto());
         $valueProductBacklogOptions[''] = 'Selecione...';
-        foreach ($productBacklogs as $productBacklog) {
+        foreach ($this->productBacklogs as $productBacklog) {
             $valueProductBacklogOptions[$productBacklog->codProductBacklog] = $productBacklog->nomeProductBacklog;
         }
         return $valueProductBacklogOptions;
-
     }
 
 }
