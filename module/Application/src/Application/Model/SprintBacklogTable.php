@@ -32,9 +32,9 @@ class SprintBacklogTable {
                 ->join('status', 'status.cod_status = sprint_backlog.cod_status', 'descricao_status')
                 ->join('participante', 'participante.cod_participante = sprint_backlog.cod_participante', 'nome_participante')
                 ->where('cod_projeto = ' . $codProjeto)
-                ->order(array('cod_sprint_backlog' => 'desc'));
+                ->order(array('sprint_backlog.cod_sprint_backlog'=>'DESC'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
+//       echo $select->getSqlString();
         return $linha;
     }
 

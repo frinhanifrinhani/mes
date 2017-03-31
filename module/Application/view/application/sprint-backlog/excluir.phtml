@@ -37,7 +37,7 @@ if (!isset($_POST['cod_sprint_backlog'])) {
     <?php
 }
 
-if (isset($_POST['cod_sprint_backlog'])) {
+if (isset($this->retorno) && $this->retorno == true) {
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -91,7 +91,7 @@ if (isset($_POST['cod_sprint_backlog'])) {
 
     <div class="form-group">
         <input type="hidden" name="cod_projeto" id="cod_projeto" value="<?= $this->cod_projeto ?>">
-        <button type="submit" name="botao_excluir" id="botao_excluir" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</button>
+        <a href="<?=$this->url('sprintbacklog-excluir',array('cod_projeto'=>$this->cod_projeto,'cod_sprint_backlog'=>$this->cod_sprint_backlog)) ?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
         <a href="<?= $this->url('sprintbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
 

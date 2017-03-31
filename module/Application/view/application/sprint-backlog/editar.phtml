@@ -1,8 +1,8 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('sprintbacklog-escolher-projeto')?>">Escolher projeto</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('sprintbacklog',array('cod_projeto'=>$this->cod_projeto))?>">Sprint Backlog</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('sprintbacklog-escolher-projeto') ?>">Escolher projeto</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('sprintbacklog', array('cod_projeto' => $this->cod_projeto)) ?>">Sprint Backlog</a></li>
         <li class="breadcrumb-item active">Editar Sprint Backlog</li>
     </ol>
 </div>
@@ -53,6 +53,8 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     </div>
     <div class="form-group">
         <?= $this->formRow($formSprintBacklog->get('tempo_sprint_backlog')); ?>
+        <label id="tempo_sprint_backlog-error-zero" class="error" for="nome_sprint_backlog" style="display: none;" >Campo Tempo de duração deve ter valor maior que zero!</label>
+
     </div>
     <div class="form-group">
         <?= $this->formRow($formSprintBacklog->get('cod_participante')); ?>
@@ -71,19 +73,20 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <?php echo $this->form()->closeTag(); ?>     
 </div>
 <script>
-    function verificarMinTempo(tempo){
-        var tempo = tempo.replace(':','');
+    function verificarMinTempo(tempo) {
+        var tempo = tempo.replace(':', '');
         var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
-      
-         if(tempo == 0000 || tempo == 000 ||tempo == 00 || tempo == 0 ){
+
+        if (tempo == 0000 || tempo == 000 || tempo == 00 || tempo == 0) {
             campoTempo.removeAttribute('style');
-        }else{
-             campoTempo.setAttribute('style','display:none')
-        };
+        } else {
+            campoTempo.setAttribute('style', 'display:none')
+        }
+        ;
     }
-    
+
     $(document).ready(function () {
-    $('#tempo_sprint_backlog').mask('99:99');
+        $('#tempo_sprint_backlog').mask('99:99');
 
         $('#form_sprint_backlog').validate({
             // Define as regras

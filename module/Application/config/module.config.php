@@ -378,6 +378,7 @@ return array(
             ),
             
             /*  * ************* ROTAS PARA PRODUCTBACKLOG POR SPRINT ************** */
+            // rota para escolher sprint 
             'productbacklog-por-sprint' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -385,6 +386,17 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklogPorSprint',
                         'action' => 'index',
+                    ),
+                ),
+            ),
+            //rota para listar product backlog
+            'productbacklog-por-sprint-listar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto[/:cod_projeto]/productbacklog-por-sprint-listar[/:cod_sprint]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ProductBacklogPorSprint',
+                        'action' => 'listar',
                     ),
                 ),
             ),

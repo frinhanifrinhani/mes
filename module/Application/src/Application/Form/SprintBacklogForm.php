@@ -26,7 +26,8 @@ class SprintBacklogForm extends Form {
 
     public function __construct($codProjeto) {
         parent::__construct('form_sprint_backlog');
-        $this->setCodProjeto($codProjeto);
+//        $this->setCodProjeto($codProjeto);
+        $this->codProjeto= $codProjeto;
         $this->setAttribute('method', 'post');
         $this->setAttribute('id', 'form_sprint_backlog');
 

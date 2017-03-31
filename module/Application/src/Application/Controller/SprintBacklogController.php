@@ -98,7 +98,7 @@ class SprintBacklogController extends AbstractActionController {
 //        $this->Redirecionamento()->redirecionarParaProjeto($projeto);
 
         if ($sprintBacklog == true) {
-            $formSprintBacklog = new SprintBacklogForm();
+            $formSprintBacklog = new SprintBacklogForm($codProjeto);
             $formSprintBacklog->setData($sprintBacklog->getArrayCopy());
         } else {
             return $this->redirect()->toRoute('sprint-backlog', array('cod_projeto' => $codProjeto));
@@ -143,7 +143,7 @@ class SprintBacklogController extends AbstractActionController {
         $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
 
         if ($sprintBacklog == true) {
-            $formSprintBacklog = new SprintBacklogForm();
+            $formSprintBacklog = new SprintBacklogForm($codProjeto);
             $formSprintBacklog->setData($sprintBacklog->getArrayCopy());
         } else {
             return $this->redirect()->toRoute('sprintbacklog', array('cod_projeto' => $codProjeto));
