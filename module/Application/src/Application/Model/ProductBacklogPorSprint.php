@@ -17,23 +17,29 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\TableGateway\TableGateway;
 
-class ProductBacklogPorSprint implements InputFilterAwareInterface {
+class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
 
     public $codProductBacklog;
+    public $codProductBacklogPb;
     public $codSprint;
+    public $nomeProductBacklog;
     protected $inputFilter;
     protected $dbAdapter;
     
-    //Recupera os valores que vem por post e passa para os Atributos, caso não exista valores, pass null (no ZF2 faz o papel do get)
+    //Recupera os valores que vem por post e passa para os Atributos, caso não exista valores, pass null (no ZF2 faz o papel do set)
     function exchangeArray($data) {
         $this->codProductBacklog = (isset($data['cod_product_backlog'])) ? $data['cod_product_backlog'] : null;
+        $this->codProductBacklogPb = (isset($data['cod_product_backlog_pb'])) ? $data['cod_product_backlog_pb'] : null;
         $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
+        $this->nomeProductBacklog = (isset($data['nome_product_backlog'])) ? $data['nome_product_backlog'] : null;
     }
-    //Rassa os valores que vem do banco para os Atributos, (no ZF2 faz o papel do set)
+    //Rassa os valores que vem do banco para os Atributos, (no ZF2 faz o papel do get)
     public function getArrayCopy() {
         return array(
             'cod_product_backlog' => $this->codProductBacklog,
+            'cod_product_backlog_pb' => $this->codProductBacklogPb,
             'cod_sprint' => $this->codSprint,
+            'nome_product_backlog' => $this->nomeProductBacklog,
             
         );
     }
@@ -56,60 +62,44 @@ class ProductBacklogPorSprint implements InputFilterAwareInterface {
             $factory = new InputFactory();
 
             $inputFilter->add($factory->createInput(array(
-                        'name' => 'nome_product_backlog',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim')
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'NotEmpty',
-                                'options' => array(
-                                    'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Nome do Item não pode ser vazio!'
-                                    ),
-                                ),
-                            ),
+                        'name' => 'cod_product_backlog',
+                        'required' => false,
+//                        'filters' => array(
+//                            array('name' => 'StripTags'),
+//                            array('name' => 'StringTrim')
+//                        ),
+//                        'validators' => array(
+//                            array(
+//                                'name' => 'NotEmpty',
+//                                'options' => array(
+//                                    'messages' => array(
+//                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo codigo da sprint do Item não pode ser vazio!'
+//                                    ),
+//                                ),
+//                            ),
                         )
-            )));
+//            )));
+            ));
             $inputFilter->add($factory->createInput(array(
-                        'name' => 'descricao_product_backlog',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim')
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'NotEmpty',
-                                'options' => array(
-                                    'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Descrição do Item não pode ser vazio!'
-                                    ),
-                                ),
-                            ),
+                        'name' => 'cod_sprint',
+                        'required' => false,
+//                        'filters' => array(
+//                            array('name' => 'StripTags'),
+//                            array('name' => 'StringTrim')
+//                        ),
+//                        'validators' => array(
+//                            array(
+//                                'name' => 'NotEmpty',
+//                                'options' => array(
+//                                    'messages' => array(
+//                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo codigo da sprint do Item não pode ser vazio!'
+//                                    ),
+//                                ),
+//                            ),
                         )
-            )));
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'prioridade_product_backlog',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim')
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'NotEmpty',
-                                'options' => array(
-                                    'messages' => array(
-                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Prioridade não pode ser vazio!'
-                                    ),
-                                ),
-                            ),
-                        )
-            )));
-
+//            )));
+            ));
+            
             $this->inputFilter = $inputFilter;
         }
 

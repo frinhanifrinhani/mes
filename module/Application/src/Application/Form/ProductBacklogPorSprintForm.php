@@ -13,11 +13,11 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\InputFilter;
 
-use Zend\Mvc\Controller\Plugin\Url;
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Application\Controller\SprintBacklogController;
+//use Zend\Mvc\Controller\Plugin\Url;
+//use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+//use Application\Controller\SprintBacklogController;
 
-class ProductBacklogPorSprintForm extends Form {
+class ProductBacklogPorSprintForm extends Form{
 
     public $sprintTable;
     public $projetoTable;
@@ -31,7 +31,7 @@ class ProductBacklogPorSprintForm extends Form {
 
         $this->add(array(
             'name' => 'cod_sprint',
-            'type' => 'Select',
+            'type' => 'text',
             'attributes' => array(
                 'id' => 'cod_sprint',
                 'class' => 'form-control',
@@ -50,7 +50,8 @@ class ProductBacklogPorSprintForm extends Form {
                 'class' => 'form-control',
             ),
 //            'options' => array(
-//                'label' => 'Código da Sprint',
+//                //'label' => 'Código da Sprint',
+//
 //            ),
         ));
 
@@ -67,12 +68,12 @@ class ProductBacklogPorSprintForm extends Form {
         ));
     }
 
-    public function setCodProjeto($codProjeto) {
-        $this->codProjeto = $codProjeto;
-    }
-
     private function getCodProjeto() {
         return $this->codProjeto;
+    }
+     
+    public function setCodProjeto($codProjeto) {
+        $this->codProjeto = $codProjeto;
     }
 
     //Busca status
@@ -85,15 +86,14 @@ class ProductBacklogPorSprintForm extends Form {
     }
 
     private function getValueSprintOptions() {
-        
+//        var_dump($controller);
         $valueSprintOptions = array();
         $sprints = $this->getSprintTable()->fetchAll($this->getCodProjeto());
         $valueSprintOptions[''] = 'Selecione...';
         foreach ($sprints as $sprint) {
-            $url= "productbacklog-por-sprint-listar/{$sprint->codSprint}";
+            $url= "/projeto/{$sprint->codProjeto}/productbacklog-por-sprint-listar/{$sprint->codSprint}";
 //            $valueSprintOptions[$sprint->codSprint] = $sprint->nomeSprint;
             $valueSprintOptions[$url] = $sprint->nomeSprint;
-//            $this->url('sprintbacklog',array('cod_projeto'=>$this->codProjeto))
         }
         return $valueSprintOptions;
     }

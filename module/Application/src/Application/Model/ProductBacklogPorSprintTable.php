@@ -15,77 +15,58 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Application\Model\ProductBacklogPorSprint;
+use Application\Model\ProductBacklog;
 use Zend\Db\Sql\TableIdentifier;
 
-class ProductBacklogPorSprintlogTable {
+class ProductBacklogPorSprintTable {
 
     protected $tableGateway;
 
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
     }
-    
+
     public function fetchAll($codProjeto) {
         $select = new Select();
         $select->from(new TableIdentifier('product_backlog'))
-                ->columns(array('cod_product_backlog', 'nome_product_backlog','descricao_product_backlog','prioridade_product_backlog','cod_projeto','cod_status'))
-                ->join('status', 'status.cod_status = product_backlog.cod_status', 'descricao_status')
+                ->columns(array('cod_product_backlog_pb' => 'cod_product_backlog', 'nome_product_backlog', 'cod_projeto'))
+                ->join('product_backlog_para_sprint', 'product_backlog_para_sprint.cod_product_backlog = product_backlog.cod_product_backlog', 'cod_product_backlog', 'left')
                 ->where('cod_projeto = ' . $codProjeto)
-                ->order(array('cod_product_backlog' => 'desc'));
+                ->order(array('product_backlog.cod_product_backlog' => 'ASC'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
+//       echo $select->getSqlString();
         return $linha;
     }
-//
-//    public function getLastId() {
-//        $ultimoSprint = $this->tableGateway->lastInsertValue;
-//        return $ultimoSprint;
-//    }
-//
-    public function getProductBacklog($codProductBacklog) {
+
+    public function getProductBackPorSprint($codProductBacklog) {
         $codProductBacklog = (int) $codProductBacklog;
         $rowset = $this->tableGateway->select(array('cod_product_backlog' => $codProductBacklog));
         $row = $rowset->current();
-
         return $row;
     }
-
-    public function salvar(ProductBacklog $productBacklog) {
+    
+    public function salvar(ProductBacklogPorSprint $productBacklogPorSprint) {
         $data = array(
-            'cod_product_backlog' => $productBacklog->codProductBacklog,
-            'nome_product_backlog' => $productBacklog->nomeProductBacklog,
-            'descricao_product_backlog' => $productBacklog->descricaoProductBacklog,
-            'prioridade_product_backlog' => $productBacklog->prioridadeProductBacklog,
-            'cod_projeto' => $productBacklog->codProjeto,
-            'cod_status' => $productBacklog->codStatus,
+            'cod_product_backlog' => $productBacklogPorSprint->codProductBacklog,
+            'cod_sprint' => $productBacklogPorSprint->codSprint,
         );
+        
+        $numRegistro = count($data['cod_product_backlog']);
+        $codSprint = $data['cod_sprint'];
+        $codProductBacklog = $productBacklogPorSprint->codProductBacklog;
+       
+        $this->tableGateway->delete(array('cod_sprint' => $codSprint));
+        
+        for ($i = 0; $i < $numRegistro; $i++) {
 
-        try {
-            $codProductBacklog = $productBacklog->codProductBacklog;
-            if (!$this->getProductBacklog($codProductBacklog)) {
-                $data['cod_product_backlog'] = $codProductBacklog;
-                return $this->tableGateway->insert($data);
-            } else {
-                return $this->tableGateway->update($data, array('cod_product_backlog' => $codProductBacklog));
+            if (!$this->getProductBackPorSprint($codProductBacklog[$i])) {
+                 $this->tableGateway->insert(array(
+                    'cod_product_backlog' => $codProductBacklog[$i],
+                    'cod_sprint' => $data['cod_sprint']));
             }
-        } catch (\Exception $e) {
-            $e->getPrevious()->getMessage();
+            
         }
-    }
 
-    public function excluir($codProductBacklog) {
-        return $this->tableGateway->delete(array('cod_product_backlog' => $codProductBacklog));
     }
-//
-//    //metodo que retorna sql da tableGateway
-//    public function getSql() {
-//        return $this->tableGateway->getSql();
-//    }
-//
-//    //metodo que retorna select da tableGateway
-//    public function getSelect() {
-//        $select = new Select($this->tableGateway->getTable());
-//        return $select;
-//    }
 
 }

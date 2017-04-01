@@ -1,1 +1,20 @@
-Product Backlog Por Sprint
+<div class="box-header with-border">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('projeto') ?>">Projetos</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('projeto-gerenciar', array('cod_projeto' => $this->cod_projeto)) ?>">Gerenciar projeto</a></li>
+        <li class="breadcrumb-item active">Product Backlog por Sprint</li>
+    </ol>
+</div>
+
+<hr />
+<div class="content">
+
+    <div class="form-group">
+        Escolha a Sprint:
+        <select name="cod_sprint" id="cod_sprint" class="form-control" onchange="location = this.value;">
+            <option>Selecione...</option>
+            <?= $this->partialLoop('partial_loop_sprint.phtml', $this->partial_loop_sprint) ?>  
+        </select>
+    </div>   
+</div>

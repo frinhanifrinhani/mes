@@ -13,40 +13,69 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Form\ProductBacklogPorSprintForm;
-//use Application\Model\ProductBacklog;
+use Application\Model\ProductBacklogPorSprint;
 
 class ProductBacklogPorSprintController extends AbstractActionController {
 
+    protected $productBacklogPorSprintTable;
     protected $productBacklogTable;
+    protected $sprintTable;
     protected $projetoTable;
 
     public function indexAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        
+
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        $productBacklogPorSprintForm = new ProductBacklogPorSprintForm($codProjeto);
+//        $productBacklogPorSprintForm = new ProductBacklogPorSprintForm($codProjeto);
+        $sprint = $this->getSprintTable()->fetchAll($codProjeto);
+
         return new ViewModel(array(
+            'partial_loop_sprint' => $sprint,
             'cod_projeto' => $codProjeto,
-            'product_backlog_por_sprint_form' => $productBacklogPorSprintForm,
+//            'product_backlog_por_sprint_form' => $productBacklogPorSprintForm,
         ));
     }
-    
+
     public function listarAction() {
-        //metodo que verifica autenticação e perfil
-//        $this->ACLPermitir()->permitir();
-//
+//        metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
+
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
-        $productBacklogPorSprintForm = new ProductBacklogPorSprintForm($codProjeto);
+        //$formProductBacklogPorSprint = new ProductBacklogPorSprintForm($codProjeto);
 //        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
-        $productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
+        $productBacklog = $this->getProductBacklogPorSprintTable()->fetchAll($codProjeto);
+//        var_dump($sprint);die;
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+//            var_dump($request->getPost());
+
+            $productBacklogPorSprint = new ProductBacklogPorSprint();
+
+            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+            $productBacklogPorSprint->setDbAdapter($dbAdapter);
+
+//            $formProductBacklogPorSprint->setInputFilter($productBacklogPorSprint->getInputFilter());
+//            $formProductBacklogPorSprint->setData($request->getPost());
+//            if ($formProductBacklogPorSprint->isValid()) {
+
+            $productBacklogPorSprint->exchangeArray($request->getPost());
+            $retorno = $this->getProductBacklogPorSprintTable()->salvar($productBacklogPorSprint);
+
+//                $ultimoProductBacklog = $this->getProductBacklogTable()->getLastId();
+//            }else{
+//                echo 'erro';
+//            }
+        }
 
         return new ViewModel(array(
             'partial_loop_listar' => $productBacklog,
             'cod_projeto' => $codProjeto,
             'cod_sprint' => $codSprint,
-            'product_backlog_por_sprint_form' => $productBacklogPorSprintForm,
+
+//            'product_backlog_por_sprint_form' => $formProductBacklogPorSprint,
         ));
     }
 
@@ -162,6 +191,24 @@ class ProductBacklogPorSprintController extends AbstractActionController {
 //    }
 //
     //recupera e retorna a model ProductBacklogTable
+    public function getSprintTable() {
+        if (!$this->sprintTable) {
+            $sm = $this->getServiceLocator();
+            $this->sprintTable = $sm->get('Application\Model\SprintTable');
+        }
+        return $this->sprintTable;
+    }
+
+    //recupera e retorna a model ProductBacklogTable
+    public function getProductBacklogPorSprintTable() {
+        if (!$this->productBacklogPorSprintTable) {
+            $sm = $this->getServiceLocator();
+            $this->productBacklogPorSprintTable = $sm->get('Application\Model\ProductBacklogPorSprintTable');
+        }
+        return $this->productBacklogPorSprintTable;
+    }
+
+    //recupera e retorna a model ProductBacklogTable
     public function getProductBacklogTable() {
         if (!$this->productBacklogTable) {
             $sm = $this->getServiceLocator();
@@ -169,6 +216,7 @@ class ProductBacklogPorSprintController extends AbstractActionController {
         }
         return $this->productBacklogTable;
     }
+
 //
 //    //recupera e retorna a model ProjetoTable
 //    public function getProjetoTable() {

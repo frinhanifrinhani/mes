@@ -27,6 +27,8 @@ use Application\Model\SprintBacklog;
 use Application\Model\SprintBacklogTable;
 use Application\Model\ProductBacklog;
 use Application\Model\ProductBacklogTable;
+use Application\Model\ProductBacklogPorSprint;
+use Application\Model\ProductBacklogPorSprintTable;
 use Application\Model\Status;
 use Application\Model\StatusTable;
 use Application\Model\Projeto;
@@ -139,6 +141,21 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new SprintBacklog());
                     return new TableGateway(new TableIdentifier('sprint_backlog'), $dbAdapter, null, $resultSetPrototype);
+                },
+                /**                 * ************ PRODUCT BACKLOG POR SPRINT ************** */
+                //instacia um objeto da ProductBacklogPorSprintTable e retorna seus elementos
+                'Application\Model\ProductBacklogPorSprintTable' => function($sm) {
+                    $tableGateway = $sm->get('ProductBacklogPorSprintTableGateway');
+                    $table = new ProductBacklogPorSprintTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da ProductBacklogPorSprint, e retorna uma TableGateway 
+                //passando o nome da tabela 'product_backlog_para_sprint'
+                'ProductBacklogPorSprintTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new ProductBacklogPorSprint());
+                    return new TableGateway(new TableIdentifier('product_backlog_para_sprint'), $dbAdapter, null, $resultSetPrototype);
                 },
                 /**                 * ************ STATUS ************** */
                 //instacia um objeto da StatusTable e retorna seus elementos
