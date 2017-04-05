@@ -43,39 +43,28 @@ class ProductBacklogPorSprintController extends AbstractActionController {
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
-        //$formProductBacklogPorSprint = new ProductBacklogPorSprintForm($codProjeto);
-//        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
+        $sprint = $this->getSprintTable()->fetchAll($codProjeto);
         $productBacklog = $this->getProductBacklogPorSprintTable()->fetchAll($codProjeto);
-//        var_dump($sprint);die;
-
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+        
         $request = $this->getRequest();
         if ($request->isPost()) {
-//            var_dump($request->getPost());
 
             $productBacklogPorSprint = new ProductBacklogPorSprint();
 
             $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $productBacklogPorSprint->setDbAdapter($dbAdapter);
 
-//            $formProductBacklogPorSprint->setInputFilter($productBacklogPorSprint->getInputFilter());
-//            $formProductBacklogPorSprint->setData($request->getPost());
-//            if ($formProductBacklogPorSprint->isValid()) {
-
             $productBacklogPorSprint->exchangeArray($request->getPost());
             $retorno = $this->getProductBacklogPorSprintTable()->salvar($productBacklogPorSprint);
-
-//                $ultimoProductBacklog = $this->getProductBacklogTable()->getLastId();
-//            }else{
-//                echo 'erro';
-//            }
         }
 
         return new ViewModel(array(
+            'partial_loop_sprint' => $sprint,
             'partial_loop_listar' => $productBacklog,
             'cod_projeto' => $codProjeto,
             'cod_sprint' => $codSprint,
-
-//            'product_backlog_por_sprint_form' => $formProductBacklogPorSprint,
+            'projeto' => $projeto,
         ));
     }
 
@@ -191,6 +180,13 @@ class ProductBacklogPorSprintController extends AbstractActionController {
 //    }
 //
     //recupera e retorna a model ProductBacklogTable
+    public function getProjetoTable() {
+        if (!$this->projetoTable) {
+            $sm = $this->getServiceLocator();
+            $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
+        }
+        return $this->projetoTable;
+    }
     public function getSprintTable() {
         if (!$this->sprintTable) {
             $sm = $this->getServiceLocator();

@@ -30,8 +30,9 @@ class ProductBacklogPorSprintTable {
         $select = new Select();
         $select->from(new TableIdentifier('product_backlog'))
                 ->columns(array('cod_product_backlog_pb' => 'cod_product_backlog', 'nome_product_backlog', 'cod_projeto'))
-                ->join('product_backlog_para_sprint', 'product_backlog_para_sprint.cod_product_backlog = product_backlog.cod_product_backlog', 'cod_product_backlog', 'left')
-                ->where('cod_projeto = ' . $codProjeto)
+                ->join('product_backlog_para_sprint', 'product_backlog_para_sprint.cod_product_backlog = product_backlog.cod_product_backlog', array('cod_product_backlog','cod_sprint'), 'left')
+                ->join('sprint', 'sprint.cod_sprint = product_backlog_para_sprint.cod_sprint','nome_sprint','left')
+                ->where('product_backlog.cod_projeto = ' . $codProjeto)
                 ->order(array('product_backlog.cod_product_backlog' => 'ASC'));
         $linha = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();

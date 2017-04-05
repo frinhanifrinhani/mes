@@ -19,26 +19,32 @@ use Zend\Db\TableGateway\TableGateway;
 
 class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
 
+    public $codProjeto;
     public $codProductBacklog;
     public $codProductBacklogPb;
     public $codSprint;
+    public $nomeSprint;
     public $nomeProductBacklog;
     protected $inputFilter;
     protected $dbAdapter;
     
     //Recupera os valores que vem por post e passa para os Atributos, caso não exista valores, pass null (no ZF2 faz o papel do set)
     function exchangeArray($data) {
+        $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->codProductBacklog = (isset($data['cod_product_backlog'])) ? $data['cod_product_backlog'] : null;
         $this->codProductBacklogPb = (isset($data['cod_product_backlog_pb'])) ? $data['cod_product_backlog_pb'] : null;
         $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
+        $this->nomeSprint = (isset($data['nome_sprint'])) ? $data['nome_sprint'] : null;
         $this->nomeProductBacklog = (isset($data['nome_product_backlog'])) ? $data['nome_product_backlog'] : null;
     }
     //Rassa os valores que vem do banco para os Atributos, (no ZF2 faz o papel do get)
     public function getArrayCopy() {
         return array(
+            'cod_projeto' => $this->codProjeto,
             'cod_product_backlog' => $this->codProductBacklog,
             'cod_product_backlog_pb' => $this->codProductBacklogPb,
             'cod_sprint' => $this->codSprint,
+            'nome_sprint' => $this->nomeSprint,
             'nome_product_backlog' => $this->nomeProductBacklog,
             
         );
