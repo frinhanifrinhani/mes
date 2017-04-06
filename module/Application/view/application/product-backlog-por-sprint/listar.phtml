@@ -28,12 +28,12 @@
     <script>$("#myModal").modal();</script>
 <?php } ?>
 <hr />
-    <div class="alert alert-success">
-        <p><b>Projeto:</b> <?=$this->projeto->nomeProjeto; ?></p>
-        <p><b>Sprint:</b> <?php var_dump($this->sprint->nomeSprint); ?></p>
-    </div>
+<div class="alert alert-success">
+    <p><b>Projeto:</b> <?= $this->projeto->nomeProjeto; ?></p>
+    <p><b>Sprint:</b> <?= $this->sprint->nomeSprint; ?></p>
+</div>
 <div class="content">
-        
+
     <div class="form-group">
         <label>Sprint:</label>
         <select name="cod_sprint" id="cod_sprint" class="form-control" onchange="location = this.value;">
@@ -46,7 +46,36 @@
         <label>Product Backlog:</label>
         <form name="product_backlog_por_sprint_form" method="post">
             <table class="table">
-                <?= $this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar) ?>  
+                <?php
+                //echo $this->partialLoop('partial_loop_listar.phtml',$this->partial_loop_listar);
+                foreach ($this->product_backlog as $lista) {
+                    ?>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="cod_product_backlog[]" id="cod_product_backlog" value="<?= $lista->codProductBacklogPb ?>" 
+                            <?php if ($lista->codProductBacklog != null) { ?> 
+                                       checked="checked" 
+                                   <?php
+                                   }
+                                   if (isset($lista->codSprint) && $lista->codSprint != $this->cod_sprint) {
+                                       ?>
+                                       disabled="disabled"
+                                       <?php
+                                   }
+                                   ?> > &nbsp;
+
+    <?php echo $lista->nomeProductBacklog; ?>
+                        </td>
+                        <td>
+                                <?php if ($lista->codProductBacklog != null) { ?> Este Product Backlog está ligado a sprint: <a href="<?= $this->url('productbacklog-por-sprint-listar', array('cod_projeto' => $lista->codProjeto, 'cod_sprint' => $lista->codSprint)) ?>"> <?php
+                                    echo $lista->nomeSprint;
+                                }
+                                ?> </a>
+                        </td>
+                    </tr>
+
+
+<?php } ?>  
             </table>
     </div>
 
@@ -57,3 +86,6 @@
     </div>
 </form>
 </div>
+
+
+

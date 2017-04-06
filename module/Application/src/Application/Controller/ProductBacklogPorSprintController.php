@@ -46,6 +46,7 @@ class ProductBacklogPorSprintController extends AbstractActionController {
         $sprint = $this->getSprintTable()->fetchAll($codProjeto);
         $productBacklog = $this->getProductBacklogPorSprintTable()->fetchAll($codProjeto);
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
+        $sprintCur = $this->getSprintTable()->getSprint($codSprint);
         
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -61,10 +62,11 @@ class ProductBacklogPorSprintController extends AbstractActionController {
 
         return new ViewModel(array(
             'partial_loop_sprint' => $sprint,
-            'partial_loop_listar' => $productBacklog,
+            'product_backlog' => $productBacklog,
             'cod_projeto' => $codProjeto,
             'cod_sprint' => $codSprint,
             'projeto' => $projeto,
+            'sprint' => $sprintCur,
         ));
     }
 
