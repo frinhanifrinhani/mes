@@ -147,27 +147,65 @@ return array(
                 ),
             ),
             /*             * ************* ROTAS PARA PARTICIPANTE POR PROJETO ************** */
-            //Rota participante
-            'participanteprojeto' => array(
-                'type' => 'Literal', //Segment
+            // rota para escolher sprint 
+            'participante-por-projeto' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/participanteprojeto', //[/:cod_participante]
+                    'route' => '/projeto[/:cod_projeto]/participante-por-projeto',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\ParticipanteProjeto',
+                        'controller' => 'Application\Controller\ParticipantePorProjeto',
                         'action' => 'listar',
                     ),
                 ),
             ),
-            'participanteprojeto-add' => array(
-                'type' => 'Segment', //Segment
+            /*             * ************* ROTAS PARA PROJETO POR PARTICIPANTE ************** */
+            // rota para escolher sprint 
+            'projeto-por-participante' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/participanteprojeto-add[/:cod_participante]', //[/:cod_participante]
+                    'route' => '/projeto-por-participante[/:cod_participante]',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\ParticipanteProjeto',
-                        'action' => 'addProjeto',
+                        'controller' => 'Application\Controller\ProjetoPorParticipante',
+                        'action' => 'listar',
                     ),
                 ),
             ),
+            
+            /*             * ************* ROTAS PARA PARTICIPANTE PROJETO ************** */
+            
+           // rota para escolher sprint 
+//            'productbacklog-por-sprint' => array(
+//                'type' => 'Segment',
+//                'options' => array(
+//                    'route' => '/projeto[/:cod_projeto]/productbacklog-por-sprint',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\ProductBacklogPorSprint',
+//                        'action' => 'index',
+//                    ),
+//                ),
+//            ), 
+            
+            //Rota participante
+//            'participanteprojeto' => array(
+//                'type' => 'Literal', //Segment
+//                'options' => array(
+//                    'route' => '/participanteprojeto', //[/:cod_participante]
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\ParticipanteProjeto',
+//                        'action' => 'listar',
+//                    ),
+//                ),
+//            ),
+//            'participanteprojeto-add' => array(
+//                'type' => 'Segment', //Segment
+//                'options' => array(
+//                    'route' => '/participanteprojeto-add[/:cod_participante]', //[/:cod_participante]
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\ParticipanteProjeto',
+//                        'action' => 'addProjeto',
+//                    ),
+//                ),
+//            ),
             /*             * ************* ROTAS PARA PROJETO ************** */
             //rota para tela projeto
             'projeto' => array(
@@ -472,6 +510,8 @@ return array(
             'Application\Controller\Login' => 'Application\Controller\LoginController',
             'Application\Controller\Participante' => 'Application\Controller\ParticipanteController',
             'Application\Controller\ParticipanteProjeto' => 'Application\Controller\ParticipanteProjetoController',
+            'Application\Controller\ParticipantePorProjeto' => 'Application\Controller\ParticipantePorProjetoController',
+            'Application\Controller\ProjetoPorParticipante' => 'Application\Controller\ProjetoPorParticipanteController',
             'Application\Controller\ProductBacklog' => 'Application\Controller\ProductBacklogController',
             'Application\Controller\Projeto' => 'Application\Controller\ProjetoController',
             'Application\Controller\SprintBacklog' => 'Application\Controller\SprintBacklogController',

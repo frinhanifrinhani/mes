@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/product-backlog-por-sprint/listar.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/projeto/listar.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Controller/ParticipantePorProjetoController.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Model/ParticipantePorProjeto.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/projeto/cadastrar.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/projeto-por-participante/listar.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Controller/ProjetoPorParticipante.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/config/module.config.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Model/ParticipantePorProjetoTable.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/product-backlog-por-sprint/index.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/projeto/gerenciar.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/Module.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Model/ProductBacklogPorSprint.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/participante/listar.phtml</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Model/ProjetoPorParticipanteTable.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/src/Application/Model/ProjetoPorParticipante.php</file>
+            <file>file:/C:/xampp/htdocs/mes/module/Application/view/application/participante-por-projeto/listar.phtml</file>
+        </group>
+    </open-files>
+</project-private>

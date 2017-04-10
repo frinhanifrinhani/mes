@@ -35,7 +35,7 @@ class ProductBacklogPorSprintTable {
                 ->where('product_backlog.cod_projeto = ' . $codProjeto)
                 ->order(array('product_backlog.cod_product_backlog' => 'ASC'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();
+       echo $select->getSqlString();
         return $linha;
     }
 

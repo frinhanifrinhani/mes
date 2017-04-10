@@ -35,8 +35,12 @@ use Application\Model\Projeto;
 use Application\Model\ProjetoTable;
 use Application\Model\ParticipanteProjeto;
 use Application\Model\ParticipanteProjetoTable;
+use Application\Model\ParticipantePorProjeto;
+use Application\Model\ParticipantePorProjetoTable;
+use Application\Model\ProjetoPorParticipante;
+use Application\Model\ProjetoPorParticipanteTable;
 
-//use Zend\Validator\Db\RecordExists;
+//use Zend\Validator\Db\RecordExists;F
 
 class Module {
 
@@ -187,23 +191,53 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new Projeto());
                     return new TableGateway(new TableIdentifier('projeto'), $dbAdapter, null, $resultSetPrototype);
                 },
+                /**                 * ************ PARTICIPANTE PROJETO ************** */
+                //instacia um objeto da ProjetoParticipanteTable e retorna seus elementos
+//                'Application\Model\ParticipanteProjetoTable' => function($sm) {
+//                    $tableGateway = $sm->get('ParticipanteProjetoTableGateway');
+//                    $table = new ParticipanteProjetoTable($tableGateway);
+//                    return $table;
+//                },
+//                //instancia um array objeto da ProjetoParticipante, e retorna uma TableGateway 
+//                //passando o nome da tabela 'projeto_para_participante'
+//                'ParticipanteProjetoTableGateway' => function ($sm) {
+//                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+//                    $resultSetPrototype = new ResultSet();
+//                    $resultSetPrototype->setArrayObjectPrototype(new ParticipanteProjeto());
+//                    return new TableGateway(new TableIdentifier('participante_para_projeto'), $dbAdapter, null, $resultSetPrototype);
+//                },
                 /**                 * ************ PARTICIPANTE POR PROJETO ************** */
                 //instacia um objeto da ProjetoParticipanteTable e retorna seus elementos
-                'Application\Model\ParticipanteProjetoTable' => function($sm) {
-                    $tableGateway = $sm->get('ParticipanteProjetoTableGateway');
-                    $table = new ParticipanteProjetoTable($tableGateway);
+                'Application\Model\ParticipantePorProjetoTable' => function($sm) {
+                    $tableGateway = $sm->get('ParticipantePorProjetoTableGateway');
+                    $table = new ParticipantePorProjetoTable($tableGateway);
                     return $table;
                 },
                 //instancia um array objeto da ProjetoParticipante, e retorna uma TableGateway 
                 //passando o nome da tabela 'projeto_para_participante'
-                'ParticipanteProjetoTableGateway' => function ($sm) {
+                'ParticipantePorProjetoTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new ParticipanteProjeto());
+                    $resultSetPrototype->setArrayObjectPrototype(new ParticipantePorProjeto());
                     return new TableGateway(new TableIdentifier('participante_para_projeto'), $dbAdapter, null, $resultSetPrototype);
                 },
-            )
+                /**                 * ************ PROJETO POR PARTICIPANTE************** */
+                //instacia um objeto da ProjetoParticipanteTable e retorna seus elementos
+                'Application\Model\ProjetoPorParticipanteTable' => function($sm) {
+                    $tableGateway = $sm->get('ProjetoPorParticipanteTableGateway');
+                    $table = new ProjetoPorParticipanteTable($tableGateway);
+                    return $table;
+                },
+                //instancia um array objeto da ProjetoParticipante, e retorna uma TableGateway 
+                //passando o nome da tabela 'projeto_para_participante'
+                'ProjetoPorParticipanteTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new ProjetoPorParticipante());
+                    return new TableGateway(new TableIdentifier('participante_para_projeto'), $dbAdapter, null, $resultSetPrototype);
+                },
+            ),
+
         );
     }
-
 }
