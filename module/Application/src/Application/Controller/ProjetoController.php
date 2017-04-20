@@ -125,9 +125,14 @@ class ProjetoController extends AbstractActionController {
         }
 
         $request = $this->getRequest();
-
+        
         if ($request->isPost()) {
-            $retorno = $this->getProjetoTable()->excluir($codProjeto);
+            $retornoCod = $this->getProjetoTable()->excluir($codProjeto);
+            if ($retornoCod == 23000) {
+                $retorno = false;
+            } else {
+                $retorno = true;
+            }
         }
 
         return new ViewModel(array(

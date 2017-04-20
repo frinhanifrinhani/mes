@@ -35,7 +35,7 @@ if (!isset($_POST['cod_projeto'])) {
     <?php
 }
 
-if (isset($_POST['cod_projeto'])) {
+if (isset($this->retorno) && $this->retorno == true) {
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -47,7 +47,27 @@ if (isset($_POST['cod_projeto'])) {
                     Projeto excluido com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="<?=$this->url('projeto')?>" class="btn btn-warning">Voltar</a>
+                    <a href="<?=$this->url('projeto')?>" class="btn btn-warning">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>$("#myModal").modal();</script>
+<?php } else if (isset($this->retorno) && $this->retorno == false) { ?>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><b>Atenção!</b></h4>
+                </div>
+                <div class="modal-body">
+                    Este projeto não pode ser excluido, <br />
+                    pois tem Sprint (s) e/ou Product Backlog (s) relacionado (s) a ele <br /><br />
+                    <!--Você pode solicitar que o dono do projeto seja alterado. <br />--> 
+                </div>
+                <div class="modal-footer">
+                    <!--<a href="/participante" class="btn btn-primary">Solicitar alteração</a>-->
+                    <a href="<?= $this->url('projeto') ?>" class="btn btn-warning">Ok</a>
                 </div>
             </div>
         </div>

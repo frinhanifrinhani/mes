@@ -83,8 +83,7 @@ class ProjetoTable {
 
             if (!$this->getProjeto($codProjeto)) {
                 $data['cod_projeto'] = $codProjeto;
-//                return $this->tableGateway->insert($data);
-                return true;
+                return $this->tableGateway->insert($data);
             } else {
                 return $this->tableGateway->update($data, array('cod_projeto' => $codProjeto));
             }
@@ -94,7 +93,13 @@ class ProjetoTable {
     }
 
     public function excluir($codProjeto) {
-        $this->tableGateway->delete(array('cod_projeto' => $codProjeto));
+        //$this->tableGateway->delete(array('cod_projeto' => $codProjeto));
+        try {
+           return $this->tableGateway->delete(array('cod_projeto' => $codProjeto));    
+        } catch (\Exception $e) {
+           return $e->getPrevious()->getCode();
+           
+        }
     }
 
     //metodo que retorna sql da tableGateway
