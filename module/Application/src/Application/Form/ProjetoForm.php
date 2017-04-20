@@ -71,10 +71,10 @@ class ProjetoForm extends Form {
                 'id' => 'data_inicio_projeto',
                 'class' => 'form-control',
                 'placeholder' => 'Data de Início do Projeto',
-                'onchange' => 'calcularDiasProjeto();',
+                
             ),
             'options' => array(
-                'label' => 'Data de Início do Projeto *',
+                'label' => 'Data Início do Projeto *',
             ),
         ));
 
@@ -85,10 +85,9 @@ class ProjetoForm extends Form {
                 'id' => 'data_fim_projeto',
                 'class' => 'form-control',
                 'placeholder' => 'Data prevista para Finalização do Projeto',
-                'onchange' => 'calcularDiasProjeto(); verificarData();',
             ),
             'options' => array(
-                'label' => 'Data Fim do Pojeto *',
+                'label' => 'Data fim Projeto Prevista *',
             ),
         ));
 

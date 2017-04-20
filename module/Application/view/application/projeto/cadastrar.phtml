@@ -1,30 +1,27 @@
 <div class="box-header with-border">    
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="/projeto">Projetos</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('projeto') ?>">Projetos</a></li>
         <li class="breadcrumb-item active">Cadastrar projeto</li>
     </ol>
 </div>
 <?php
 if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     ?>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel"><b>Parabens!</b></h4>
+                    <div class="close" aria-label="Close" >
+                        <!--<a href="/participante"> <span class="glyphicon glyphicon-remove "></span></a>-->
+                    </div>
+                    <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
                 </div>
                 <div class="modal-body">
-
-                    <b>Projeto cadastrado com sucesso!</b><br /><br />
-                    Você deseja fazer alguma alteração?
+                    <spant> Projeto cadastrado com sucesso!</spant>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?= $this->url('projeto-editar', array('action' => 'editar', 'cod_projeto' => $this->ultimoProjeto)) ?>" class="btn btn-default">Sim</a>
-                    <a href="/projeto" class="btn btn-danger">Não</a>
+                    <a href="<?=$this->url('projeto')?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>
@@ -65,13 +62,14 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     </div>
     <div class="form-group">
         <!--<input type="hidden" name="cod_participante" id="cod_participante" value="<? $this->cod_participante ?>">-->
-        <?= $this->formRow($formProjeto->get('botao_salvar')); ?>
-        <a href="<?= $this->url('projeto') ?>" class="btn btn-danger" >Cancelar</a>
+        <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+        <a href="<?= $this->url('projeto') ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-floppy-save"></span> Cancelar</a>
     </div>
 
     <?php echo $this->form()->closeTag(); ?>     
 </div>
 <script>
+
 
     $(function () {
         $("#data_inicio_projeto").datepicker({
@@ -83,53 +81,41 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
             showAnim: "fadeIn"
         });
     });
+ 
+        $('#data_fim_projeto').change(function () {
 
-    function calcularDiasProjeto() {
-        var dataInicio = document.getElementById('data_inicio_projeto').value;
-        var dataFim = document.getElementById('data_fim_projeto').value;
+            var dia = 1000 * 60 * 60 * 24
 
-        var dataInicioBR = document.getElementById('data_inicio_projeto').value.split('/');
-        var dataInicioUSA = new Date(dataInicioBR[2], dataInicioBR[1] - 1, dataInicioBR[0]);
+            var dataInicioInput = $("#data_inicio_projeto").val();
+            var dataFimInput = $("#data_fim_projeto").val();
+            var dataFimProjetoErro = $('#dataFimProjetoErro').get(0);
 
-        var dataFimBR = document.getElementById('data_fim_projeto').value.split('/');
-        var dataFimUSA = new Date(dataFimBR[2], dataFimBR[1] - 1, dataFimBR[0]);
+            var dataInicioSplit = dataInicioInput.toString().split('/');
+            var dataInicio = dataInicioSplit[1] + "/" + dataInicioSplit[0] + "/" + dataInicioSplit[2];
 
-        var tempo = Math.abs(dataFimUSA.getTime() - dataInicioUSA.getTime());
-        var dias = Math.ceil(tempo / (1000 * 60 * 60 * 24));
+            var dataFimSplit = dataFimInput.toString().split('/');
+            var dataFim = dataFimSplit[1] + "/" + dataFimSplit[0] + "/" + dataFimSplit[2];
 
-        var dataFimProjetoErro = document.getElementById('dataFimProjetoErro');
+            var diasDataInicio = new Date(dataInicio);
+            var diasDataFim = new Date(dataFim);
+            if (diasDataInicio > diasDataFim) {
+                dataFimProjetoErro.removeAttribute('style');
+                dataFimProjetoErro.innerHTML = "Data fim do projeto não pode ser menor que data de início do projeto";
+                return false;
+            } else {
+                dataFimProjetoErro.innerHTML = "";
+            }
+            var dias = Math.round((diasDataFim.getTime() - diasDataInicio.getTime()) / dia);
 
-        if (dias < 15) {
-            dataFimProjetoErro.removeAttribute('style');
-            dataFimProjetoErro.innerHTML = "O projeto não pode ter uma duração menor que quinze (15) dias";
-            return false;
-        } else {
-            dataFimProjetoErro.innerHTML = "";
-        }
-
-    }
-
-    function verificarData() {
-        var dataInicio = document.getElementById('data_inicio_projeto').value;
-        var dataFim = document.getElementById('data_fim_projeto').value;
-
-        if (dataInicio > dataFim) {
-            dataFimProjetoErro.removeAttribute('style');
-            dataFimProjetoErro.innerHTML = "Data fim do projeto não pode ser menor que data de início do projeto";
-            return false;
-        }
-    }
-
-//    function alterarStatusProjetoData() {
-//        var dataInicio = document.getElementById('data_inicio_projeto').value;
-//        var partesData = dataInicio.split("/");
-//        var data = new Date(partesData[2],partesData[1] -1, partesData[0]);
-//
-//        if(data === new Date()){
-//            alert('ok');
-//        }
-//
-//    }
+            if (dias < parseInt(14)) {
+                dataFimProjetoErro.removeAttribute('style');
+                dataFimProjetoErro.innerHTML = "O projeto não pode ter uma duração menor que quinze (15) dias";
+                //$('#form_projeto').submit(false);
+            } else {
+                dataFimProjetoErro.innerHTML = "";                
+                //$('#form_projeto').submit(true);
+            }
+    });
 
 
     $('#form_projeto').validate({
@@ -140,7 +126,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
             },
             data_inicio_projeto: {
                 required: true,
-                dateformat: "required",
+                //dateformat: "required",
             },
             data_fim_projeto: {
                 required: true,
@@ -156,7 +142,7 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
             },
             data_inicio_projeto: {
                 required: "Campo data de início do projeto não pode ser vazio",
-                dateformat: "Choose your preferred dateformat",
+                //dateformat: "Choose your preferred dateformat",
             },
             data_fim_projeto: {
                 required: "Campo data fim do projeto não pode ser vazio",

@@ -102,7 +102,7 @@ class Projeto implements InputFilterAwareInterface {
                                     'max' => 255,
                                     'messages' => array(
                                         \Zend\Validator\StringLength::TOO_SHORT => 'O campo nome deve ter no mínimo 3 caracteres!',
-                                        \Zend\Validator\StringLength::TOO_LONG => 'O campo nome deve ter no máximo 255 caracteres!',
+                                        // \Zend\Validator\StringLength::TOO_LONG => 'O campo nome deve ter no máximo 255 caracteres!',
                                     )
                                 ),
                             ),
@@ -134,6 +134,20 @@ class Projeto implements InputFilterAwareInterface {
                                 'options' => array(
                                     'messages' => array(
                                         \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo data fim do projeto não pode ser vazio'
+                                    ),
+                                ),
+                            ),
+                        ),
+            )));
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'cod_participante',
+                        'required' => true,
+                        'validators' => array(
+                            array(
+                                'name' => 'NotEmpty',
+                                'options' => array(
+                                    'messages' => array(
+                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo Dono do projeto não pode ser vazio'
                                     ),
                                 ),
                             ),

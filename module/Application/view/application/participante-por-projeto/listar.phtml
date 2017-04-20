@@ -24,10 +24,10 @@
         <tbody>
             <?php foreach ($this->participante_por_projeto as $participante) { ?>
 
-                <?php if (($participante->codProjeto == $this->cod_projeto) || (isset($participante->codProjeto) && ($participante->codProjeto != null ))  &&  $participante->codProjeto == $this->cod_projeto ) { ?> 
+                <?php //if ( (isset($participante->codProjeto) && $participante->codProjeto == $this->cod_projeto) || ($participante->codProjeto == null)  ) { ?> 
                 <tr>
                     <td><input type="checkbox" name="participante[]" value="<?= $participante->codParticipantePt ?>"
-                               <?php if ($participante->codParticipante != null && $participante->codProjeto == $this->cod_projeto) { ?> checked="checked" <?php } ?>>  </td>
+                               <?php if ($participante->codParticipante != null /*&& $participante->codProjeto == $this->cod_projeto*/) { ?> checked="checked" <?php } ?>>  </td>
                     <td><?= $participante->nomeParticipante ?></td>
                     <td><?= $participante->tipoParticipante ?></td>
                     <td><?= $participante->cpfParticipante ?></td>
@@ -36,7 +36,7 @@
 
                 </tr>
                 <?php
-            }
+//            }
             }
             ?>
 

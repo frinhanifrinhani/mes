@@ -1,7 +1,7 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="/participante">Participantes</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('participante') ?>">Participantes</a></li>
         <li class="breadcrumb-item active">Excluir participante</li>
     </ol>
 </div>
@@ -9,7 +9,7 @@
 if (!isset($_POST['cod_participante'])) {
     ?>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,18 +25,17 @@ if (!isset($_POST['cod_participante'])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" name="excluir" id="excluir" class="btn btn-primary" onclick="excluir();">Sim</button>
-                    <a href="<?=$this->url('participante')?>" class="btn btn-warning">Não</a>
+                    <a href="<?= $this->url('participante') ?>" class="btn btn-warning">Não</a>
                 </div>
             </div>
         </div>
     </div>
     <script>$("#myModal").modal();</script>
 
-<?php
+    <?php
 }
 
 if (isset($this->retorno) && $this->retorno == true) {
-    
     ?>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -45,27 +44,27 @@ if (isset($this->retorno) && $this->retorno == true) {
                     <h4 class="modal-title" id="myModalLabel"><b>Parabéns!</b></h4>
                 </div>
                 <div class="modal-body">
-                   Participante excluido com sucesso!
+                    Participante excluido com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="<?=$this->url('participante')?>" class="btn btn-primary">Ok</a>
+                    <a href="<?= $this->url('participante') ?>" class="btn btn-primary">Ok</a>
                 </div>
             </div>
         </div>
     </div>
     <script>$("#myModal").modal();</script>
-<?php } else if (isset($this->retorno) && $this->retorno == false){?>
-     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php } else if (isset($this->retorno) && $this->retorno == false) { ?>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel"><b>Atenção!</b></h4>
                 </div>
-                
-                <?php 
+
+                <?php
 //                    echo $this->cod_participante; 
 //                    echo $this->solicitante; 
-                    ?>
+                ?>
                 <div class="modal-body">
                     Este participante não pode ser excluido, <br />
                     pois ele é 'dono' de um ou mais projeto(s), e/ou sprint(s)<br /><br />
@@ -73,7 +72,7 @@ if (isset($this->retorno) && $this->retorno == true) {
                 </div>
                 <div class="modal-footer">
                     <!--<a href="/participante" class="btn btn-primary">Solicitar alteração</a>-->
-                    <a href="<?=$this->url('participante')?>" class="btn btn-warning">Voltar</a>
+                    <a href="<?= $this->url('participante') ?>" class="btn btn-warning">Voltar</a>
                 </div>
             </div>
         </div>
@@ -108,7 +107,7 @@ if (isset($this->retorno) && $this->retorno == true) {
         <?= $this->formRow($formParticipante->get('cod_tipo_participante')); ?>
     </div>
     <div class="form-group">
-        <a href="<?= $this->url('participante-excluir',array('action' => 'excluir', 'cod_participante' => $this->cod_participante))?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+        <a href="<?= $this->url('participante-excluir', array('action' => 'excluir', 'cod_participante' => $this->cod_participante)) ?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
         <a href="<?= $this->url('participante') ?>" class="btn btn-warning" > <span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
     <?= $this->form()->closeTag() ?>
@@ -116,25 +115,25 @@ if (isset($this->retorno) && $this->retorno == true) {
 
 <script>
     bloquerCampos();
-    function excluir(){
+    function excluir() {
         var formulario = document.getElementById('form_participante');
         formulario.submit();
-        
+
         return true;
     }
-    
-    function bloquerCampos(){
+
+    function bloquerCampos() {
         var nomeParticipante = document.getElementById('nome_participante');
         var cpfParticipante = document.getElementById('cpf_participante');
         var telefoneParticipante = document.getElementById('telefone_participante');
         var emailParticipante = document.getElementById('email_participante');
         var codTipoParticipante = document.getElementById('cod_tipo_participante');
-        
-        nomeParticipante.setAttribute('disabled','disabled');
-        cpfParticipante.setAttribute('disabled','disabled');
-        telefoneParticipante.setAttribute('disabled','disabled');
-        emailParticipante.setAttribute('disabled','disabled');
-        codTipoParticipante.setAttribute('disabled','disabled');
+
+        nomeParticipante.setAttribute('disabled', 'disabled');
+        cpfParticipante.setAttribute('disabled', 'disabled');
+        telefoneParticipante.setAttribute('disabled', 'disabled');
+        emailParticipante.setAttribute('disabled', 'disabled');
+        codTipoParticipante.setAttribute('disabled', 'disabled');
     }
-    
+
 </script>

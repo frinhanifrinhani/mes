@@ -1,11 +1,15 @@
 <div class="box-header with-border">
-    <h3 class="box-title">Excluir projeto</h3>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('projeto') ?>">Participantes</a></li>
+        <li class="breadcrumb-item active">Excluir Projeto</li>
+    </ol>
 </div>
 <?php
 if (!isset($_POST['cod_projeto'])) {
     ?>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,9 +24,8 @@ if (!isset($_POST['cod_projeto'])) {
                     Você tem certeza que deseja excluir?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-primary">Ver</button>
-                    <button type="button" name="excluir" id="excluir" class="btn btn-danger" onclick="excluir();">Sim</button>
-                    <a href="/projeto" class="btn btn-warning">Não</a>
+                    <button type="button" name="excluir" id="excluir" class="btn btn-primary" onclick="excluir();">Sim</button>
+                    <a href="<?= $this->url('projeto') ?>" class="btn btn-warning">Não</a>
                 </div>
             </div>
         </div>
@@ -44,7 +47,7 @@ if (isset($_POST['cod_projeto'])) {
                     Projeto excluido com sucesso!
                 </div>
                 <div class="modal-footer">
-                    <a href="/participante" class="btn btn-warning">Voltar</a>
+                    <a href="<?=$this->url('projeto')?>" class="btn btn-warning">Voltar</a>
                 </div>
             </div>
         </div>
@@ -61,33 +64,32 @@ if (isset($_POST['cod_projeto'])) {
     echo $this->form()->openTag($formProjeto);
     ?>
     <div class="form-group">
-    <?= $this->formRow($formProjeto->get('cod_projeto')); ?>
+        <?= $this->formRow($formProjeto->get('cod_projeto')); ?>
     </div>
     <div class="form-group">
-<?= $this->formRow($formProjeto->get('nome_projeto')); ?>
+        <?= $this->formRow($formProjeto->get('nome_projeto')); ?>
     </div>
     <div class="form-group">
-<?= $this->formRow($formProjeto->get('descricao_projeto')); ?>
+        <?= $this->formRow($formProjeto->get('descricao_projeto')); ?>
     </div>
     <div class="form-group">
-<?= $this->formRow($formProjeto->get('data_inicio_projeto')); ?>
+        <?= $this->formRow($formProjeto->get('data_inicio_projeto')); ?>
     </div>
     <div class="form-group">
-<?= $this->formRow($formProjeto->get('data_fim_projeto')); ?>
+        <?= $this->formRow($formProjeto->get('data_fim_projeto')); ?>
     </div>
     <div class="form-group">
-<?= $this->formRow($formProjeto->get('cod_participante')); ?>
+        <?= $this->formRow($formProjeto->get('cod_participante')); ?>
     </div>
     <div class="form-group">
-<?= $this->formRow($formProjeto->get('cod_status')); ?>
-    </div>
-    <div class="form-group">
-        <a href="<?= $this->url('projeto-editar', array('action' => 'editar', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Editar</a>
-        <a href="<?= $this->url('projeto-excluir', array('action' => 'excluir', 'cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-danger" >Excluir</a>
-        <a href="<?= $this->url('projeto') ?>" class="btn btn-warning" >Cancelar</a>
+        <?= $this->formRow($formProjeto->get('cod_status')); ?>
+    </div>   
+     <div class="form-group">
+        <a href="<?= $this->url('projeto-excluir', array('action' => 'excluir', 'cod_projeto' => $this->cod_participante)) ?>" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span> Excluir</a>
+        <a href="<?= $this->url('projeto') ?>" class="btn btn-warning" > <span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
 
-<?php echo $this->form()->closeTag(); ?>      
+    <?php echo $this->form()->closeTag(); ?>      
 </div>
 
 <script>

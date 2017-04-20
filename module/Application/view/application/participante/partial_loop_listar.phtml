@@ -7,7 +7,7 @@
     <td><?= $this->escapeHtml($this->emailParticipante) ?></td>
     <td><?= $this->tipoParticipante ?></td>
     <td>
-        <a href="<?= $this->url('projeto-por-participante', array('cod_participante' => $this->codParticipante)) ?>" class="btn btn-warning " title="Add. Projeto"><span class="glyphicon glyphicon-check"></span></a>
+        <!--<a href="<? $this->url('projeto-por-participante', array('cod_participante' => $this->codParticipante)) ?>" class="btn btn-warning " title="Add. Projeto"><span class="glyphicon glyphicon-check"></span></a>-->
         <a href="<?= $this->url('participante-editar', array('action' => 'editar', 'cod_participante' => $this->codParticipante)) ?>" class="btn btn-primary " title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
         <a href="<?= $this->url('participante-excluir', array('action' => 'excluir', 'cod_participante' => $this->codParticipante)) ?>" class="btn btn-danger" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
     </td>

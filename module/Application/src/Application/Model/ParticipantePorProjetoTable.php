@@ -30,7 +30,7 @@ class ParticipantePorProjetoTable {
         $select->quantifier('DISTINCT');
         $select->from(new TableIdentifier('participante'))
                 ->columns(array('cod_participante_pt' => 'cod_participante', 'nome_participante','cpf_participante','email_participante'))
-                ->join('participante_para_projeto', 'participante_para_projeto.cod_participante = participante.cod_participante', array('cod_participante','cod_projeto'),'left')
+                ->join('participante_para_projeto', 'participante_para_projeto.cod_participante = participante.cod_participante', array('cod_participante'),'left')
                 ->join('tipo_participante', 'tipo_participante.cod_tipo_participante = participante.cod_tipo_participante', 'tipo_participante','left');
 //                ->group('participante.cod_participante');
         

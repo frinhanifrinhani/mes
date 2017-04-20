@@ -80,11 +80,11 @@ class ProjetoTable {
 
         try {
             $codProjeto = $projeto->codProjeto;
-            var_dump($this->getProjeto($codProjeto));
+
             if (!$this->getProjeto($codProjeto)) {
-                echo 'aqui';
                 $data['cod_projeto'] = $codProjeto;
-                return $this->tableGateway->insert($data);
+//                return $this->tableGateway->insert($data);
+                return true;
             } else {
                 return $this->tableGateway->update($data, array('cod_projeto' => $codProjeto));
             }
