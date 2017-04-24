@@ -1,9 +1,5 @@
 <?php
 /**
- * mudou aqui
- */
-
-/**
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
