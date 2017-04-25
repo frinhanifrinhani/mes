@@ -105,13 +105,13 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong>4</td>
-            <td><strong>Em Andamento: </strong>4</td>
-            <td><strong>Finalizado: </strong>4</td>
-            <td><strong>Parado: </strong>4 </td>
-            <td><strong>Total: </strong>16</td>
+            <td><strong>Em Aberto: </strong><?=$this->sprint_backlog_em_aberto->sprintBacklogEmAberto?></td>
+            <td><strong>Em Andamento: </strong><?=$this->sprint_backlog_em_andamento->sprintBacklogEmAndamento?></td>
+            <td><strong>Finalizado: </strong><?=$this->sprint_backlog_parado->sprintBacklogParado?></td>
+            <td><strong>Parado: </strong><?=$this->sprint_backlog_finalizado->sprintBacklogFinalizado?></td>
+            <td><strong>Total: </strong><?=$this->total_sprint_backlog->totalSprintBacklog?></td>
         </tr>
-        <tr>
+<!--        <tr>
             <td colspan="5"><strong>Observações:</strong></td>
         </tr>
         <tr>
@@ -121,7 +121,7 @@
                 - Atenção! 3 sprint backlog pra serem finalizadas 26/03/2017.<br />
                 - Atenção! 1 sprint backlog pra ser finalizada 25/03/2017.<br />
             </td>
-        </tr>
+        </tr>-->
     </tbody>
 </table>
 

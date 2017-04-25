@@ -29,6 +29,11 @@ class SprintBacklog implements InputFilterAwareInterface {
     public $nomeParticipante;
     public $codProjeto;
     public $codProductBacklog;
+    public $sprintBacklogEmAberto;
+    public $sprintBacklogEmAndamento;
+    public $sprintBacklogParado;
+    public $sprintBacklogFinalizado;
+    public $totalSprintBacklog;
     public $dataCadastroSprintBacklog;
     protected $inputFilter;
     protected $dbAdapter;
@@ -46,6 +51,11 @@ class SprintBacklog implements InputFilterAwareInterface {
         $this->nomeParticipante = (isset($data['nome_participante'])) ? $data['nome_participante'] : null;
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->codProductBacklog = (isset($data['cod_product_backlog'])) ? $data['cod_product_backlog'] : null;
+        $this->sprintBacklogEmAberto = (isset($data['sprint_backlog_em_aberto'])) ? $data['sprint_backlog_em_aberto'] : null;
+        $this->sprintBacklogEmAndamento = (isset($data['sprint_backlog_em_andamento'])) ? $data['sprint_backlog_em_andamento'] : null;
+        $this->sprintBacklogParado = (isset($data['sprint_backlog_parado'])) ? $data['sprint_backlog_parado'] : null;
+        $this->sprintBacklogFinalizado = (isset($data['sprint_backlog_finalizado'])) ? $data['sprint_backlog_finalizado'] : null;
+        $this->totalSprintBacklog = (isset($data['total_sprint_backlog'])) ? $data['total_sprint_backlog'] : null;
         $this->dataCadastroSprintBacklog = (isset($data['data_cadastro_sprint_backlog'])) ? $data['data_cadastro_sprint_backlog'] : null;
     }
 

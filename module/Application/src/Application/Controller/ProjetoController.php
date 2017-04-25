@@ -147,27 +147,40 @@ class ProjetoController extends AbstractActionController {
 
         $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
         $projetoDados = $projeto->getArrayCopy();
-//        var_dump($projetoDados);
-//        if ($projeto == true) {
-//            $formProjeto = new ProjetoForm();
-//            $formProjeto->setData($projeto->getArrayCopy());
-//        } else {
+//        var_dump($projeto);
+//        if ($projeto == null) {
 //            return $this->redirect()->toRoute('projeto');
-//        }
+//        } 
         
+        //informações da sprint
         $sprintEmAberto = $this->getSprintTable()->retornarSprintEmAberto($codProjeto);
         $sprintEmAndamento = $this->getSprintTable()->retornarSprintEmAndamento($codProjeto);
         $sprintParado = $this->getSprintTable()->retornarSprintParado($codProjeto);
         $sprintFinalizado = $this->getSprintTable()->retornarSprintFinalizado($codProjeto);
         $totalSprint = $this->getSprintTable()->retornarTotalSprint($codProjeto);
-
+        
+        //informações do sprint backlog
+        $sprintBacklogEmAberto = $this->getSprintBacklogTable()->retornarSprintBacklogEmAberto($codProjeto);
+        $sprintBacklogEmAndadmento = $this->getSprintBacklogTable()->retornarSprintBacklogEmAndamento($codProjeto);
+        $sprintBacklogParado = $this->getSprintBacklogTable()->retornarSprintBacklogParado($codProjeto);
+        $sprintBacklogFinalizado = $this->getSprintBacklogTable()->retornarSprintBacklogFinalizado($codProjeto);
+        $totalSprintBacklog = $this->getSprintBacklogTable()->retornarTotalSprintBacklog($codProjeto);
+        
         $request = $this->getRequest();
 
         return new ViewModel(array(
+            //informações da sprint
             'sprint_em_aberto' => $sprintEmAberto,
             'sprint_em_andamento' => $sprintEmAndamento,
             'sprint_parado' => $sprintParado,
             'sprint_finalizado' => $sprintFinalizado,
+            //informações do sprint backlog
+            'sprint_backlog_em_aberto' => $sprintBacklogEmAberto,
+            'sprint_backlog_em_andamento' => $sprintBacklogEmAndadmento,
+            'sprint_backlog_parado' => $sprintBacklogParado,
+            'sprint_backlog_finalizado' => $sprintBacklogFinalizado,
+            'total_sprint_backlog' => $totalSprintBacklog,
+            
             'total_sprint' => $totalSprint,
             'retorno' => $retorno,
             'cod_projeto' => $codProjeto,
