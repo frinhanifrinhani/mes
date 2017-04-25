@@ -13,13 +13,12 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Projeto;
-//use Application\Model\Login;
-//use Zend\Paginator\Adapter\DbSelect;
 use Application\Form\ProjetoForm;
 
 class ProjetoController extends AbstractActionController {
 
     protected $projetoTable;
+    protected $sprintTable;
 
     public function listarAction() {
 
@@ -154,11 +153,21 @@ class ProjetoController extends AbstractActionController {
 //        } else {
 //            return $this->redirect()->toRoute('projeto');
 //        }
+        
+        $sprintEmAberto = $this->getSprintTable()->retornarSprintEmAberto($codProjeto);
+        $sprintEmAndamento = $this->getSprintTable()->retornarSprintEmAndamento($codProjeto);
+        $sprintParado = $this->getSprintTable()->retornarSprintParado($codProjeto);
+        $sprintFinalizado = $this->getSprintTable()->retornarSprintFinalizado($codProjeto);
+        $totalSprint = $this->getSprintTable()->retornarTotalSprint($codProjeto);
 
         $request = $this->getRequest();
 
-
         return new ViewModel(array(
+            'sprint_em_aberto' => $sprintEmAberto,
+            'sprint_em_andamento' => $sprintEmAndamento,
+            'sprint_parado' => $sprintParado,
+            'sprint_finalizado' => $sprintFinalizado,
+            'total_sprint' => $totalSprint,
             'retorno' => $retorno,
             'cod_projeto' => $codProjeto,
             'projetos' => $projetoDados,
@@ -172,6 +181,15 @@ class ProjetoController extends AbstractActionController {
             $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
         }
         return $this->projetoTable;
+    }
+    
+    //recupera e retorna a model SprintTable
+    public function getSprintTable() {
+        if (!$this->sprintTable) {
+            $sm = $this->getServiceLocator();
+            $this->sprintTable = $sm->get('Application\Model\SprintTable');
+        }
+        return $this->sprintTable;
     }
 
     //recupera e retorna o Service Manager

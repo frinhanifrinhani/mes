@@ -13,8 +13,8 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Form\SprintBacklogForm;
-use Application\Model\Projeto;
-use Application\Model\SprintBacklog;
+//use Application\Model\Projeto;
+//use Application\Model\SprintBacklog;
 
 class SprintBacklogController extends AbstractActionController {
 

@@ -16,6 +16,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Application\Model\Sprint;
 use Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Sql\Expression;
 
 class SprintTable {
 
@@ -75,6 +76,72 @@ class SprintTable {
 
     public function excluir($codSprint) {
         return $this->tableGateway->delete(array('cod_sprint' => $codSprint));
+    }
+    
+        
+    public function retornarSprintEmAberto($codProjeto){
+        $count = new Expression();
+        $select = new Select();
+        $select->from(new TableIdentifier('sprint'))
+               ->columns(array('sprint_em_aberto'=> $count->setExpression("Count('cod_status')")))
+               ->join('projeto','projeto.cod_projeto = sprint.cod_projeto',array())
+               ->where('sprint.cod_projeto = '.$codProjeto.' and sprint.cod_status = 1');
+                $linha = $this->tableGateway->selectWith($select);
+                $rowset =$linha->current();
+//       echo $select->getSqlString();
+        return $rowset;
+    }
+    
+    public function retornarSprintEmAndamento($codProjeto){
+        $count = new Expression();
+        $select = new Select();
+        $select->from(new TableIdentifier('sprint'))
+               ->columns(array('sprint_em_andamento'=> $count->setExpression("Count('cod_status')")))
+               ->join('projeto','projeto.cod_projeto = sprint.cod_projeto',array())
+               ->where('sprint.cod_projeto = '.$codProjeto.' and sprint.cod_status = 2');
+                $linha = $this->tableGateway->selectWith($select);
+                $rowset =$linha->current();
+//       echo $select->getSqlString();
+        return $rowset;
+    }
+    
+    public function retornarSprintParado($codProjeto){
+        $count = new Expression();
+        $select = new Select();
+        $select->from(new TableIdentifier('sprint'))
+               ->columns(array('sprint_parado'=> $count->setExpression("Count('cod_status')")))
+               ->join('projeto','projeto.cod_projeto = sprint.cod_projeto',array())
+               ->where('sprint.cod_projeto = '.$codProjeto.' and sprint.cod_status = 3');
+                $linha = $this->tableGateway->selectWith($select);
+                $rowset =$linha->current();
+//       echo $select->getSqlString();
+        return $rowset;
+    }
+    
+    public function retornarSprintFinalizado($codProjeto){
+        $count = new Expression();
+        $select = new Select();
+        $select->from(new TableIdentifier('sprint'))
+               ->columns(array('sprint_finalizado'=> $count->setExpression("Count('cod_status')")))
+               ->join('projeto','projeto.cod_projeto = sprint.cod_projeto',array())
+               ->where('sprint.cod_projeto = '.$codProjeto.' and sprint.cod_status = 4');
+                $linha = $this->tableGateway->selectWith($select);
+                $rowset =$linha->current();
+//       echo $select->getSqlString();
+        return $rowset;
+    }
+    
+    public function retornarTotalSprint($codProjeto){
+        $count = new Expression();
+        $select = new Select();
+        $select->from(new TableIdentifier('sprint'))
+               ->columns(array('total_sprint'=> $count->setExpression("Count('cod_status')")))
+               ->join('projeto','projeto.cod_projeto = sprint.cod_projeto',array())
+               ->where('sprint.cod_projeto = '.$codProjeto);
+                $linha = $this->tableGateway->selectWith($select);
+                $rowset =$linha->current();
+//       echo $select->getSqlString();
+        return $rowset;
     }
 
 //    //metodo que retorna sql da tableGateway

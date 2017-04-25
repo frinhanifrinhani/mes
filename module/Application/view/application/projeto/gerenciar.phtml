@@ -46,13 +46,13 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong>4</td>
-            <td><strong>Em Andamento: </strong>4</td>
-            <td><strong>Finalizado: </strong>4</td>
-            <td><strong>Parado: </strong>4 </td>
-            <td><strong>Total: </strong>16</td>
+            <td><strong>Em Aberto: </strong><?=$this->sprint_em_aberto->sprintEmAberto?></td>
+            <td><strong>Em Andamento: </strong><?=$this->sprint_em_andamento->sprintEmAndamento?></td>
+            <td><strong>Finalizado: </strong><?=$this->sprint_parado->sprintParado?></td>
+            <td><strong>Parado: </strong><?=$this->sprint_finalizado->sprintFinalizado?></td>
+            <td><strong>Total: </strong><?=$this->total_sprint->totalSprint?></td>
         </tr>
-        <tr>
+<!--        <tr>
             <td colspan="5"><strong>Observações:</strong></td>
         </tr>
         <tr>
@@ -60,7 +60,7 @@
                 - Atenção 1 sprint está atrasada 2 dias.<br /> 
                 - 1 Sprint pra ser finalizada 25/03/2017.<br />
             </td>
-        </tr>
+        </tr>-->
     </tbody>
 </table>
 

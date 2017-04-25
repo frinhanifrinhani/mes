@@ -27,6 +27,11 @@ class Sprint implements InputFilterAwareInterface {
     public $codProjeto;
     public $descricaoStatus;
     public $dataCadastroSprint;
+    public $sprintEmAberto;
+    public $sprintEmAndamento;
+    public $sprintParado;
+    public $sprintFinalizado;
+    public $totalSprint;
     protected $inputFilter;
     protected $dbAdapter;
 
@@ -39,7 +44,12 @@ class Sprint implements InputFilterAwareInterface {
         $this->tempoSprint = (isset($data['tempo_sprint'])) ? $data['tempo_sprint'] : null;
         $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
-        $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
+        $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
+        $this->sprintEmAberto = (isset($data['sprint_em_aberto'])) ? $data['sprint_em_aberto'] : null;
+        $this->sprintEmAndamento = (isset($data['sprint_em_andamento'])) ? $data['sprint_em_andamento'] : null;
+        $this->sprintParado = (isset($data['sprint_parado'])) ? $data['sprint_parado'] : null;
+        $this->sprintFinalizado = (isset($data['sprint_finalizado'])) ? $data['sprint_finalizado'] : null;
+        $this->totalSprint = (isset($data['total_sprint'])) ? $data['total_sprint'] : null;
         $this->dataCadastroSprint = (isset($data['data_cadastro_sprint'])) ? $data['data_cadastro_sprint'] : null;
     }
 
@@ -51,7 +61,7 @@ class Sprint implements InputFilterAwareInterface {
             'tempo_sprint' => $this->tempoSprint,
             'descricao_status' => $this->descricaoStatus,
             'cod_status' => $this->codStatus,
-            'cod_projeto' => $this->codProjeto,
+            'cod_projeto' => $this->sprintEmAberto,
             'data_cadastro_sprint' => $this->dataCadastroSprint,
         );
     }
