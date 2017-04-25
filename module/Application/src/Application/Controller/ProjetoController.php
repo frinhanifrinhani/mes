@@ -19,6 +19,7 @@ class ProjetoController extends AbstractActionController {
 
     protected $projetoTable;
     protected $sprintTable;
+    protected $sprintBacklogTable;
 
     public function listarAction() {
 
@@ -71,35 +72,34 @@ class ProjetoController extends AbstractActionController {
     public function editarAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        
+
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
         if ($projeto == true) {
             $formProjeto = new ProjetoForm();
             $formProjeto->setData($projeto->getArrayCopy());
         } else {
             return $this->redirect()->toRoute('projeto');
-        };
-
+        }
+//
         $request = $this->getRequest();
-
+//
         if ($request->isPost()) {
 
-            $projeto = new projeto();
+            $projeto = new Projeto();
 
-//            $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-//            $projeto->setDbAdapter($dbAdapter);
-//            $formprojeto->setInputFilter($projeto->getInputFilter());
             $formProjeto->setData($request->getPost());
 
             if ($formProjeto->isValid()) {
 
                 $projeto->exchangeArray($formProjeto->getData());
-                $retorno = $this->getprojetoTable()->salvar($projeto);
-
-                $ultimoProjeto = $this->getprojetoTable()->getLastId();
+                $retornoCod = $this->getProjetoTable()->salvar($projeto);
+                if ($retornoCod == 23000) {
+                    $retorno = false;
+                } else {
+                    $retorno = true;
+                }
             }
         }
 
@@ -147,6 +147,7 @@ class ProjetoController extends AbstractActionController {
 
         $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
         $projetoDados = $projeto->getArrayCopy();
+//        var_dump($projetoDados);
 //        if ($projeto == true) {
 //            $formProjeto = new ProjetoForm();
 //            $formProjeto->setData($projeto->getArrayCopy());
@@ -190,6 +191,15 @@ class ProjetoController extends AbstractActionController {
             $this->sprintTable = $sm->get('Application\Model\SprintTable');
         }
         return $this->sprintTable;
+    }
+    
+    //recupera e retorna a model SprintBacklogTable
+    public function getSprintBacklogTable() {
+        if (!$this->sprintBacklogTable) {
+            $sm = $this->getServiceLocator();
+            $this->sprintBacklogTable = $sm->get('Application\Model\SprintBacklogTable');
+        }
+        return $this->sprintBacklogTable;
     }
 
     //recupera e retorna o Service Manager

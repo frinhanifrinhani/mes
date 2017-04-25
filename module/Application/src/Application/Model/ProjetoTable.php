@@ -59,7 +59,7 @@ class ProjetoTable {
                 ->columns(array('cod_projeto', 'nome_projeto', 'descricao_projeto', 'data_inicio_projeto', 'data_fim_projeto', 'cod_status', 'data_cadastro_projeto'))
                 ->join('status', 'status.cod_status = projeto.cod_status', 'descricao_status')
                 ->join('participante', 'participante.cod_participante = projeto.cod_participante', 'nome_participante')
-                ->order(array('cod_projeto' => 'desc'));
+                ->where('projeto.cod_projeto = '.$codProjeto);
         $rowset = $this->tableGateway->selectWith($select);
 //       echo $select->getSqlString();  
         $linha = $rowset->current();
