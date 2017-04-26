@@ -158,13 +158,8 @@ class ProjetoController extends AbstractActionController {
         $sprintParado = $this->getSprintTable()->retornarSprintParado($codProjeto);
         $sprintFinalizado = $this->getSprintTable()->retornarSprintFinalizado($codProjeto);
         $totalSprint = $this->getSprintTable()->retornarTotalSprint($codProjeto);
-        
-        //informações do sprint backlog
-        $sprintBacklogEmAberto = $this->getSprintBacklogTable()->retornarSprintBacklogEmAberto($codProjeto);
-        $sprintBacklogEmAndadmento = $this->getSprintBacklogTable()->retornarSprintBacklogEmAndamento($codProjeto);
-        $sprintBacklogParado = $this->getSprintBacklogTable()->retornarSprintBacklogParado($codProjeto);
-        $sprintBacklogFinalizado = $this->getSprintBacklogTable()->retornarSprintBacklogFinalizado($codProjeto);
-        $totalSprintBacklog = $this->getSprintBacklogTable()->retornarTotalSprintBacklog($codProjeto);
+                
+        $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
         
         $request = $this->getRequest();
 
@@ -173,14 +168,8 @@ class ProjetoController extends AbstractActionController {
             'sprint_em_aberto' => $sprintEmAberto,
             'sprint_em_andamento' => $sprintEmAndamento,
             'sprint_parado' => $sprintParado,
-            'sprint_finalizado' => $sprintFinalizado,
-            //informações do sprint backlog
-            'sprint_backlog_em_aberto' => $sprintBacklogEmAberto,
-            'sprint_backlog_em_andamento' => $sprintBacklogEmAndadmento,
-            'sprint_backlog_parado' => $sprintBacklogParado,
-            'sprint_backlog_finalizado' => $sprintBacklogFinalizado,
-            'total_sprint_backlog' => $totalSprintBacklog,
-            
+            'sprint_finalizado' => $sprintFinalizado,            
+            'dados_sprint_backlog' => $dadosSprintBacklog,
             'total_sprint' => $totalSprint,
             'retorno' => $retorno,
             'cod_projeto' => $codProjeto,
