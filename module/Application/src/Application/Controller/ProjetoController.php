@@ -151,24 +151,14 @@ class ProjetoController extends AbstractActionController {
 //        if ($projeto == null) {
 //            return $this->redirect()->toRoute('projeto');
 //        } 
-        
-        //informações da sprint
-        $sprintEmAberto = $this->getSprintTable()->retornarSprintEmAberto($codProjeto);
-        $sprintEmAndamento = $this->getSprintTable()->retornarSprintEmAndamento($codProjeto);
-        $sprintParado = $this->getSprintTable()->retornarSprintParado($codProjeto);
-        $sprintFinalizado = $this->getSprintTable()->retornarSprintFinalizado($codProjeto);
-        $totalSprint = $this->getSprintTable()->retornarTotalSprint($codProjeto);
-                
+               
+        $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
         $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
         
         $request = $this->getRequest();
 
-        return new ViewModel(array(
-            //informações da sprint
-            'sprint_em_aberto' => $sprintEmAberto,
-            'sprint_em_andamento' => $sprintEmAndamento,
-            'sprint_parado' => $sprintParado,
-            'sprint_finalizado' => $sprintFinalizado,            
+        return new ViewModel(array(            
+            'dados_sprint' => $dadosSprint,
             'dados_sprint_backlog' => $dadosSprintBacklog,
             'total_sprint' => $totalSprint,
             'retorno' => $retorno,
