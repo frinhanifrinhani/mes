@@ -13,8 +13,8 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Form\SprintBacklogForm;
-//use Application\Model\Projeto;
-//use Application\Model\SprintBacklog;
+use Application\Model\Projeto;
+use Application\Model\SprintBacklog;
 
 class SprintBacklogController extends AbstractActionController {
 
@@ -26,10 +26,8 @@ class SprintBacklogController extends AbstractActionController {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $projetos = $this->getProjetoTable()->fetchAll();
-//        $codProjeto = $this->getProjetoTable()->getProjeto();
         return new ViewModel(array(
             'partial_loop_projetos' => $projetos,
-                //'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
         ));
     }
 
@@ -38,7 +36,6 @@ class SprintBacklogController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        //$this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
 
         $sprintBacklog = $this->getSprintBacklogTable()->fetchAll($codProjeto);
 
@@ -60,7 +57,6 @@ class SprintBacklogController extends AbstractActionController {
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            
             $sprintBacklog = new SprintBacklog();
             $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
             $sprintBacklog->setDbAdapter($dbAdapter);
@@ -71,7 +67,6 @@ class SprintBacklogController extends AbstractActionController {
                 $sprintBacklog->exchangeArray($formSprintBacklog->getData());
                 $retorno = $this->getSprintBacklogTable()->salvar($sprintBacklog);
 //
-//                $ultimoProductBacklog = $this->getProductBacklogTable()->getLastId();
             }
         }
 
