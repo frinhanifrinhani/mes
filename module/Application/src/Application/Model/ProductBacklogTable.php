@@ -16,6 +16,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Application\Model\ProductBacklog;
 use Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Sql\Expression;
 
 class ProductBacklogTable {
 
@@ -76,6 +77,82 @@ class ProductBacklogTable {
 
     public function excluir($codProductBacklog) {
         return $this->tableGateway->delete(array('cod_product_backlog' => $codProductBacklog));
+    }
+    
+    public function retornarDadosProductBacklog($codProjeto){
+        $expression = new Expression();
+
+        $select = new Select();
+        $select->from('product_backlog');
+
+        $productBacklogEmAberto = new Select();
+        $productBacklogEmAberto->from('product_backlog')
+                ->columns(array('product_backlog_em_aberto' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.cod_status = 1");
+
+        $productBacklogEmAndamento = new Select();
+        $productBacklogEmAndamento->from('product_backlog')
+                ->columns(array('product_backlog_em_andamento' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.cod_status = 2");
+
+        $productBacklogParado = new Select();
+        $productBacklogParado->from('product_backlog')
+                ->columns(array('product_backlog_parado' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.cod_status = 3");
+
+        $productBacklogFinalizado = new Select();
+        $productBacklogFinalizado->from('product_backlog')
+                ->columns(array('product_backlog_finalizado' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.cod_status = 4");
+
+        $totalProdcutBacklog = new Select();
+        $totalProdcutBacklog->from('product_backlog')
+                ->columns(array('total_product_backlog' => $expression->setExpression("COUNT('prioridade_product_backlog')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto}");
+                
+        $productBacklogPrioridadeAlta = new Select();
+        $productBacklogPrioridadeAlta->from('product_backlog')
+                ->columns(array('product_backlog_prioridade_alta' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.prioridade_product_backlog = 1");
+                
+        $productBacklogPrioridadeMedia = new Select();
+        $productBacklogPrioridadeMedia->from('product_backlog')
+                ->columns(array('product_backlog_prioridade_media' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.prioridade_product_backlog = 2");
+                
+        $productBacklogPrioridadeBaixa = new Select();
+        $productBacklogPrioridadeBaixa->from('product_backlog')
+                ->columns(array('product_backlog_prioridade_baixa' => $expression->setExpression("COUNT('cod_status')")))
+                ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.prioridade_product_backlog = 3");
+
+        $select->columns(array(
+                    'product_backlog_em_aberto' => new \Zend\Db\Sql\Expression('?', array($productBacklogEmAberto)),
+                    'product_backlog_em_andamento' => new \Zend\Db\Sql\Expression('?', array($productBacklogEmAndamento)),
+                    'product_backlog_parado' => new \Zend\Db\Sql\Expression('?', array($productBacklogParado)),
+                    'product_backlog_finalizado' => new \Zend\Db\Sql\Expression('?', array($productBacklogFinalizado)),
+                    'total_product_backlog' => new \Zend\Db\Sql\Expression('?', array($totalProdcutBacklog)),
+                    'product_backlog_prioridade_alta' => new \Zend\Db\Sql\Expression('?', array($productBacklogPrioridadeAlta)),
+                    'product_backlog_prioridade_media' => new \Zend\Db\Sql\Expression('?', array($productBacklogPrioridadeMedia)),
+                    'product_backlog_prioridade_baixa' => new \Zend\Db\Sql\Expression('?', array($productBacklogPrioridadeBaixa)),
+                ))
+                ->join('projeto', 'projeto.cod_projeto = product_backlog.cod_projeto', array())
+                ->group(array(
+                    'product_backlog_em_aberto',
+                    'product_backlog_em_andamento',
+                    'product_backlog_parado',
+                    'product_backlog_finalizado',
+                    'total_product_backlog',
+                    'product_backlog_prioridade_alta',
+                    'product_backlog_prioridade_media',
+                    'product_backlog_prioridade_baixa',
+                    )
+        );
+
+        $linha = $this->tableGateway->selectWith($select);
+//        echo $select->getSqlString();
+        $rowset = $linha->current();
+        return $rowset;
+
     }
 //
 //    //metodo que retorna sql da tableGateway

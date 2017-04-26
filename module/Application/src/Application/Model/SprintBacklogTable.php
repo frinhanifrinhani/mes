@@ -86,7 +86,6 @@ class SprintBacklogTable {
         $expression = new Expression();
         $select = new Select();
 
-        $select = new Select();
         $select->from('sprint_backlog');
 
         $sprintBacklogEmAberto = new Select();

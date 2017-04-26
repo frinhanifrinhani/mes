@@ -19,6 +19,7 @@ class ProjetoController extends AbstractActionController {
 
     protected $projetoTable;
     protected $sprintTable;
+    protected $productBacklogTable;
     protected $sprintBacklogTable;
 
     public function listarAction() {
@@ -153,12 +154,14 @@ class ProjetoController extends AbstractActionController {
 //        } 
                
         $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
+        $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
         $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
         
         $request = $this->getRequest();
 
         return new ViewModel(array(            
             'dados_sprint' => $dadosSprint,
+            'dados_product_backlog' => $dadosProductBacklog,
             'dados_sprint_backlog' => $dadosSprintBacklog,
             'total_sprint' => $totalSprint,
             'retorno' => $retorno,
@@ -183,6 +186,15 @@ class ProjetoController extends AbstractActionController {
             $this->sprintTable = $sm->get('Application\Model\SprintTable');
         }
         return $this->sprintTable;
+    }
+    
+    //recupera e retorna a model ProductBacklogTable
+    public function getProductBacklogTable() {
+        if (!$this->productBacklogTable) {
+            $sm = $this->getServiceLocator();
+            $this->productBacklogTable = $sm->get('Application\Model\ProductBacklogTable');
+        }
+        return $this->productBacklogTable;
     }
     
     //recupera e retorna a model SprintBacklogTable

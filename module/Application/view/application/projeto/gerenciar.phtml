@@ -1,3 +1,10 @@
+<style type="text/css">
+    #tituloTabela{
+        text-align: center;
+        font-weight: 900;
+        color: #003300;
+    }
+</style>
 <div class="box-header with-border">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
@@ -19,7 +26,7 @@
 <table class="table table-bordered-green alert-success">
     <thead>
         <tr>
-            <td colspan="3"><h4>Dados do Projeto</h4> </td>
+            <td colspan="3" id="tituloTabela"><h4>Dados do Projeto</h4> </td>
         </tr>
     </thead>
     <tbody>
@@ -38,19 +45,19 @@
     </tbody>
 </table>
 
-<table class="table table-bordered-green">
+<table class="table table-bordered-green alert-success">
     <thead>
         <tr>
-            <td colspan="5"><h4>Sprint</h4></td>
+            <td colspan="5" id="tituloTabela"><h4>Sprint</h4></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong><?=$this->dados_sprint->sprintEmAberto?></td>
-            <td><strong>Em Andamento: </strong><?=$this->dados_sprint->sprintEmAndamento?></td>
-            <td><strong>Finalizado: </strong><?=$this->dados_sprint->sprintParado?></td>
-            <td><strong>Parado: </strong><?=$this->dados_sprint->sprintFinalizado?></td>
-            <td><strong>Total: </strong><?=$this->dados_sprint->totalSprint?></td>
+            <td><strong>Em Aberto: </strong><?= $this->dados_sprint->sprintEmAberto ?></td>
+            <td><strong>Em Andamento: </strong><?= $this->dados_sprint->sprintEmAndamento ?></td>
+            <td><strong>Finalizado: </strong><?= $this->dados_sprint->sprintParado ?></td>
+            <td><strong>Parado: </strong><?= $this->dados_sprint->sprintFinalizado ?></td>
+            <td><strong>Total: </strong><?= $this->dados_sprint->totalSprint ?></td>
         </tr>
 <!--        <tr>
             <td colspan="5"><strong>Observações:</strong></td>
@@ -64,52 +71,52 @@
     </tbody>
 </table>
 
-<table class="table table-bordered-green">
+<table class="table table-bordered-green alert-success">
     <thead>
         <tr>
-            <td colspan="5"><h4>Product Backlog</h4></td>
+            <td colspan="5" id="tituloTabela"><h4>Product Backlog</h4></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong>4</td>
-            <td><strong>Em Andamento: </strong>4</td>
-            <td><strong>Finalizado: </strong>4</td>
-            <td><strong>Parado: </strong>4 </td>
-            <td><strong>Total: </strong>16</td>
+            <td><strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?></td>
+            <td><strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?></td>
+            <td><strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogParado ?></td>
+            <td><strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?></td>
+            <td><strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?></td>
         </tr>
         <tr>
             <td><strong>Prioridades</strong></td>
-            <td><strong>Alta: </strong>4</td>
-            <td><strong>Média: </strong>4</td>
-            <td colspan="2"><strong>Baixa: </strong>4</td>
-            
-        </tr>
-        <tr>
-            <td colspan="5"><strong>Observações:</strong></td>
-        </tr>
-        <tr>
-            <td colspan="5">
-                - Antenção! Você tem muitos itens com prioridade alta.<br /> 
-                - Antenção! Você tem muitos itens parados.<br /> 
-            </td>
-        </tr>
+            <td><strong>Alta: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeAlta ?></td>
+            <td><strong>Média: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeMedia ?></td>
+            <td colspan="2"><strong>Baixa: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeBaixa ?></td>
+
+            <!--        </tr>
+                    <tr>
+                        <td colspan="5"><strong>Observações:</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            - Antenção! Você tem muitos itens com prioridade alta.<br /> 
+                            - Antenção! Você tem muitos itens parados.<br /> 
+                        </td>
+                    </tr>-->
     </tbody>
 </table>
 
-<table class="table table-bordered-green">
+<table class="table table-bordered-green alert-success">
     <thead>
         <tr>
-            <td colspan="5"><h4>Sprint Backlog</h4></td>
+            <td colspan="5" id="tituloTabela"><h4>Sprint Backlog</h4></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong><?=$this->dados_sprint_backlog->sprintBacklogEmAberto?></td>
-            <td><strong>Em Andamento: </strong><?=$this->dados_sprint_backlog->sprintBacklogEmAndamento?></td>
-            <td><strong>Finalizado: </strong><?=$this->dados_sprint_backlog->sprintBacklogParado?></td>
-            <td><strong>Parado: </strong><?=$this->dados_sprint_backlog->sprintBacklogFinalizado?></td>
-            <td><strong>Total: </strong><?=$this->dados_sprint_backlog->totalSprintBacklog?></td>
+            <td><strong>Em Aberto: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAberto ?></td>
+            <td><strong>Em Andamento: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAndamento ?></td>
+            <td><strong>Finalizado: </strong><?= $this->dados_sprint_backlog->sprintBacklogParado ?></td>
+            <td><strong>Parado: </strong><?= $this->dados_sprint_backlog->sprintBacklogFinalizado ?></td>
+            <td><strong>Total: </strong><?= $this->dados_sprint_backlog->totalSprintBacklog ?></td>
         </tr>
 <!--        <tr>
             <td colspan="5"><strong>Observações:</strong></td>

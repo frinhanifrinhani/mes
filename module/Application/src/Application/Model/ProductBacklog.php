@@ -26,6 +26,14 @@ class ProductBacklog implements InputFilterAwareInterface {
     public $codProjeto;
     public $codStatus;
     public $descricaoStatus;
+    public $productBacklogEmAberto;
+    public $productBacklogEmAndamento;
+    public $productBacklogParado;
+    public $productBacklogFinalizado;
+    public $totalProductBacklog;
+    public $productBacklogPrioridadeAlta;
+    public $productBacklogPrioridadeMedia;
+    public $productBacklogPrioridadeBaixa;
     public $dataCadastroProductBacklog;
     protected $inputFilter;
     protected $dbAdapter;
@@ -39,6 +47,14 @@ class ProductBacklog implements InputFilterAwareInterface {
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->codStatus = (isset($data['cod_status'])) ? $data['cod_status'] : null;
         $this->descricaoStatus = (isset($data['descricao_status'])) ? $data['descricao_status'] : null;
+        $this->productBacklogEmAberto = (isset($data['product_backlog_em_aberto'])) ? $data['product_backlog_em_aberto'] : null;
+        $this->productBacklogEmAndamento = (isset($data['product_backlog_em_andamento'])) ? $data['product_backlog_em_andamento'] : null;
+        $this->productBacklogParado = (isset($data['product_backlog_parado'])) ? $data['product_backlog_parado'] : null;
+        $this->productBacklogFinalizado = (isset($data['product_backlog_finalizado'])) ? $data['product_backlog_finalizado'] : null;
+        $this->totalProductBacklog = (isset($data['total_product_backlog'])) ? $data['total_product_backlog'] : null;
+        $this->productBacklogPrioridadeAlta = (isset($data['product_backlog_prioridade_alta'])) ? $data['product_backlog_prioridade_alta'] : null;
+        $this->productBacklogPrioridadeMedia = (isset($data['product_backlog_prioridade_media'])) ? $data['product_backlog_prioridade_media'] : null;
+        $this->productBacklogPrioridadeBaixa = (isset($data['product_backlog_prioridade_baixa'])) ? $data['product_backlog_prioridade_baixa'] : null;
         $this->dataCadastroProductBacklog = (isset($data['data_cadastro_product_backlog'])) ? $data['data_cadastro_product_backlog'] : null;
     }
 

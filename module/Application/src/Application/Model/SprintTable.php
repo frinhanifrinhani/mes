@@ -82,7 +82,6 @@ class SprintTable {
         $expression = new Expression();
         $select = new Select();
 
-        $select = new Select();
         $select->from('sprint');
 
         $sprintEmAberto = new Select();
