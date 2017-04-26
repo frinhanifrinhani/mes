@@ -49,6 +49,7 @@ class Sprint implements InputFilterAwareInterface {
         $this->sprintParado = (isset($data['sprint_parado'])) ? $data['sprint_parado'] : null;
         $this->sprintFinalizado = (isset($data['sprint_finalizado'])) ? $data['sprint_finalizado'] : null;
         $this->totalSprint = (isset($data['total_sprint'])) ? $data['total_sprint'] : null;
+        $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
         $this->dataCadastroSprint = (isset($data['data_cadastro_sprint'])) ? $data['data_cadastro_sprint'] : null;
     }
 
