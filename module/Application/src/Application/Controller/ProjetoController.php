@@ -163,7 +163,6 @@ class ProjetoController extends AbstractActionController {
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
             'dados_sprint_backlog' => $dadosSprintBacklog,
-            'total_sprint' => $totalSprint,
             'retorno' => $retorno,
             'cod_projeto' => $codProjeto,
             'projetos' => $projetoDados,
