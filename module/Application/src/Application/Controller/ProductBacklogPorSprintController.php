@@ -28,10 +28,13 @@ class ProductBacklogPorSprintController extends AbstractActionController {
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $sprint = $this->getSprintTable()->fetchAll($codProjeto);
+        $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
 
         return new ViewModel(array(
             'partial_loop_sprint' => $sprint,
             'cod_projeto' => $codProjeto,
+            'projeto' => $projeto,
+            
         ));
     }
 

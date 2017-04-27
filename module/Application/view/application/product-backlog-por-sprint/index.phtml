@@ -3,11 +3,14 @@
         <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
         <li class="breadcrumb-item"><a href="<?= $this->url('projeto') ?>">Projetos</a></li>
         <li class="breadcrumb-item"><a href="<?= $this->url('projeto-gerenciar', array('cod_projeto' => $this->cod_projeto)) ?>">Gerenciar projeto</a></li>
-        <li class="breadcrumb-item active">Product Backlog por Sprint</li>
+        <li class="breadcrumb-item active">Product Backlog por Sprint: Escolher Sprint</li>
     </ol>
 </div>
 
 <hr />
+<div class="alert alert-success">
+    <p><b>Projeto:</b> <?= $this->projeto->nomeProjeto; ?></p>
+</div>
 <div class="content">
 
     <div class="form-group">
@@ -18,7 +21,7 @@
         </select>
     </div> 
     <div class="form-group">
-        <button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" disabled ><span class="glyphicon glyphicon-floppy-save"</span> Salvar</button>
+        <!--<button type="submit" name="botao_salvar" id="botao_salvar" class="btn btn-primary" disabled ><span class="glyphicon glyphicon-floppy-save"</span> Salvar</button>-->
         <a href="<?= $this->url('projeto-gerenciar', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-warning" ><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
     </div>
 </div>
