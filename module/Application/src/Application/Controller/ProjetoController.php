@@ -14,6 +14,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\Projeto;
 use Application\Form\ProjetoForm;
+use DOMPDFModule\View\Model\PdfModel;
 
 class ProjetoController extends AbstractActionController {
 
@@ -53,7 +54,7 @@ class ProjetoController extends AbstractActionController {
             $formProjeto->setInputFilter($projeto->getInputFilter());
             $formProjeto->setData($request->getPost());
             if ($formProjeto->isValid()) {
-                
+
                 $projeto->exchangeArray($formProjeto->getData());
                 $retorno = $this->getProjetoTable()->salvar($projeto);
 
@@ -113,6 +114,8 @@ class ProjetoController extends AbstractActionController {
 
     //metodo que retorna pagina de exclusao da funcionalidade Projeto
     public function excluirAction() {
+        //metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
@@ -125,7 +128,7 @@ class ProjetoController extends AbstractActionController {
         }
 
         $request = $this->getRequest();
-        
+
         if ($request->isPost()) {
             $retornoCod = $this->getProjetoTable()->excluir($codProjeto);
             if ($retornoCod == 23000) {
@@ -141,8 +144,35 @@ class ProjetoController extends AbstractActionController {
             'form_projeto' => $formProjeto,
         ));
     }
+
+    public function relatorioAction() {
+        //metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
+
+        $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+
+        $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
+        $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
+        $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
+
+        $pdf = new PdfModel();
+
+        $pdf->setOption("filename", "relatorio");
+        $pdf->setOption('paperSize', 'a4');
+        $pdf->setOption('paperOrientation', 'landscape');
+
+        $pdf->setVariables(array(
+            'dados_sprint' => $dadosSprint,
+            'dados_product_backlog' => $dadosProductBacklog,
+            'dados_sprint_backlog' => $dadosSprintBacklog,
+        ));
+        return $pdf;
+    }
+
     //metodo que retorna pagina gerenciar projeto funcionalidade Projeto
     public function gerenciarAction() {
+        //metodo que verifica autenticação e perfil
+        $this->ACLPermitir()->permitir();
         $retorno = false;
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
@@ -152,14 +182,14 @@ class ProjetoController extends AbstractActionController {
 //        if ($projeto == null) {
 //            return $this->redirect()->toRoute('projeto');
 //        } 
-               
+
         $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
         $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
         $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
-        
+
         $request = $this->getRequest();
 
-        return new ViewModel(array(            
+        return new ViewModel(array(
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
             'dados_sprint_backlog' => $dadosSprintBacklog,
@@ -177,7 +207,7 @@ class ProjetoController extends AbstractActionController {
         }
         return $this->projetoTable;
     }
-    
+
     //recupera e retorna a model SprintTable
     public function getSprintTable() {
         if (!$this->sprintTable) {
@@ -186,7 +216,7 @@ class ProjetoController extends AbstractActionController {
         }
         return $this->sprintTable;
     }
-    
+
     //recupera e retorna a model ProductBacklogTable
     public function getProductBacklogTable() {
         if (!$this->productBacklogTable) {
@@ -195,7 +225,7 @@ class ProjetoController extends AbstractActionController {
         }
         return $this->productBacklogTable;
     }
-    
+
     //recupera e retorna a model SprintBacklogTable
     public function getSprintBacklogTable() {
         if (!$this->sprintBacklogTable) {

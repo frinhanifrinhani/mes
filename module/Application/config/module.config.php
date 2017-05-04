@@ -250,6 +250,18 @@ return array(
                     ),
                 ),
             ),
+            
+            //rota para gerar relatorio projeto
+            'projeto-relatorio' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/projeto-relatorio[/:cod_projeto]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Projeto',
+                        'action' => 'relatorio',
+                    ),
+                ),
+            ),
             //Rota gerenciar projeto
             'projeto-gerenciar' => array(
                 'type' => 'Segment',
@@ -437,6 +449,7 @@ return array(
                     ),
                 ),
             ),
+            
         /*         * ************* ROTAS PARA USUARIO ************** */
         //rota para tela usuario
 //            'usuario' => array(

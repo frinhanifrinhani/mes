@@ -1,0 +1,23 @@
+<htlm>
+    <head><title></title>
+    </head>
+    <body>
+        <table class="table table-bordered-green alert-success">
+            <thead>
+                <tr>
+                    <td colspan="5" id="tituloTabela"><h4>Product Backlog</h4></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?></td>
+                    <td><strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?></td>
+                    <td><strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogParado ?></td>
+                    <td><strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?></td>
+                    <td><strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</htlm>
+
