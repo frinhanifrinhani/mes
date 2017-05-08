@@ -1,23 +1,37 @@
-<htlm>
-    <head><title></title>
-    </head>
-    <body>
-        <table class="table table-bordered-green alert-success">
-            <thead>
-                <tr>
-                    <td colspan="5" id="tituloTabela"><h4>Product Backlog</h4></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?></td>
-                    <td><strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?></td>
-                    <td><strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogParado ?></td>
-                    <td><strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?></td>
-                    <td><strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?></td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
-</htlm>
 
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        width:573px;
+        margin: auto;
+        padding: 10px;
+        border:1px solid #000;
+    }
+    h1{text-align: center;}
+    h2{text-align: center;}
+</style>
+<!--<div class="container">-->
+
+<h1>My Easy Scrum</h1>
+<br />
+<h2>Relatório do Projeto x</h2>
+<h3>Informações do Projeto</h3>
+<hr />
+<strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?>
+<strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?>
+<strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogParado ?>
+<strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?>
+<strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?>
+<!--</div>-->
+
+
+
+<?php
+date_default_timezone_set('America/Sao_Paulo');
+$date = date('d/m/Y H:i');
+echo $date;
+?>

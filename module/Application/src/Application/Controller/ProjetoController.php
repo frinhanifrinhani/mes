@@ -159,7 +159,7 @@ class ProjetoController extends AbstractActionController {
 
         $pdf->setOption("filename", "relatorio");
         $pdf->setOption('paperSize', 'a4');
-        $pdf->setOption('paperOrientation', 'landscape');
+        $pdf->setOption('paperOrientation', 'portrait');
 
         $pdf->setVariables(array(
             'dados_sprint' => $dadosSprint,
