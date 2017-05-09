@@ -150,6 +150,9 @@ class ProjetoController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
+        
+        $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
+        $projetoDados = $projeto->getArrayCopy();
 
         $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
         $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
@@ -160,12 +163,14 @@ class ProjetoController extends AbstractActionController {
         $pdf->setOption("filename", "relatorio");
         $pdf->setOption('paperSize', 'a4');
         $pdf->setOption('paperOrientation', 'portrait');
-
+        
         $pdf->setVariables(array(
+            'dados_projeto' => $projetoDados,
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
             'dados_sprint_backlog' => $dadosSprintBacklog,
         ));
+        
         return $pdf;
     }
 
