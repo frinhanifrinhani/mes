@@ -153,7 +153,12 @@ class ProjetoController extends AbstractActionController {
         
         $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
         $projetoDados = $projeto->getArrayCopy();
-
+        //------
+        $sprints = $this->getSprintTable()->fetchAll($codProjeto);
+        //------/
+//        var_dump($sprint);
+//        die();
+        
         $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
         $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
         $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
@@ -166,6 +171,7 @@ class ProjetoController extends AbstractActionController {
         
         $pdf->setVariables(array(
             'dados_projeto' => $projetoDados,
+            'sprints'=>$sprints,
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
             'dados_sprint_backlog' => $dadosSprintBacklog,

@@ -9,15 +9,9 @@
         padding: 10px;
         border:1px solid #000;
     }
-
     h1{text-align: center;}
     h2{text-align: center;}
-    hr{border: 1px #000 solid;}
 
-    table {border-collapse: collapse;width: 100%;}
-    thead{text-align: left;background-color: #aaa;}
-    .tableLista, table, tr, td{border-bottom:1px solid #000; }
-    .tableLista, table, thead{border-bottom:1px solid #000; }
     .dataDeGeracao{font-size: 12px; text-align: right;}
 </style>
 <!--<div class="container">-->
@@ -34,43 +28,12 @@
 <strong>Status: </strong><?= $this->dados_projeto['descricao_status']; ?><br/>
 <hr />
 <h3>Sprint</h3>
-<table class="tableLista">
-    <tr>
-        <td></td>
-    </tr>
-</table>
-
-<table>
-    <thead>
-        <tr>
-            <th>Nome Sprint</th>
-            <th>Descrição Sprint</th>
-            <th>Tempo de Duração</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <?php foreach ($this->sprints as $sprints) { ?>
-            <tr>
-                <td><?= $sprints->nomeSprint ?></td>
-                <td><?= $sprints->descricaoSprint ?></td>
-                <td><?= $sprints->tempoSprint ?>&nbsp;Dias</td>
-                <td><?= $sprints->descricaoStatus ?></td>
-            </tr>
-        <?php } ?>  
-    </tbody>
-</table>
-<table>
-    <tr>
-        <td><strong>Em Aberto: </strong><?= $this->dados_sprint->sprintEmAberto ?></td>
-        <td><strong>Em Andamento: </strong><?= $this->dados_sprint->sprintEmAndamento ?></td>
-        <td><strong>Finalizado: </strong><?= $this->dados_sprint->sprintParado ?></td>
-        <td><strong>Parado: </strong><?= $this->dados_sprint->sprintFinalizado ?></td>
-        <td><strong>Total: </strong><?= $this->dados_sprint->totalSprint ?></td>
-    </tr>
-</table>
+<strong>Em Aberto: </strong><?= $this->dados_sprint->sprintEmAberto ?><br/>
+<strong>Em Andamento: </strong><?= $this->dados_sprint->sprintEmAndamento ?><br/>
+<strong>Finalizado: </strong><?= $this->dados_sprint->sprintParado ?><br/>
+<strong>Parado: </strong><?= $this->dados_sprint->sprintFinalizado ?><br/>
 <br />
+<strong>Total: </strong><?= $this->dados_sprint->totalSprint ?><br/>
 <hr />
 <h3>Product Backlog</h3>
 <strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?><br/>
