@@ -30,6 +30,9 @@ class IndexController extends AbstractActionController {
             return $this->redirect()->toRoute('login');
         }
     }
+    public function acessoNegadoAction() {
+        return new ViewModel();
+    }
 
     public function inicioAction() {
 

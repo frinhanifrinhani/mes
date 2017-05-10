@@ -55,6 +55,17 @@ return array(
                     ),
                 ),
             ),
+            //rota para acesso negado
+            'acesso-negado' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/acesso-negado',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'acesso-negado',
+                    ),
+                ),
+            ),
             //rota para tela inicial com projeto
             'projetoescolhido' => array(
                 'type' => 'Segment',
@@ -434,7 +445,7 @@ return array(
                     'route' => '/projeto[/:cod_projeto]/productbacklog-por-sprint',
                     'defaults' => array(
                         'controller' => 'Application\Controller\ProductBacklogPorSprint',
-                        'action' => 'index',
+                        'action' => 'escolher',
                     ),
                 ),
             ),

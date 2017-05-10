@@ -22,7 +22,7 @@ class ProductBacklogPorSprintController extends AbstractActionController {
     protected $sprintTable;
     protected $projetoTable;
 
-    public function indexAction() {
+    public function escolherAction() {
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
 

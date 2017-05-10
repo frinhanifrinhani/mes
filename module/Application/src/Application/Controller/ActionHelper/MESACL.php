@@ -17,6 +17,8 @@ use Zend\Authentication\AuthenticationService;
 //use Zend\Mvc\Controller\Plugin\Redirect;
 use Zend\Session\Container;
 
+use Application\Controller\ActionHelper\ACL;
+
 class MESACL extends AbstractPlugin {
 
     public $autenticado;
@@ -48,7 +50,38 @@ class MESACL extends AbstractPlugin {
             'senha_participante' => $container->senha_participante,
         );
     }
+    public function acl(){
+        $controller = $this->getController();
 
+        $controllerName = $controller->params('controller');
+        $actionName = $controller->params('action');
+        
+        switch ($this->container()['cod_tipo_participante']){
+            case 1:
+                $perfil = 'productowner';
+                break;
+            
+            case 2:
+                $perfil = 'scrummaster';
+                break;
+            
+            case 3:
+                $perfil = 'scrumteam';
+                break;
+        }   
+        
+        echo "Rota: $controllerName - $actionName <br />";
+        echo "Perfil: $perfil<br />";
+        
+        $acl = new ACL();
+//            if ($acl->isAllowed($this->container()['cod_tipo_participante'], 'ProjetoController', 'listar')) {
+        if ($acl->isAllowed($perfil, $controllerName, $actionName)) {
+            return true;
+        } else {
+            
+            return false;
+        }
+    }
     public function verificarAutenticacao() {
         if (!$this->autenticado->hasIdentity()) {
             return false;
@@ -59,12 +92,24 @@ class MESACL extends AbstractPlugin {
 
     public function permitir() {
         $autenticado = $this->verificarAutenticacao();
+        $permitido = $this->acl();
+        
         $container = new Container();
         
         if ($autenticado == false) {
             $controller = $this->getController();
             $redirector = $controller->getPluginManager()->get('Redirect');
             return $redirector->toRoute('login');
+        }
+        
+        if($permitido == false){
+            $controller = $this->getController();
+            $redirector = $controller->getPluginManager()->get('Redirect');
+            return $redirector->toRoute('acesso-negado');
+//              $controller->getResponse()->setHttpResponseCode(401);
+//            return $this->flashMessenger()->addErrorMessage('Você não tem permissão!');
+//            echo 'Acesso negado';
+              
         }
 
     }
