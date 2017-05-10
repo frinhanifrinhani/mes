@@ -12,12 +12,17 @@
 
     h1{text-align: center;}
     h2{text-align: center;}
-    hr{border: 1px #000 solid;}
+    hr{
+        border-top: 0px solid #fff;
+      border-bottom: 1px solid #000;
+      color: #fff;
+      background-color: #fff;
+     }
 
     table {border-collapse: collapse;width: 100%;}
-    thead{text-align: left;background-color: #aaa;}
-    .tableLista, table, tr, td{border-bottom:1px solid #000; }
-    .tableLista, table, thead{border-bottom:1px solid #000; }
+    thead,th{text-align: left; background-color: #aaa;}
+    table, tr, td{border-bottom:1px solid #000; }
+    table, thead{border-bottom:1px solid #000; }
     .dataDeGeracao{font-size: 12px; text-align: right;}
 </style>
 <!--<div class="container">-->
@@ -34,18 +39,13 @@
 <strong>Status: </strong><?= $this->dados_projeto['descricao_status']; ?><br/>
 <hr />
 <h3>Sprint</h3>
-<table class="tableLista">
-    <tr>
-        <td></td>
-    </tr>
-</table>
 
 <table>
     <thead>
         <tr>
-            <th>Nome Sprint</th>
-            <th>Descrição Sprint</th>
-            <th>Tempo de Duração</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Duração</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -62,44 +62,119 @@
     </tbody>
 </table>
 <table>
-    <tr>
-        <td><strong>Em Aberto: </strong><?= $this->dados_sprint->sprintEmAberto ?></td>
-        <td><strong>Em Andamento: </strong><?= $this->dados_sprint->sprintEmAndamento ?></td>
-        <td><strong>Finalizado: </strong><?= $this->dados_sprint->sprintParado ?></td>
-        <td><strong>Parado: </strong><?= $this->dados_sprint->sprintFinalizado ?></td>
-        <td><strong>Total: </strong><?= $this->dados_sprint->totalSprint ?></td>
-    </tr>
+    <thead>
+        <tr>
+            <td><strong>Em Aberto: </strong><?= $this->dados_sprint->sprintEmAberto ?></td>
+            <td><strong>Em Andamento: </strong><?= $this->dados_sprint->sprintEmAndamento ?></td>
+            <td><strong>Finalizado: </strong><?= $this->dados_sprint->sprintParado ?></td>
+            <td><strong>Parado: </strong><?= $this->dados_sprint->sprintFinalizado ?></td>
+            <td><strong>Total: </strong><?= $this->dados_sprint->totalSprint ?></td>
+        </tr>
+    </thead>
 </table>
 <br />
 <hr />
 <h3>Product Backlog</h3>
-<strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?><br/>
-<strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?><br/>
-<strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogParado ?><br/>
-<strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?><br/>
-<h4>Prioridades</strong></h4>
-<strong>Alta: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeAlta ?><br/>
-<strong>Média: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeMedia ?><br/>
-<strong>Baixa: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeBaixa ?><br/>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Prioridade</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php foreach ($this->productBacklogs as $productBacklogs) { ?>
+            <tr>
+                <td><?= $productBacklogs->nomeProductBacklog ?></td>
+                <td><?= $productBacklogs->descricaoProductBacklog ?></td>
+                <td><?php
+                    switch ($productBacklogs->prioridadeProductBacklog) {
+                        case 1;
+                            echo 'Alta';
+                            break;
+                        case 2;
+                            echo 'Média';
+                            break;
+                        case 3;
+                            echo 'Baixa';
+                            break;
+                    }
+                    ?></td>
+                <td><?= $productBacklogs->descricaoStatus ?></td>
+            </tr>
+        <?php } ?>  
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <td><strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?></td>
+            <td><strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?></td>
+            <td><strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogParado ?></td>
+            <td><strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?></td>
+            <td><strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?></td>
+        </tr>
+    </thead>
+</table>
+<br>
+<table>
+    <thead>
+        <tr>
+            <td><strong>Priorides </strong></td>
+            <td><strong>Alta: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeAlta ?></td>
+            <td><strong>Média: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeMedia ?></td>
+            <td><strong>Baixa: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeBaixa ?></td>
+        </tr>
+    </thead>
+</table>
 <br />
-<strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?><br/>
 <hr />
 <h3>Sprint Backlog</h3>
-<strong>Em Aberto: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAberto ?><br/>
-<strong>Em Andamento: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAndamento ?><br/>
-<strong>Finalizado: </strong><?= $this->dados_sprint_backlog->sprintBacklogParado ?><br/>
-<strong>Parado: </strong><?= $this->dados_sprint_backlog->sprintBacklogFinalizado ?><br/>
-<br/>
-<strong>Total: </strong><?= $this->dados_sprint_backlog->totalSprintBacklog ?><br/>
-<hr />
-<!--</div>-->
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Tempo</th>
+            <th>Status</th>
+            <th>Atribuido</th>
+        </tr>
+    </thead>
 
+    <tbody>
+        <?php foreach ($this->sprintBacklogs as $sprintBacklogs) { ?>
+            <tr>
+                <td><?= $sprintBacklogs->nomeSprintBacklog ?></td>
+                <td><?= $sprintBacklogs->descricaoSprintBacklog ?></td>
+                <td><?= $sprintBacklogs->tempoSprintBacklog ?>&nbsp;Horas</td>
+                <td><?= $sprintBacklogs->descricaoStatus ?></td>
+                <td><?= $sprintBacklogs->nomeParticipante ?></td>
+            </tr>
+        <?php } ?>  
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <td><strong>Em Aberto: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAberto ?></td>
+            <td><strong>Em Andamento: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAndamento ?></td>
+            <td><strong>Finalizado: </strong><?= $this->dados_sprint_backlog->sprintBacklogParado ?></td>
+            <td><strong>Parado: </strong><?= $this->dados_sprint_backlog->sprintBacklogFinalizado ?></td>
+            <td><strong>Total: </strong><?= $this->dados_sprint_backlog->totalSprintBacklog ?></td>
+        </tr>
+    </thead>
+</table>
+<br>
 
 <div class="dataDeGeracao">
-    Gerado em: 
+    Relatório gerado em 
     <?php
     date_default_timezone_set('America/Sao_Paulo');
-    $date = date('d/m/Y H:i');
-    echo $date;
+    $data = date('d/m/Y');
+    $hora = date('H:i');
+    echo "$data às $hora";
     ?>
 </div>
