@@ -37,6 +37,7 @@ class SprintTable {
 //       echo $select->getSqlString();  
         return $linha;
     }
+
     //metodo que retorna ultma sprint cadastrada
 //    public function getLastId() {
 //        $ultimoSprint = $this->tableGateway->lastInsertValue;
@@ -77,8 +78,8 @@ class SprintTable {
     public function excluir($codSprint) {
         return $this->tableGateway->delete(array('cod_sprint' => $codSprint));
     }
-  
-    public function retornarDadosSprint($codProjeto){
+
+    public function retornarDadosSprint($codProjeto) {
         $expression = new Expression();
         $select = new Select();
 
@@ -130,7 +131,35 @@ class SprintTable {
         $rowset = $linha->current();
         return $rowset;
     }
-    
+
+    public function countSprint() {
+        $expression = new Expression();
+
+        $select = new Select();
+        $select->from('sprint');
+
+        $totalSprint = new Select();
+        $totalSprint->from('sprint')
+                ->columns(array('total_sprint' => $expression->setExpression("COUNT('cod_sprint')")));
+
+        $sprintFinalizado = new Select();
+        $sprintFinalizado->from('sprint')
+                ->columns(array('sprint_finalizado' => $expression->setExpression("COUNT(cod_status)")))
+                ->where("cod_status = 4");
+
+        $select->columns(array(
+                    'total_sprint' => new \Zend\Db\Sql\Expression('?', array($totalSprint)),
+                    'sprint_finalizado' => new \Zend\Db\Sql\Expression('?', array($sprintFinalizado)),
+                ))
+                ->group(array(
+                    'total_sprint',
+                    'sprint_finalizado')
+        );
+
+        $linha = $this->tableGateway->selectWith($select);
+        $rowset = $linha->current();
+        return $rowset;
+    }
 
 //    //metodo que retorna sql da tableGateway
 //    public function getSql() {
@@ -142,5 +171,4 @@ class SprintTable {
 //        $select = new Select($this->tableGateway->getTable());
 //        return $select;
 //    }
-
 }

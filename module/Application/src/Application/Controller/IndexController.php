@@ -21,6 +21,9 @@ use Application\Model\Projeto;
 class IndexController extends AbstractActionController {
 
     protected $projetoTable;
+    protected $sprintTable;
+    protected $productBacklogTable;
+    protected $sprintBacklogTable;
 
     public function indexAction() {
         $autenticacao = new AuthenticationService;
@@ -38,8 +41,12 @@ class IndexController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
+//        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
 //        $codProjeto = $this->getProjetoTable()->getProjeto();
+        
+        $sprints = $this->getSprintTable()->countSprint();
+//        $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog();
+//        $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog();
         
         switch($this->ACLPermitir()->container()['cod_tipo_participante']){
             case 1:
@@ -56,10 +63,11 @@ class IndexController extends AbstractActionController {
         }
         
         return new ViewModel(array(
-            'partial_loop_projetos' => $projetos,
+//            'partial_loop_projetos' => $projetos,
             'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
             'tipo_participante' => $tipoParticipante,
             'cod_tipo_participante' => $this->ACLPermitir()->container()['cod_tipo_participante'],
+            'sprints' => $sprints,
             
         ));
     }
@@ -74,13 +82,40 @@ class IndexController extends AbstractActionController {
         ));
     }
 
-    //recupera e retorna a model ProjetoTable
+//recupera e retorna a model ProjetoTable
     public function getProjetoTable() {
         if (!$this->projetoTable) {
             $sm = $this->getServiceLocator();
             $this->projetoTable = $sm->get('Application\Model\ProjetoTable');
         }
         return $this->projetoTable;
+    }
+
+    //recupera e retorna a model SprintTable
+    public function getSprintTable() {
+        if (!$this->sprintTable) {
+            $sm = $this->getServiceLocator();
+            $this->sprintTable = $sm->get('Application\Model\SprintTable');
+        }
+        return $this->sprintTable;
+    }
+
+    //recupera e retorna a model ProductBacklogTable
+    public function getProductBacklogTable() {
+        if (!$this->productBacklogTable) {
+            $sm = $this->getServiceLocator();
+            $this->productBacklogTable = $sm->get('Application\Model\ProductBacklogTable');
+        }
+        return $this->productBacklogTable;
+    }
+
+    //recupera e retorna a model SprintBacklogTable
+    public function getSprintBacklogTable() {
+        if (!$this->sprintBacklogTable) {
+            $sm = $this->getServiceLocator();
+            $this->sprintBacklogTable = $sm->get('Application\Model\SprintBacklogTable');
+        }
+        return $this->sprintBacklogTable;
     }
 
     //recupera e retorna o Service Manager
