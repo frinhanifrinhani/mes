@@ -69,12 +69,9 @@ class MESACL extends AbstractPlugin {
                 $perfil = 'scrumteam';
                 break;
         }   
-        
-        echo "Rota: $controllerName - $actionName <br />";
-        echo "Perfil: $perfil<br />";
-        
+//        echo "Rota: $controllerName - $actionName <br />";
+//        echo "Perfil: $perfil<br />";
         $acl = new ACL();
-//            if ($acl->isAllowed($this->container()['cod_tipo_participante'], 'ProjetoController', 'listar')) {
         if ($acl->isAllowed($perfil, $controllerName, $actionName)) {
             return true;
         } else {
@@ -106,9 +103,6 @@ class MESACL extends AbstractPlugin {
             $controller = $this->getController();
             $redirector = $controller->getPluginManager()->get('Redirect');
             return $redirector->toRoute('acesso-negado');
-//              $controller->getResponse()->setHttpResponseCode(401);
-//            return $this->flashMessenger()->addErrorMessage('Você não tem permissão!');
-//            echo 'Acesso negado';
               
         }
 

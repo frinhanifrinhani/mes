@@ -40,9 +40,26 @@ class IndexController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
         $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
 //        $codProjeto = $this->getProjetoTable()->getProjeto();
+        
+        switch($this->ACLPermitir()->container()['cod_tipo_participante']){
+            case 1:
+                $tipoParticipante = 'Product Owner';
+                break;
+            
+            case 2:
+                $tipoParticipante = 'Scrum Master';
+                break;
+            
+            case 3:
+                $tipoParticipante = 'Scrum Team';
+                break;
+        }
+        
         return new ViewModel(array(
             'partial_loop_projetos' => $projetos,
             'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
+            'tipo_participante' => $tipoParticipante,
+            'cod_tipo_participante' => $this->ACLPermitir()->container()['cod_tipo_participante'],
             
         ));
     }

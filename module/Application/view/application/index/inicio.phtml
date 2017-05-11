@@ -1,41 +1,79 @@
-<p>Bem vindo! <?= $this->nome_participante ?>!</p>
 
-<p>Em qual projeto você pretente trabalhar? 
-    <select name="projetos" id="projetos" onchange="location = this.value;">
-    <!--<select name="projetos" id="projetos" >-->
-        <option>Selecione...</option>
-        <?= $this->partialLoop('partial_loop_projetos.phtml', $this->partial_loop_projetos) ?>  
-    </select>
-</p>
+<div class="jumbotron">
+    <div class="container">
+        <h3 class="display-3">Bem vindo <?= $this->nome_participante ?>!</h3>
+        <p>O My Easy Scrum é um gerenciador de projetos Scrum, que visa agilizar e facilitar 
+            ainda mais os processos referentes ao gerenciamento e desenvolvimento de projetos, 
+            e é muito bom ter você participando da equipe como <?= $this->tipo_participante ?>.</p>
+        <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
+        <?php
+        switch ($this->cod_tipo_participante) {
+            case 1:
+                ?>
+                <p><a class="btn btn-primary btn-lg" href="<?=$this->url('projeto')?>" role="button">Ir para Projeto</a></p>
+                <?php
+                break;
 
-<script>
-    function escolherProjeto(codProjeto){
-        
-    }
-    
-//function escolherProjeto(){
-//       var ajax = new XMLHttpRequest();
-//       ajax.onreadystatechange = function () {
-//       if (ajax.readyState == 4)
-//       {
-//           if (ajax.status == 200) {
-//               if (ajax.responseText) {
-//             //alert(ajax.responseText);
-//                       document.getElementById('t53_garant').value = ajax.responseText;
-//               }
-//                   else{
-//               alert("error");
-//                    }
-//
-//           } else {
-//              // alert(ajax.statusText);
-//           }
-//       }
-//   }
-//       dados = 'method=carregaGarantia&t53_codbem='+t53_codbem;
-////alert(dados);
-//       ajax.open("POST", "lt_lote_empenhoRCP.php", true);
-//       ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=iso-8859-1');
-//       ajax.send(dados);
-//   }
-</script>
+            case 2:
+                ?>
+                <p><a class="btn btn-primary btn-lg" href="<?=$this->url('projeto')?>" role="button">Ir para Projeto</a></p>
+                <?php
+                break;
+
+            case 3:
+                ?>
+                <p><a class="btn btn-primary btn-lg" href="<?=$this->url('sprintbacklog-escolher-projeto')?>" role="button">Ir para Sprint Backlog</a></p>
+                <?php
+                break;
+        }
+        ?>
+    </div>
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-5">
+            <h2>Projeto</h2>
+            <p>Scrum é uma metodologia ágil para gestão e planejamento de projetos de software.
+                No Scrum, os projetos são dividos em ciclos (tipicamente mensais) chamados de Sprints.
+                Esta conta do My Easy Scrum, possui X projetos, onde X já foram entreges. </p>
+            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+        </div>
+        <div class="col-md-5">
+            <h2>Sprint</h2>
+            <p>Na metodoligia Scrum, o trabalho é realizado em iterações ou 
+                ciclos que vão de 15 a 30 dias de calendário chamado de Sprints, o trabalho realizado 
+                em cada sprint deve criar algo de valor tangível para o cliente ou usuário
+                Esta conta do My Easy Scrum, possui X Sprint, onde X já foram entreges.</p>
+            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+        </div>
+        <div class="col-md-5">
+            <h2>Product Backlog</h2>
+            <p>
+                O Product Backlog é uma lista contendo todas as funcionalidades desejadas
+                para um produto. O conteúdo desta lista é definido pelo Product Owner.
+                Esta conta do My Easy Scrum, possui X Product Backlog, onde X já foram entreges.
+            </p>
+            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+        </div>
+        <div class="col-md-5">
+            <h2>Sprint Backlog</h2>
+            <p>
+                O Sprint Backlog é uma lista de tarefas que o Scrum Team se
+                compromete a fazer em um Sprint. Os itens do Sprint Backlog 
+                são extraídos do Product Backlog, pela equipe, com base nas 
+                prioridades definidas pelo Product Owner e a percepção da 
+                equipe sobre o tempo que será necessário para completar as 
+                várias funcionalidades.
+                Esta conta do My Easy Scrum, possui X Sprint Backlog, onde X já foram entreges. 
+            </p>
+            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; Company 2017</p>
+    </footer>
+</div> <!-- /container -->
