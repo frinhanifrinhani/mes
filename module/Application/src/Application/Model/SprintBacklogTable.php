@@ -134,6 +134,36 @@ class SprintBacklogTable {
         $rowset = $linha->current();
         return $rowset;
     }
+    
+    public function countSprintBacklog(){
+        $expression = new Expression();
+
+        $select = new Select();
+        $select->from('sprint_backlog');
+
+        $totalSprintBacklog = new Select();
+        $totalSprintBacklog->from('sprint_backlog')
+                ->columns(array('total_sprint_backlog' => $expression->setExpression("COUNT('cod_sprint_backlog')")));
+
+        $sprintBacklogFinalizado = new Select();
+        $sprintBacklogFinalizado->from('sprint_backlog')
+                ->columns(array('sprint_backlogs_finalizado' => $expression->setExpression("COUNT(cod_status)")))
+                ->where("cod_status = 4");
+
+        $select->columns(array(
+                    'total_sprint_backlog' => new \Zend\Db\Sql\Expression('?', array($totalSprintBacklog)),
+                    'sprint_backlog_finalizado' => new \Zend\Db\Sql\Expression('?', array($sprintBacklogFinalizado)),
+                ))
+                ->group(array(
+                    'total_sprint_backlog',
+                    'sprint_backlog_finalizado')
+        );
+
+        $linha = $this->tableGateway->selectWith($select);
+//        echo $select->getSqlString();  
+        $rowset = $linha->current();
+        return $rowset;
+    }
 
 //    //metodo que retorna sql da tableGateway
 //    public function getSql() {

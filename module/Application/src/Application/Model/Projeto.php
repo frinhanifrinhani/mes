@@ -29,6 +29,8 @@ class Projeto implements InputFilterAwareInterface {
     public $codParticipante;
     public $nomeParticipante;
     public $productOwner; // vem pelo join
+    public $totalProjeto;
+    public $projetoFinalizado;
     public $dataCadastroProjeto;
     protected $inputFilter;
     protected $dbAdapter;
@@ -44,6 +46,8 @@ class Projeto implements InputFilterAwareInterface {
         $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
         $this->nomeParticipante = (isset($data['nome_participante'])) ? $data['nome_participante'] : null;
         $this->productOwner = (isset($data['product_owner'])) ? $data['product_owner'] : null;
+        $this->totalProjeto = (isset($data['total_projeto'])) ? $data['total_projeto'] : null;
+        $this->projetoFinalizado = (isset($data['projeto_finalizado'])) ? $data['projeto_finalizado'] : null;
         $this->dataCadastroProjeto = (isset($data['data_cadastro_projeto'])) ? $data['data_cadastro_projeto'] : null;
     }
 

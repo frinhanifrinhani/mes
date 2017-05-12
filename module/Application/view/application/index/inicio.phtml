@@ -10,19 +10,19 @@
         switch ($this->cod_tipo_participante) {
             case 1:
                 ?>
-                <p><a class="btn btn-primary btn-lg" href="<?=$this->url('projeto')?>" role="button">Ir para Projeto</a></p>
+                <p><a class="btn btn-primary btn-lg" href="<?= $this->url('projeto') ?>" role="button">Ir para Projeto</a></p>
                 <?php
                 break;
 
             case 2:
                 ?>
-                <p><a class="btn btn-primary btn-lg" href="<?=$this->url('projeto')?>" role="button">Ir para Projeto</a></p>
+                <p><a class="btn btn-primary btn-lg" href="<?= $this->url('projeto') ?>" role="button">Ir para Projeto</a></p>
                 <?php
                 break;
 
             case 3:
                 ?>
-                <p><a class="btn btn-primary btn-lg" href="<?=$this->url('sprintbacklog-escolher-projeto')?>" role="button">Ir para Sprint Backlog</a></p>
+                <p><a class="btn btn-primary btn-lg" href="<?= $this->url('sprintbacklog-escolher-projeto') ?>" role="button">Ir para Sprint Backlog</a></p>
                 <?php
                 break;
         }
@@ -36,7 +36,34 @@
             <h2>Projeto</h2>
             <p>Scrum é uma metodologia ágil para gestão e planejamento de projetos de software.
                 No Scrum, os projetos são dividos em ciclos que vão de 15 a 30 dias chamados de Sprints.
-                Esta conta do My Easy Scrum, possui X projetos, onde X já foram entreges. </p>
+                Esta conta do My Easy Scrum, possui 
+            </p>
+            <p>
+                Esta conta do My Easy Scrum,
+
+                <?php if ($this->projetos->totalProjeto == 0) { ?>
+                    ainda não possui Projeto cadastrado,
+                <?php } ?>
+                <?php if ($this->projetos->totalProjeto == 1) { ?>
+                    possui <strong><?= $this->projetos->totalProjeto ?></strong> Projeto, 
+                <?php } ?>
+                <?php if ($this->projetos->totalProjeto > 1) { ?>
+                    possui <strong><?= $this->projetos->totalProjeto ?></strong> Projetos, 
+                <?php } ?>
+
+                <?php if ($this->projetos->projetoFinalizado == 0) { ?>
+                    e ainda não possui Projeto concluido.
+                <?php } ?>
+
+                <?php if ($this->projetos->projetoFinalizado == 1) { ?>    
+                    onde <strong><?= $this->projetos->projetoFinalizado ?></strong> já foi entrege.
+                <?php } ?>
+
+                <?php if ($this->projetos->projetoFinalizado > 1) { ?>    
+                    onde <strong><?= $this->projetos->projetoFinalizado ?></strong> já foram entreges.
+                <?php } ?>    
+            </p> 
+            <hr />
             <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
         <div class="col-md-5">
@@ -44,17 +71,68 @@
             <p>Na metodoligia Scrum, o trabalho é realizado em iterações ou 
                 ciclos que vão de 15 a 30 dias de calendário chamado de Sprints, o trabalho realizado 
                 em cada sprint deve criar algo de valor tangível para o cliente ou usuário.
-                Esta conta do My Easy Scrum, possui <strong><?= $this->sprints->totalSprint ?></strong> Sprint, onde <strong><?= $this->sprints->sprintFinalizado ?></strong> já foram entreges.</p>
-            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+            </p>
+            <p>
+                Esta conta do My Easy Scrum,
+
+                <?php if ($this->sprints->totalSprint == 0) { ?>
+                    ainda não possui sprint cadastrada,
+                <?php } ?>
+                <?php if ($this->sprints->totalSprint == 1) { ?>
+                    possui <strong><?= $this->sprints->totalSprint ?></strong> Sprint, 
+                <?php } ?>
+                <?php if ($this->sprints->totalSprint > 1) { ?>
+                    possui <strong><?= $this->sprints->totalSprint ?></strong> Sprints, 
+                <?php } ?>
+
+                <?php if ($this->sprints->sprintFinalizado == 0) { ?>
+                    e ainda não possui sprint concluida.
+                <?php } ?>
+
+                <?php if ($this->sprints->sprintFinalizado == 1) { ?>    
+                    onde <strong><?= $this->sprints->sprintFinalizado ?></strong> já foi entrege.
+                <?php } ?>
+
+                <?php if ($this->sprints->sprintFinalizado > 1) { ?>    
+                    onde <strong><?= $this->sprints->sprintFinalizado ?></strong> já foram entreges.
+                <?php } ?>    
+            </p> 
+            <hr />
+        <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
         <div class="col-md-5">
             <h2>Product Backlog</h2>
             <p>
                 O Product Backlog é uma lista contendo todas as funcionalidades desejadas
                 para um produto. O conteúdo desta lista é definido pelo Product Owner.
-                Esta conta do My Easy Scrum, possui X Product Backlog, onde X já foram entreges.
             </p>
-            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+            <p>
+                Esta conta do My Easy Scrum,
+
+                <?php if ($this->product_backlogs->totalProductBacklog == 0) { ?>
+                    ainda não possui Product Backlog cadastrado,
+                <?php } ?>
+                <?php if ($this->product_backlogs->totalProductBacklog == 1) { ?>
+                    possui <strong><?= $this->product_backlogs->totalProductBacklog ?></strong> Product Backlog, 
+                <?php } ?>
+                <?php if ($this->product_backlogs->totalProductBacklog > 1) { ?>
+                    possui <strong><?= $this->product_backlogs->totalProductBacklog ?></strong> Product Backlogs, 
+                <?php } ?>
+
+                <?php if ($this->product_backlogs->productBacklogFinalizado == 0) { ?>
+                    e ainda não possui Product Backlog concluido.
+                <?php } ?>
+
+                <?php if ($this->product_backlogs->productBacklogFinalizado == 1) { ?>    
+                    onde <strong><?= $this->product_backlogs->productBacklogFinalizado ?></strong> já foi entrege.
+                <?php } ?>
+
+                <?php if ($this->product_backlogs->productBacklogFinalizado > 1) { ?>    
+                    onde <strong><?= $this->product_backlogs->productBacklogFinalizado ?></strong> já foram entreges.
+                <?php } ?>    
+            </p>
+            <hr />
+      <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
         <div class="col-md-5">
             <h2>Sprint Backlog</h2>
@@ -65,15 +143,36 @@
                 prioridades definidas pelo Product Owner e a percepção da 
                 equipe sobre o tempo que será necessário para completar as 
                 várias funcionalidades.
-                Esta conta do My Easy Scrum, possui X Sprint Backlog, onde X já foram entreges. 
             </p>
-            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
+            <p>
+                Esta conta do My Easy Scrum,
+
+                <?php if ($this->sprint_backlogs->totalSprintBacklog == 0) { ?>
+                    ainda não possui Sprint Backlog cadastrado,
+                <?php } ?>
+                <?php if ($this->sprint_backlogs->totalSprintBacklog == 1) { ?>
+                    possui <strong><?= $this->sprint_backlogs->totalSprintBacklog ?></strong> Sprint Backlog, 
+                <?php } ?>
+                <?php if ($this->sprint_backlogs->totalSprintBacklog > 1) { ?>
+                    possui <strong><?= $this->sprint_backlogs->totalSprintBacklog ?></strong> Sprint Backlogs, 
+                <?php } ?>
+
+                <?php if ($this->sprint_backlogs->sprintBacklogFinalizado == 0) { ?>
+                    e ainda não possui Product Backlog concluido.
+                <?php } ?>
+
+                <?php if ($this->sprint_backlogs->sprintBacklogFinalizado == 1) { ?>    
+                    onde <strong><?= $this->sprint_backlogs->sprintBacklogFinalizado ?></strong> já foi entrege.
+                <?php } ?>
+
+                <?php if ($this->sprint_backlogs->sprintBacklogFinalizado > 1) { ?>    
+                    onde <strong><?= $this->sprint_backlogs->sprintBacklogFinalizado ?></strong> já foram entreges.
+                <?php } ?>    
+            </p>  
+            <hr />
+                        <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
     </div>
 
     <hr>
-
-    <footer>
-        <p>&copy; Company 2017</p>
-    </footer>
 </div> <!-- /container -->

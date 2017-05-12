@@ -44,9 +44,11 @@ class IndexController extends AbstractActionController {
 //        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
 //        $codProjeto = $this->getProjetoTable()->getProjeto();
         
+        $projetos = $this->getProjetoTable()->countProjeto();
         $sprints = $this->getSprintTable()->countSprint();
-//        $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog();
-//        $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog();
+        $prodcutBacklogs = $this->getProductBacklogTable()->countProductBacklog();
+        $sprintBacklogs = $this->getSprintBacklogTable()->countSprintBacklog();
+//        var_dump($sprintBacklogs);
         
         switch($this->ACLPermitir()->container()['cod_tipo_participante']){
             case 1:
@@ -67,7 +69,10 @@ class IndexController extends AbstractActionController {
             'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
             'tipo_participante' => $tipoParticipante,
             'cod_tipo_participante' => $this->ACLPermitir()->container()['cod_tipo_participante'],
+            'projetos' => $projetos,
             'sprints' => $sprints,
+            'product_backlogs' => $prodcutBacklogs,
+            'sprint_backlogs' => $sprintBacklogs,
             
         ));
     }

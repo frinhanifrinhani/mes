@@ -154,6 +154,36 @@ class ProductBacklogTable {
         return $rowset;
 
     }
+    
+    public function countProductBacklog(){
+        $expression = new Expression();
+
+        $select = new Select();
+        $select->from('product_backlog');
+
+        $totalProductBacklog = new Select();
+        $totalProductBacklog->from('product_backlog')
+                ->columns(array('total_product_backlog' => $expression->setExpression("COUNT('cod_prodcut_backlog')")));
+
+        $productBacklogFinalizado = new Select();
+        $productBacklogFinalizado->from('product_backlog')
+                ->columns(array('product_backlog_finalizado' => $expression->setExpression("COUNT(cod_status)")))
+                ->where("cod_status = 4");
+
+        $select->columns(array(
+                    'total_product_backlog' => new \Zend\Db\Sql\Expression('?', array($totalProductBacklog)),
+                    'product_backlog_finalizado' => new \Zend\Db\Sql\Expression('?', array($productBacklogFinalizado)),
+                ))
+                ->group(array(
+                    'total_product_backlog',
+                    'product_backlog_finalizado')
+        );
+
+        $linha = $this->tableGateway->selectWith($select);
+//        echo $select->getSqlString();  
+        $rowset = $linha->current();
+        return $rowset;
+    }
 //
 //    //metodo que retorna sql da tableGateway
 //    public function getSql() {

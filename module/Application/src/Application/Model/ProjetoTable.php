@@ -17,6 +17,7 @@ use Zend\Db\ResultSet\ResultSet;
 use Application\Model\ProjetoTable;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\I18n\View\Helper\DateFormat;
+use Zend\Db\Sql\Expression;
 
 class ProjetoTable {
 
@@ -67,6 +68,36 @@ class ProjetoTable {
     
     }
 
+    public function countProjeto(){
+        $expression = new Expression();
+
+        $select = new Select();
+        $select->from('projeto');
+
+        $totalProjeto = new Select();
+        $totalProjeto->from('projeto')
+                ->columns(array('total_projeto' => $expression->setExpression("COUNT('cod_projeto')")));
+
+        $projetoFinalizado = new Select();
+        $projetoFinalizado->from('projeto')
+                ->columns(array('projeto_finalizado' => $expression->setExpression("COUNT(cod_status)")))
+                ->where("cod_status = 4");
+
+        $select->columns(array(
+                    'total_projeto' => new \Zend\Db\Sql\Expression('?', array($totalProjeto)),
+                    'projeto_finalizado' => new \Zend\Db\Sql\Expression('?', array($projetoFinalizado)),
+                ))
+                ->group(array(
+                    'total_projeto',
+                    'projeto_finalizado')
+        );
+
+        $linha = $this->tableGateway->selectWith($select);
+//        echo $select->getSqlString();  
+        $rowset = $linha->current();
+        return $rowset;
+    }
+    
     public function salvar(Projeto $projeto) {
         $data = array(
             'cod_projeto' => $projeto->codProjeto,
