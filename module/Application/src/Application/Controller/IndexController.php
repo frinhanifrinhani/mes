@@ -41,14 +41,11 @@ class IndexController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-//        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
-//        $codProjeto = $this->getProjetoTable()->getProjeto();
-        
+          
         $projetos = $this->getProjetoTable()->countProjeto();
         $sprints = $this->getSprintTable()->countSprint();
         $prodcutBacklogs = $this->getProductBacklogTable()->countProductBacklog();
         $sprintBacklogs = $this->getSprintBacklogTable()->countSprintBacklog();
-//        var_dump($sprintBacklogs);
         
         switch($this->ACLPermitir()->container()['cod_tipo_participante']){
             case 1:

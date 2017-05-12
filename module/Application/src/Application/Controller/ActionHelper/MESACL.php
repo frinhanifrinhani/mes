@@ -32,6 +32,7 @@ class MESACL extends AbstractPlugin {
  
     }
     
+    
     public function container(){
         
         $container = new Container();
@@ -71,6 +72,7 @@ class MESACL extends AbstractPlugin {
         }   
 //        echo "Rota: $controllerName - $actionName <br />";
 //        echo "Perfil: $perfil<br />";
+//        echo 'aqu';
         $acl = new ACL();
         if ($acl->isAllowed($perfil, $controllerName, $actionName)) {
             return true;
@@ -92,7 +94,7 @@ class MESACL extends AbstractPlugin {
         $permitido = $this->acl();
         
         $container = new Container();
-        
+//        $this->layout()->nomeParticipante='Thiago';
         if ($autenticado == false) {
             $controller = $this->getController();
             $redirector = $controller->getPluginManager()->get('Redirect');
