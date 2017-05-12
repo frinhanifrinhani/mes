@@ -50,9 +50,8 @@ class Module {
         $moduleRouteListener->attach($eventManager);
 
         $GLOBALS['sm'] = $e->getApplication()->getServiceManager();
-        
-        var_dump($GLOBALS);die;
-        $serviceManager = $e->getApplication()->getServiceManager();
+
+//        $serviceManager = $e->getApplication()->getServiceManager();
 //        $container = $serviceManager->get('Application\Controller\Index');
     $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
      $viewModel->nomeParticipante =  'Thiago';//$container->container2();
