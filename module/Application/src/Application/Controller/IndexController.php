@@ -47,24 +47,9 @@ class IndexController extends AbstractActionController {
         $prodcutBacklogs = $this->getProductBacklogTable()->countProductBacklog();
         $sprintBacklogs = $this->getSprintBacklogTable()->countSprintBacklog();
         
-        switch($this->ACLPermitir()->container()['cod_tipo_participante']){
-            case 1:
-                $tipoParticipante = 'Product Owner';
-                break;
-            
-            case 2:
-                $tipoParticipante = 'Scrum Master';
-                break;
-            
-            case 3:
-                $tipoParticipante = 'Scrum Team';
-                break;
-        }
-        
         return new ViewModel(array(
-//            'partial_loop_projetos' => $projetos,
             'nome_participante' => $this->ACLPermitir()->container()['nome_participante'],
-            'tipo_participante' => $tipoParticipante,
+            'tipo_participante' => $this->ACLPermitir()->container()['tipo_participante'],
             'cod_tipo_participante' => $this->ACLPermitir()->container()['cod_tipo_participante'],
             'projetos' => $projetos,
             'sprints' => $sprints,
