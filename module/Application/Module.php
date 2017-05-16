@@ -13,6 +13,7 @@ namespace Application;
 // importação das bibliotecas do ZendFramework
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Application\Controller\ActionHelper\MESACL;
 //add
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -52,9 +53,11 @@ class Module {
         $GLOBALS['sm'] = $e->getApplication()->getServiceManager();
 
         $serviceManager = $e->getApplication()->getServiceManager();
-//        $container = $serviceManager->get('Application\Controller\Index');
-    $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
-     $viewModel->nomeParticipante =  'Thiago';//$container->container2();
+
+        $container = new MESACL();
+        $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+        $viewModel->nomeParticipante = $container->container()['nome_participante'];
+        $viewModel->tipoParticipante = $container->container()['tipo_participante'];
     }
 
     public function getConfig() {
@@ -242,7 +245,7 @@ class Module {
                     return new TableGateway(new TableIdentifier('participante_para_projeto'), $dbAdapter, null, $resultSetPrototype);
                 },
             ),
-
         );
     }
+
 }
