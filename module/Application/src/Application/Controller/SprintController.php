@@ -117,7 +117,7 @@ class SprintController extends AbstractActionController {
         //ActionHelper que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $retorno = false;
-        
+
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprint = (int) $this->params()->fromRoute('cod_sprint', null);
 

@@ -150,13 +150,13 @@ class ProjetoController extends AbstractActionController {
         $this->ACLPermitir()->permitir();
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-        
+
         $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
         $projetoDados = $projeto->getArrayCopy();
         $sprints = $this->getSprintTable()->fetchAll($codProjeto);
         $productBacklogs = $this->getProductBacklogTable()->fetchAll($codProjeto);
         $sprintBacklogs = $this->getSprintBacklogTable()->fetchAll($codProjeto);
-        
+
         $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
         $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
         $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
@@ -168,17 +168,17 @@ class ProjetoController extends AbstractActionController {
         $pdf->setOption("filename", $nomeArquivo);
         $pdf->setOption('paperSize', 'a4');
         $pdf->setOption('paperOrientation', 'portrait');
-        
+
         $pdf->setVariables(array(
             'dados_projeto' => $projetoDados,
-            'sprints'=>$sprints,
-            'productBacklogs'=>$productBacklogs,
-            'sprintBacklogs'=>$sprintBacklogs,
+            'sprints' => $sprints,
+            'productBacklogs' => $productBacklogs,
+            'sprintBacklogs' => $sprintBacklogs,
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
             'dados_sprint_backlog' => $dadosSprintBacklog,
         ));
-        
+
         return $pdf;
     }
 
@@ -190,18 +190,16 @@ class ProjetoController extends AbstractActionController {
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
 
         $projeto = $this->getProjetoTable()->getProjetoJoin($codProjeto);
-        $projetoDados = $projeto->getArrayCopy();
-//        var_dump($projeto);
-//        if ($projeto == null) {
-//            return $this->redirect()->toRoute('projeto');
-//        } 
 
-        $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
-        $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
-        $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
-
-        $request = $this->getRequest();
-
+        if ($projeto == true) {
+            $projetoDados = $projeto->getArrayCopy();
+            $dadosSprint = $this->getSprintTable()->retornarDadosSprint($codProjeto);
+            $dadosProductBacklog = $this->getProductBacklogTable()->retornarDadosProductBacklog($codProjeto);
+            $dadosSprintBacklog = $this->getSprintBacklogTable()->retornarDadosSprintBacklog($codProjeto);
+        } else {
+            return $this->redirect()->toRoute('projeto');
+        }
+        
         return new ViewModel(array(
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
