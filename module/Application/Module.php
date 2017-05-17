@@ -56,6 +56,7 @@ class Module {
 
         $container = new MESACL();
         $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+
         $viewModel->nomeParticipante = $container->container()['nome_participante'];
         $viewModel->tipoParticipante = $container->container()['tipo_participante'];
     }

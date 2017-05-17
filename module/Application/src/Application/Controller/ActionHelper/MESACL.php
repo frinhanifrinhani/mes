@@ -22,13 +22,13 @@ class MESACL extends AbstractPlugin {
 
     public $autenticado;
     public $dados;
+    public $tipoParticipante;
     public $redirect;
 
     public function __construct() {
 
         $this->autenticado = new AuthenticationService();
         $this->dados = $this->autenticado->getIdentity();
-
     }
 
     public function container() {
@@ -37,24 +37,25 @@ class MESACL extends AbstractPlugin {
 
         switch ($container->cod_tipo_participante){
             case 1:
-                $this->dados->tipo_participante = 'Product Owner';
+                $this->tipoParticipante = 'Product Owner';
                 break;
             
             case 2:
-                $this->dados->tipo_participante = 'Scrum Master';
+                $this->tipoParticipante = 'Scrum Master';
                 break;
             
             case 3:
-                $this->dados->tipo_participante = 'Scrum Team';
+                $this->tipoParticipante = 'Scrum Team';
                 break;
         }
-        
-        $container->cod_participante = $this->dados->cod_participante;
-        $container->cod_tipo_participante = $this->dados->cod_tipo_participante;
-        $container->tipo_participante = $this->dados->tipo_participante;
-        $container->nome_participante = $this->dados->nome_participante;
-        $container->email_participante = $this->dados->email_participante;
-        $container->senha_participante = $this->dados->senha_participante;
+
+//        $container->cod_participante = $this->dados->cod_participante;
+        $container->cod_participante = (isset($this->dados->cod_participante)) ? $this->dados->cod_participante : null;
+        $container->cod_tipo_participante = (isset($this->dados->cod_tipo_participante)) ? $this->dados->cod_tipo_participante : null;//$this->dados->cod_tipo_participante;
+        $container->nome_participante = (isset($this->dados->nome_participante)) ? $this->dados->nome_participante : null;//$this->dados->nome_participante;
+        $container->email_participante = (isset($this->dados->email_participante)) ? $this->dados->email_participante : null;//$this->dados->email_participante;
+        $container->senha_participante = (isset($this->dados->senha_participante)) ? $this->dados->senha_participante : null;//$this->dados->senha_participante;
+        $container->tipo_participante = $this->tipoParticipante;//(isset($this->tipoParticipante)) ? $this->tipoParticipante : null;//$this->tipoParticipante;
 
         return array(
             'cod_participante' => $container->cod_participante,
@@ -73,7 +74,7 @@ class MESACL extends AbstractPlugin {
         $actionName = $controller->params('action');
 
         $acl = new ACL();
-        if ($acl->isAllowed($this->dados->tipo_participante, $controllerName, $actionName)) {
+        if ($acl->isAllowed($this->container()['cod_tipo_participante'], $controllerName, $actionName)) {
             return true;
         } else {
 
@@ -95,7 +96,6 @@ class MESACL extends AbstractPlugin {
 
         $container = new Container();
 
-//        $this->layout()->nomeParticipante='Thiago';
         if ($autenticado == false) {
             $controller = $this->getController();
             $redirector = $controller->getPluginManager()->get('Redirect');
