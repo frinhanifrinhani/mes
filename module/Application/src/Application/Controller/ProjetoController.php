@@ -165,7 +165,7 @@ class ProjetoController extends AbstractActionController {
         date_default_timezone_set('America/Sao_Paulo');
         $data = date('d-m-Y_Hi');
         $nomeArquivo = "Relatorio_do_Projeto_{$data}";
-        $pdf->setOption("filename", $nomeArquivo);
+       // $pdf->setOption("filename", $nomeArquivo);
         $pdf->setOption('paperSize', 'a4');
         $pdf->setOption('paperOrientation', 'portrait');
 

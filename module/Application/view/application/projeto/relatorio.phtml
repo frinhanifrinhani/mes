@@ -1,4 +1,4 @@
-
+<html>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -26,7 +26,10 @@
     .dataDeGeracao{font-size: 12px; text-align: right;}
 </style>
 <!--<div class="container">-->
-
+<head>
+    <title>Relatório do projeto</title>
+</head>
+<body>
 <h1>My Easy Scrum</h1>
 <h2>Relatório do Projeto: <?= $this->dados_projeto['nome_projeto'] ?></h2>
 <hr />
@@ -178,3 +181,5 @@
     echo "$data às $hora";
     ?>
 </div>
+</body>
+</html>
