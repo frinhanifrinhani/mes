@@ -50,7 +50,6 @@ class SprintBacklogController extends AbstractActionController {
         $retorno = false;
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
-//        $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
         $formSprintBacklog = new SprintBacklogForm($codProjeto);
                 
         $productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
@@ -62,18 +61,17 @@ class SprintBacklogController extends AbstractActionController {
             $sprintBacklog->setDbAdapter($dbAdapter);
             $formSprintBacklog->setInputFilter($sprintBacklog->getInputFilter());
             $formSprintBacklog->setData($request->getPost());
-//
+
             if ($formSprintBacklog->isValid()) {
                 $sprintBacklog->exchangeArray($formSprintBacklog->getData());
                 $retorno = $this->getSprintBacklogTable()->salvar($sprintBacklog);
-//
+
             }
         }
 
         return new ViewModel(array(
             'retorno' => $retorno,
             'partial_loop_product_backlog' => $productBacklog,
-//            'cod_sprint' => $codSprint,
             'cod_projeto' => $codProjeto,
             'form_sprint_backlog' => $formSprintBacklog,
         ));
@@ -87,10 +85,8 @@ class SprintBacklogController extends AbstractActionController {
         $codSprintBacklog = (int) $this->params()->fromRoute('cod_sprint_backlog', null);
 
         $projeto = $this->getProjetoTable()->getProjeto($codProjeto);
-        //$productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
 
         $sprintBacklog = $this->getSprintBacklogTable()->getSprintBacklog($codSprintBacklog);
-//        $this->Redirecionamento()->redirecionarParaProjeto($projeto);
 
         if ($sprintBacklog == true) {
             $formSprintBacklog = new SprintBacklogForm($codProjeto);
@@ -115,7 +111,6 @@ class SprintBacklogController extends AbstractActionController {
         }
 
         return new ViewModel(array(
-            //'partial_loop_product_backlog' => $productBacklog,
             'retorno' => $retorno,
             'cod_sprint_backlog' => $codSprintBacklog,
             'cod_projeto' => $codProjeto,

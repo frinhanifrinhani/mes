@@ -58,13 +58,11 @@ class ProductBacklogController extends AbstractActionController {
                 $productBacklog->exchangeArray($formProductBacklog->getData());
                 $retorno = $this->getProductBacklogTable()->salvar($productBacklog);
 
-//                $ultimoProductBacklog = $this->getProductBacklogTable()->getLastId();
             }
         }
 
         return new ViewModel(array(
             'retorno' => $retorno,
-//            'cod_sprint' => $codSprint,
             'cod_projeto' => $codProjeto,
             'form_productbacklog' => $formProductBacklog,
         ));

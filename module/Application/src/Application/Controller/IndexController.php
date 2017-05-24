@@ -15,7 +15,6 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Model\Login;
 use Zend\Session\Container;
-//use Application\Controller\ProjetoController;
 use Application\Model\Projeto;
 
 class IndexController extends AbstractActionController {

@@ -60,9 +60,7 @@ class SprintController extends AbstractActionController {
                 $retorno = $this->getSprintTable()->salvar($sprint);
             }
         }
-//        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         return new ViewModel(array(
-//            'partial_loop_projetos' => $projetos,
             'cod_projeto' => $codProjeto,
             'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
             'retorno' => $retorno,

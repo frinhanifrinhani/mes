@@ -27,8 +27,6 @@ class ProjetoController extends AbstractActionController {
 
         //metodo que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
-        //SER FOR NECESSÁRIO FILTAR OS PROJETOS APENAS PARA QUE O DONO VEJE
-//        $projetos = $this->getProjetoTable()->fetchAll($this->ACLPermitir()->container()['cod_participante']);
         $projetos = $this->getProjetoTable()->fetchAll();
         //retorna dados pra a view
         return new ViewModel(array(
@@ -46,7 +44,6 @@ class ProjetoController extends AbstractActionController {
 
         $request = $this->getRequest();
 
-//        var_dump($request->getPost());
         if ($request->isPost()) {
 
             $projeto = new Projeto();
@@ -57,14 +54,10 @@ class ProjetoController extends AbstractActionController {
 
                 $projeto->exchangeArray($formProjeto->getData());
                 $retorno = $this->getProjetoTable()->salvar($projeto);
-
-                $ultimoProjeto = $this->getProjetoTable()->getLastId();
             }
         }
 
         return new ViewModel(array(
-            //'cod_participante' => $this->ACLPermitir()->container()['cod_participante'],
-            'ultimoProjeto' => $ultimoProjeto,
             'retorno' => $retorno,
             'form_projeto' => $formProjeto,
         ));
@@ -84,9 +77,9 @@ class ProjetoController extends AbstractActionController {
         } else {
             return $this->redirect()->toRoute('projeto');
         }
-//
+
         $request = $this->getRequest();
-//
+
         if ($request->isPost()) {
 
             $projeto = new Projeto();
@@ -165,7 +158,7 @@ class ProjetoController extends AbstractActionController {
         date_default_timezone_set('America/Sao_Paulo');
         $data = date('d-m-Y_Hi');
         $nomeArquivo = "Relatorio_do_Projeto_{$data}";
-       // $pdf->setOption("filename", $nomeArquivo);
+        // $pdf->setOption("filename", $nomeArquivo);
         $pdf->setOption('paperSize', 'a4');
         $pdf->setOption('paperOrientation', 'portrait');
 
@@ -199,7 +192,7 @@ class ProjetoController extends AbstractActionController {
         } else {
             return $this->redirect()->toRoute('projeto');
         }
-        
+
         return new ViewModel(array(
             'dados_sprint' => $dadosSprint,
             'dados_product_backlog' => $dadosProductBacklog,
