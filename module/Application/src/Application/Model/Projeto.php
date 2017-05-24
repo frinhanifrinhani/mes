@@ -67,8 +67,6 @@ class Projeto implements InputFilterAwareInterface {
         );
     }
 
-    /* add */
-
     public function setDbAdapter($dbAdapter) {
 
         $this->dbAdapter = $dbAdapter;

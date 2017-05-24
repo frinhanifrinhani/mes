@@ -34,15 +34,8 @@ class SprintTable {
                 ->where('cod_projeto = ' . $codProjeto)
                 ->order(array('cod_sprint' => 'desc'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
-
-    //metodo que retorna ultma sprint cadastrada
-//    public function getLastId() {
-//        $ultimoSprint = $this->tableGateway->lastInsertValue;
-//        return $ultimoSprint;
-//    }
 
     public function getSprint($codSprint) {
         $codSprint = (int) $codSprint;
@@ -127,7 +120,6 @@ class SprintTable {
         );
 
         $linha = $this->tableGateway->selectWith($select);
-//        echo $select->getSqlString();
         $rowset = $linha->current();
         return $rowset;
     }
@@ -161,14 +153,4 @@ class SprintTable {
         return $rowset;
     }
 
-//    //metodo que retorna sql da tableGateway
-//    public function getSql() {
-//        return $this->tableGateway->getSql();
-//    }
-//
-//    //metodo que retorna select da tableGateway
-//    public function getSelect() {
-//        $select = new Select($this->tableGateway->getTable());
-//        return $select;
-//    }
 }

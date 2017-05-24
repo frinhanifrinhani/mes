@@ -27,7 +27,7 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
     public $nomeProductBacklog;
     protected $inputFilter;
     protected $dbAdapter;
-    
+
     //Recupera os valores que vem por post e passa para os Atributos, caso não exista valores, pass null (no ZF2 faz o papel do set)
     function exchangeArray($data) {
         $this->codProjeto = (isset($data['cod_projeto'])) ? $data['cod_projeto'] : null;
@@ -37,6 +37,7 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
         $this->nomeSprint = (isset($data['nome_sprint'])) ? $data['nome_sprint'] : null;
         $this->nomeProductBacklog = (isset($data['nome_product_backlog'])) ? $data['nome_product_backlog'] : null;
     }
+
     //Rassa os valores que vem do banco para os Atributos, (no ZF2 faz o papel do get)
     public function getArrayCopy() {
         return array(
@@ -46,7 +47,6 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
             'cod_sprint' => $this->codSprint,
             'nome_sprint' => $this->nomeSprint,
             'nome_product_backlog' => $this->nomeProductBacklog,
-            
         );
     }
 
@@ -70,42 +70,14 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
             $inputFilter->add($factory->createInput(array(
                         'name' => 'cod_product_backlog',
                         'required' => false,
-//                        'filters' => array(
-//                            array('name' => 'StripTags'),
-//                            array('name' => 'StringTrim')
-//                        ),
-//                        'validators' => array(
-//                            array(
-//                                'name' => 'NotEmpty',
-//                                'options' => array(
-//                                    'messages' => array(
-//                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo codigo da sprint do Item não pode ser vazio!'
-//                                    ),
-//                                ),
-//                            ),
-                        )
-//            )));
+                            )
             ));
             $inputFilter->add($factory->createInput(array(
                         'name' => 'cod_sprint',
                         'required' => false,
-//                        'filters' => array(
-//                            array('name' => 'StripTags'),
-//                            array('name' => 'StringTrim')
-//                        ),
-//                        'validators' => array(
-//                            array(
-//                                'name' => 'NotEmpty',
-//                                'options' => array(
-//                                    'messages' => array(
-//                                        \Zend\Validator\NotEmpty::IS_EMPTY => 'Campo codigo da sprint do Item não pode ser vazio!'
-//                                    ),
-//                                ),
-//                            ),
-                        )
-//            )));
+                            )
             ));
-            
+
             $this->inputFilter = $inputFilter;
         }
 

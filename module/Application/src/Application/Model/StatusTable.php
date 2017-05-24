@@ -30,7 +30,6 @@ class StatusTable {
         $select->from(new TableIdentifier('status'))
                 ->columns(array('cod_status', 'descricao_status'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
 

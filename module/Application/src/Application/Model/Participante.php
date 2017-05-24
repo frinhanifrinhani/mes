@@ -31,7 +31,6 @@ class Participante implements InputFilterAwareInterface {
     public $dataCadastroParticipante;
     protected $inputFilter;
     protected $dbAdapter;
-   // public $data;
 
     function exchangeArray($data) {
         $this->codParticipante = (isset($data['cod_participante'])) ? $data['cod_participante'] : null;
@@ -59,8 +58,6 @@ class Participante implements InputFilterAwareInterface {
         );
     }
 
-
-    /* add */
     public function setDbAdapter($dbAdapter) {
 
         $this->dbAdapter = $dbAdapter;

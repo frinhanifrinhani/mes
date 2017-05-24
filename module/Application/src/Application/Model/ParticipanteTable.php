@@ -34,7 +34,6 @@ class ParticipanteTable {
                 ->join('tipo_participante', 'tipo_participante.cod_tipo_participante = participante.cod_tipo_participante', 'tipo_participante')
                 ->order(array('cod_participante'=>'desc'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
     
@@ -46,9 +45,9 @@ class ParticipanteTable {
                 ->where(array('participante.cod_tipo_participante'=>$scrumTeamId))
                 ->order(array('participante.cod_participante'=>'desc'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
+    
     public function fetchAllProductOwner() {
         $select = new Select();
         $select->from(new TableIdentifier('participante'))
@@ -57,14 +56,8 @@ class ParticipanteTable {
                 ->where('participante.cod_tipo_participante = 1')
                 ->order(array('nome_participante'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
-      //metodo que retorna ultimo participante cadastrado
-//    public function getLastId(){
-//      $ultimoParticipante = $this->tableGateway->lastInsertValue;
-//      return $ultimoParticipante;
-//    }
 
     public function getParticipante($codParticipante)
      {
@@ -127,16 +120,5 @@ class ParticipanteTable {
         $senhaParticipante = array('senha_participante' => md5($senhaParticipante));
         return $this->tableGateway->update($senhaParticipante, array('email_participante' => $emailParticipante));
     }
-
-//        //metodo que retorna sql da tableGateway
-//    public function getSql() {
-//        return $this->tableGateway->getSql();
-//    }
-//
-//    //metodo que retorna select da tableGateway
-//    public function getSelect() {
-//        $select = new Select($this->tableGateway->getTable());
-//        return $select;
-//    }
 
 }

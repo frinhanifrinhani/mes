@@ -35,15 +35,8 @@ class SprintBacklogTable {
                 ->where('cod_projeto = ' . $codProjeto)
                 ->order(array('sprint_backlog.cod_sprint_backlog' => 'DESC'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();
         return $linha;
     }
-
-    //metodo que retorna ultma sprint cadastrada
-//    public function getLastId() {
-//        $ultimoSprint = $this->tableGateway->lastInsertValue;
-//        return $ultimoSprint;
-//    }
 
     public function getSprintBacklog($codSprintBacklog) {
         $codSprintBacklog = (int) $codSprintBacklog;
@@ -130,7 +123,6 @@ class SprintBacklogTable {
         );
 
         $linha = $this->tableGateway->selectWith($select);
-//        echo $select->getSqlString();
         $rowset = $linha->current();
         return $rowset;
     }
@@ -160,19 +152,8 @@ class SprintBacklogTable {
         );
 
         $linha = $this->tableGateway->selectWith($select);
-//        echo $select->getSqlString();  
         $rowset = $linha->current();
         return $rowset;
     }
 
-//    //metodo que retorna sql da tableGateway
-//    public function getSql() {
-//        return $this->tableGateway->getSql();
-//    }
-//
-//    //metodo que retorna select da tableGateway
-//    public function getSelect() {
-//        $select = new Select($this->tableGateway->getTable());
-//        return $select;
-//    }
 }

@@ -33,10 +33,8 @@ class ProjetoTable {
                 ->columns(array('cod_projeto', 'nome_projeto', 'descricao_projeto', 'data_inicio_projeto', 'data_fim_projeto', 'cod_status', 'data_cadastro_projeto'))
                 ->join('status', 'status.cod_status = projeto.cod_status', 'descricao_status')
                 ->join('participante', 'participante.cod_participante = projeto.cod_participante', 'nome_participante')
-//                ->where('projeto.cod_participante = ' . $productOwner)
                 ->order(array('nome_projeto'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
 
@@ -52,23 +50,21 @@ class ProjetoTable {
 
         return $row;
     }
-    
-    public function getProjetoJoin($codProjeto){
-        
+
+    public function getProjetoJoin($codProjeto) {
+
         $select = new Select();
         $select->from(new TableIdentifier('projeto'))
                 ->columns(array('cod_projeto', 'nome_projeto', 'descricao_projeto', 'data_inicio_projeto', 'data_fim_projeto', 'cod_status', 'data_cadastro_projeto'))
                 ->join('status', 'status.cod_status = projeto.cod_status', 'descricao_status')
                 ->join('participante', 'participante.cod_participante = projeto.cod_participante', 'nome_participante')
-                ->where('projeto.cod_projeto = '.$codProjeto);
+                ->where('projeto.cod_projeto = ' . $codProjeto);
         $rowset = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         $linha = $rowset->current();
         return $linha;
-    
     }
 
-    public function countProjeto(){
+    public function countProjeto() {
         $expression = new Expression();
 
         $select = new Select();
@@ -93,11 +89,10 @@ class ProjetoTable {
         );
 
         $linha = $this->tableGateway->selectWith($select);
-//        echo $select->getSqlString();  
         $rowset = $linha->current();
         return $rowset;
     }
-    
+
     public function salvar(Projeto $projeto) {
         $data = array(
             'cod_projeto' => $projeto->codProjeto,
@@ -124,24 +119,11 @@ class ProjetoTable {
     }
 
     public function excluir($codProjeto) {
-        //$this->tableGateway->delete(array('cod_projeto' => $codProjeto));
         try {
-           return $this->tableGateway->delete(array('cod_projeto' => $codProjeto));    
+            return $this->tableGateway->delete(array('cod_projeto' => $codProjeto));
         } catch (\Exception $e) {
-           return $e->getPrevious()->getCode();
-           
+            return $e->getPrevious()->getCode();
         }
     }
-
-//    //metodo que retorna sql da tableGateway
-//    public function getSql() {
-//        return $this->tableGateway->getSql();
-//    }
-//
-//    //metodo que retorna select da tableGateway
-//    public function getSelect() {
-//        $select = new Select($this->tableGateway->getTable());
-//        return $select;
-//    }
 
 }

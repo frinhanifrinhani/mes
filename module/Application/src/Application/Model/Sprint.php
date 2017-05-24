@@ -35,8 +35,6 @@ class Sprint implements InputFilterAwareInterface {
     protected $inputFilter;
     protected $dbAdapter;
 
-    // public $data;
-
     function exchangeArray($data) {
         $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
         $this->nomeSprint = (isset($data['nome_sprint'])) ? $data['nome_sprint'] : null;
@@ -65,8 +63,6 @@ class Sprint implements InputFilterAwareInterface {
             'data_cadastro_sprint' => $this->dataCadastroSprint,
         );
     }
-
-    /* add */
 
     public function setDbAdapter($dbAdapter) {
 

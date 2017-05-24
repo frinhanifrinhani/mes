@@ -25,25 +25,18 @@ class ProductBacklogTable {
     public function __construct(TableGateway $tableGateway) {
         $this->tableGateway = $tableGateway;
     }
-    
+
     public function fetchAll($codProjeto) {
         $select = new Select();
         $select->from(new TableIdentifier('product_backlog'))
-                ->columns(array('cod_product_backlog', 'nome_product_backlog','descricao_product_backlog','prioridade_product_backlog','cod_projeto','cod_status'))
+                ->columns(array('cod_product_backlog', 'nome_product_backlog', 'descricao_product_backlog', 'prioridade_product_backlog', 'cod_projeto', 'cod_status'))
                 ->join('status', 'status.cod_status = product_backlog.cod_status', 'descricao_status')
-                ->where('cod_projeto = ' .$codProjeto)
-                ->order(array('product_backlog.cod_product_backlog'=>'ASC'));
+                ->where('cod_projeto = ' . $codProjeto)
+                ->order(array('product_backlog.cod_product_backlog' => 'ASC'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();
         return $linha;
     }
 
-//
-//    public function getLastId() {
-//        $ultimoSprint = $this->tableGateway->lastInsertValue;
-//        return $ultimoSprint;
-//    }
-//
     public function getProductBacklog($codProductBacklog) {
         $codProductBacklog = (int) $codProductBacklog;
         $rowset = $this->tableGateway->select(array('cod_product_backlog' => $codProductBacklog));
@@ -78,8 +71,8 @@ class ProductBacklogTable {
     public function excluir($codProductBacklog) {
         return $this->tableGateway->delete(array('cod_product_backlog' => $codProductBacklog));
     }
-    
-    public function retornarDadosProductBacklog($codProjeto){
+
+    public function retornarDadosProductBacklog($codProjeto) {
         $expression = new Expression();
 
         $select = new Select();
@@ -109,17 +102,17 @@ class ProductBacklogTable {
         $totalProdcutBacklog->from('product_backlog')
                 ->columns(array('total_product_backlog' => $expression->setExpression("COUNT('prioridade_product_backlog')")))
                 ->where("product_backlog.cod_projeto = {$codProjeto}");
-                
+
         $productBacklogPrioridadeAlta = new Select();
         $productBacklogPrioridadeAlta->from('product_backlog')
                 ->columns(array('product_backlog_prioridade_alta' => $expression->setExpression("COUNT('cod_status')")))
                 ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.prioridade_product_backlog = 1");
-                
+
         $productBacklogPrioridadeMedia = new Select();
         $productBacklogPrioridadeMedia->from('product_backlog')
                 ->columns(array('product_backlog_prioridade_media' => $expression->setExpression("COUNT('cod_status')")))
                 ->where("product_backlog.cod_projeto = {$codProjeto} AND product_backlog.prioridade_product_backlog = 2");
-                
+
         $productBacklogPrioridadeBaixa = new Select();
         $productBacklogPrioridadeBaixa->from('product_backlog')
                 ->columns(array('product_backlog_prioridade_baixa' => $expression->setExpression("COUNT('cod_status')")))
@@ -145,17 +138,15 @@ class ProductBacklogTable {
                     'product_backlog_prioridade_alta',
                     'product_backlog_prioridade_media',
                     'product_backlog_prioridade_baixa',
-                    )
+                        )
         );
 
         $linha = $this->tableGateway->selectWith($select);
-//        echo $select->getSqlString();
         $rowset = $linha->current();
         return $rowset;
-
     }
-    
-    public function countProductBacklog(){
+
+    public function countProductBacklog() {
         $expression = new Expression();
 
         $select = new Select();
@@ -180,20 +171,8 @@ class ProductBacklogTable {
         );
 
         $linha = $this->tableGateway->selectWith($select);
-//        echo $select->getSqlString();  
         $rowset = $linha->current();
         return $rowset;
     }
-//
-//    //metodo que retorna sql da tableGateway
-//    public function getSql() {
-//        return $this->tableGateway->getSql();
-//    }
-//
-//    //metodo que retorna select da tableGateway
-//    public function getSelect() {
-//        $select = new Select($this->tableGateway->getTable());
-//        return $select;
-//    }
 
 }

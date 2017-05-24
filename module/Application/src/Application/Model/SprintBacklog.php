@@ -38,8 +38,6 @@ class SprintBacklog implements InputFilterAwareInterface {
     protected $inputFilter;
     protected $dbAdapter;
 
-    // public $data;
-
     function exchangeArray($data) {
         $this->codSprintBacklog = (isset($data['cod_sprint_backlog'])) ? $data['cod_sprint_backlog'] : null;
         $this->nomeSprintBacklog = (isset($data['nome_sprint_backlog'])) ? $data['nome_sprint_backlog'] : null;
@@ -74,8 +72,6 @@ class SprintBacklog implements InputFilterAwareInterface {
             'data_cadastro_sprint_backlog' => $this->dataCadastroSprintBacklog,
         );
     }
-
-    /* add */
 
     public function setDbAdapter($dbAdapter) {
 
@@ -130,7 +126,6 @@ class SprintBacklog implements InputFilterAwareInterface {
                         )
             )));
             
-
             $inputFilter->add($factory->createInput(array(
                         'name' => 'tempo_sprint_backlog',
                         'required' => true,

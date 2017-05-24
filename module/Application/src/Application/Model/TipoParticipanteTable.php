@@ -30,7 +30,6 @@ class TipoParticipanteTable {
         $select->from(new TableIdentifier('tipo_participante'))
                 ->columns(array('cod_tipo_participante', 'tipo_participante'));
         $linha = $this->tableGateway->selectWith($select);
-//       echo $select->getSqlString();  
         return $linha;
     }
 
