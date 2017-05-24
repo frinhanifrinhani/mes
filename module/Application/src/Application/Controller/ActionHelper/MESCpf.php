@@ -14,37 +14,18 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
 class MESCpf extends AbstractPlugin {
 
-    /**
-     * Tamanho do Campo
-     * @var int
-     */
     protected $size = 11;
-    /**
-     * Modificadores de Dígitos
-     * @var array
-     */
+
     protected $modifiers = [
         [10, 9, 8, 7, 6, 5, 4, 3, 2],
         [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
     ];
 
-    /**
-     * Constante CPF_INVALIDO
-     */
     const CPF_INVALIDO = '';
- 
-    /**
-     * Mensagens de retorno
-     *
-     * @access protected
-     * @name $_messagemTemplates
-     * @var array
-     */
+
     protected $_messageTemplates = array(self::CPF_INVALIDO => 'CPF "%value%" é inválido!');
  
-    //Método que verifica e valida um cpf
-
-    
+    //Método que verifica e valida um cpf   
     public function isValid($value) {
         if (empty($value)) {
             return false;

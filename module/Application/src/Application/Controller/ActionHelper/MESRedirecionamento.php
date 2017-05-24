@@ -25,12 +25,4 @@ class MESRedirecionamento extends AbstractPlugin {
         }
     }
 
-//    public function redirecionarParaSprint($sprint) {
-//        if ($sprint == false) {
-//            $controller = $this->getController();
-//            $redirector = $controller->getPluginManager()->get('Redirect');
-//            return $redirector->toRoute('sprint');
-//        }
-//    }
-
 }

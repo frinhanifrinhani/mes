@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -14,8 +15,7 @@ use Zend\Mail;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Sendmail;
 
-class MESEmail extends AbstractPlugin
-{
+class MESEmail extends AbstractPlugin {
 
     public function enviarEmailConfirmacao($nomeParticipante, $emailParticipante, $senhaParticipante) {
         $mailbody = "Olá $nomeParticipante!\n";
@@ -29,7 +29,6 @@ class MESEmail extends AbstractPlugin
         $mailbody .= "\n";
         $mailbody .= "Obs: A senha fornecida é provisória, você deve altera-la assim que acessar o sistema.";
 
-
         $mail = new Message();
         $mail->setBody($mailbody);
 
@@ -39,7 +38,7 @@ class MESEmail extends AbstractPlugin
         $transport = new Sendmail();
         $transport->send($mail);
     }
-    
+
     public function enviarEmailRecuperarSenha($nomeParticipante, $emailParticipante, $senhaParticipante) {
         $mailbody = "Olá $nomeParticipante!\n";
         $mailbody .= "\n";
@@ -59,4 +58,5 @@ class MESEmail extends AbstractPlugin
         $transport = new Sendmail();
         $transport->send($mail);
     }
+
 }

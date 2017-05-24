@@ -12,9 +12,7 @@ namespace Application\Controller\ActionHelper;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Authentication\Validator\Authentication;
-//add
 use Zend\Authentication\AuthenticationService;
-//use Zend\Mvc\Controller\Plugin\Redirect;
 use Zend\Session\Container;
 use Application\Controller\ActionHelper\ACL;
 
@@ -49,13 +47,12 @@ class MESACL extends AbstractPlugin {
                 break;
         }
 
-//        $container->cod_participante = $this->dados->cod_participante;
         $container->cod_participante = (isset($this->dados->cod_participante)) ? $this->dados->cod_participante : null;
-        $container->cod_tipo_participante = (isset($this->dados->cod_tipo_participante)) ? $this->dados->cod_tipo_participante : null;//$this->dados->cod_tipo_participante;
-        $container->nome_participante = (isset($this->dados->nome_participante)) ? $this->dados->nome_participante : null;//$this->dados->nome_participante;
-        $container->email_participante = (isset($this->dados->email_participante)) ? $this->dados->email_participante : null;//$this->dados->email_participante;
-        $container->senha_participante = (isset($this->dados->senha_participante)) ? $this->dados->senha_participante : null;//$this->dados->senha_participante;
-        $container->tipo_participante = $this->tipoParticipante;//(isset($this->tipoParticipante)) ? $this->tipoParticipante : null;//$this->tipoParticipante;
+        $container->cod_tipo_participante = (isset($this->dados->cod_tipo_participante)) ? $this->dados->cod_tipo_participante : null;
+        $container->nome_participante = (isset($this->dados->nome_participante)) ? $this->dados->nome_participante : null;
+        $container->email_participante = (isset($this->dados->email_participante)) ? $this->dados->email_participante : null;
+        $container->senha_participante = (isset($this->dados->senha_participante)) ? $this->dados->senha_participante : null;
+        $container->tipo_participante = $this->tipoParticipante;
 
         return array(
             'cod_participante' => $container->cod_participante,
