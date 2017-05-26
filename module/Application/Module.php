@@ -59,6 +59,7 @@ class Module {
 
         $viewModel->nomeParticipante = $container->container()['nome_participante'];
         $viewModel->tipoParticipante = $container->container()['tipo_participante'];
+        $viewModel->codTipoParticipante = $container->container()['cod_tipo_participante'];
     }
 
     public function getConfig() {
