@@ -1,7 +1,7 @@
 <div class="box-header with-border">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=$this->url('inicio')?>">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="<?=$this->url('sprintbacklog-escolher-projeto')?>">Escolher projeto</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('inicio') ?>">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="<?= $this->url('sprintbacklog-escolher-projeto') ?>">Escolher projeto</a></li>
         <li class="breadcrumb-item active">Sprint Backlog</li>
     </ol>
 </div>
@@ -22,6 +22,13 @@
         </tr>
     </thead>
     <tbody>
-        <?=$this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar) ?>  
+        <?php
+        if ($this->cod_tipo_participante == 1 || $this->cod_tipo_participante == 2) {
+            echo $this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar);
+        }
+        if ($this->cod_tipo_participante == 3) {
+            echo $this->partialLoop('partial_loop_listar_st.phtml', $this->partial_loop_listar);
+        }
+        ?> 
     </tbody>
 </table>

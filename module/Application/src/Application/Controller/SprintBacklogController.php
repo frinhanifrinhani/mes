@@ -40,6 +40,7 @@ class SprintBacklogController extends AbstractActionController {
         $sprintBacklog = $this->getSprintBacklogTable()->fetchAll($codProjeto);
 
         return new ViewModel(array(
+            'cod_tipo_participante' => $this->ACLPermitir()->container()['cod_tipo_participante'],
             'partial_loop_listar' => $sprintBacklog,
             'cod_projeto' => $codProjeto,
         ));
@@ -51,7 +52,7 @@ class SprintBacklogController extends AbstractActionController {
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $formSprintBacklog = new SprintBacklogForm($codProjeto);
-                
+
         $productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
 
         $request = $this->getRequest();
@@ -65,7 +66,6 @@ class SprintBacklogController extends AbstractActionController {
             if ($formSprintBacklog->isValid()) {
                 $sprintBacklog->exchangeArray($formSprintBacklog->getData());
                 $retorno = $this->getSprintBacklogTable()->salvar($sprintBacklog);
-
             }
         }
 
@@ -117,13 +117,13 @@ class SprintBacklogController extends AbstractActionController {
             'form_sprint_backlog' => $formSprintBacklog,
         ));
     }
-    
+
     //metodo que retorna pagina de exclusão dos dados da funcionalidade Sprint Backlog
     public function excluirAction() {
         //ActionHelper que verifica autenticação e perfil
         $this->ACLPermitir()->permitir();
         $retorno = false;
-        
+
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $codSprintBacklog = (int) $this->params()->fromRoute('cod_sprint_backlog', null);
 
