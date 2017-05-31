@@ -30,6 +30,7 @@ class ProductBacklogController extends AbstractActionController {
         $productBacklog = $this->getProductBacklogTable()->fetchAll($codProjeto);
 
         return new ViewModel(array(
+            'cod_tipo_participante' => $this->ACLPermitir()->container()['cod_tipo_participante'],
             'partial_loop_listar' => $productBacklog,
             'cod_projeto' => $codProjeto,
         ));
@@ -41,9 +42,9 @@ class ProductBacklogController extends AbstractActionController {
 
         $codProjeto = (int) $this->params()->fromRoute('cod_projeto', null);
         $this->Redirecionamento()->redirecionarParaProjeto($codProjeto);
-        
+
         $formProductBacklog = new ProductBacklogForm();
-        
+
         $request = $this->getRequest();
         if ($request->isPost()) {
             $productBacklog = new ProductBacklog();
@@ -57,7 +58,6 @@ class ProductBacklogController extends AbstractActionController {
             if ($formProductBacklog->isValid()) {
                 $productBacklog->exchangeArray($formProductBacklog->getData());
                 $retorno = $this->getProductBacklogTable()->salvar($productBacklog);
-
             }
         }
 

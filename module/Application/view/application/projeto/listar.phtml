@@ -1,12 +1,12 @@
 <div class="box-header with-border">
-     <ol class="breadcrumb">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/inicio">Inicio</a></li>
         <li class="breadcrumb-item active">Projetos</li>
     </ol>
 </div>
 
 <hr />
-<a href="<?php echo $this->url('projeto-cadastrar', array('action' => 'cadastrar')) ?>" class="btn btn-success" <?php if($this->cod_tipo_participante != 1){ ?> disabled="disabled" <?php } ?>><span class="glyphicon glyphicon-file"></span> Novo Projeto</a>
+<a href="<?php echo $this->url('projeto-cadastrar', array('action' => 'cadastrar')) ?>" class="btn btn-success" <?php if ($this->cod_tipo_participante != 1) { ?> disabled="disabled" <?php } ?>><span class="glyphicon glyphicon-file"></span> Novo Projeto</a>
 <p></p>
 <table id="data_table" class="table data_tables table-striped table-hover table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     <thead>
@@ -23,12 +23,12 @@
     </thead>
     <tbody>
         <?php
-        if($this->cod_tipo_participante == 1){
-           echo $this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar);
+        if ($this->cod_tipo_participante == 1) {
+            echo $this->partialLoop('partial_loop_listar.phtml', $this->partial_loop_listar);
         }
-        if($this->cod_tipo_participante == 2){
+        if ($this->cod_tipo_participante == 2) {
             echo $this->partialLoop('partial_loop_listar_sm.phtml', $this->partial_loop_listar);
         }
-            ?>  
+        ?>  
     </tbody>
 </table>
