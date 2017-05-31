@@ -30,6 +30,7 @@ class ProjetoController extends AbstractActionController {
         $projetos = $this->getProjetoTable()->fetchAll();
         //retorna dados pra a view
         return new ViewModel(array(
+            'cod_tipo_participante'=> $this->ACLPermitir()->container()['cod_tipo_participante'],
             'partial_loop_listar' => $projetos,
         ));
     }
