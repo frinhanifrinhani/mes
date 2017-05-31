@@ -30,16 +30,13 @@ class ACL extends BaseAcl {
         //Scrum Team - 3
         $this->allow(3, 'Application\Controller\Index', 'inicio');
         $this->allow(3, 'Application\Controller\Participante', array('alterarsenha'));
-        $this->allow(3, 'Application\Controller\Projeto', array('listar', 'gerenciar'));
-        $this->allow(3, 'Application\Controller\Sprint', array('listar'));
-        $this->allow(3, 'Application\Controller\ProductBacklog', array('listar'));
-        $this->allow(3, 'Application\Controller\SprintBacklog', array('escolher', 'listar', 'cadastrar', 'editar')); //verificar excluir
+        $this->allow(3, 'Application\Controller\SprintBacklog', array('escolher', 'listar', 'cadastrar', 'editar'));
 
         //Scrum Master - 2
         $this->allow(2, 'Application\Controller\Index', 'inicio');
         $this->allow(2, 'Application\Controller\Participante', array('listar', 'cadastrar', 'editar', 'excluir', 'alterarsenha'));
         $this->allow(2, 'Application\Controller\Projeto', array('listar', 'gerenciar', 'relatorio'));
-        $this->allow(2, 'Application\Controller\Sprint', array('listar', 'cadastrar', 'editar', 'excluir')); //verificar editar e excluir
+        $this->allow(2, 'Application\Controller\Sprint', array('listar', 'cadastrar', 'editar', 'excluir'));
         $this->allow(2, 'Application\Controller\ProductBacklog', array('listar'));
         $this->allow(2, 'Application\Controller\SprintBacklog', array('escolher', 'listar', 'cadastrar', 'editar', 'excluir'));
         $this->allow(2, 'Application\Controller\ProductBacklogPorSprint', array('escolher', 'listar'));
