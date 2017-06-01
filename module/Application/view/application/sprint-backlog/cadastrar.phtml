@@ -71,13 +71,17 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 <script>
     function verificarMinTempo(tempo) {
         var segundos = tempo.split(":").pop();
-
-        if (segundos > 59) {
-
+        if(segundos > 59){
             var tempoSprintBacklog = document.getElementById('tempo_sprint_backlog');
-            tempoSprintBacklog.value = tempo.split(":").shift() + ":00";
+            var hora = tempo.split(":").shift();
+            var horaIncremento = parseInt(hora) + 1;
+            tempoSprintBacklog.value= horaIncremento + ":00";
+            
+            if(horaIncremento > 99){
+                tempoSprintBacklog.value= "99:00";
+            }
         }
-
+                
         var tempo = tempo.replace(':', '');
         var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
 
