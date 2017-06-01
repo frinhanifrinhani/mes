@@ -74,15 +74,23 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
 </div>
 <script>
     function verificarMinTempo(tempo) {
+        var segundos = tempo.split(":").pop();
+        
+        if(segundos > 59){
+            
+            var tempoSprintBacklog = document.getElementById('tempo_sprint_backlog');
+            tempoSprintBacklog.value=tempo.split(":").shift() + ":00";
+        }
+                
         var tempo = tempo.replace(':', '');
         var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
 
         if (tempo == 0000 || tempo == 000 || tempo == 00 || tempo == 0) {
             campoTempo.removeAttribute('style');
         } else {
-            campoTempo.setAttribute('style', 'display:none')
+            campoTempo.setAttribute('style', 'display:none');
         }
-        ;
+        
     }
 
     $(document).ready(function () {

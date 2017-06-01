@@ -69,15 +69,24 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
     <?php echo $this->form()->closeTag(); ?>     
 </div>
 <script>
-    function verificarMinTempo(tempo){
-        var tempo = tempo.replace(':','');
+    function verificarMinTempo(tempo) {
+        var segundos = tempo.split(":").pop();
+
+        if (segundos > 59) {
+
+            var tempoSprintBacklog = document.getElementById('tempo_sprint_backlog');
+            tempoSprintBacklog.value = tempo.split(":").shift() + ":00";
+        }
+
+        var tempo = tempo.replace(':', '');
         var campoTempo = document.getElementById('tempo_sprint_backlog-error-zero');
-      
-        if(tempo == 0000 || tempo == 000 ||tempo == 00 || tempo == 0 ){
+
+        if (tempo == 0000 || tempo == 000 || tempo == 00 || tempo == 0) {
             campoTempo.removeAttribute('style');
-        }else{
-             campoTempo.setAttribute('style','display:none')
-        };
+        } else {
+            campoTempo.setAttribute('style', 'display:none');
+        }
+        
     }
     $('#tempo_sprint_backlog').mask('99:99');
     $(document).ready(function () {
@@ -116,6 +125,6 @@ if (isset($_POST['botao_salvar']) && ($this->retorno == true)) {
             }
         });
     });
-    
-    
+
+
 </script>
