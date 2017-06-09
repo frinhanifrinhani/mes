@@ -24,6 +24,7 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
     public $codProductBacklogPb;
     public $codSprint;
     public $nomeSprint;
+    public $descricaoSprint;
     public $nomeProductBacklog;
     public $descricaoProductBacklog;
     protected $inputFilter;
@@ -36,6 +37,7 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
         $this->codProductBacklogPb = (isset($data['cod_product_backlog_pb'])) ? $data['cod_product_backlog_pb'] : null;
         $this->codSprint = (isset($data['cod_sprint'])) ? $data['cod_sprint'] : null;
         $this->nomeSprint = (isset($data['nome_sprint'])) ? $data['nome_sprint'] : null;
+        $this->descricaoSprint = (isset($data['descricao_sprint'])) ? $data['descricao_sprint'] : null;
         $this->descricaoProductBacklog = (isset($data['descricao_product_backlog'])) ? $data['descricao_product_backlog'] : null;
         $this->nomeProductBacklog = (isset($data['nome_product_backlog'])) ? $data['nome_product_backlog'] : null;
     }
@@ -48,6 +50,7 @@ class ProductBacklogPorSprint {//implements InputFilterAwareInterface {
             'cod_product_backlog_pb' => $this->codProductBacklogPb,
             'cod_sprint' => $this->codSprint,
             'nome_sprint' => $this->nomeSprint,
+            'descricao_sprint' => $this->descricaoSprint,
             'nome_product_backlog' => $this->nomeProductBacklog,
             'descricao_product_backlog' => $this->descricaoProductBacklog,
         );

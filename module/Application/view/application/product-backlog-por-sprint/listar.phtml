@@ -77,7 +77,7 @@
                         </td>
                         <td>
                             <?php if ($lista->codProductBacklog != null) { ?>  <a href="<?= $this->url('productbacklog-por-sprint-listar', array('cod_projeto' => $lista->codProjeto, 'cod_sprint' => $lista->codSprint)) ?>"> <?php
-                                    echo $lista->nomeSprint;
+                                    echo $lista->nomeSprint." - " . $lista->descricaoSprint;
                                 }
                                 ?> </a>
                         </td>
