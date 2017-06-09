@@ -32,7 +32,7 @@ class SprintTable {
                 ->columns(array('cod_sprint', 'nome_sprint', 'descricao_sprint', 'tempo_sprint', 'cod_status', 'cod_projeto'))
                 ->join('status', 'status.cod_status = sprint.cod_status', 'descricao_status')
                 ->where('cod_projeto = ' . $codProjeto)
-                ->order(array('cod_sprint' => 'desc'));
+                ->order(array('nome_sprint' => 'asc'));
         $linha = $this->tableGateway->selectWith($select);
         return $linha;
     }
