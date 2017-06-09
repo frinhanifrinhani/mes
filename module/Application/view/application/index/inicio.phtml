@@ -5,7 +5,6 @@
         <p>O My Easy Scrum é um gerenciador de projetos Scrum, que visa agilizar e facilitar 
             ainda mais os processos referentes ao gerenciamento e desenvolvimento de projetos, 
             e é muito bom ter você participando da equipe como <?= $this->tipo_participante ?>.</p>
-        <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
         <?php
         switch ($this->cod_tipo_participante) {
             case 1:
@@ -40,31 +39,31 @@
             </p>
             <p>
                 Esta conta do My Easy Scrum,
-
-                <?php if ($this->projetos->totalProjeto == 0) { ?>
+                <?php $totalProjeto = isset($this->projetos->totalProjeto) ? $this->projetos->totalProjeto : 0; ?>
+                <?php if ($totalProjeto == 0) { ?>
                     ainda não possui Projeto cadastrado,
                 <?php } ?>
-                <?php if ($this->projetos->totalProjeto == 1) { ?>
-                    possui <strong><?= $this->projetos->totalProjeto ?></strong> Projeto, 
+                <?php if ($totalProjeto == 1) { ?>
+                    possui <strong><?= $totalProjeto ?></strong> Projeto, 
                 <?php } ?>
-                <?php if ($this->projetos->totalProjeto > 1) { ?>
-                    possui <strong><?= $this->projetos->totalProjeto ?></strong> Projetos, 
+                <?php if ($totalProjeto > 1) { ?>
+                    possui <strong><?= $totalProjeto ?></strong> Projetos, 
                 <?php } ?>
 
-                <?php if ($this->projetos->projetoFinalizado == 0) { ?>
+                <?php $projetoFinalizado = isset($this->projetos->projetoFinalizado) ? $this->projetos->projetoFinalizado : 0; ?>
+                <?php if ($projetoFinalizado == 0) { ?>
                     e ainda não possui Projeto concluido.
                 <?php } ?>
 
-                <?php if ($this->projetos->projetoFinalizado == 1) { ?>    
-                    onde <strong><?= $this->projetos->projetoFinalizado ?></strong> Projeto já foi entrege.
+                <?php if ($projetoFinalizado == 1) { ?>    
+                    onde <strong><?= $projetoFinalizado ?></strong> Projeto já foi entrege.
                 <?php } ?>
 
-                <?php if ($this->projetos->projetoFinalizado > 1) { ?>    
-                    onde <strong><?= $this->projetos->projetoFinalizado ?></strong> Projetos já foram entreges.
+                <?php if ($projetoFinalizado > 1) { ?>    
+                    onde <strong><?= $projetoFinalizado ?></strong> Projetos já foram entreges.
                 <?php } ?>    
             </p> 
             <hr />
-            <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
         <div class="col-md-5">
             <h2>Sprint</h2>
@@ -75,30 +74,31 @@
             <p>
                 Esta conta do My Easy Scrum,
 
-                <?php if ($this->sprints->totalSprint == 0) { ?>
+                <?php $totalSprint = isset($this->sprints->totalSprint) ? $this->sprints->totalSprint : 0; ?>
+                <?php if ($totalSprint == 0) { ?>
                     ainda não possui sprint cadastrada,
                 <?php } ?>
-                <?php if ($this->sprints->totalSprint == 1) { ?>
-                    possui <strong><?= $this->sprints->totalSprint ?></strong> Sprint, 
+                <?php if ($totalSprint == 1) { ?>
+                    possui <strong><?= $totalSprint ?></strong> Sprint, 
                 <?php } ?>
-                <?php if ($this->sprints->totalSprint > 1) { ?>
-                    possui <strong><?= $this->sprints->totalSprint ?></strong> Sprints, 
+                <?php if ($totalSprint > 1) { ?>
+                    possui <strong><?= $totalSprint ?></strong> Sprints, 
                 <?php } ?>
 
-                <?php if ($this->sprints->sprintFinalizado == 0) { ?>
+                <?php $sprintFinalizado = isset($this->sprints->sprintFinalizado) ? $this->sprints->sprintFinalizado : 0; ?>
+                <?php if ($sprintFinalizado == 0) { ?>
                     e ainda não possui sprint concluida.
                 <?php } ?>
 
-                <?php if ($this->sprints->sprintFinalizado == 1) { ?>    
-                    onde <strong><?= $this->sprints->sprintFinalizado ?></strong> Sprint já foi entrege.
+                <?php if ($sprintFinalizado == 1) { ?>    
+                    onde <strong><?= $sprintFinalizado ?></strong> Sprint já foi entrege.
                 <?php } ?>
 
-                <?php if ($this->sprints->sprintFinalizado > 1) { ?>    
-                    onde <strong><?= $this->sprints->sprintFinalizado ?></strong> Sprints já foram entreges.
+                <?php if ($sprintFinalizado > 1) { ?>    
+                    onde <strong><?= $sprintFinalizado ?></strong> Sprints já foram entreges.
                 <?php } ?>    
             </p> 
             <hr />
-        <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
         <div class="col-md-5">
             <h2>Product Backlog</h2>
@@ -108,30 +108,30 @@
             </p>
             <p>
                 Esta conta do My Easy Scrum,
-
-                <?php if ($this->product_backlogs->totalProductBacklog == 0) { ?>
+                <?php $totalProductBacklog = isset($this->product_backlogs->totalProductBacklog) ? $this->product_backlogs->totalProductBacklog : 0; ?>
+                <?php if ($totalProductBacklog == 0) { ?>
                     ainda não possui Product Backlog cadastrado,
                 <?php } ?>
-                <?php if ($this->product_backlogs->totalProductBacklog == 1) { ?>
-                    possui <strong><?= $this->product_backlogs->totalProductBacklog ?></strong> Product Backlog, 
+                <?php if ($totalProductBacklog == 1) { ?>
+                    possui <strong><?= $totalProductBacklog ?></strong> Product Backlog, 
                 <?php } ?>
-                <?php if ($this->product_backlogs->totalProductBacklog > 1) { ?>
-                    possui <strong><?= $this->product_backlogs->totalProductBacklog ?></strong> Product Backlogs, 
+                <?php if ($totalProductBacklog > 1) { ?>
+                    possui <strong><?= $totalProductBacklog ?></strong> Product Backlogs, 
                 <?php } ?>
 
-                <?php if ($this->product_backlogs->productBacklogFinalizado == 0) { ?>
+                <?php $productBacklogFinalizado = isset($this->product_backlogs->productBacklogFinalizado) ? $this->product_backlogs->productBacklogFinalizado : 0; ?>
+                <?php if ($productBacklogFinalizado == 0) { ?>
                     e ainda não possui Product Backlog concluido.
                 <?php } ?>
 
-                <?php if ($this->product_backlogs->productBacklogFinalizado == 1) { ?>    
-                    onde <strong><?= $this->product_backlogs->productBacklogFinalizado ?></strong> Product Backlog já foi entrege.
+                <?php if ($productBacklogFinalizado == 1) { ?>    
+                    onde <strong><?= $productBacklogFinalizado ?></strong> Product Backlog já foi entrege.
                 <?php } ?>
 
-                <?php if ($this->product_backlogs->productBacklogFinalizado > 1) { ?>    
-                    onde <strong><?= $this->product_backlogs->productBacklogFinalizado ?></strong> Product Backlogs já foram entreges.
+                <?php if ($productBacklogFinalizado > 1) { ?>    
+                    onde <strong><?= $productBacklogFinalizado ?></strong> Product Backlogs já foram entreges.
                 <?php } ?>    
             </p>
-      <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
         <div class="col-md-5">
             <h2>Sprint Backlog</h2>
@@ -145,30 +145,30 @@
             </p>
             <p>
                 Esta conta do My Easy Scrum,
-
-                <?php if ($this->sprint_backlogs->totalSprintBacklog == 0) { ?>
+                <?php $totalSprintBacklog = isset($this->sprint_backlogs->totalSprintBacklog) ? $this->sprint_backlogs->totalSprintBacklog : 0; ?>
+                <?php if ($totalSprintBacklog == 0) { ?>
                     ainda não possui Sprint Backlog cadastrado,
                 <?php } ?>
-                <?php if ($this->sprint_backlogs->totalSprintBacklog == 1) { ?>
-                    possui <strong><?= $this->sprint_backlogs->totalSprintBacklog ?></strong> Sprint Backlog, 
+                <?php if ($totalSprintBacklog == 1) { ?>
+                    possui <strong><?= $totalSprintBacklog ?></strong> Sprint Backlog, 
                 <?php } ?>
-                <?php if ($this->sprint_backlogs->totalSprintBacklog > 1) { ?>
-                    possui <strong><?= $this->sprint_backlogs->totalSprintBacklog ?></strong> Sprint Backlogs, 
+                <?php if ($totalSprintBacklog > 1) { ?>
+                    possui <strong><?= $totalSprintBacklog ?></strong> Sprint Backlogs, 
                 <?php } ?>
 
-                <?php if ($this->sprint_backlogs->sprintBacklogFinalizado == 0) { ?>
+                <?php $sprintBacklogFinalizado = isset($this->sprint_backlogs->sprintBacklogFinalizado) ? $this->sprint_backlogs->sprintBacklogFinalizado : 0; ?>
+                <?php if ($sprintBacklogFinalizado == 0) { ?>
                     e ainda não possui Product Backlog concluido.
                 <?php } ?>
 
-                <?php if ($this->sprint_backlogs->sprintBacklogFinalizado == 1) { ?>    
-                    onde <strong><?= $this->sprint_backlogs->sprintBacklogFinalizado ?></strong> Sprint Backlog já foi entrege.
+                <?php if ($sprintBacklogFinalizado == 1) { ?>    
+                    onde <strong><?= $sprintBacklogFinalizado ?></strong> Sprint Backlog já foi entrege.
                 <?php } ?>
 
-                <?php if ($this->sprint_backlogs->sprintBacklogFinalizado > 1) { ?>    
-                    onde <strong><?= $this->sprint_backlogs->sprintBacklogFinalizado ?></strong> Sprint Backlogs já foram entreges.
+                <?php if ($sprintBacklogFinalizado > 1) { ?>    
+                    onde <strong><?= $sprintBacklogFinalizado ?></strong> Sprint Backlogs já foram entreges.
                 <?php } ?>    
             </p>  
-                        <!--<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>-->
         </div>
     </div>
 </div> <!-- /container -->

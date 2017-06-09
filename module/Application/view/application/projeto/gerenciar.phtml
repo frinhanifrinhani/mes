@@ -18,7 +18,6 @@
         <a href="<?= $this->url('sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Sprint</a>
         <a href="<?= $this->url('productbacklog', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Product Backlog</a>
         <a href="<?= $this->url('productbacklog-por-sprint', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Product Backlog Por Sprint</a>
-        <!--<a href="<? $this->url('participante-por-projeto', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" >Participante por Projeto</a>-->
         <a href="<?= $this->url('projeto-relatorio', array('cod_projeto' => $this->cod_projeto)) ?>" class="btn btn-primary" target="_blank" >Gerar Relatório do Projeto</a>
     </div>
 </div>
@@ -53,21 +52,13 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong><?= $this->dados_sprint->sprintEmAberto ?></td>
-            <td><strong>Em Andamento: </strong><?= $this->dados_sprint->sprintEmAndamento ?></td>
-            <td><strong>Finalizado: </strong><?= $this->dados_sprint->sprintFinalizado ?></td>
-            <td><strong>Parado: </strong><?= $this->dados_sprint->sprintParado ?></td>
-            <td><strong>Total: </strong><?= $this->dados_sprint->totalSprint ?></td>
+            <td><strong>Em Aberto: </strong><?= isset($this->dados_sprint->sprintEmAberto) ? $this->dados_sprint->sprintEmAberto : 0; ?></td>
+            <td><strong>Em Andamento: </strong><?= isset($this->dados_sprint->sprintEmAndamento) ? $this->dados_sprint->sprintEmAndamento : 0; ?></td>
+            <td><strong>Finalizado: </strong><?= isset($this->dados_sprint->sprintFinalizado) ? $this->dados_sprint->sprintFinalizado : 0; ?></td>
+            <td><strong>Parado: </strong><?= isset($this->dados_sprint->sprintParado) ? $this->dados_sprint->sprintParado : 0; ?></td>
+            <td><strong>Total: </strong><?= isset($this->dados_sprint->totalSprint) ? $this->dados_sprint->totalSprint : 0; ?></td>
         </tr>
-<!--        <tr>
-            <td colspan="5"><strong>Observações:</strong></td>
-        </tr>
-        <tr>
-            <td colspan="5">
-                - Atenção 1 sprint está atrasada 2 dias.<br /> 
-                - 1 Sprint pra ser finalizada 25/03/2017.<br />
-            </td>
-        </tr>-->
+
     </tbody>
 </table>
 
@@ -79,28 +70,17 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong><?= $this->dados_product_backlog->productBacklogEmAberto ?></td>
-            <td><strong>Em Andamento: </strong><?= $this->dados_product_backlog->productBacklogEmAndamento ?></td>
-            <td><strong>Finalizado: </strong><?= $this->dados_product_backlog->productBacklogFinalizado ?></td>
-            <td><strong>Parado: </strong><?= $this->dados_product_backlog->productBacklogParado ?></td>
-            <td><strong>Total: </strong><?= $this->dados_product_backlog->totalProductBacklog ?></td>
+            <td><strong>Em Aberto: </strong><?= isset($this->dados_product_backlog->productBacklogEmAberto) ? $this->dados_product_backlog->productBacklogEmAberto : 0; ?></td>
+            <td><strong>Em Andamento: </strong><?= isset($this->dados_product_backlog->productBacklogEmAndamento) ? $this->dados_product_backlog->productBacklogEmAndamento : 0; ?></td>
+            <td><strong>Finalizado: </strong><?= isset($this->dados_product_backlog->productBacklogFinalizado) ? $this->dados_product_backlog->productBacklogFinalizado : 0; ?></td>
+            <td><strong>Parado: </strong><?= isset($this->dados_product_backlog->productBacklogParado) ? $this->dados_product_backlog->productBacklogParado : 0; ?></td>
+            <td><strong>Total: </strong><?= isset($this->dados_product_backlog->totalProductBacklog) ? $this->dados_product_backlog->totalProductBacklog : 0; ?></td>
         </tr>
         <tr>
             <td><strong>Prioridades</strong></td>
-            <td><strong>Alta: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeAlta ?></td>
-            <td><strong>Média: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeMedia ?></td>
-            <td colspan="2"><strong>Baixa: </strong><?= $this->dados_product_backlog->productBacklogPrioridadeBaixa ?></td>
-
-            <!--        </tr>
-                    <tr>
-                        <td colspan="5"><strong>Observações:</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">
-                            - Antenção! Você tem muitos itens com prioridade alta.<br /> 
-                            - Antenção! Você tem muitos itens parados.<br /> 
-                        </td>
-                    </tr>-->
+            <td><strong>Alta: </strong><?= isset($this->dados_product_backlog->productBacklogPrioridadeAlta) ? $this->dados_product_backlog->productBacklogPrioridadeAlta : 0; ?></td>
+            <td><strong>Média: </strong><?= isset($this->dados_product_backlog->productBacklogPrioridadeMedia) ? $this->dados_product_backlog->productBacklogPrioridadeMedia : 0; ?></td>
+            <td colspan="2"><strong>Baixa: </strong><?= isset($this->dados_product_backlog->productBacklogPrioridadeBaixa) ? $this->dados_product_backlog->productBacklogPrioridadeBaixa : 0; ?></td>
     </tbody>
 </table>
 
@@ -112,25 +92,11 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>Em Aberto: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAberto ?></td>
-            <td><strong>Em Andamento: </strong><?= $this->dados_sprint_backlog->sprintBacklogEmAndamento ?></td>
-            <td><strong>Finalizado: </strong><?= $this->dados_sprint_backlog->sprintBacklogFinalizado ?></td>
-            <td><strong>Parado: </strong><?= $this->dados_sprint_backlog->sprintBacklogParado ?></td>
-            <td><strong>Total: </strong><?= $this->dados_sprint_backlog->totalSprintBacklog ?></td>
+            <td><strong>Em Aberto: </strong><?= isset($this->dados_sprint_backlog->sprintBacklogEmAberto) ? $this->dados_sprint_backlog->sprintBacklogEmAberto : 0; ?></td>
+            <td><strong>Em Andamento: </strong><?= isset($this->dados_sprint_backlog->sprintBacklogEmAndamento) ? $this->dados_sprint_backlog->sprintBacklogEmAberto : 0; ?></td>
+            <td><strong>Finalizado: </strong><?= isset($this->dados_sprint_backlog->sprintBacklogFinalizado) ? $this->dados_sprint_backlog->sprintBacklogEmAberto : 0; ?></td>
+            <td><strong>Parado: </strong><?= isset($this->dados_sprint_backlog->sprintBacklogParado) ? $this->dados_sprint_backlog->sprintBacklogEmAberto : 0; ?></td>
+            <td><strong>Total: </strong><?= isset($this->dados_sprint_backlog->totalSprintBacklog) ? $this->dados_sprint_backlog->sprintBacklogEmAberto : 0; ?></td>
         </tr>
-<!--        <tr>
-            <td colspan="5"><strong>Observações:</strong></td>
-        </tr>
-        <tr>
-            <td colspan="5">
-                - Atenção! 2 sprint backlogs estão atrasada 1 dias.<br /> 
-                - Atenção! 1 sprint backlog está atrasada 1 dias.<br /> 
-                - Atenção! 3 sprint backlog pra serem finalizadas 26/03/2017.<br />
-                - Atenção! 1 sprint backlog pra ser finalizada 25/03/2017.<br />
-            </td>
-        </tr>-->
     </tbody>
 </table>
-
-
-
