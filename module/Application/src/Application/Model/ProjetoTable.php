@@ -38,11 +38,6 @@ class ProjetoTable {
         return $linha;
     }
 
-    public function getLastId() {
-        $ultimoProjeto = $this->tableGateway->lastInsertValue;
-        return $ultimoProjeto;
-    }
-
     public function getProjeto($codProjeto) {
         $codProjeto = (int) $codProjeto;
         $rowset = $this->tableGateway->select(array('cod_projeto' => $codProjeto));

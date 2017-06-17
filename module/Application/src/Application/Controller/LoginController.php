@@ -24,15 +24,15 @@ class LoginController extends AbstractActionController {
         if ($autenticacao->hasIdentity()) {
             return $this->redirect()->toRoute('inicio');
         }
-        
+
         $request = $this->getRequest();
         if ($request->isPost()) {
             $identidade = $request->getPost('email_participante');
             $credencial = $request->getPost('senha_participante');
 
             $usuario = new Login($identidade, $credencial);
-
-            if ($usuario->autenticar($this->getServiceLocator()) == true) {
+            $usuario->setServiceManage($this->getServiceLocator());
+            if ($usuario->autenticar() == true) {
                 return $this->redirect()->toRoute('inicio');
             } else {
                 $this->flashMessenger()->addWarningMessage('E-mail e senha não correspondem!');

@@ -189,9 +189,8 @@ class SprintBacklogForm extends Form {
     }
 
     private function getValueParticipanteOptions() {
-
         $valueOptions = array();
-        $participantes = $this->getParticipanteTable()->fetchAllScrumTeam(3);
+        $participantes = $this->getParticipanteTable()->fetchAllScrumTeam();
         $valueOptions[''] = 'Selecione...';
         foreach ($participantes as $participante) {
             $valueOptions[$participante->codParticipante] = $participante->nomeParticipante;

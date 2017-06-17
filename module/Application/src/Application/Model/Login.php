@@ -21,17 +21,23 @@ class Login {
 
     private $identidade;
     private $credencial;
-    private $mensagens = array();
-
+    protected $serviceManage;
+    
     public function __construct($identidade, $credencial) {
         $this->identidade = $identidade;
         $this->credencial = $credencial;
     }
+    
+    public function getServiceManage(){
+        return $this->serviceManage;
+    }
+    public function setServiceManage($serviceManage){
+        $this->serviceManage = $serviceManage;
+    }
 
-    public function autenticar($sm) {
+    public function autenticar() {
         try {
-            $zendDb = $sm->get('Zend\Db\Adapter\Adapter');
-            $adapter = new DbTable($zendDb);
+            $adapter = new DbTable($this->serviceManage->get('Zend\Db\Adapter\Adapter'));
 
             $adapter->setIdentityColumn('email_participante')
                     ->setTableName(new TableIdentifier('participante'))

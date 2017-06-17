@@ -70,7 +70,8 @@ class ParticipanteController extends AbstractActionController {
                     $credencial = $request->getPost('senha_participante');
 
                     $usuario = new Login($identidade, $credencial);
-                    $usuario->autenticar($this->getServiceLocator());
+                    $usuario->setServiceManage($this->getServiceLocator());
+                    $usuario->autenticar();
                 }
             }
             if ($cpfParticipanteValiado == false) {
@@ -114,9 +115,9 @@ class ParticipanteController extends AbstractActionController {
 
                 $validadeCpf == true;
                 // DESCOMENTAR PARA ENVIAR EMAIL (OFFLINE PROVOCA ERRO)
-                                if ($retorno == true) {
-                                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
-                                }
+                if ($retorno == true) {
+                    $this->Email()->enviarEmailConfirmacao($participante->nomeParticipante, $participante->emailParticipante, $participante->senhaParticipante);
+                }
             }
 
             if ($cpfParticipanteValiado == false) {
